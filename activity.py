@@ -5,7 +5,7 @@ __author__ = 'Andrey Derevyagin'
 __copyright__ = 'Copyright © 2015'
 
 import time
-from cgi import escape
+from html import escape
 import copy
 
 CLEAR_NONE = 0
@@ -60,8 +60,8 @@ class ActivityManager(object):
         '''
         activity_required_fields = ['activity_type', ]
         for key in activity_required_fields:
-            if not activity_info.has_key(key):
-                print 'Error: "%s" key not found in activity'%key
+            if key not in activity_info:
+                print('Error: "%s" key not found in activity'%key)
                 return None
 
         if self._db:
@@ -80,27 +80,27 @@ class ActivityManager(object):
 
         activity['id'] = aid
         activity['created_timestamp'] = int(time.time())
-        if activity_info.has_key('user'):
+        if 'user' in activity_info:
             if isinstance(activity_info.get('user'), dict):
                 activity['user'] = activity_info.get('user').get('id')
             else:
                 activity['user'] = activity_info.get('user')
-        if activity_info.has_key('other_user'):
+        if 'other_user' in activity_info:
             if isinstance(activity_info.get('other_user'), dict):
                 activity['other_user'] = activity_info.get('other_user').get('id')
             else:
                 activity['other_user'] = activity_info.get('other_user')
 
-        if activity_info.has_key('kanojo'):
+        if 'kanojo' in activity_info:
             if isinstance(activity_info.get('kanojo'), dict):
                 activity['kanojo'] = activity_info.get('kanojo').get('id')
             else:
                 activity['kanojo'] = activity_info.get('kanojo')
 
-        if activity_info.has_key('scanned'):
+        if 'scanned' in activity_info:
             activity['scanned'] = activity_info.get('scanned')
 
-        if activity_info.has_key('activity'):
+        if 'activity' in activity_info:
             activity['activity'] = activity_info.get('activity')
 
         if self._db:
@@ -119,7 +119,7 @@ class ActivityManager(object):
             return activity
 
         allow_keys = ('kanojo', 'scanned', 'user', 'other_user', 'activity', 'created_timestamp', 'id', 'activity_type', 'activity_type2', )
-        rv = { key: activity[key] for key in allow_keys if activity.has_key(key) }
+        rv = { key: activity[key] for key in allow_keys if key in activity }
 
         if user_id and rv.get('activity_type') == ACTIVITY_ME_STOLE_KANOJO and rv.get('other_user') == user_id:
             rv['activity_type'] = ACTIVITY_MY_KANOJO_STOLEN
@@ -133,7 +133,7 @@ class ActivityManager(object):
             (rv['user'], rv['other_user']) = (rv.get('other_user'), rv.get('user'))
 
 
-        if not rv.has_key('activity'):
+        if 'activity' not in rv:
             at = rv.get('activity_type')
             if ACTIVITY_SCAN == at:
                 human_time = time.strftime("%d %b %Y %H:%M:%S", time.localtime(rv.get(created_timestamp)))
@@ -248,12 +248,12 @@ class ActivityManager(object):
         return rv
 
     def kanojo_ids(self, activities):
-        rv = map(lambda el: el.get('kanojo'), filter(lambda a: a.get('kanojo'), activities))
+        rv = [el.get('kanojo') for el in [a for a in activities if a.get('kanojo')]]
         return list(set(rv))
 
     def user_ids(self, activities):
-        rv = map(lambda el: el.get('user'), filter(lambda a: a.get('user'), activities))
-        rv.extend(map(lambda el: el.get('other_user'), filter(lambda a: a.get('other_user'), activities)))
+        rv = [el.get('user') for el in [a for a in activities if a.get('user')]]
+        rv.extend([el.get('other_user') for el in [a for a in activities if a.get('other_user')]])
         return list(set(rv))
 
     def fill_format_activities(self, activities, fill_type=FILL_TYPE_PLAIN):
@@ -291,21 +291,21 @@ class ActivityManager(object):
                 f['other_user_level'] = a['other_user'].get('level')
             try:
                 a['activity'] = a['activity'].format(**f)
-            except KeyError, err:
-                print 'Error in activity format(KeyError): ', err, a
+            except KeyError as err:
+                print('Error in activity format(KeyError): ', err, a)
                 continue
             rv.append(a)
         return rv
 
     def fill_activities(self, activities, users, kanojos, def_user, def_kanojo, fill_type=FILL_TYPE_PLAIN):
         for a in activities:
-            if a.has_key('kanojo'):
+            if 'kanojo' in a:
                 kanojo = next((k for k in kanojos if k.get('id') == a.get('kanojo')), None)
                 a['kanojo'] = kanojo if kanojo else def_kanojo
-            if a.has_key('user'):
+            if 'user' in a:
                 user = next((u for u in users if u.get('id') == a.get('user')), None)
                 a['user'] = user if user else def_user
-            if a.has_key('other_user'):
+            if 'other_user' in a:
                 other_user = next((u for u in users if u.get('id') == a.get('other_user')), None)
                 a['other_user'] = other_user if other_user else def_user
         activities = self.fill_format_activities(activities, fill_type=fill_type)
@@ -376,7 +376,7 @@ if __name__ == "__main__":
             'kanojo': 1
         })
     '''
-    print a.user_activity(2)
+    print(a.user_activity(2))
     tmp = a.all_activities()
-    print tmp
-    print a.user_ids(tmp)
+    print(tmp)
+    print(a.user_ids(tmp))

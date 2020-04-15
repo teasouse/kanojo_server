@@ -5,7 +5,7 @@ __version__ = '0.1'
 __author__ = 'Andrey Derevyagin'
 __copyright__ = 'Copyright © 2014'
 
-import urllib2
+import urllib.request, urllib.error, urllib.parse
 import time
 import json
 import hashlib
@@ -45,14 +45,14 @@ class GeoIP(object):
 
     def ip2timezone(self, ip, service_type=GEOIP_CACHE_ONLY):
         key = self.geo_key(ip)
-        if self.cache.has_key(key):
+        if key in self.cache:
             self.cache.get(key)['update'] = int(time.time())
             return self.cache.get(key).get('tz')
         if service_type == GEOIP_WEB_SERVICE:
             tz_string = None
-            req = urllib2.Request('http://freegeoip.net/json/'+ip)
+            req = urllib.request.Request('http://freegeoip.net/json/'+ip)
             try:
-                urlObject = urllib2.urlopen(req, timeout=5)
+                urlObject = urllib.request.urlopen(req, timeout=5)
                 tmp = json.loads(urlObject.read())
                 tz_string = tmp.get('time_zone')
             except:
@@ -70,7 +70,7 @@ class GeoIP(object):
 
 if __name__ == "__main__":
     geoIP = GeoIP()
-    print geoIP.ip2timezone('8.8.8.8', service_type=GEOIP_WEB_SERVICE)
-    print geoIP.ip2timezone('31.13.144.31', service_type=GEOIP_WEB_SERVICE)
-    print geoIP.ip2timezone('8.8.8.8')
-    print geoIP.cache
+    print(geoIP.ip2timezone('8.8.8.8', service_type=GEOIP_WEB_SERVICE))
+    print(geoIP.ip2timezone('31.13.144.31', service_type=GEOIP_WEB_SERVICE))
+    print(geoIP.ip2timezone('8.8.8.8'))
+    print(geoIP.cache)

@@ -66,8 +66,8 @@ post(%d): %s'''%(self.id, self.date_string(), self.title, self.poster, self.img_
         #tm = datetime.fromtimestamp(self.time, pytz.timezone('Europe/Kiev'))
         #tm = datetime.fromtimestamp(self.time, pytz.utc)
         #tm = time.gmtime(self.time).astimezone(pytz.timezone('Europe/Moscow'))
-        m = [u'января', u'февраля', u'марта', u'апреля', u'мая', u'июня', u'июля', u'августа', u'сентября', u'октября', u'ноября', u'декабря']
-        w = [u'Пн',u'Вт',u'Ср',u'Чт',u'Пт',u'Сб',u'Вс']
+        m = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря']
+        w = ['Пн','Вт','Ср','Чт','Пт','Сб','Вс']
         return '%s %02d %s %d %02d:%02d:%02d'%(w[tm.weekday()], tm.day, m[tm.month-1], tm.year, tm.hour, tm.minute, tm.second)
         #tm = time.localtime(self.time)
         #return '%s %02d %s %d %02d:%02d:%02d'%(w[tm.tm_wday], tm.tm_mday, m[tm.tm_mon-1], tm.tm_year, tm.tm_hour, tm.tm_min, tm.tm_sec)

@@ -43,8 +43,8 @@ class KanojoManager(object):
         self.clothes_magic = clothes_magic
         self.generate_secret = generate_secret
         tmp = json.loads(open('dress_up_clothes_time.json').read())
-        self.dress_up_time1 = filter(lambda el: el.get('dress_up_from')<el.get('dress_up_to'), tmp.get('info'))
-        self.dress_up_time2 = filter(lambda el: el.get('dress_up_from')>el.get('dress_up_to'), tmp.get('info'))
+        self.dress_up_time1 = [el for el in tmp.get('info') if el.get('dress_up_from')<el.get('dress_up_to')]
+        self.dress_up_time2 = [el for el in tmp.get('info') if el.get('dress_up_from')>el.get('dress_up_to')]
         if self.db and self.db.seqs.find_one({ 'colection': 'kanojos' }) is None:
             self.db.seqs.insert({
                     'colection': 'kanojos',
@@ -61,8 +61,8 @@ class KanojoManager(object):
                 'eye_position', 'brow_position', 'mouth_position', 
                 'consumption', 'possession', 'recognition', 'sexual', 'flirtable']
         for key in barcode_fields:
-            if not barcode_info.has_key(key):
-                print 'Error: "%s" key not found'%key
+            if key not in barcode_info:
+                print('Error: "%s" key not found'%key)
                 return None
 
         kid = self.db.seqs.find_and_modify(
@@ -182,7 +182,7 @@ class KanojoManager(object):
                 'flirtable':     { 'bounds': (1, 100), 'bits': (75, 91), },
             }
         while len(order) > 0:
-            if not defaults.has_key(order[0]):
+            if order[0] not in defaults:
                 return None
             info = defaults[order[0]]
             (_min, _max) = info['bounds']
@@ -195,12 +195,12 @@ class KanojoManager(object):
         return rv
 
     def save(self, kanojo):
-        if kanojo and kanojo.has_key('_id') and self.db:
+        if kanojo and '_id' in kanojo and self.db:
             # check date_info
             date_info = kanojo.get('date_info')
             if date_info and len(date_info) > 0:
                 tm = int(time.time())
-                date_info = filter(lambda x: x.get('back_time', 0) > tm, date_info)
+                date_info = [x for x in date_info if x.get('back_time', 0) > tm]
                 if len(date_info):
                     kanojo['date_info'] = date_info
                 else:
@@ -247,7 +247,7 @@ class KanojoManager(object):
         return changed
 
     def delete(self, kanojo):
-        if kanojo and kanojo.has_key('_id') and self.db:
+        if kanojo and '_id' in kanojo and self.db:
             _id = kanojo.pop('_id')
             self.db.kanojos_deleted.insert(kanojo)
             #print self.db.kanojos.find_one({ 'id': kanojo.get('id') })
@@ -320,9 +320,9 @@ class KanojoManager(object):
         kanojo_date = self.kanojo_date(kanojo)
         if kanojo_date:
             relation_status = None
-            if not kanojo.has_key('relation_status') and user:
+            if 'relation_status' not in kanojo and user:
                 relation_status = self.relation_status(kanojo, user)
-            elif kanojo.has_key('relation_status'):
+            elif 'relation_status' in kanojo:
                 relation_status = kanojo.get('relation_status')
             if relation_status != 2:
                 duration = kanojo_date.get('back_time', 0) - int(time.time())
@@ -339,7 +339,7 @@ class KanojoManager(object):
             return kanojo
         allow_keys = ['mouth_type', 'skin_color', 'body_type', 'race_type', 'spot_type', 'sexual', 'recognition', 'clothes_type', 'brow_type', 'consumption', 'eye_position', 'accessory_type', 'possession', 'hair_type', 'clothes_color', 'ear_type', 'brow_position', 'eye_color', 'glasses_type', 'hair_color', 'face_type', 'eye_type', 'mouth_position', 'fringe_type', 'nose_type']
         if clear == CLEAR_BARCODE:
-            rv = { key: kanojo[key] for key in allow_keys if kanojo.has_key(key) }
+            rv = { key: kanojo[key] for key in allow_keys if key in kanojo }
             rv['barcode'] = '************'
             return rv
         # select clothes must call before change kanojo db document
@@ -357,7 +357,7 @@ class KanojoManager(object):
         curr_date = self.kanojo_date(tmp_kanojo)
         if curr_date:
             if tmp_kanojo.get('relation_status') == 2:
-                if curr_date.has_key('background_image_url'):
+                if 'background_image_url' in curr_date:
                     tmp_kanojo['avatar_background_image_url'] = curr_date.get('background_image_url')
             else:
                 tmp_kanojo['in_room'] = False
@@ -365,9 +365,9 @@ class KanojoManager(object):
         allow_keys.extend(['id', 'profile_image_url', 'name', 'mascot_enabled', 'like_rate', 'love_gauge', 'location', 'nationality', 'avatar_background_image_url', 'advertising_product_url', 'birth_day', 'birth_month', 'birth_year', 'emotion_status', 'on_advertising', 'goods_button_visible', 'follower_count', 'advertising_banner_url', 'advertising_product_title', 'voted_like', 'relation_status', 'status', 'in_room'])
         if tmp_kanojo.get('relation_status') > 1:
             allow_keys.extend(['barcode', 'source', 'geo'])
-        rv = { key: tmp_kanojo[key] for key in allow_keys if tmp_kanojo.has_key(key) }
+        rv = { key: tmp_kanojo[key] for key in allow_keys if key in tmp_kanojo }
         rv['clothes_type'] = clothes_type
-        return OrderedDict(sorted(rv.items(), cmp=kanojo_order_dict_cmp))
+        return OrderedDict(sorted(list(rv.items()), cmp=kanojo_order_dict_cmp))
 
     def kanojo(self, kanojo_id, self_user=None, clear=CLEAR_SELF, check_clothes=False):
         query = { 'id': kanojo_id }
@@ -398,7 +398,7 @@ class KanojoManager(object):
         return rv
 
     def kanojos_owner_users(self, kanojos):
-        s = set(map(lambda k: k.get('owner_user_id'), kanojos))
+        s = set([k.get('owner_user_id') for k in kanojos])
         s.discard(0)
         s.discard(None)
         return list(s)
@@ -435,11 +435,11 @@ class KanojoManager(object):
         '''
         wardrobe = kanojo.get('wardrobe')
         if wardrobe and len(wardrobe):
-            wardrobe_ids = map(lambda el: el.get('id'), wardrobe)
+            wardrobe_ids = [el.get('id') for el in wardrobe]
             tm = int(time.time()) if test_time is None else test_time
 
             # check if wardrobe used now
-            if kanojo.has_key('clothes_selected') and tm < kanojo.get('clothes_selected').get('undress_time', 0):
+            if 'clothes_selected' in kanojo and tm < kanojo.get('clothes_selected').get('undress_time', 0):
                 return (kanojo.get('clothes_selected').get('clothes_type', kanojo.get('clothes_type')), False)
 
             days_age = (tm - kanojo.get('birthday', 0)) / (24 * 60 * 60)
@@ -447,14 +447,14 @@ class KanojoManager(object):
             hour = datetime.fromtimestamp(tm, pytz.timezone(tz_string)).hour
 
             # search all clothes that can dress in this hour and calc 'weight_full'
-            clothes_info = filter(lambda el: el.get('id') in wardrobe_ids and el.get('dress_up_from')<=hour<el.get('dress_up_to'), self.dress_up_time1)
-            clothes_info.extend(filter(lambda el: el.get('id') in wardrobe_ids and (hour<el.get('dress_up_to') or hour>=el.get('dress_up_from')), self.dress_up_time2))
+            clothes_info = [el for el in self.dress_up_time1 if el.get('id') in wardrobe_ids and el.get('dress_up_from')<=hour<el.get('dress_up_to')]
+            clothes_info.extend([el for el in self.dress_up_time2 if el.get('id') in wardrobe_ids and (hour<el.get('dress_up_to') or hour>=el.get('dress_up_from'))])
             clothes_info = copy.deepcopy(clothes_info)
             #weight_full = reduce(lambda x,y: x+y.get('like_weight'), clothes_info, 3)
             # TODO: do it simple
             weight_full = 3
             for ci in clothes_info:
-                w = filter(lambda el: el.get('id')==ci.get('id'), wardrobe)
+                w = [el for el in wardrobe if el.get('id')==ci.get('id')]
                 like_weight = ci.get('like_weight', 10)
                 if len(w):
                     like_weight = int(like_weight * w[0].get('like_weight_mult', 1))
@@ -482,7 +482,7 @@ class KanojoManager(object):
             clothes_type == store_item['clothes_item_id']
         '''
         wardrobe = kanojo.get('wardrobe', [])
-        w = filter(lambda el: el.get('id')==clothes_type, wardrobe)
+        w = [el for el in wardrobe if el.get('id')==clothes_type]
         if len(w):
             w = w[0]
             w['like_weight_mult'] = w.get('like_weight_mult', 1) + like_weight_mult
@@ -503,7 +503,7 @@ class KanojoManager(object):
         return w
 
     def apply_date(self, kanojo, store_item):
-        if store_item.has_key('duration_of_date'):
+        if 'duration_of_date' in store_item:
             date_info = kanojo.get('date_info', [])
             curr_tm = int(time.time())
             back_tm = 0
@@ -512,13 +512,13 @@ class KanojoManager(object):
             date = {
                 'item_id': store_item.get('item_id')
             }
-            if store_item.has_key('background_image_url'):
+            if 'background_image_url' in store_item:
                 date['background_image_url'] = store_item['background_image_url']
             if back_tm < curr_tm:
                 date['back_time'] = curr_tm + store_item.get('duration_of_date')
             else:
                 date['back_time'] = back_tm + store_item.get('duration_of_date')
-            print back_tm, curr_tm, date['back_time']
+            print(back_tm, curr_tm, date['back_time'])
             date_info.append(date)
             kanojo['date_info'] = date_info
             return date
@@ -527,13 +527,13 @@ class KanojoManager(object):
 
     def action_string_to_freq(self, action_string):
         try:
-            actions = map(lambda el: int(el), action_string.split('|'))
-        except ValueError, e:
+            actions = [int(el) for el in action_string.split('|')]
+        except ValueError as e:
             return False
         freq = {}
         for act in actions:
-            if not freq.has_key(act):
-                freq[act] = len(filter(lambda el: el==act, actions))
+            if act not in freq:
+                freq[act] = len([el for el in actions if el==act])
         return freq
 
     def user_action_price(self, kanojo, action_string):
@@ -712,7 +712,7 @@ if __name__ == "__main__":
     import config
     km = KanojoManager(generate_secret=config.KANOJO_SECRET)
 
-    print km.generate('123')
+    print(km.generate('123'))
 
     exit()
 
@@ -733,7 +733,7 @@ if __name__ == "__main__":
     #kanojo = km.kanojo(368, user, clear=CLEAR_NONE)
     kanojo = km.kanojo(31, user, clear=CLEAR_NONE)
     kanojo.pop('_id', None)
-    print json.dumps(kanojo)
+    print(json.dumps(kanojo))
 
     #import pprint
     #pprint.pprint(km.user_action(kanojo, user, '10|11|12|20|21|20|12|11|10'))
@@ -743,9 +743,9 @@ if __name__ == "__main__":
     for i in range(1417822084, 1417822084+60*60*24*15, 60*60):
         tm = datetime.fromtimestamp(i, pytz.timezone('Europe/Kiev'))
         (clothes_type, changed) = km.select_clothes(kanojo, test_time=i)
-        print '%02d %d %d'%(tm.hour, clothes_type, changed)
+        print('%02d %d %d'%(tm.hour, clothes_type, changed))
 
     kanojo.pop('_id', None)
-    print json.dumps(kanojo)
+    print(json.dumps(kanojo))
     #print km.create(barcode_info, barcode_info.get('name'), '/profile_images/kanojo/1.png?w=88&h=88&face=true', { 'id': 1 })
 

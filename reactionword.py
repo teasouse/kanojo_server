@@ -15,7 +15,7 @@ class ReactionwordManager(object):
         self._items = tmp.get('reactionword')
 
     def reactionword_json(self, a, pod):
-        itms = filter(lambda x: a in x.get('a') and (not x.has_key('pod') or pod in x.get('pod')), self._items)
+        itms = [x for x in self._items if a in x.get('a') and ('pod' not in x or pod in x.get('pod'))]
         if len(itms):
             itm = itms[random.randrange(len(itms))]
             return json.dumps(itm.get('data'))

@@ -119,7 +119,7 @@ class UserManager(object):
         return user
 
     def save(self, user):
-        if user and user.has_key('_id') and self.db:
+        if user and '_id' in user and self.db:
             return self.db.users.save(user)
         return False
 
@@ -154,7 +154,7 @@ class UserManager(object):
                 allow_keys.extend(['email', 'tickets', 'language', 'twitter_connect', 'facebook_connect', 'birth_day', 'birth_month', 'birth_year', 'description'])
                 if self_uid is None:
                     self_uid = tmp_user.get('id')
-            rv = { key: tmp_user[key] for key in allow_keys if tmp_user.has_key(key) }
+            rv = { key: tmp_user[key] for key in allow_keys if key in tmp_user }
             if self_uid:
                 if self_uid == tmp_user.get('id'):
                     rv['relation_status'] = 2
@@ -162,7 +162,7 @@ class UserManager(object):
                     self_user = self.user(uid=self_uid, clear=CLEAR_NONE)
             if self_user:
                 rv['relation_status'] = 2 if self_user.get('id')==tmp_user.get('id') else 3 if tmp_user.get('id') in self_user.get('enemies') else 1
-            return OrderedDict(sorted(rv.items(), cmp=user_order_dict_cmp))
+            return OrderedDict(sorted(list(rv.items()), cmp=user_order_dict_cmp))
 
     def user(self, uuid=None, uid=None, self_uid=None, self_user=None, clear=CLEAR_SELF):
         query = None
@@ -192,7 +192,7 @@ class UserManager(object):
             rv.append(u)
             if self_user is None and self_uid is not None and u.get('id') == self_uid:
                 self_user = copy.copy(u)
-        rv = map(lambda u: self.clear(u, clear=CLEAR_OTHER, self_user=self_user), rv)
+        rv = [self.clear(u, clear=CLEAR_OTHER, self_user=self_user) for u in rv]
         return rv
 
 
@@ -249,7 +249,7 @@ class UserManager(object):
         if kanojo:
             try:
                 user['generate_count'] = int(user.get('generate_count', 0)) + 1
-            except ValueError, e:
+            except ValueError as e:
                 pass
             k = user.get('kanojos', [])
             #k.append(kanojo.get('id'))
@@ -325,7 +325,7 @@ class UserManager(object):
         units = store_item.get('buy_units', 1)
         store_item_id = store_item.get('base_store_item_id', store_item.get('item_id'))
         has_items = user.get('has_items', [])
-        _itm = filter(lambda el: el.get('store_item_id')==store_item_id, has_items)
+        _itm = [el for el in has_items if el.get('store_item_id')==store_item_id]
         if len(_itm):
             _itm = _itm[0]
             _itm['units'] = _itm.get('units', 1) + units
@@ -341,14 +341,14 @@ class UserManager(object):
         return _itm
 
     def give_present(self, user, kanojo, store_item_id):
-        has_item = filter(lambda x: x.get('store_item_id')==store_item_id, user.get('has_items', []))
+        has_item = [x for x in user.get('has_items', []) if x.get('store_item_id')==store_item_id]
         if len(has_item) and has_item[0].get('units', 1) >= 1:
             has_item = has_item[0]
             rv = { 'code': 200 }
             store_item = self.store.get_item(store_item_id)
 
             relation_status = self.kanojo_manager.relation_status(kanojo, user)
-            if store_item.has_key('clothes_item_id'):
+            if 'clothes_item_id' in store_item:
                 weight_mult = 1 if relation_status==2 else 0.35
                 self.kanojo_manager.add_clothes(kanojo, clothes_type=store_item.get('clothes_item_id'), like_weight_mult=weight_mult)
 
@@ -356,7 +356,7 @@ class UserManager(object):
                 self.check_approached_kanojo(user, kanojo, action_dict.get('info', {}))
                 rv.update(action_dict)
 
-            if store_item.has_key('action'):
+            if 'action' in store_item:
                 if store_item.get('action') == 'dump_kanojo':
                     rv.update(self.kanojo_manager.user_breakup_with_kanojo_alert(kanojo))
                     self.breakup_with_kanojo(user, kanojo)
@@ -386,7 +386,7 @@ class UserManager(object):
         return rv
 
     def do_date(self, user, kanojo, store_item_id):
-        has_item = filter(lambda x: x.get('store_item_id')==store_item_id, user.get('has_items', []))
+        has_item = [x for x in user.get('has_items', []) if x.get('store_item_id')==store_item_id]
         if len(has_item) and has_item[0].get('units', 1) >= 1:
             has_item = has_item[0]
             rv = { 'code': 200 }
@@ -463,12 +463,12 @@ class UserManager(object):
                 try:
                     current_owner['kanojos'].remove(kanojo.get('id'))
                     kanojo['followers'].remove(current_owner.get('id'))
-                except ValueError, e:
+                except ValueError as e:
                     pass
                 self.save(current_owner)
             try:
                 user['friends'].remove(kanojo.get('id'))
-            except Exception, e:
+            except Exception as e:
                 pass
             kanojo['owner_user_id'] = user.get('id')
             user['kanojos'].insert(0, kanojo.get('id'))
@@ -598,7 +598,7 @@ if __name__ == "__main__":
     db = MongoClient(mdb_connection_string)[db_name]
 
     u = UserManager(db)
-    print u.generate_name()
+    print(u.generate_name())
     #u.create('~')
 
     import json
@@ -607,7 +607,7 @@ if __name__ == "__main__":
     user.pop('_id', None)
     print json.dumps(user)
     '''
-    print json.dumps(u.users([1,2], self_uid=1))
+    print(json.dumps(u.users([1,2], self_uid=1)))
 
 
 

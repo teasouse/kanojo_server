@@ -10,9 +10,9 @@ import json
 import requests
 try:
     from gdrive_cdn import UploadToCDN
-except ImportError, e:
+except ImportError as e:
     pass
-import StringIO
+import io
 
 
 class UploadToDeviantsart(object):
@@ -39,13 +39,13 @@ class ImageManager(object):
     def upload_user_profile_image(self, img_data, filename='image.jpg'):
         try:
             cdn = UploadToCDN()
-        except NameError, e:
+        except NameError as e:
             cdn = UploadToDeviantsart()
         im = Image.open(img_data)
         (width, height) = im.size
         if width > 200 or height > 200:
             im.thumbnail((200, 200), Image.ANTIALIAS)
-        dt = StringIO.StringIO()
+        dt = io.StringIO()
         im.save(dt, format="JPEG", quality=95)
         url = cdn.upload(dt.getvalue(), content_type='image/jpeg', filename=filename)
         dt.close()
@@ -54,21 +54,21 @@ class ImageManager(object):
     def crop_and_upload_profile_image(self, img_data, filename='kanojo', upload_full_image=True):
         try:
             cdn = UploadToCDN()
-        except NameError, e:
+        except NameError as e:
             cdn = UploadToDeviantsart()
         im = Image.open(img_data)
         cr = im.crop((94, 40, 170+94, 170+40))
         cr.thumbnail((88, 88), Image.ANTIALIAS)
-        dt = StringIO.StringIO()
+        dt = io.StringIO()
         cr.save(dt, format="png")
-        crop_url = cdn.upload(dt.getvalue(), content_type='image/png', filename=u'%ss.png'%filename)
+        crop_url = cdn.upload(dt.getvalue(), content_type='image/png', filename='%ss.png'%filename)
         dt.close()
 
         full_url = None
         if cdn and upload_full_image:
-            dt = StringIO.StringIO()
+            dt = io.StringIO()
             im.save(dt, format="png")
-            full_url = cdn.upload(dt.getvalue(), content_type='image/png', filename=u'%s.png'%filename)
+            full_url = cdn.upload(dt.getvalue(), content_type='image/png', filename='%s.png'%filename)
             dt.close()
         return (crop_url, full_url)
 
@@ -78,20 +78,20 @@ if __name__=='__main__':
     #im = Image.open(StringIO.StringIO(buffer))
     cr = im.crop((94, 40, 170+94, 170+40))
     cr.thumbnail((88, 88), Image.ANTIALIAS)
-    dt = StringIO.StringIO()
+    dt = io.StringIO()
     cr.save(dt, format="png")
-    crop_url = UploadToCDN().upload(dt.getvalue(), content_type='image/png', filename=u'best_girl.png')
+    crop_url = UploadToCDN().upload(dt.getvalue(), content_type='image/png', filename='best_girl.png')
     #crop_url = UploadToDeviantsart().upload(dt.getvalue(), content_type='image/png')
     dt.close()
 
     full_url = None
     try:
         cdn = UploadToCDN()
-    except NameError, e:
+    except NameError as e:
         cdn = None
     if cdn:
-        dt = StringIO.StringIO()
+        dt = io.StringIO()
         im.save(dt, format="png")
-        full_url = UploadToCDN().upload(dt.getvalue(), content_type='image/png', filename=u'fk.png')
+        full_url = UploadToCDN().upload(dt.getvalue(), content_type='image/png', filename='fk.png')
         dt.close()
-    print crop_url, full_url
+    print(crop_url, full_url)

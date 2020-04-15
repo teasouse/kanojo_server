@@ -23,16 +23,16 @@ class StoreTest(unittest.TestCase):
             c = _ctgrs[0]
             group = [c, ]
             # serach category group
-            if c.has_key('group_title'):
-                group = filter(lambda x: x.get('group_title') == c.get('group_title'), _ctgrs)
+            if 'group_title' in c:
+                group = [x for x in _ctgrs if x.get('group_title') == c.get('group_title')]
             val = {
                 'items': []
             }
             for c in group:
-                val['title'] = c.get('group_title') if c.has_key('group_title') else c.get('title')
+                val['title'] = c.get('group_title') if 'group_title' in c else c.get('title')
                 if c.get('image_thumbnail_url') is None:
                     # category for basic items
-                    itms = filter(lambda x: x.get('category_id') == c.get('item_category_id'), self.sm._items)
+                    itms = [x for x in self.sm._items if x.get('category_id') == c.get('item_category_id')]
                     if user_level:
                         val['level'] = user_level
                     for i in itms:
@@ -46,7 +46,7 @@ class StoreTest(unittest.TestCase):
     def item_list_from_categories(self, allow_kanojo, user_level=None):
         ctgrs = self.sm.categories(allow_kanojo, item_class=1)
         # filter categories with items
-        ctgrs = filter(lambda c: len(filter(lambda i: c.get('item_category_id', -2)==i.get('category_id', -1), self.sm._items)), ctgrs)
+        ctgrs = [c for c in ctgrs if len([i for i in self.sm._items if c.get('item_category_id', -2)==i.get('category_id', -1)])]
         return self.prepare_categories(ctgrs, user_level=user_level)
 
     def test_item_list1(self):
@@ -68,26 +68,26 @@ class StoreTest(unittest.TestCase):
         has_items = copy.deepcopy(self.user.get('has_items'))
         item_list = self.sm.goods_list(KANOJO_OWNER, filter_has_items=True, has_items=has_items)
         self.assertGreater(len(item_list), 0)
-        self.assertTrue(item_list[0].has_key('items'))
+        self.assertTrue('items' in item_list[0])
         self.assertGreater(len(item_list[0].get('items')), 0)
 
         item_category = item_list[0].get('items')[0]
         c_items = self.sm.category_goods(item_category.get('item_category_id'), filter_has_items=True, has_items=has_items)
         self.assertGreater(len(item_list), 0)
-        self.assertTrue(item_list[0].has_key('items'))
+        self.assertTrue('items' in item_list[0])
         self.assertGreater(len(item_list[0].get('items')), 0)
         for c in c_items:
             self.assertEqual(c.get('flag'), 'user_has')
             for i in c.get('items'):
-                self.assertTrue(i.has_key('has_units'))
+                self.assertTrue('has_units' in i)
 
     def test_not_unique_items(self):
         items = copy.deepcopy(self.sm._items)
         items.extend(self.sm._dates)
-        ids = map(lambda x: x.get('item_id'), items)
+        ids = [x.get('item_id') for x in items]
 
         for i in items:
-            if i.has_key('base_store_item_id'):
+            if 'base_store_item_id' in i:
                 self.assertTrue(i.get('base_store_item_id') in ids, 'Store item \"%s\" links to nonexisting item \"%s\"'%(i.get('item_id'), i.get('base_store_item_id')))
 
         while len(ids):
@@ -97,7 +97,7 @@ class StoreTest(unittest.TestCase):
 
     def test_not_unique_categories(self):
         categories = copy.deepcopy(self.sm._categories)
-        ids = map(lambda x: x.get('item_category_id'), categories)
+        ids = [x.get('item_category_id') for x in categories]
         while len(ids):
             c_id = ids.pop(0)
             if c_id != None:

@@ -14,7 +14,7 @@ from flask import session
 import json
 import time, datetime
 import re
-import urllib
+import urllib.request, urllib.parse, urllib.error
 from pymongo import MongoClient
 from datetime import timedelta
 from user import *
@@ -25,7 +25,7 @@ from flask_api.decorators import set_parsers
 from bkmultipartparser import BKMultipartParser
 from thread_post import Post
 from hashlib import sha224
-from cgi import escape
+from html import escape
 from geo_ip import GeoIP, GEOIP_CACHE_ONLY, GEOIP_WEB_SERVICE
 from store import StoreManager, KANOJO_OWNER, KANOJO_FRIEND, KANOJO_OTHER
 from reactionword import ReactionwordManager
@@ -86,7 +86,7 @@ def order_dict_cmp(x, y):
 
 def json_response(data):
     if isinstance(data, dict):
-        data = OrderedDict(sorted(data.items(), cmp=order_dict_cmp))
+        data = OrderedDict(sorted(list(data.items()), cmp=order_dict_cmp))
     rtext = json.dumps(data)
     if request.method == 'POST':
         if request.form.get('callback', False):
@@ -144,10 +144,10 @@ def check_post_request(post_request):
     reject_rule = None
     remote_ip = get_remote_ip()
     for rule in ban_rules:
-        if rule.has_key('ip') and remote_ip != rule.get('ip'):
+        if 'ip' in rule and remote_ip != rule.get('ip'):
             continue
         flag = True
-        for k in filter(lambda el: el!='ip', rule.keys()):
+        for k in [el for el in list(rule.keys()) if el!='ip']:
             if post_request.headers.get(k) != rule.get(k):
                 flag = False
                 break
@@ -156,10 +156,10 @@ def check_post_request(post_request):
             #    continue
             reject_rule = rule
         if reject_rule is not None:
-            print 'Rejected by rule:', rule
+            print('Rejected by rule:', rule)
             break
     if reject_rule is None:
-        print post_request.headers
+        print(post_request.headers)
     return reject_rule
 
 @app.route('/post', methods=['POST'])
@@ -169,7 +169,7 @@ def post():
     #    return 'You are banned for this thread.'
     prms = request.form
 
-    name = u'Сырно' if len(prms.get('nya1').strip()) == 0 else prms.get('nya1').strip()
+    name = 'Сырно' if len(prms.get('nya1').strip()) == 0 else prms.get('nya1').strip()
     msg = escape(prms.get('nya2').strip())
     pwd = prms.get('password', '').strip()
     if len(msg):
@@ -382,7 +382,7 @@ def dress_up_file(fn):
 
 def dresup_json_to_barcode(dressup_json):
     keys = ["c_skin", "c_hair", "c_eye", "c_clothes", "body", "hair", "face", "fringe", "mouth", "eye", "nose", "brow", "ear", "spot", "glasses", "accessory", "clothes"]
-    r_keys = dressup_json.keys()
+    r_keys = list(dressup_json.keys())
     for k in keys:
         if k not in r_keys:
             rv = { 'code': 400 }
@@ -513,7 +513,7 @@ def last_activity():
     prms = request.args
     try:
         since_id = int(prms.get('since_id', 0))
-    except ValueError, e:
+    except ValueError as e:
         return json_response({ "code": 400 })
     activities = activity_manager.all_activities(since_id=since_id)
     uids = activity_manager.user_ids(activities)
@@ -533,7 +533,7 @@ def last_activity():
 def user_html(uid):
     try:
         uid = int(uid)
-    except ValueError, e:
+    except ValueError as e:
         return abort(400)
     user = user_manager.user(uid=uid, clear=CLEAR_NONE)
     if not user:
@@ -578,7 +578,7 @@ def user_html(uid):
 def kanojo_html(kid):
     try:
         kid = int(kid)
-    except ValueError, e:
+    except ValueError as e:
         return abort(400)
     kanojo = kanojo_manager.kanojo(kid, clear=CLEAR_NONE)
     if kanojo is None:
@@ -640,7 +640,7 @@ def acc_verify():
 @app.route('/2/api/account/show.json', methods=['GET','POST'])
 @app.route('/2/account/show.json', methods=['GET','POST'])
 def account_show():
-    if not session.has_key('id'):
+    if 'id' not in session:
         return json_response({ "code": 401 })
     user = user_manager.user(uid=session['id'], clear=CLEAR_SELF)
     if user:
@@ -652,7 +652,7 @@ def account_show():
 def user_currentkanojos():
     #kanojo_manager.server = request.url_root[:-1]
     kanojo_manager.server = server_url()[:-1]
-    if not session.has_key('id'):
+    if 'id' not in session:
         return json_response({ "code": 401 })
     prms = request.form if request.method == 'POST' else request.args
     if prms.get('user_id') is None or prms.get('index') is None or prms.get('limit') is None:
@@ -682,7 +682,7 @@ def user_currentkanojos():
 
 @app.route('/2/user/friend_kanojos.json', methods=['GET','POST'])
 def user_friendkanojos():
-    if not session.has_key('id'):
+    if 'id' not in session:
         return json_response({ "code": 401 })
     prms = request.form if request.method == 'POST' else request.args
     if prms.get('user_id') is None or prms.get('index') is None or prms.get('limit') is None:
@@ -715,7 +715,7 @@ def user_friendkanojos():
 
 @app.route('/2/kanojo/like_rankings.json', methods=['GET','POST'])
 def kanojo_likerankings():
-    if not session.has_key('id'):
+    if 'id' not in session:
         return json_response({ "code": 401 })
     prms = request.form if request.method == 'POST' else request.args
     if prms.get('index') is None or prms.get('limit') is None:
@@ -743,7 +743,7 @@ def kanojo_likerankings():
 
 @app.route('/2/kanojo/show.json', methods=['GET','POST'])
 def kanojo_show():
-    if not session.has_key('id'):
+    if 'id' not in session:
         return json_response({ "code": 401 })
     prms = request.form if request.method == 'POST' else request.args
     if prms.get('kanojo_id') is None or prms.get('screen') is None:
@@ -771,7 +771,7 @@ def kanojo_show():
 
 @app.route('/2/user/enemy_users.json', methods=['GET','POST'])
 def user_enemy_users():
-    if not session.has_key('id'):
+    if 'id' not in session:
         return json_response({ "code": 401 })
     prms = request.form if request.method == 'POST' else request.args
     if prms.get('user_id') is None or prms.get('index') is None or prms.get('limit') is None:
@@ -797,7 +797,7 @@ def communication_play_on_live2d():
             20 - kiss
             21 - touch breasts
     '''
-    if not session.has_key('id'):
+    if 'id' not in session:
         return json_response({ "code": 401 })
     prms = request.form if request.method == 'POST' else request.args
     if prms.get('kanojo_id') is None or prms.get('actions') is None:
@@ -816,12 +816,12 @@ def communication_play_on_live2d():
         #url = request.url_root+'apibanner/kanojoroom/reactionword.html'
         url = server_url() + 'web/reactionword.html'
         if actions and len(actions):
-            print actions
+            print(actions)
             dt = user_manager.user_action(self_user, kanojo, action_string=actions, current_owner=owner_user)
-            if dt.has_key('love_increment') and dt.has_key('info'):
+            if 'love_increment' in dt and 'info' in dt:
                 tmp = dt.get('info', {})
-                prms = { key: tmp[key] for key in ['pod', 'a'] if tmp.has_key(key) }
-                dt['love_increment']['reaction_word'] = '%s?%s'%(url, urllib.urlencode(prms))
+                prms = { key: tmp[key] for key in ['pod', 'a'] if key in tmp }
+                dt['love_increment']['reaction_word'] = '%s?%s'%(url, urllib.parse.urlencode(prms))
                 #print dt['love_increment']['reaction_word']
                 dt.pop('info', None)
             rspns.update(dt)
@@ -857,7 +857,7 @@ def apibanner_kanojoroom_reactionword():
     try:
         a = int(prms.get('a'))
         pod = int(prms.get('pod'))
-    except ValueError, e:
+    except ValueError as e:
         return json_response({ "code": 400 })
     val = { 
         'text': reactionword.reactionword_json(a, pod),
@@ -866,7 +866,7 @@ def apibanner_kanojoroom_reactionword():
 
 @app.route('/2/kanojo/vote_like.json', methods=['GET', 'POST'])
 def kanojo_vote_like():
-    if not session.has_key('id'):
+    if 'id' not in session:
         return json_response({ "code": 401 })
     prms = request.form if request.method == 'POST' else request.args
     if prms.get('kanojo_id') is None or prms.get('like') is None:
@@ -887,7 +887,7 @@ def kanojo_vote_like():
 
 @app.route('/2/resource/product_category_list.json', methods=['GET','POST'])
 def resource_product_category_list():
-    if not session.has_key('id'):
+    if 'id' not in session:
         return json_response({ "code": 401 })
     rspns = { "code": 200 }
     rspns['categories'] = [{"id": "1", "name": "Drink"}, {"id": "2", "name": "Food"}, {"id": "3", "name": "Snack"}, {"id": "4", "name": "Alcohol"}, {"id": "5", "name": "Beer"}, {"id": "6", "name": "Tabacco"}, {"id": "7", "name": "Magazines"}, {"id": "8", "name": "Stationary"}, {"id": "9", "name": "Industrial tool"}, {"id": "10", "name": "Electronics"}, {"id": "11", "name": "Kitchenware"}, {"id": "12", "name": "Clothes"}, {"id": "13", "name": "Accessory"}, {"id": "14", "name": "Music"}, {"id": "15", "name": "DVD"}, {"id": "16", "name": "TVgame"}, {"id": "17", "name": "Sports gear"}, {"id": "18", "name": "Health & beauty"}, {"id": "19", "name": "Medicine"}, {"id": "20", "name": "Medical supplies"}, {"id": "22", "name": "Book"}, {"id": "21", "name": "others"}]
@@ -924,7 +924,7 @@ def activity_usertimeline():
             ]
         }
     '''
-    if not session.has_key('id'):
+    if 'id' not in session:
         return json_response({ "code": 401 })
     prms = request.form if request.method == 'POST' else request.args
     if prms.get('index') is None or prms.get('limit') is None:
@@ -934,7 +934,7 @@ def activity_usertimeline():
     self_uid = session['id']
     try:
         user_id = int(prms.get('user_id', self_uid))
-    except Exception, e:
+    except Exception as e:
         return json_response({ "code": 400 })
     
     activities = activity_manager.user_activity(user_id=user_id, skip=index, limit=limit)
@@ -960,10 +960,10 @@ def activity_usertimeline():
 
 
     #return json_response({"code": 200, "activities": []})
-    data = {"activities": [{"kanojo": {"mascot_enabled": "0", "avatar_background_image_url": None, "in_room": True, "mouth_type": 1, "skin_color": 2, "body_type": 1, "race_type": 10, "spot_type": 1, "birth_day": 12, "sexual": 61, "id": 1, "relation_status": 2, "on_advertising": None, "clothes_type": 3, "brow_type": 10, "consumption": 17, "like_rate": 0, "eye_position": 0, "source": "", "location": "Somewhere", "birth_month": 10, "follower_count": 1, "goods_button_visible": True, "accessory_type": 1, "birth_year": 2014, "status": "Born in  12 Oct 2014 @ Somewhere. Area: Italy. 1 users are following.\nShe has relationship with id:1", "hair_type": 3, "clothes_color": 3, "ear_type": 1, "brow_position": 0, "barcode": "8028670007619", "love_gauge": 50, "profile_image_url": "https://192.168.1.19/profile_images/kanojo/1.png?w=88&h=88&face=true", "possession": 11, "eye_color": 5, "glasses_type": 1, "hair_color": 23, "face_type": 3, "nationality": "Italy", "advertising_product_url": None, "geo": "0.0000,0.0000", "emotion_status": 50, "voted_like": False, "eye_type": 101, "mouth_position": 0, "name": "\u30f4\u30a7\u30eb\u30c7", "fringe_type": 22, "nose_type": 1, "advertising_banner_url": None, "advertising_product_title": None, "recognition": 11}, "scanned": None, "user": {"friend_count": 0, "tickets": 20, "name": "everyone", "language": "en", "level": 1, "kanojo_count": 1, "money": 0, "stamina_max": 100, "facebook_connect": False, "profile_image_url": None, "sex": "not sure", "stamina": 100, "twitter_connect": False, "birth_month": 10, "id": 1, "birth_day": 11, "enemy_count": 0, "scan_count": 0, "email": None, "relation_status": 2, "birth_year": 2014, 'description': '', 'generate_count': 0, 'password': ''}, "other_user": {"friend_count": 0, "tickets": 20, "name": "id:1", "language": "en", "level": 1, "kanojo_count": 1, "money": 0, "stamina_max": 100, "facebook_connect": False, "profile_image_url": None, "sex": "not sure", "stamina": 100, "twitter_connect": False, "birth_month": 10, "id": 2, "birth_day": 11, "enemy_count": 0, "scan_count": 0, "email": None, "relation_status": 2, "birth_year": 2014, 'description': '', 'generate_count': 0, 'password': ''}, "activity": "AKI approached dsad.", "created_timestamp": 1413382843, "id": 16786677, "activity_type": 7}], "code": 200}
+    data = {"activities": [{"kanojo": {"mascot_enabled": "0", "avatar_background_image_url": None, "in_room": True, "mouth_type": 1, "skin_color": 2, "body_type": 1, "race_type": 10, "spot_type": 1, "birth_day": 12, "sexual": 61, "id": 1, "relation_status": 2, "on_advertising": None, "clothes_type": 3, "brow_type": 10, "consumption": 17, "like_rate": 0, "eye_position": 0, "source": "", "location": "Somewhere", "birth_month": 10, "follower_count": 1, "goods_button_visible": True, "accessory_type": 1, "birth_year": 2014, "status": "Born in  12 Oct 2014 @ Somewhere. Area: Italy. 1 users are following.\nShe has relationship with id:1", "hair_type": 3, "clothes_color": 3, "ear_type": 1, "brow_position": 0, "barcode": "8028670007619", "love_gauge": 50, "profile_image_url": "https://192.168.1.19/profile_images/kanojo/1.png?w=88&h=88&face=true", "possession": 11, "eye_color": 5, "glasses_type": 1, "hair_color": 23, "face_type": 3, "nationality": "Italy", "advertising_product_url": None, "geo": "0.0000,0.0000", "emotion_status": 50, "voted_like": False, "eye_type": 101, "mouth_position": 0, "name": "\\u30f4\\u30a7\\u30eb\\u30c7", "fringe_type": 22, "nose_type": 1, "advertising_banner_url": None, "advertising_product_title": None, "recognition": 11}, "scanned": None, "user": {"friend_count": 0, "tickets": 20, "name": "everyone", "language": "en", "level": 1, "kanojo_count": 1, "money": 0, "stamina_max": 100, "facebook_connect": False, "profile_image_url": None, "sex": "not sure", "stamina": 100, "twitter_connect": False, "birth_month": 10, "id": 1, "birth_day": 11, "enemy_count": 0, "scan_count": 0, "email": None, "relation_status": 2, "birth_year": 2014, 'description': '', 'generate_count': 0, 'password': ''}, "other_user": {"friend_count": 0, "tickets": 20, "name": "id:1", "language": "en", "level": 1, "kanojo_count": 1, "money": 0, "stamina_max": 100, "facebook_connect": False, "profile_image_url": None, "sex": "not sure", "stamina": 100, "twitter_connect": False, "birth_month": 10, "id": 2, "birth_day": 11, "enemy_count": 0, "scan_count": 0, "email": None, "relation_status": 2, "birth_year": 2014, 'description': '', 'generate_count': 0, 'password': ''}, "activity": "AKI approached dsad.", "created_timestamp": 1413382843, "id": 16786677, "activity_type": 7}], "code": 200}
     return json_response(data)
     data = json.dumps(data)
-    data = '''{"activities": [{"kanojo": {"mascot_enabled": "0", "avatar_background_image_url": null, "in_room": true, "mouth_type": 1, "skin_color": 2, "body_type": 1, "race_type": 10, "spot_type": 1, "birth_day": 12, "sexual": 61, "id": 1, "relation_status": 2, "on_advertising": null, "clothes_type": 3, "brow_type": 10, "consumption": 17, "like_rate": 0, "eye_position": 0, "source": "", "location": "Somewhere", "birth_month": 10, "follower_count": 1, "goods_button_visible": true, "accessory_type": 1, "birth_year": 2014, "status": "Born in  12 Oct 2014 @ Somewhere. Area: Italy. 1 users are following.\nShe has relationship with id:1", "hair_type": 3, "clothes_color": 3, "ear_type": 1, "brow_position": 0, "barcode": "8028670007619", "love_gauge": 50, "profile_image_url": "https://192.168.1.19/profile_images/kanojo/1.png?w=88&h=88&face=true", "possession": 11, "eye_color": 5, "glasses_type": 1, "hair_color": 23, "face_type": 3, "nationality": "Italy", "advertising_product_url": null, "geo": "0.0000,0.0000", "emotion_status": 50, "voted_like": false, "eye_type": 101, "mouth_position": 0, "name": "\u30f4\u30a7\u30eb\u30c7", "fringe_type": 22, "nose_type": 1, "advertising_banner_url": null, "advertising_product_title": null, "recognition": 11}, "scanned": null, "user": {"friend_count": 0, "tickets": 5, "name": "id:1", "language": "en", "level": 1, "kanojo_count": 1, "money": 0, "stamina_max": 100, "facebook_connect": false, "profile_image_url": null, "sex": "not sure", "stamina": 100, "twitter_connect": false, "birth_month": 10, "id": 1, "birth_day": 11, "enemy_count": 0, "scan_count": 0, "email": null, "relation_status": 2, "birth_year": 2014, 'description': '', 'generate_count': 0, 'password': ''}, "other_user": {"friend_count": 0, "tickets": 20, "name": "id:1", "language": "en", "level": 1, "kanojo_count": 1, "money": 0, "stamina_max": 100, "facebook_connect": false, "profile_image_url": null, "sex": "not sure", "stamina": 100, "twitter_connect": false, "birth_month": 10, "id": 1, "birth_day": 11, "enemy_count": 0, "scan_count": 0, "email": null, "relation_status": 2, "birth_year": 2014, 'description': '', 'generate_count': 0, 'password': ''}, "activity": "AKI approached dsad.", "created_timestamp": 1413382843, "id": 16786677, "activity_type": 7}], "code": 200}'''
+    data = '''{"activities": [{"kanojo": {"mascot_enabled": "0", "avatar_background_image_url": null, "in_room": true, "mouth_type": 1, "skin_color": 2, "body_type": 1, "race_type": 10, "spot_type": 1, "birth_day": 12, "sexual": 61, "id": 1, "relation_status": 2, "on_advertising": null, "clothes_type": 3, "brow_type": 10, "consumption": 17, "like_rate": 0, "eye_position": 0, "source": "", "location": "Somewhere", "birth_month": 10, "follower_count": 1, "goods_button_visible": true, "accessory_type": 1, "birth_year": 2014, "status": "Born in  12 Oct 2014 @ Somewhere. Area: Italy. 1 users are following.\nShe has relationship with id:1", "hair_type": 3, "clothes_color": 3, "ear_type": 1, "brow_position": 0, "barcode": "8028670007619", "love_gauge": 50, "profile_image_url": "https://192.168.1.19/profile_images/kanojo/1.png?w=88&h=88&face=true", "possession": 11, "eye_color": 5, "glasses_type": 1, "hair_color": 23, "face_type": 3, "nationality": "Italy", "advertising_product_url": null, "geo": "0.0000,0.0000", "emotion_status": 50, "voted_like": false, "eye_type": 101, "mouth_position": 0, "name": "\\u30f4\\u30a7\\u30eb\\u30c7", "fringe_type": 22, "nose_type": 1, "advertising_banner_url": null, "advertising_product_title": null, "recognition": 11}, "scanned": null, "user": {"friend_count": 0, "tickets": 5, "name": "id:1", "language": "en", "level": 1, "kanojo_count": 1, "money": 0, "stamina_max": 100, "facebook_connect": false, "profile_image_url": null, "sex": "not sure", "stamina": 100, "twitter_connect": false, "birth_month": 10, "id": 1, "birth_day": 11, "enemy_count": 0, "scan_count": 0, "email": null, "relation_status": 2, "birth_year": 2014, 'description': '', 'generate_count': 0, 'password': ''}, "other_user": {"friend_count": 0, "tickets": 20, "name": "id:1", "language": "en", "level": 1, "kanojo_count": 1, "money": 0, "stamina_max": 100, "facebook_connect": false, "profile_image_url": null, "sex": "not sure", "stamina": 100, "twitter_connect": false, "birth_month": 10, "id": 1, "birth_day": 11, "enemy_count": 0, "scan_count": 0, "email": null, "relation_status": 2, "birth_year": 2014, 'description': '', 'generate_count': 0, 'password': ''}, "activity": "AKI approached dsad.", "created_timestamp": 1413382843, "id": 16786677, "activity_type": 7}], "code": 200}'''
     from gzip import GzipFile
     from io import BytesIO as IO
     gzip_buffer = IO()
@@ -995,20 +995,20 @@ def profile_images_kanojo(kid):
 
 @app.route('/2/notification/register_token.json', methods=['POST'])
 def notification_register_token():
-    if not session.has_key('id'):
+    if 'id' not in session:
         return json_response({ "code": 401 })
     time.sleep(1)
     return json_response({ "code": 200 })
 
 @app.route('/2/api/message/dialog.json', methods=['GET'])
 def api_message_dialog():
-    if not session.has_key('id'):
+    if 'id' not in session:
         return json_response({ "code": 401 })
     return json_response({ "code": 200 })
 
 @app.route('/2/api/webview/chart.json', methods=['GET'])
 def api_webview_chart():
-    if not session.has_key('id'):
+    if 'id' not in session:
         return json_response({ "code": 401 })
     prms = request.args
     if prms.get('user_id') is None or prms.get('kanojo_id') is None:
@@ -1041,7 +1041,7 @@ def wv_chart():
 @app.route('/2/api/webview/show.json', methods=['GET'])
 def api_webview_show():
     #print request.cookies
-    if not session.has_key('id'):
+    if 'id' not in session:
         return json_response({ "code": 401 })
     prms = request.args
     if prms.get('uuid') is None:
@@ -1066,7 +1066,7 @@ def web_i():
 
 @app.route('/2/barcode/query.json', methods=['GET', 'POST'])
 def barcode_query():
-    if not session.has_key('id'):
+    if 'id' not in session:
         return json_response({ "code": 401 })
     prms = request.form if request.method == 'POST' else request.args
     if prms.get('barcode') is None:
@@ -1141,7 +1141,7 @@ def barcode_query():
 @app.route('/2/barcode/scan.json', methods=['POST'])
 @set_parsers(BKMultipartParser)
 def barcode_scan():
-    if not session.has_key('id'):
+    if 'id' not in session:
         return json_response({ "code": 401 })
     parser = BKMultipartParser()
     options = {
@@ -1173,7 +1173,7 @@ def barcode_scan():
 
 @app.route('/2/barcode/decrease_generating.json', methods=['GET'])
 def barcode_decrease_generating():
-    if not session.has_key('id'):
+    if 'id' not in session:
         return json_response({ "code": 401 })
     prms = request.args
     barcode = prms.get('barcode')
@@ -1188,14 +1188,14 @@ def barcode_decrease_generating():
 @app.route('/2/barcode/scan_and_generate.json', methods=['POST'])
 @set_parsers(BKMultipartParser)
 def barcode_scan_and_generate():
-    if not session.has_key('id'):
+    if 'id' not in session:
         return json_response({ "code": 401 })
     parser = BKMultipartParser()
     options = {
         'content_length': request.headers.get('content_length')
     }
     (prms, files) = parser.parse(request.stream.read(), request.headers.get('Content-Type'), **options)
-    if not prms.has_key('barcode') or not files.has_key('kanojo_profile_image_data') and not prms.has_key('kanojo_name'):
+    if 'barcode' not in prms or 'kanojo_profile_image_data' not in files and 'kanojo_name' not in prms:
         return json_response({ "code": 400 })
 
     rspns = { 'code': 200 }
@@ -1213,8 +1213,8 @@ def barcode_scan_and_generate():
     if bc_info:
         f = files['kanojo_profile_image_data']
         kname = prms.get('kanojo_name').encode('utf-8')
-        (crop_url, full_url) = image_manager.crop_and_upload_profile_image(f.stream, filename=urllib.quote(kname))
-        print crop_url, full_url, escape(prms.get('kanojo_name')), urllib.quote(kname)
+        (crop_url, full_url) = image_manager.crop_and_upload_profile_image(f.stream, filename=urllib.parse.quote(kname))
+        print(crop_url, full_url, escape(prms.get('kanojo_name')), urllib.parse.quote(kname))
 
         if not crop_url or not full_url:
             rspns = { "code": 503, "love_increment": { "alertShow": 1 }, "alerts": [ { "body": "Something going wrong, please, scan again.", "title": "" } ] }
@@ -1235,7 +1235,7 @@ def barcode_scan_and_generate():
 @app.route('/2/account/update.json', methods=['POST'])
 @set_parsers(BKMultipartParser)
 def account_update():
-    if not session.has_key('id'):
+    if 'id' not in session:
         return json_response({ "code": 401 })
     parser = BKMultipartParser()
     options = {
@@ -1247,23 +1247,23 @@ def account_update():
     self_user = user_manager.user(uid=uid, clear=CLEAR_NONE)
 
     updated = False
-    if prms.has_key('name'):
+    if 'name' in prms:
         self_user['name'] = prms['name']
         updated = True
-    if prms.has_key('sex'):
+    if 'sex' in prms:
         self_user['sex'] = prms['sex']
         updated = True
-    if prms.has_key('email'):
+    if 'email' in prms:
         #self_user['email'] = prms['email']
         updated = True
-    if prms.has_key('birth_year') and prms.has_key('birth_month') and prms.has_key('birth_day'):
+    if 'birth_year' in prms and 'birth_month' in prms and 'birth_day' in prms:
         self_user['birthday'] = int(time.mktime(time.strptime('%s-%s-%s 12:00:00'%(prms['birth_year'], prms['birth_month'], prms['birth_day'] ), '%Y-%m-%d %H:%M:%S'))) - time.timezone
         updated = True
-    if files.has_key('profile_image_data'):
+    if 'profile_image_data' in files:
         f = files['profile_image_data']
         #img_url = image_manager.upload(f.stream.read(), f.content_type, filename=f.filename)
         img_url = image_manager.upload_user_profile_image(f.stream, filename='%s.jpg'%uid)
-        print 'url: ', img_url
+        print('url: ', img_url)
         #f.save(open(f.filename, 'wb'))
         if img_url:
             self_user['profile_image_url'] = img_url
@@ -1283,16 +1283,16 @@ def account_update():
 def activity_scanned_timeline():
     '''
     '''
-    if not session.has_key('id'):
+    if 'id' not in session:
         return json_response({ "code": 401 })
     prms = request.args
-    if not prms.has_key('barcode') or not prms.has_key('index') and not prms.has_key('limit'):# or not prms.has_key('since_id'):
+    if 'barcode' not in prms or 'index' not in prms and 'limit' not in prms:# or not prms.has_key('since_id'):
         return json_response({ "code": 400 })
     barcode = prms.get('barcode')
     try:
         index = int(prms.get('index'))
         limit = int(prms.get('limit'))
-    except ValueError, e:
+    except ValueError as e:
         return json_response({ "code": 400 })
     # TODO: logic
     rspns = { 'code': 200 }
@@ -1305,7 +1305,7 @@ def barcode_update():
     '''
         update product info
     '''
-    if not session.has_key('id'):
+    if 'id' not in session:
         return json_response({ "code": 401 })
     parser = BKMultipartParser()
     options = {
@@ -1322,15 +1322,15 @@ def communication_store_items():
     '''
         item_class: 1 - items, 2 - date, 3 - tickets
     '''
-    if not session.has_key('id'):
+    if 'id' not in session:
         return json_response({ "code": 401 })
     prms = request.args
-    if not prms.has_key('item_class') or not prms.has_key('item_category_id'):
+    if 'item_class' not in prms or 'item_category_id' not in prms:
         return json_response({ "code": 400 })
     try:
         item_class = int(prms.get('item_class'))
         item_category_id = int(prms.get('item_category_id'))
-    except ValueError, e:
+    except ValueError as e:
         return json_response({ "code": 400 })
     rspns = { 'code': 200 }
 
@@ -1350,15 +1350,15 @@ def communication_date_list():
         type_id - 1 (store, can buy this items), 2 - belongings list
         kanojo_id - kanojo_id
     '''
-    if not session.has_key('id'):
+    if 'id' not in session:
         return json_response({ "code": 401 })
     prms = request.args
-    if not prms.has_key('type_id') or not prms.has_key('kanojo_id'):
+    if 'type_id' not in prms or 'kanojo_id' not in prms:
         return json_response({ "code": 400 })
     try:
         type_id = int(prms.get('type_id'))
         kanojo_id = int(prms.get('kanojo_id'))
-    except ValueError, e:
+    except ValueError as e:
         return json_response({ "code": 400 })
 
     rspns = { 'code': 200 }
@@ -1383,15 +1383,15 @@ def communication_date_list():
 
 @app.route('/2/shopping/compare_price.json', methods=['GET', 'POST'])
 def shopping_compare_price():
-    if not session.has_key('id'):
+    if 'id' not in session:
         return json_response({ "code": 401 })
     prms = request.form if request.method == 'POST' else request.args
-    if not prms.has_key('store_item_id') or not prms.has_key('price'):
+    if 'store_item_id' not in prms or 'price' not in prms:
         return json_response({ "code": 400 })
     try:
         store_item_id = int(prms.get('store_item_id'))
         price = int(prms.get('price'))
-    except ValueError, e:
+    except ValueError as e:
         return json_response({ "code": 400 })
 
     self_user = user_manager.user(uid=session['id'], clear=CLEAR_NONE)
@@ -1408,15 +1408,15 @@ def communication_item_list():
         type_id - 1 (can buy), 2 - belongings list
         kanojo_id - kanojo_id
     '''
-    if not session.has_key('id'):
+    if 'id' not in session:
         return json_response({ "code": 401 })
     prms = request.args
-    if not prms.has_key('type_id') or not prms.has_key('kanojo_id'):
+    if 'type_id' not in prms or 'kanojo_id' not in prms:
         return json_response({ "code": 400 })
     try:
         type_id = int(prms.get('type_id'))
         kanojo_id = int(prms.get('kanojo_id'))
-    except ValueError, e:
+    except ValueError as e:
         return json_response({ "code": 400 })
     rspns = { 'code': 200 }
 
@@ -1442,15 +1442,15 @@ def communication_has_items():
     '''
         item_class: 1 - items, 2 - date
     '''
-    if not session.has_key('id'):
+    if 'id' not in session:
         return json_response({ "code": 401 })
     prms = request.args
-    if not prms.has_key('item_class') or not prms.has_key('item_category_id'):
+    if 'item_class' not in prms or 'item_category_id' not in prms:
         return json_response({ "code": 400 })
     try:
         item_class = int(prms.get('item_class'))
         item_category_id = int(prms.get('item_category_id'))
-    except ValueError, e:
+    except ValueError as e:
         return json_response({ "code": 400 })
     rspns = { 'code': 200 }
 
@@ -1472,15 +1472,15 @@ def communication_has_items():
 
 @app.route('/2/communication/do_gift.json', methods=['GET', 'POST'])
 def communication_do_gift():
-    if not session.has_key('id'):
+    if 'id' not in session:
         return json_response({ "code": 401 })
     prms = request.form if request.method == 'POST' else request.args
-    if not prms.has_key('basic_item_id') or not prms.has_key('kanojo_id'):
+    if 'basic_item_id' not in prms or 'kanojo_id' not in prms:
         return json_response({ "code": 400 })
     try:
         basic_item_id = int(prms.get('basic_item_id'))
         kanojo_id = int(prms.get('kanojo_id'))
-    except ValueError, e:
+    except ValueError as e:
         return json_response({ "code": 400 })
 
     kanojo = kanojo_manager.kanojo(kanojo_id, None, clear=CLEAR_NONE)
@@ -1491,10 +1491,10 @@ def communication_do_gift():
     rspns['owner_user'] = user_manager.clear(owner_user, CLEAR_OTHER, self_user=self_user)
     url = server_url() + 'web/reactionword.html'
     do_gift = user_manager.user_action(user=self_user, kanojo=kanojo, do_gift=basic_item_id, is_extended_action=False)
-    if do_gift.has_key('love_increment') and do_gift.has_key('info'):
+    if 'love_increment' in do_gift and 'info' in do_gift:
         tmp = do_gift.get('info', {})
-        prms = { key: tmp[key] for key in ['pod', 'a'] if tmp.has_key(key) }
-        do_gift['love_increment']['reaction_word'] = '%s?%s'%(url, urllib.urlencode(prms))
+        prms = { key: tmp[key] for key in ['pod', 'a'] if key in tmp }
+        do_gift['love_increment']['reaction_word'] = '%s?%s'%(url, urllib.parse.urlencode(prms))
         do_gift.pop('info', None)
     rspns.update(do_gift)
     rspns['self_user'] = user_manager.clear(self_user, CLEAR_SELF, self_user=self_user)
@@ -1509,15 +1509,15 @@ def shopping_verify_tickets():
     '''
         buy extend gift/date
     '''
-    if not session.has_key('id'):
+    if 'id' not in session:
         return json_response({ "code": 401 })
     prms = request.form if request.method == 'POST' else request.args
-    if not prms.has_key('store_item_id') or not prms.has_key('use_tickets'):
+    if 'store_item_id' not in prms or 'use_tickets' not in prms:
         return json_response({ "code": 400 })
     try:
         store_item_id = int(prms.get('store_item_id'))
         use_tickets = int(prms.get('use_tickets'))
-    except ValueError, e:
+    except ValueError as e:
         return json_response({ "code": 400 })
 
     rspns = { 'code': 200 }
@@ -1536,15 +1536,15 @@ def shopping_verify_tickets():
 
 @app.route('/2/communication/do_extend_gift.json', methods=['GET', 'POST'])
 def communication_do_extend_gift():
-    if not session.has_key('id'):
+    if 'id' not in session:
         return json_response({ "code": 401 })
     prms = request.form if request.method == 'POST' else request.args
-    if not prms.has_key('extend_item_id') or not prms.has_key('kanojo_id'):
+    if 'extend_item_id' not in prms or 'kanojo_id' not in prms:
         return json_response({ "code": 400 })
     try:
         extend_item_id = int(prms.get('extend_item_id'))
         kanojo_id = int(prms.get('kanojo_id'))
-    except ValueError, e:
+    except ValueError as e:
         return json_response({ "code": 400 })
 
     kanojo = kanojo_manager.kanojo(kanojo_id, None, clear=CLEAR_NONE)
@@ -1555,10 +1555,10 @@ def communication_do_extend_gift():
     rspns['owner_user'] = user_manager.clear(owner_user, CLEAR_OTHER, self_user=self_user)
     url = server_url() + 'web/reactionword.html'
     give_present = user_manager.give_present(self_user, kanojo, extend_item_id)
-    if give_present.has_key('love_increment') and give_present.has_key('info'):
+    if 'love_increment' in give_present and 'info' in give_present:
         tmp = give_present.get('info', {})
-        prms = { key: tmp[key] for key in ['pod', 'a'] if tmp.has_key(key) }
-        give_present['love_increment']['reaction_word'] = '%s?%s'%(url, urllib.urlencode(prms))
+        prms = { key: tmp[key] for key in ['pod', 'a'] if key in tmp }
+        give_present['love_increment']['reaction_word'] = '%s?%s'%(url, urllib.parse.urlencode(prms))
         give_present.pop('info', None)
     rspns.update(give_present)
     rspns['kanojo'] = kanojo_manager.clear(kanojo, self_user, clear=CLEAR_OTHER, check_clothes=True)
@@ -1572,15 +1572,15 @@ def communication_do_extend_gift():
 
 @app.route('/2/communication/do_date.json', methods=['GET', 'POST'])
 def communication_do_date():
-    if not session.has_key('id'):
+    if 'id' not in session:
         return json_response({ "code": 401 })
     prms = request.form if request.method == 'POST' else request.args
-    if not prms.has_key('basic_item_id') or not prms.has_key('kanojo_id'):
+    if 'basic_item_id' not in prms or 'kanojo_id' not in prms:
         return json_response({ "code": 400 })
     try:
         basic_item_id = int(prms.get('basic_item_id'))
         kanojo_id = int(prms.get('kanojo_id'))
-    except ValueError, e:
+    except ValueError as e:
         return json_response({ "code": 400 })
 
     kanojo = kanojo_manager.kanojo(kanojo_id, None, clear=CLEAR_NONE)
@@ -1591,10 +1591,10 @@ def communication_do_date():
     rspns['owner_user'] = user_manager.clear(owner_user, CLEAR_OTHER, self_user=self_user)
     url = server_url() + 'web/reactionword.html'
     do_date = user_manager.user_action(user=self_user, kanojo=kanojo, do_date=basic_item_id, is_extended_action=False)
-    if do_date.has_key('love_increment') and do_date.has_key('info'):
+    if 'love_increment' in do_date and 'info' in do_date:
         tmp = do_date.get('info', {})
-        prms = { key: tmp[key] for key in ['pod', 'a'] if tmp.has_key(key) }
-        do_date['love_increment']['reaction_word'] = '%s?%s'%(url, urllib.urlencode(prms))
+        prms = { key: tmp[key] for key in ['pod', 'a'] if key in tmp }
+        do_date['love_increment']['reaction_word'] = '%s?%s'%(url, urllib.parse.urlencode(prms))
         do_date.pop('info', None)
     rspns.update(do_date)
     rspns['self_user'] = user_manager.clear(self_user, CLEAR_SELF, self_user=self_user)
@@ -1606,15 +1606,15 @@ def communication_do_date():
 
 @app.route('/2/communication/do_extend_date.json', methods=['GET', 'POST'])
 def communication_do_extend_date():
-    if not session.has_key('id'):
+    if 'id' not in session:
         return json_response({ "code": 401 })
     prms = request.form if request.method == 'POST' else request.args
-    if not prms.has_key('extend_item_id') or not prms.has_key('kanojo_id'):
+    if 'extend_item_id' not in prms or 'kanojo_id' not in prms:
         return json_response({ "code": 400 })
     try:
         extend_item_id = int(prms.get('extend_item_id'))
         kanojo_id = int(prms.get('kanojo_id'))
-    except ValueError, e:
+    except ValueError as e:
         return json_response({ "code": 400 })
 
     kanojo = kanojo_manager.kanojo(kanojo_id, None, clear=CLEAR_NONE)
@@ -1625,10 +1625,10 @@ def communication_do_extend_date():
     rspns['owner_user'] = user_manager.clear(owner_user, CLEAR_OTHER, self_user=self_user)
     url = server_url() + 'web/reactionword.html'
     do_date = user_manager.do_date(self_user, kanojo, extend_item_id)
-    if do_date.has_key('love_increment') and do_date.has_key('info'):
+    if 'love_increment' in do_date and 'info' in do_date:
         tmp = do_date.get('info', {})
-        prms = { key: tmp[key] for key in ['pod', 'a'] if tmp.has_key(key) }
-        do_date['love_increment']['reaction_word'] = '%s?%s'%(url, urllib.urlencode(prms))
+        prms = { key: tmp[key] for key in ['pod', 'a'] if key in tmp }
+        do_date['love_increment']['reaction_word'] = '%s?%s'%(url, urllib.parse.urlencode(prms))
         do_date.pop('info', None)
     rspns.update(do_date)
     rspns['kanojo'] = kanojo_manager.clear(kanojo, self_user, clear=CLEAR_OTHER, check_clothes=True)
@@ -1662,12 +1662,12 @@ def update_stamina_job():
     for user in db.users.find(query):
         user_manager.user_change(user, up_stamina=True, update_db_record=True)
         try:
-            print 'Recover stamina \"%s\"(id:%d)'%(user.get('name').encode('utf-8'), user.get('id'))
-        except UnicodeEncodeError, e:
-            print 'Recover stamina uid: %d'%user.get('id')
+            print('Recover stamina \"%s\"(id:%d)'%(user.get('name').encode('utf-8'), user.get('id')))
+        except UnicodeEncodeError as e:
+            print('Recover stamina uid: %d'%user.get('id'))
 
 def test_job():
-    print int(time.time())
+    print(int(time.time()))
 
 
 update_stamina_job()

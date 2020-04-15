@@ -35,41 +35,41 @@ class StoreManager(object):
 	def items(self, allow_kanojo, item_class):
 		_items = self._items if item_class==1 else self._dates
 		ctgrs = self.categories(allow_kanojo, item_class)
-		ctgrs = map(lambda x: x.get('item_category_id'), ctgrs)
-		itms = filter(lambda x: x.get('allow_kanojo', 0xFF) & allow_kanojo and x.get('category_id', 0) in ctgrs, _items)
+		ctgrs = [x.get('item_category_id') for x in ctgrs]
+		itms = [x for x in _items if x.get('allow_kanojo', 0xFF) & allow_kanojo and x.get('category_id', 0) in ctgrs]
 		#itms = filter(lambda x: x.get('allow_kanojo', 0) & allow_kanojo, _items)
 		return itms
 
 	def categories(self, allow_kanojo, item_class):
 		#_categories = self._items_categories if item_class==1 else self._dates_categories
-		ctgrs = filter(lambda x: x.get('allow_kanojo', 0) & allow_kanojo, self._categories)
+		ctgrs = [x for x in self._categories if x.get('allow_kanojo', 0) & allow_kanojo]
 		return ctgrs
 
 	def clear_category(self, ctgr):
 		allow_keys = ['item_category_id', 'image_thumbnail_url', 'description', 'expand_flag', 'title']
 		rv = {}
-		for k in ctgr.keys():
+		for k in list(ctgr.keys()):
 			if k in allow_keys:
 				rv[k] = ctgr[k]
-		if not ctgr.has_key('image_thumbnail_url'):
+		if 'image_thumbnail_url' not in ctgr:
 			rv.pop('item_category_id', None)
 		return rv
 
 	def clear_item(self, itm):
 		allow_keys = ['description', 'title', 'item_id', 'image_url', 'image_thumbnail_url', 'price', 'has_units', 'purchasable_level']
 		rv = {}
-		for k in itm.keys():
+		for k in list(itm.keys()):
 			if k in allow_keys:
 				rv[k] = itm[k]
-		if rv.has_key('description'):
+		if 'description' in rv:
 			rv['description'] = rv['description'].format(**ITEM_DESRIPTION_DICT)
-		if not rv.has_key('price') and not rv.has_key('has_units'):
+		if 'price' not in rv and 'has_units' not in rv:
 			price = None
-			if itm.has_key('price_t'):
+			if 'price_t' in itm:
 				price = 'Ticket: {price_t}'.format(**itm)
-			if itm.has_key('price_b'):
+			if 'price_b' in itm:
 				price = 'Price: {price_b}B Coins'.format(**itm) if price is None else price + ', {price_b}B Coins'.format(**itm)
-			if itm.has_key('price_s'):
+			if 'price_s' in itm:
 				price = 'Price: {price_s} stamina'.format(**itm) if price is None else price + ', {price_s} stamina'.format(**itm)
 			if price:
 				rv['price'] = price
@@ -77,7 +77,7 @@ class StoreManager(object):
 
 	def category_by_id(self, item_category_id, item_class):
 		#_categories = self._items_categories if item_class==1 else self._dates_categories
-		_ctgrs = filter(lambda c: c.get('item_category_id')==item_category_id, self._categories)
+		_ctgrs = [c for c in self._categories if c.get('item_category_id')==item_category_id]
 		if len(_ctgrs):
 			return _ctgrs[0]
 		return None
@@ -90,16 +90,16 @@ class StoreManager(object):
 			i = _itms[0]
 			c = self.category_by_id(i.get('category_id'), item_class=item_class)
 			if c:
-				_ctgrs = filter(lambda el: el.get('group_title', -1)==c.get('group_title', -2) or el.get('item_category_id')==c.get('item_category_id'), self._categories)
+				_ctgrs = [el for el in self._categories if el.get('group_title', -1)==c.get('group_title', -2) or el.get('item_category_id')==c.get('item_category_id')]
 				val = {
 					'items': []
 				}
 				if set_user_has_flag:
 					val['flag'] = 'user_has'
 				for c in _ctgrs:
-					val['title'] = c.get('group_title') if c.has_key('group_title') else c.get('title')
+					val['title'] = c.get('group_title') if 'group_title' in c else c.get('title')
 					# category for basic items
-					_c_items = filter(lambda x: x.get('category_id') == c.get('item_category_id'), _itms)
+					_c_items = [x for x in _itms if x.get('category_id') == c.get('item_category_id')]
 					if len(_c_items):
 						if c.get('image_thumbnail_url') is None:
 							if user_level:
@@ -113,7 +113,7 @@ class StoreManager(object):
 							if set_user_has_flag:
 								has_units_counter = 0
 								for i in _c_items:
-									tmp = filter(lambda x: x.get('store_item_id')==i.get('item_id'), has_items)
+									tmp = [x for x in has_items if x.get('store_item_id')==i.get('item_id')]
 									if len(tmp):
 										has_units_counter += tmp[0].get('units', 1)
 								if has_units_counter:
@@ -130,8 +130,8 @@ class StoreManager(object):
 	def _item_list(self, allow_kanojo, item_class, user_level=None, filter_has_items=False, has_items=None):
 		itms = self.items(allow_kanojo, item_class=item_class)
 		if filter_has_items:
-			store_item_ids = map(lambda x: x.get('store_item_id'), has_items)
-			itms = filter(lambda x: x.get('item_id') in store_item_ids, itms)
+			store_item_ids = [x.get('store_item_id') for x in has_items]
+			itms = [x for x in itms if x.get('item_id') in store_item_ids]
 		return self._items2categories(itms, item_class=item_class, user_level=user_level, has_items=has_items, set_user_has_flag=filter_has_items)
 
 	def goods_list(self, allow_kanojo, user_level=None, filter_has_items=False, has_items=None):
@@ -145,17 +145,17 @@ class StoreManager(object):
 		_itms = copy.deepcopy(itms)
 		while len(_itms):
 			i = _itms[0]
-			if i.has_key('group'):
+			if 'group' in i:
 				val = {
 					'items': [],
 					'title': i.get('group')
 				}
 				if set_user_has_flag:
 					val['flag'] = 'user_has'
-				_c_items = filter(lambda x: x.get('group')==i.get('group'), _itms)
+				_c_items = [x for x in _itms if x.get('group')==i.get('group')]
 				for i in _c_items:
 					if has_items:
-						tmp_arr = filter(lambda x: x.get('store_item_id')==i.get('item_id'), has_items)
+						tmp_arr = [x for x in has_items if x.get('store_item_id')==i.get('item_id')]
 						if tmp_arr:
 							units = tmp_arr[0].get('units', 1)
 							i['has_units'] = '1 unit' if units==1 else '%d units'%units
@@ -174,12 +174,12 @@ class StoreManager(object):
 
 	def _category_items(self, item_category_id, item_class, filter_has_items=False, has_items=None):
 		_items = self._items if item_class==1 else self._dates
-		itms = filter(lambda x: x.get('category_id') == item_category_id, _items)
-		store_item_ids = map(lambda x: x.get('store_item_id'), has_items)
+		itms = [x for x in _items if x.get('category_id') == item_category_id]
+		store_item_ids = [x.get('store_item_id') for x in has_items]
 		if filter_has_items:
-			itms = filter(lambda x: x.get('item_id') in store_item_ids, itms)
+			itms = [x for x in itms if x.get('item_id') in store_item_ids]
 		else:
-			itms = filter(lambda x: not x.get('hidden_in_store') or x.get('item_id') in store_item_ids, itms)
+			itms = [x for x in itms if not x.get('hidden_in_store') or x.get('item_id') in store_item_ids]
 		return self._category_items2categories(itms, set_user_has_flag=filter_has_items, has_items=has_items)
 
 	def category_goods(self, item_category_id, filter_has_items=False, has_items=None):
@@ -192,13 +192,13 @@ class StoreManager(object):
 		'''
 			get item from GOODS!!!
 		'''
-		itm = filter(lambda x: x.get('item_id') == item_id, self._items)
+		itm = [x for x in self._items if x.get('item_id') == item_id]
 		if len(itm):
 			return itm[0]
 		return None
 
 	def get_date(self, item_id=None):
-		itm = filter(lambda x: x.get('item_id') == item_id, self._dates)
+		itm = [x for x in self._dates if x.get('item_id') == item_id]
 		if len(itm):
 			return itm[0]
 		return None
@@ -209,8 +209,8 @@ class StoreManager(object):
 			return 1 - if item_id is item(goods)
 			       2 - if item_id is date
 		'''
-		item_ids = map(lambda el: el.get('item_id'), self._items)
-		date_ids = map(lambda el: el.get('item_id'), self._dates)
+		item_ids = [el.get('item_id') for el in self._items]
+		date_ids = [el.get('item_id') for el in self._dates]
 		if item_id in item_ids and item_id not in date_ids:
 			return 1
 		elif item_id in date_ids and item_id not in item_ids:
@@ -233,19 +233,19 @@ if __name__ == "__main__":
 	#print json.dumps(user)
 
 	#print json.dumps(sm.dates_list(KANOJO_OWNER))
-	print json.dumps(sm.category_dates(8, has_items=[]))
+	print(json.dumps(sm.category_dates(8, has_items=[])))
 
 	exit()
 
 	def ordered(obj):
 		if isinstance(obj, dict):
-			return {k: ordered(v) for k, v in obj.items()}
+			return {k: ordered(v) for k, v in list(obj.items())}
 		if isinstance(obj, list):
 			return sorted(ordered(x) for x in obj)
 		else:
 			return obj
 	dt_old = sm.item_list_from_categories(k_type, user_level=u_level)
 	#dt = {"code": 200, "item_categories": [{"items": [{"description": "Any KANOJOs love flowers. This item may increase KANOJO's love level.", "title": "A bunch of flowers", "price": "Price: 25B Coins", "image_url": "http://www.barcodekanojo.com/images/api/item/basic/gift_flower.png", "item_id": 1, "image_thumbnail_url": "http://www.barcodekanojo.com/images/api/item/basic/gift_flower_thm.png"}, {"description": "A bit fancy gift. This item may increase KANOJO's love level.", "title": "Perfume", "price": "Price: 40B Coins", "image_url": "http://www.barcodekanojo.com/images/api/item/basic/gift_perfume.png", "item_id": 2, "image_thumbnail_url": "http://www.barcodekanojo.com/images/api/item/basic/gift_perfume_thm.png"}], "level": 1, "title": "B coin"}, {"items": [{"category_id": 6, "image_thumbnail_url": "http://www.barcodekanojo.com/images/api/item/category/thm/wardrobe_thm.png", "description": "Buy clothes to your Kanojo or friends for present!", "expand_flag": 0, "title": "Clothes"}, {"category_id": 24, "image_thumbnail_url": "http://www.barcodekanojo.com/images/api/item/category/thm/category_glasses.png", "description": "Be more fashionable with glasses! Give it to her now!", "expand_flag": 0, "title": "EyeWear"}, {"category_id": 46, "image_thumbnail_url": "http://www.barcodekanojo.com/images/api/item/consumption/thm/item_bcoin_thm.png", "description": "B coin", "expand_flag": 0, "title": "B COIN"}, {"category_id": 44, "image_thumbnail_url": "http://www.barcodekanojo.com/images/api/item/consumption/thm/item_permanant_kanojo_thm.png", "description": "Wedding Ware For Permanent Kanojo", "expand_flag": 1, "title": "Wedding Ware"}], "title": "Wardrobe"}, {"items": [{"category_id": 7, "image_thumbnail_url": "http://www.barcodekanojo.com/images/api/item/category/thm/drink_energy_thm.png", "description": "Gain your Stamina.", "expand_flag": 0, "title": "Energy Drinks"}], "title": "Portion"}, {"items": [{"category_id": 8, "image_thumbnail_url": "http://www.barcodekanojo.com/images/api/item/category/thm/letter_goodbye_thm.png", "description": "To dump your Kanojo...", "expand_flag": 0, "title": "Goodbye Letter"}], "title": "Other"}]}
-	print 'Сomparison:', ordered(dt) == ordered(dt_old)
+	print('Сomparison:', ordered(dt) == ordered(dt_old))
 	#print json.dumps(dt_old)
 

@@ -78,12 +78,12 @@ class UserTest(unittest.TestCase):
             "profile_image_full_url": "http://gdrive-cdn.herokuapp.com/get/0B-nxIpt4DE2TWE1hM0g2bF9LNkU/637179.png",
             "love_gauge": 50,
             "mouth_position": 0.1,
-            "name": "\u3042\u304a\u3075\u3043\u308b",
+            "name": "\\u3042\\u304a\\u3075\\u3043\\u308b",
             "fringe_type": 10,
             "nose_type": 1,
             "birthday": 1415271083
         }
-        self.kanojo_friend = {"mascot_enabled": "0", "avatar_background_image_url": None, "mouth_type": 10, "nose_type": 3, "body_type": 1, "race_type": 10, "spot_type": 1, "sexual": 19, "id": 31, "recognition": 36, "clothes_type": 4, "brow_type": 2, "consumption": 18, "like_rate": 0, "eye_position": 0, "followers": [1], "location": "Somewhere", "accessory_type": 1, "possession": 27, "hair_type": 15, "clothes_color": 3, "ear_type": 1, "brow_position": 0, "barcode": "hidden", "love_gauge": 50, "profile_image_url": "http://www.deviantsart.com/u7ij6n.png", "eye_color": 6, "glasses_type": 1, "hair_color": 16, "owner_user_id": 0, "face_type": 4, "nationality": "Japan", "advertising_product_url": None, "profile_image_full_url": "http://gdrive-cdn.herokuapp.com/get/0B-nxIpt4DE2TbnZtVVB1T1RYX00/1277508.png", "eye_type": 112, "mouth_position": 0, "name": "\u30b0\u30e9\u30cb\u30fc\u30cb", "fringe_type": 3, "skin_color": 10, "birthday": 1413571308}
+        self.kanojo_friend = {"mascot_enabled": "0", "avatar_background_image_url": None, "mouth_type": 10, "nose_type": 3, "body_type": 1, "race_type": 10, "spot_type": 1, "sexual": 19, "id": 31, "recognition": 36, "clothes_type": 4, "brow_type": 2, "consumption": 18, "like_rate": 0, "eye_position": 0, "followers": [1], "location": "Somewhere", "accessory_type": 1, "possession": 27, "hair_type": 15, "clothes_color": 3, "ear_type": 1, "brow_position": 0, "barcode": "hidden", "love_gauge": 50, "profile_image_url": "http://www.deviantsart.com/u7ij6n.png", "eye_color": 6, "glasses_type": 1, "hair_color": 16, "owner_user_id": 0, "face_type": 4, "nationality": "Japan", "advertising_product_url": None, "profile_image_full_url": "http://gdrive-cdn.herokuapp.com/get/0B-nxIpt4DE2TbnZtVVB1T1RYX00/1277508.png", "eye_type": 112, "mouth_position": 0, "name": "\\u30b0\\u30e9\\u30cb\\u30fc\\u30cb", "fringe_type": 3, "skin_color": 10, "birthday": 1413571308}
 
     def test_user_action_approche(self):
         user = copy.deepcopy(self.user)
@@ -101,8 +101,8 @@ class UserTest(unittest.TestCase):
 
         dt = self.um.user_action(user, kanojo, action_string="10|12|21")
         self.assertEqual(dt.get('code'), 200)
-        self.assertTrue(dt.has_key('love_increment'))
-        self.assertTrue(dt.get('love_increment').has_key('increase_love'))
+        self.assertTrue('love_increment' in dt)
+        self.assertTrue('increase_love' in dt.get('love_increment'))
         self.assertGreater(dt.get('love_increment').get('increase_love'), 0)
         self.assertEqual(dt.get('love_increment').get('decrement_love'), 0)
         self.assertEqual(self.user.get('stamina')-10, user.get('stamina'))
@@ -110,8 +110,8 @@ class UserTest(unittest.TestCase):
 
         dt = self.um.user_action(user, kanojo2, action_string="10|12|21|21|20|12|12|20")
         self.assertEqual(dt.get('code'), 200)
-        self.assertTrue(dt.has_key('love_increment'))
-        self.assertTrue(dt.get('love_increment').has_key('decrement_love'))
+        self.assertTrue('love_increment' in dt)
+        self.assertTrue('decrement_love' in dt.get('love_increment'))
         self.assertGreater(dt.get('love_increment').get('decrement_love'), 0)
         self.assertEqual(dt.get('love_increment').get('increase_love'), 0)
         self.assertEqual(self.user.get('stamina')-20, user.get('stamina'))
@@ -120,7 +120,7 @@ class UserTest(unittest.TestCase):
         kanojo2['love_gauge'] = 1
         dt = self.um.user_action(user, kanojo2, action_string="10|12|21|21|20|12|12|20")
         self.assertEqual(dt.get('code'), 200)
-        self.assertTrue(dt.has_key('love_increment'))
+        self.assertTrue('love_increment' in dt)
         self.assertEqual(self.user.get('stamina')-30, user.get('stamina'))
         self.assertTrue(dt.get('info').get('change_owner'))
 
@@ -143,14 +143,14 @@ class UserTest(unittest.TestCase):
         # not extended gift
         dt = self.um.user_action(user, kanojo, do_gift=1, is_extended_action=False)
         self.assertEqual(dt.get('code'), 403)
-        self.assertTrue(dt.has_key('love_increment'))
+        self.assertTrue('love_increment' in dt)
         self.assertEqual(dt.get('love_increment').get('alertShow'), 1)
-        self.assertTrue(dt.has_key('alerts'))
+        self.assertTrue('alerts' in dt)
 
         user['money'] = 100
         dt = self.um.user_action(user, kanojo, do_gift=1, is_extended_action=False)
         self.assertEqual(dt.get('code'), 200)
-        self.assertTrue(dt.has_key('love_increment'))
+        self.assertTrue('love_increment' in dt)
         self.assertGreater(dt.get('love_increment').get('increase_love'), 0)
         self.assertNotEqual(kanojo.get('love_gauge'), self.kanojo.get('love_gauge'))
 
