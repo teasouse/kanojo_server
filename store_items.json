@@ -123,9 +123,7 @@
 			"image_thumbnail_url": "https://www.barcodekanojo.com/images/store/letter_goodbye_thm.png",
 			"group": "Goodbye Letters",
 			"action": "dump_kanojo"
-		},
-
-
+		}
 	],
 
 	"dates": [
