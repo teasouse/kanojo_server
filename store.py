@@ -25,7 +25,7 @@ class StoreManager(object):
 	"""docstring for StoreManager"""
 	def __init__(self, store_file='store_items.json'):
 		super(StoreManager, self).__init__()
-		store_info = json.load(open(store_file))
+		store_info = json.load(open(store_file, encoding='utf-8'))
 		self._items = store_info.get('items')
 		self._dates = store_info.get('dates')
 		self._categories = store_info.get('categories')

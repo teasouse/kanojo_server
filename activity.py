@@ -266,18 +266,18 @@ class ActivityManager(object):
                 elif FILL_TYPE_HTML == fill_type:
                     a['kanojo_url'] = '/kanojo/%d.html'%a['kanojo'].get('id')
                     if a['kanojo'].get('id'):
-                        f['kanojo_name'] = '<a href="%s">%s</a>'%(a['kanojo_url'], escape(a['kanojo'].get('name').encode('utf-8')))
+                        f['kanojo_name'] = '<a href="%s">%s</a>'%(a['kanojo_url'], escape(a['kanojo'].get('name')))
                     else:
-                        f['kanojo_name'] = '%s'%escape(a['kanojo'].get('name').encode('utf-8'))
+                        f['kanojo_name'] = '%s'%escape(a['kanojo'].get('name'))
             if a.get('user'):
                 if FILL_TYPE_PLAIN == fill_type:
                     f['user_name'] = a['user'].get('name').encode('utf-8')
                 elif FILL_TYPE_HTML == fill_type:
                     a['user_url'] = '/user/%d.html'%a['user'].get('id')
                     if a['user'].get('id'):
-                        f['user_name'] =  '<a href="%s">%s</a>'%(a['user_url'], escape(a['user'].get('name').encode('utf-8')))
+                        f['user_name'] =  '<a href="%s">%s</a>'%(a['user_url'], escape(a['user'].get('name')))
                     else:
-                        f['user_name'] =  '%s'%escape(a['user'].get('name').encode('utf-8'))
+                        f['user_name'] =  '%s'%escape(a['user'].get('name'))
                 f['user_level'] = a['user'].get('level')
             if a.get('other_user'):
                 if FILL_TYPE_PLAIN == fill_type:
@@ -285,9 +285,9 @@ class ActivityManager(object):
                 elif FILL_TYPE_HTML == fill_type:
                     a['other_user_url'] = '/user/%d.html'%a['other_user'].get('id')
                     if a['other_user'].get('id'):
-                        f['other_user_name'] =  '<a href="%s">%s</a>'%(a['other_user_url'], escape(a['other_user'].get('name').encode('utf-8')))
+                        f['other_user_name'] =  '<a href="%s">%s</a>'%(a['other_user_url'], escape(a['other_user'].get('name')))
                     else:
-                        f['other_user_name'] = '%s'%escape(a['other_user'].get('name').encode('utf-8'))
+                        f['other_user_name'] = '%s'%escape(a['other_user'].get('name'))
                 f['other_user_level'] = a['other_user'].get('level')
             try:
                 a['activity'] = a['activity'].format(**f)

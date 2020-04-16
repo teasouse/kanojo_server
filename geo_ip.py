@@ -39,7 +39,8 @@ class GeoIP(object):
         return cache
 
     def geo_key(self, ip):
-        tmp = ('%s%s%s%s%s'%(self.secret1, ip[:len(ip)//2], self.secret2, ip[len(ip)//2:], self.secret3)).encode('utf-8')
+        ipIndex = len(ip)//2
+        tmp = ('%s%s%s%s%s'%(self.secret1, ip[:ipIndex], self.secret2, ip[ipIndex:], self.secret3)).encode('utf-8')
         #print tmp, ip
         return hashlib.md5(tmp).hexdigest()
 

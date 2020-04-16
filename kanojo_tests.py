@@ -125,7 +125,7 @@ class KanojoTest(unittest.TestCase):
 
         wardrobe1 = filter(lambda el: el.get('id')==24, self.kanojo.get('wardrobe'))
         wardrobe2 = filter(lambda el: el.get('id')==24, kanojo.get('wardrobe'))
-        self.assertEqual(wardrobe2[0].get('like_weight_mult')-1.5, wardrobe1[0].get('like_weight_mult'))
+        self.assertEqual(next(wardrobe2).get('like_weight_mult')-1.5, next(wardrobe1).get('like_weight_mult'))
 
         self.km.add_clothes(kanojo, 51)
         self.assertEqual(len(self.kanojo.get('wardrobe'))+1, len(kanojo.get('wardrobe')))

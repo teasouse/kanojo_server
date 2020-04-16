@@ -126,8 +126,8 @@ class KanojoManager(object):
         last_bits_move = 8-((bit_end) % 8)
         first_bits_move = ((bit_start) % 8)
 
-        rv = data[bit_start/8] & ~(-1 << (8 - first_bits_move))
-        for i in range(bit_start/8, bit_end/8):
+        rv = data[int(bit_start/8)] & ~(-1 << (8 - first_bits_move))
+        for i in range(int(bit_start/8), int(bit_end/8)):
             rv = rv << 8 | data[i+1]
         rv = rv >> last_bits_move
         return rv
@@ -141,7 +141,8 @@ class KanojoManager(object):
         if not barcode or len(barcode)==0:
             return None
 
-        bc = '%s%s%s'%(self.generate_secret[:len(self.generate_secret)/2], barcode, self.generate_secret[len(self.generate_secret)/2:])
+        secretIndex = len(self.generate_secret)//2
+        bc = ('%s%s%s'%(self.generate_secret[:secretIndex], barcode, self.generate_secret[secretIndex:])).encode('utf-8')
         hash_arr = bytearray(hashlib.md5(bc).digest())
 
         rv = { 'barcode': barcode, 'body_type': 1 }
@@ -351,7 +352,7 @@ class KanojoManager(object):
 
         tmp_kanojo = copy.copy(kanojo)
         self.fill_fields(tmp_kanojo, self_user=self_user, owner_user=owner_user)
-        if tmp_kanojo.get('relation_status') is not 2:
+        if tmp_kanojo.get('relation_status') != 2:
             tmp_kanojo['barcode'] = '************'
 
         curr_date = self.kanojo_date(tmp_kanojo)
@@ -442,7 +443,7 @@ class KanojoManager(object):
             if 'clothes_selected' in kanojo and tm < kanojo.get('clothes_selected').get('undress_time', 0):
                 return (kanojo.get('clothes_selected').get('clothes_type', kanojo.get('clothes_type')), False)
 
-            days_age = (tm - kanojo.get('birthday', 0)) / (24 * 60 * 60)
+            days_age = int((tm - kanojo.get('birthday', 0)) / (24 * 60 * 60))
             tz_string = kanojo.get('timezone', 'Europe/Kiev')
             hour = datetime.fromtimestamp(tm, pytz.timezone(tz_string)).hour
 
@@ -573,7 +574,7 @@ class KanojoManager(object):
             tm = int(time.time())
             enjoying_time = kanojo.get('enjoying_time', 0)
             if enjoying_time > tm:
-                m = (enjoying_time - tm) / 60
+                m = (enjoying_time - tm) // 60
                 rv['alerts'] = [ { "body": "She is enjoying with someone, coming back about %d mins later."%m, "title": "" } ]
                 rv['love_increment']['alertShow'] = 1
                 rv['info']['busy'] = True
@@ -595,7 +596,7 @@ class KanojoManager(object):
 
         tz_string = kanojo.get('timezone', 'Europe/Kiev')
         hour = datetime.fromtimestamp(time.time(), pytz.timezone(tz_string)).hour
-        part_of_day = ((hour + 2) % 24 ) / 6 # 0 - night, 1 - morning, 2 - day, 3 - evening
+        part_of_day = int(((hour + 2) % 24 ) / 6) # 0 - night, 1 - morning, 2 - day, 3 - evening
         rv['info']['pod'] = part_of_day
 
         return rv
@@ -621,9 +622,9 @@ class KanojoManager(object):
 
             relation_status = self.relation_status(kanojo, user)
             if relation_status == 2:
-                action_weight /= 5
+                action_weight = int(action_weight/5)
             elif relation_status == 3:
-                action_weight /= 20
+                action_weight = int(action_weight/20)
             else:
                 action_weight = 0
 
@@ -642,12 +643,12 @@ class KanojoManager(object):
         relation_status = self.relation_status(kanojo, user)
         action_weight = randint(50, 100)
         if relation_status == 2:
-            action_weight /= 5
+            action_weight = int(action_weight/5)
         elif relation_status == 3:
             if is_extended:
-                action_weight /= 10
+                action_weight = int(action_weight/10)
             else:
-                action_weight /= 20
+                action_weight = int(action_weight/20)
         else:
             action_weight = 0
         rv = self._kanojo_love_increment(kanojo, user, action_weight, relation_status=relation_status)
@@ -657,16 +658,16 @@ class KanojoManager(object):
     def duration_to_str(self, duration):
         if duration < 60:
             return '%d seconds'%duration if duration > 1 else '%d second'%duration
-        duration /= 60
+        duration = int(duration/60)
         if duration < 60:
             return '%d minutes'%duration if duration > 1 else '%d minute'%duration
-        duration /= 60
+        duration = int(duration/60)
         if duration < 24:
             return '%d hours'%duration if duration > 1 else '%d hour'%duration
-        duration /= 24
+        duration = int(duration/24)
         if duration < 7:
             return '%d days'%duration if duration > 1 else '%d day'%duration
-        duration /= 7
+        duration = int(duration/7)
         return '%d weeks'%duration if duration > 1 else '%d week'%duration
 
     def user_do_date_calc_kanojo_love_increment(self, kanojo, user, store_item, is_extended=False):
@@ -686,9 +687,9 @@ class KanojoManager(object):
                 self.apply_date(kanojo, store_item)
             return rv
         elif relation_status == 2:
-            action_weight /= 5
+            action_weight = int(action_weight/5)
         elif relation_status == 3:
-            action_weight /= 20
+            action_weight = int(action_weight/20)
         else:
             action_weight = 0
         rv = self._kanojo_love_increment(kanojo, user, action_weight, relation_status=relation_status)
