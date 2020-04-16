@@ -86,10 +86,6 @@ class StoreTest(unittest.TestCase):
         items.extend(self.sm._dates)
         ids = [x.get('item_id') for x in items]
 
-        for i in items:
-            if 'base_store_item_id' in i:
-                self.assertTrue(i.get('base_store_item_id') in ids, 'Store item \"%s\" links to nonexisting item \"%s\"'%(i.get('item_id'), i.get('base_store_item_id')))
-
         while len(ids):
             item_id = ids.pop(0)
             if item_id != None:
