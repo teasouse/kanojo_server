@@ -1,17 +1,26 @@
 # Kanojo server
 
-Barcode kanojo server.
+Barcode Kanojo server.
+
+## Requirements:
+- Python 3
+- MongoDB
 
 ## Setup
 
-- Install [virtualenv](https://virtualenv.pypa.io/en/latest/)
+- **Recommended** Install [virtualenv](https://virtualenv.pypa.io/en/latest/)
+	- Recommended to be setup under `./venv/` directory.
+	- Can also be installed from pip.
 - Install python requirements from "requirements.txt"
-- Rename "config.py.template" to "config.py" and fill app params
+```sh
+python(3) -m pip -r requirements.txt
+```
+- Rename "config.py.template" to "config.py" and fill app parameters.
 
 ## Usage
 
  Now you can run server by:
-`python web_job.py`
+`python(3) web_job.py`
 
 
 ## Licensing
