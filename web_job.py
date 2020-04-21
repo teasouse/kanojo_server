@@ -34,9 +34,9 @@ from collections import OrderedDict
 from activity import ActivityManager, FILL_TYPE_PLAIN, FILL_TYPE_HTML
 
 from OpenSSL import SSL
-# context = SSL.Context(SSL.SSLv23_METHOD)
-# context.use_privatekey_file(config.SSL_PRIVATEKEY_FILE)
-# context.use_certificate_file(config.SSL_CERTIFICATE_FILE)
+context = SSL.Context(SSL.SSLv23_METHOD)
+context.use_privatekey_file(config.SSL_PRIVATEKEY_FILE)
+context.use_certificate_file(config.SSL_CERTIFICATE_FILE)
 
 app = Flask(__name__)
 app.debug = False
