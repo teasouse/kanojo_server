@@ -8,7 +8,7 @@ __copyright__ = 'Copyright © 2014-2015'
 
 import os
 import os.path
-from functools import wraps
+from functools import wraps, cmp_to_key
 from flask import Flask, Response, json, request, stream_with_context, redirect, render_template, abort, send_file, send_from_directory
 from flask import session
 import json
@@ -34,9 +34,9 @@ from collections import OrderedDict
 from activity import ActivityManager, FILL_TYPE_PLAIN, FILL_TYPE_HTML
 
 from OpenSSL import SSL
-context = SSL.Context(SSL.SSLv23_METHOD)
-context.use_privatekey_file(config.SSL_PRIVATEKEY_FILE)
-context.use_certificate_file(config.SSL_CERTIFICATE_FILE)
+# context = SSL.Context(SSL.SSLv23_METHOD)
+# context.use_privatekey_file(config.SSL_PRIVATEKEY_FILE)
+# context.use_certificate_file(config.SSL_CERTIFICATE_FILE)
 
 app = Flask(__name__)
 app.debug = False
@@ -86,7 +86,7 @@ def order_dict_cmp(x, y):
 
 def json_response(data):
     if isinstance(data, dict):
-        data = OrderedDict(sorted(list(data.items()), cmp=order_dict_cmp))
+        data = OrderedDict(sorted(list(data.items()), key=cmp_to_key(order_dict_cmp)))
     rtext = json.dumps(data)
     if request.method == 'POST':
         if request.form.get('callback', False):
@@ -1532,8 +1532,6 @@ def shopping_verify_tickets():
     rspns.update(buy_present)
     return json_response(rspns)
 
-
-
 @app.route('/2/communication/do_extend_gift.json', methods=['GET', 'POST'])
 def communication_do_extend_gift():
     if 'id' not in session:
@@ -1568,7 +1566,6 @@ def communication_do_extend_gift():
     else:
         rspns['owner_user'] = user_manager.clear(self_user, CLEAR_OTHER, self_user=self_user)    
     return json_response(rspns)
-
 
 @app.route('/2/communication/do_date.json', methods=['GET', 'POST'])
 def communication_do_date():
