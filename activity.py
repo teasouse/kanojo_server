@@ -4,9 +4,10 @@
 __author__ = 'Andrey Derevyagin'
 __copyright__ = 'Copyright © 2015'
 
-import time
-from html import escape
 import copy
+import time
+
+from html import escape
 
 CLEAR_NONE = 0
 CLEAR_SELF = 1

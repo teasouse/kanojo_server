@@ -4,9 +4,10 @@
 __author__ = 'Andrey Derevyagin'
 __copyright__ = 'Copyright © 2015'
 
-import unittest
-from reactionword import ReactionwordManager
 import json
+import unittest
+
+from reactionword import ReactionwordManager
 
 class ReactionwordTest(unittest.TestCase):
     def __init__(self, *args, **kwargs):
@@ -21,4 +22,4 @@ class ReactionwordTest(unittest.TestCase):
                 self.assertGreater(len(reactionword), 1)
 
 if __name__ == '__main__':
-    unittest.main()(venv)
+	unittest.main()(venv)

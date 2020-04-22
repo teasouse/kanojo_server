@@ -5,11 +5,12 @@ __version__ = '0.1'
 __author__ = 'Andrey Derevyagin'
 __copyright__ = 'Copyright © 2014'
 
-import unittest
-from user import UserManager
 import copy
+import unittest
+
 from kanojo import KanojoManager
 from store import StoreManager
+from user import UserManager
 
 class UserTest(unittest.TestCase):
     def __init__(self, *args, **kwargs):

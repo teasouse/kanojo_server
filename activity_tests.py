@@ -6,8 +6,7 @@ __author__ = 'Andrey Derevyagin'
 __copyright__ = 'Copyright © 2015'
 
 import unittest
-from activity import ActivityManager
-from activity import FILL_TYPE_PLAIN, FILL_TYPE_HTML
+from activity import ActivityManager, FILL_TYPE_HTML, FILL_TYPE_PLAIN
 
 
 class ActivityTest(unittest.TestCase):

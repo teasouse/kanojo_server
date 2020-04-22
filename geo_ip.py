@@ -5,12 +5,12 @@ __version__ = '0.1'
 __author__ = 'Andrey Derevyagin'
 __copyright__ = 'Copyright © 2014'
 
-import urllib.request, urllib.error, urllib.parse
-import time
-import json
 import hashlib
-#from config import GEOIP_SECRET1, GEOIP_SECRET2, GEOIP_SECRET3
+import json
+import time
+import urllib.request, urllib.error, urllib.parse
 
+#from config import GEOIP_SECRET1, GEOIP_SECRET2, GEOIP_SECRET3
 
 GEOIP_CACHE_ONLY = 0
 GEOIP_WEB_SERVICE = 1

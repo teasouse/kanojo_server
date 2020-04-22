@@ -5,12 +5,11 @@ __version__ = '0.01'
 __author__ = 'Andrey Derevyagin'
 __copyright__ = 'Copyright © 2013-2014'
 
-
+import calendar
 import time
 import pytz
-from datetime import datetime
-import calendar
 
+from datetime import datetime
 
 class Post(object):
     """docstring for Post"""

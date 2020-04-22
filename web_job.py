@@ -4,34 +4,35 @@
 __author__ = 'Andrey Derevyagin'
 __copyright__ = 'Copyright © 2014-2015'
 
-
-import os
-import os.path
-from functools import wraps, cmp_to_key
-from flask import Flask, Response, json, request, stream_with_context, redirect, render_template, abort, send_file, send_from_directory
-from flask import session
+import datetime
 import json
-import time, datetime
+import os, os.path
 import re
-import urllib.parse, urllib.error
-from pymongo import MongoClient
-from datetime import timedelta
-from user import *
-from kanojo import *
-from images import ImageManager
-import config
+import ssl
+import time
+import urllib.error, urllib.parse
+
+from apscheduler.schedulers.background import BackgroundScheduler
+from collections import OrderedDict
+from functools import cmp_to_key
+from flask import Flask, Response, abort, json, redirect, render_template, request, send_file, send_from_directory, session, stream_with_context
 from flask_api.decorators import set_parsers
-from bkmultipartparser import BKMultipartParser
-from thread_post import Post
 from hashlib import sha224
 from html import escape
-from geo_ip import GeoIP, GEOIP_CACHE_ONLY, GEOIP_WEB_SERVICE
-from store import StoreManager, KANOJO_OWNER, KANOJO_FRIEND, KANOJO_OTHER
-from reactionword import ReactionwordManager
+from pymongo import MongoClient
 from random import randint
-from collections import OrderedDict
+
+import config
+
 from activity import ActivityManager, FILL_TYPE_PLAIN, FILL_TYPE_HTML
-import ssl
+from bkmultipartparser import BKMultipartParser
+from geo_ip import GeoIP, GEOIP_CACHE_ONLY, GEOIP_WEB_SERVICE
+from images import ImageManager
+from kanojo import *
+from reactionword import ReactionwordManager
+from store import StoreManager, KANOJO_OWNER, KANOJO_FRIEND, KANOJO_OTHER
+from thread_post import Post
+from user import *
 
 context = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)
 context.load_cert_chain(config.SSL_CERTIFICATE_FILE, keyfile=config.SSL_PRIVATEKEY_FILE)
@@ -41,7 +42,7 @@ app.debug = False
 app.secret_key = config.SESSION_SECRET_KEY
 #app.config['SESSION_COOKIE_DOMAIN'] = '192.168.1.19'
 #session.permanent = True
-#app.permanent_session_lifetime = timedelta(minutes=5)
+#app.permanent_session_lifetime = datetime.timedelta(minutes=5)
 #app.config['DEFAULT_PARSERS'] = []
 
 mdb_connection_string = config.MDB_CONNECTION_STRING_REAL
@@ -1666,8 +1667,6 @@ def test_job():
 
 
 update_stamina_job()
-
-from apscheduler.schedulers.background import BackgroundScheduler
 
 #if not app.debug or os.environ.get('WERKZEUG_RUN_MAIN') == 'true':
 #if True:

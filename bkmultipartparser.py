@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+from flask_api import exceptions
 from flask_api.parsers import BaseParser
 from werkzeug.formparser import MultiPartParser as WerkzeugMultiPartParser
 from werkzeug.formparser import default_stream_factory
 from werkzeug._compat import BytesIO, text_type
-from flask_api import exceptions
 
 class BKMultipartParser(BaseParser):
     """

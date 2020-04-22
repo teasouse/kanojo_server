@@ -4,14 +4,14 @@
 __author__ = 'Andrey Derevyagin'
 __copyright__ = 'Copyright © 2014-2015'
 
-import json
 import copy
+import json
+
 from user import UserManager, CLEAR_NONE
 
 KANOJO_OWNER = 1
 KANOJO_FRIEND = 2
 KANOJO_OTHER = 4
-
 
 ITEM_DESRIPTION_DICT = {
 	'attention': '\n*Attention\nThis is consumable item.\nThis item is for the user who is at level 1 or higher.\nWhen she wears clothes, love level is cut down less likely. Effectiveness is depending upon clothes she wears.\nWhen you give her more than 1clothes at the same time, KANOJO by herself selects which clothes she wears daily. Outfits can be given by her [friends], but she often seems to put on clothes given from her [owner].\nDressing time is depending on her area(where she was born).',

@@ -5,10 +5,10 @@ __version__ = '0.1'
 __author__ = 'Andrey Derevyagin'
 __copyright__ = 'Copyright © 2014'
 
-import unittest
-from store import StoreManager
-from store import KANOJO_OWNER, KANOJO_FRIEND, KANOJO_OTHER
 import copy
+import unittest
+
+from store import StoreManager, KANOJO_OWNER, KANOJO_FRIEND, KANOJO_OTHER
 
 class StoreTest(unittest.TestCase):
     def __init__(self, *args, **kwargs):

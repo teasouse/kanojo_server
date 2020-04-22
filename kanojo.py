@@ -4,19 +4,19 @@
 __author__ = 'Andrey Derevyagin'
 __copyright__ = 'Copyright © 2014-2015'
 
-
-from pymongo import MongoClient
-import config
-import time
-from datetime import datetime
-import pytz
-#from user import CLEAR_NONE, CLEAR_SELF, CLEAR_OTHER
-import json
 import copy
-from random import randint
 import hashlib
-from collections import OrderedDict
+import json
+import time
+import pytz
 
+from collections import OrderedDict
+from datetime import datetime
+from pymongo import MongoClient
+from random import randint
+#from user import CLEAR_NONE, CLEAR_SELF, CLEAR_OTHER
+
+import config
 
 CLEAR_NONE = 0
 CLEAR_SELF = 1
@@ -32,7 +32,6 @@ def kanojo_order_dict_cmp(x, y):
     elif y in order:
         return 1
     return cmp(x, y)
-
 
 class KanojoManager(object):
     """docstring for KanojoManager"""

@@ -5,15 +5,16 @@ __version__ = '0.1'
 __author__ = 'Andrey Derevyagin'
 __copyright__ = 'Copyright © 2014'
 
-from PIL import Image
+import io
 import json
 import requests
+
+from PIL import Image
+
 try:
     from gdrive_cdn import UploadToCDN
 except ImportError as e:
     pass
-import io
-
 
 class UploadToDeviantsart(object):
     def __init__(self):
@@ -26,8 +27,6 @@ class UploadToDeviantsart(object):
         except ValueError:
             return False
         return rv.get('url', False)
-
-
 
 class ImageManager(object):
     def __init__(self):

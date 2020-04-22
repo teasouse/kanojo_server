@@ -4,15 +4,17 @@
 __author__ = 'Andrey Derevyagin'
 __copyright__ = 'Copyright © 2014-2015'
 
-
-from pymongo import MongoClient
-import time
-import config
-import math
 import copy
-from activity import ActivityManager, ACTIVITY_SCAN, ACTIVITY_GENERATED, ACTIVITY_ME_ADD_FRIEND, ACTIVITY_APPROACH_KANOJO, ACTIVITY_ME_STOLE_KANOJO, ACTIVITY_MY_KANOJO_STOLEN, ACTIVITY_MY_KANOJO_ADDED_TO_FRIENDS, ACTIVITY_BECOME_NEW_LEVEL, ACTIVITY_MARRIED, ACTIVITY_JOINED, ACTIVITY_BREAKUP, ACTIVITY_ADD_AS_ENEMY
+import math
 import random
+import time
+
 from collections import OrderedDict
+from pymongo import MongoClient
+
+import config
+
+from activity import ActivityManager, ACTIVITY_SCAN, ACTIVITY_GENERATED, ACTIVITY_ME_ADD_FRIEND, ACTIVITY_APPROACH_KANOJO, ACTIVITY_ME_STOLE_KANOJO, ACTIVITY_MY_KANOJO_STOLEN, ACTIVITY_MY_KANOJO_ADDED_TO_FRIENDS, ACTIVITY_BECOME_NEW_LEVEL, ACTIVITY_MARRIED, ACTIVITY_JOINED, ACTIVITY_BREAKUP, ACTIVITY_ADD_AS_ENEMY
 
 CLEAR_NONE = 0
 CLEAR_SELF = 1
@@ -503,6 +505,7 @@ class UserManager(object):
             price = store_item
         else:
             return { "code": 500, "love_increment": { "alertShow": 1 }, "alerts": [ { "body": "Server error.", "title": "" } ] }
+
         if user.get('stamina') < price.get('price_s', 0):
             return { "code": 403, "love_increment": { "alertShow": 1 }, "alerts": [ { "body": "You don't have enough stamina.", "title": "" } ] }
         if user.get('money') < price.get('price_b', 0):

@@ -5,10 +5,12 @@ __version__ = '0.1'
 __author__ = 'Andrey Derevyagin'
 __copyright__ = 'Copyright © 2014'
 
-import unittest
-from kanojo import KanojoManager
 import copy
-import random, string
+import random
+import string
+import unittest
+
+from kanojo import KanojoManager
 
 class KanojoTest(unittest.TestCase):
     def __init__(self, *args, **kwargs):
