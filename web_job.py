@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-
 __author__ = 'Andrey Derevyagin'
 __copyright__ = 'Copyright © 2014-2015'
 
@@ -14,7 +13,7 @@ from flask import session
 import json
 import time, datetime
 import re
-import urllib.request, urllib.parse, urllib.error
+import urllib.parse, urllib.error
 from pymongo import MongoClient
 from datetime import timedelta
 from user import *
@@ -32,11 +31,10 @@ from reactionword import ReactionwordManager
 from random import randint
 from collections import OrderedDict
 from activity import ActivityManager, FILL_TYPE_PLAIN, FILL_TYPE_HTML
+import ssl
 
-from OpenSSL import SSL
-context = SSL.Context(SSL.SSLv23_METHOD)
-context.use_privatekey_file(config.SSL_PRIVATEKEY_FILE)
-context.use_certificate_file(config.SSL_CERTIFICATE_FILE)
+context = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)
+context.load_cert_chain(config.SSL_CERTIFICATE_FILE, keyfile=config.SSL_PRIVATEKEY_FILE)
 
 app = Flask(__name__)
 app.debug = False
