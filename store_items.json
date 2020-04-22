@@ -73,22 +73,25 @@
 
 	"items": [
 		{
+			"item_id": 1,
 			"description": "Any KANOJOs love flowers. This item may increase KANOJO's love level.",
 			"title": "A bunch of flowers",
-			"item_id": 1,
 			"image_url": "https://www.barcodekanojo.com/images/store/gift_flower.png",
 			"image_thumbnail_url": "https://www.barcodekanojo.com/images/store/gift_flower_thm.png",
 			"price_b": 25,
 			"category_id": 1
 		},
 		{
+			"item_id": 51
+		},
+		{
+			"item_id": 101,
 			"purchase_product_id": "jp.co.cybird.barcodekanojo.wardrobe_clothes_0001",
 			"confirm_purchase_message": null,
 			"description": "Dressing time: Daytime\nChic and elegant black jacket.{attention}",
 			"title": "Jacket (black)",
 			"purchasable_level": 1,
 			"image_url": "https://www.barcodekanojo.com/images/store/wardrobe_clothes_0001.png",
-			"item_id": 101,
 			"image_thumbnail_url": "https://www.barcodekanojo.com/images/store/wardrobe_clothes_0001_thm.png",
 			"category_id": 6,
 			"price_t": 1,
@@ -96,12 +99,19 @@
 			"clothes_item_id": 8
 		},
 		{
+			"item_id": 110,
+			"_price_t": "<20",
+			"_price_s": "<100",
+			"category_id": 6
+			"_comment": "The above line is just a place holder for tests."
+		},
+		{
+			"item_id": 140,
 			"purchase_product_id": "jp.co.cybird.barcodekanojo.wardrobe_clothes_0009",
 			"confirm_purchase_message": null,
 			"description": "Dressing time: Daytime\nおかえり！ごはんすぐ出来るから待っててね。エプロン姿であなたを待っててくれます。{attention}",
 			"title": "エプロン",
 			"purchasable_level": 1,
-			"item_id": 140,
 			"category_id": 6,
 			"image_url": "https://www.barcodekanojo.com/images/store/wardrobe_clothes_0009.png",
 			"image_thumbnail_url": "https://www.barcodekanojo.com/images/store/wardrobe_clothes_0009_thm.png",
@@ -110,12 +120,12 @@
 			"clothes_item_id": 66
 		},
 		{
+			"item_id": 198,
 			"purchase_product_id": "jp.co.cybird.barcodekanojo.letter_goodbye_0001_0003",
 			"confirm_purchase_message": null,
 			"description": "To dump your Kanojo...",
 			"title": "Goodbye Letter",
 			"purchasable_level": 1,
-			"item_id": 198,
 			"category_id": 8,
 			"price_s": 5,
 			"image_url": "https://www.barcodekanojo.com/images/store/letter_goodbye.png",
