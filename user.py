@@ -10,6 +10,7 @@ import random
 import time
 
 from collections import OrderedDict
+from functools import cmp_to_key
 from pymongo import MongoClient
 
 import config
@@ -164,7 +165,7 @@ class UserManager(object):
                     self_user = self.user(uid=self_uid, clear=CLEAR_NONE)
             if self_user:
                 rv['relation_status'] = 2 if self_user.get('id')==tmp_user.get('id') else 3 if tmp_user.get('id') in self_user.get('enemies') else 1
-            return OrderedDict(sorted(list(rv.items()), cmp=user_order_dict_cmp))
+            return OrderedDict(sorted(list(rv.items()), key=cmp_to_key(user_order_dict_cmp)))
 
     def user(self, uuid=None, uid=None, self_uid=None, self_user=None, clear=CLEAR_SELF):
         query = None

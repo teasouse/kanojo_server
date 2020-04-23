@@ -10,7 +10,7 @@ import os, os.path
 import re
 import ssl
 import time
-import urllib.error, urllib.parse
+import urllib.parse
 
 from apscheduler.schedulers.background import BackgroundScheduler
 from collections import OrderedDict
@@ -81,7 +81,7 @@ def order_dict_cmp(x, y):
         return -1
     elif y in order:
         return 1
-    return cmp(x, y)
+    return (x > y) - (x < y)
 
 def json_response(data):
     if isinstance(data, dict):
@@ -679,7 +679,7 @@ def user_currentkanojos():
     rspns['user'] = user_manager.clear(user, CLEAR_OTHER, self_uid=session['id'])
     return json_response(rspns)
 
-@app.route('/2/user/friend_kanojos.json', methods=['GET','POST'])
+@app.route('/2/api/user/friend_kanojos.json', methods=['GET','POST'])
 def user_friendkanojos():
     if 'id' not in session:
         return json_response({ "code": 401 })
@@ -712,7 +712,7 @@ def user_friendkanojos():
     rspns['user'] = user_manager.clear(user, CLEAR_OTHER, self_uid=session['id'])
     return json_response(rspns)
 
-@app.route('/2/kanojo/like_rankings.json', methods=['GET','POST'])
+@app.route('/2/api/kanojo/like_rankings.json', methods=['GET','POST'])
 def kanojo_likerankings():
     if 'id' not in session:
         return json_response({ "code": 401 })
@@ -884,7 +884,7 @@ def kanojo_vote_like():
     rspns['kanojo'] = kanojo_manager.clear(kanojo, self_user, clear=CLEAR_OTHER)
     return json_response(rspns)
 
-@app.route('/2/resource/product_category_list.json', methods=['GET','POST'])
+@app.route('/2/api/resource/product_category_list.json', methods=['GET','POST'])
 def resource_product_category_list():
     if 'id' not in session:
         return json_response({ "code": 401 })
