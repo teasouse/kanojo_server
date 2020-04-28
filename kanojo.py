@@ -12,6 +12,7 @@ import pytz
 
 from collections import OrderedDict
 from datetime import datetime
+from functools import cmp_to_key
 from pymongo import MongoClient
 from random import randint
 #from user import CLEAR_NONE, CLEAR_SELF, CLEAR_OTHER
@@ -367,7 +368,7 @@ class KanojoManager(object):
 			allow_keys.extend(['barcode', 'source', 'geo'])
 		rv = { key: tmp_kanojo[key] for key in allow_keys if key in tmp_kanojo }
 		rv['clothes_type'] = clothes_type
-		return OrderedDict(sorted(list(rv.items()), cmp=kanojo_order_dict_cmp))
+		return OrderedDict(sorted(list(rv.items()), key=cmp_to_key(kanojo_order_dict_cmp)))
 
 	def kanojo(self, kanojo_id, self_user=None, clear=CLEAR_SELF, check_clothes=False):
 		query = { 'id': kanojo_id }
