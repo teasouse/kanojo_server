@@ -740,7 +740,7 @@ def kanojo_likerankings():
 	rspns['like_ranking_kanojos'] = like_ranking_kanojos
 	return json_response(rspns)
 
-@app.route('/2/kanojo/show.json', methods=['GET','POST'])
+@app.route('/2/api/kanojo/show.json', methods=['GET','POST'])
 def kanojo_show():
 	if 'id' not in session:
 		return json_response({ "code": 401 })
