@@ -863,7 +863,7 @@ def apibanner_kanojoroom_reactionword():
 	}
 	return render_template('apibanner_kanojoroom_reactionword.html', **val)
 
-@app.route('/2/kanojo/vote_like.json', methods=['GET', 'POST'])
+@app.route('/2/api/kanojo/vote_like.json', methods=['GET', 'POST'])
 def kanojo_vote_like():
 	if 'id' not in session:
 		return json_response({ "code": 401 })
