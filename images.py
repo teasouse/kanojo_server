@@ -15,6 +15,16 @@ try:
     from gdrive_cdn import UploadToCDN
 except ImportError as e:
     pass
+	
+class saveLocal(object):
+	def __init__(self):
+        super(saveLocal, self).__init__()
+
+    def upload(self, content, content_type='image/png', filename='image.png'):
+        with open(filename, 'bw') as f:
+			f.write(content)
+		return filename
+
 
 class UploadToDeviantsart(object):
     def __init__(self):
@@ -54,11 +64,11 @@ class ImageManager(object):
         try:
             cdn = UploadToCDN()
         except NameError as e:
-            cdn = UploadToDeviantsart()
+            cdn = saveLocal()
         im = Image.open(img_data)
         cr = im.crop((94, 40, 170+94, 170+40))
         cr.thumbnail((88, 88), Image.ANTIALIAS)
-        dt = io.StringIO()
+        dt = io.BytesIO()
         cr.save(dt, format="png")
         crop_url = cdn.upload(dt.getvalue(), content_type='image/png', filename='%ss.png'%filename)
         dt.close()

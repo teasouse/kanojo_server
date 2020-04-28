@@ -986,7 +986,7 @@ def activity_usertimeline():
 @app.route('/profile_images/kanojo/<kid>.png')
 def profile_images_kanojo(kid):
     # TODO: web
-    filename = '%s.png'%kid
+    filename = '/profile_images/kanojo/%s.png'%kid
     if os.path.isfile(filename):
         return send_file(filename, mimetype='image/png')
     #request.args.get('w,h,face')
@@ -1063,7 +1063,7 @@ def web_i():
     val = {}
     return render_template('index_m.html', **val)
 
-@app.route('/2/barcode/query.json', methods=['GET', 'POST'])
+@app.route('/2/api/barcode/query.json', methods=['GET', 'POST'])
 def barcode_query():
     if 'id' not in session:
         return json_response({ "code": 401 })
@@ -1170,7 +1170,7 @@ def barcode_scan():
         rspns['user'] = user_manager.clear(self_user, CLEAR_SELF, self_user=self_user)
     return json_response(rspns)
 
-@app.route('/2/barcode/decrease_generating.json', methods=['GET'])
+@app.route('/2/api/barcode/decrease_generating.json', methods=['GET'])
 def barcode_decrease_generating():
     if 'id' not in session:
         return json_response({ "code": 401 })
@@ -1184,7 +1184,7 @@ def barcode_decrease_generating():
     rspns['product'] = { 'category': 'Industrial tool', 'company_name': 'wakaba', 'name': None, 'price': '$9.95', 'product': 'iichan', 'product_image_url': None }
     return json_response(rspns)
 
-@app.route('/2/barcode/scan_and_generate.json', methods=['POST'])
+@app.route('/2/api/barcode/scan_and_generate.json', methods=['POST'])
 @set_parsers(BKMultipartParser)
 def barcode_scan_and_generate():
     if 'id' not in session:

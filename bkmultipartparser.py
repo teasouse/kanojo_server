@@ -3,9 +3,10 @@
 
 from flask_api import exceptions
 from flask_api.parsers import BaseParser
+from io import BytesIO
 from werkzeug.formparser import MultiPartParser as WerkzeugMultiPartParser
 from werkzeug.formparser import default_stream_factory
-from werkzeug._compat import BytesIO, text_type
+from werkzeug._compat import text_type
 
 class BKMultipartParser(BaseParser):
     """
@@ -24,13 +25,13 @@ class BKMultipartParser(BaseParser):
         if boundary is None:
             msg = 'Multipart message missing boundary in Content-Type header'
             raise exceptions.ParseError(msg)
-        boundary = boundary.encode('ascii')
+        boundary = boundary.encode('utf-8')
 
         content_length = options.get('content_length')
         assert content_length is not None, 'MultiPartParser.parse() requires `content_length` argument'
 
-        if data.rstrip()[-2:] != '--':
-            data = data.rstrip() + '--\r\n'
+        if data.rstrip()[-2:] != b"--":
+            data = data.rstrip() + b"--\r\n"
         try:
             return multipart_parser.parse(BytesIO(data), boundary, len(data))
         except ValueError as exc:

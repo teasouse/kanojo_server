@@ -167,7 +167,7 @@ class KanojoManager(object):
                 'ear_type':      { 'bounds': (1, 2), 'bits': (76, 77), },
                 'glasses_type':  { 'bounds': (1, 2), 'bits': (77, 78), },
                 'face_type':     { 'bounds': (1, 6), 'bits': (78, 89), },
-                'eye_type':      { 'bounds': (101, 115), 'bits': (81, 92), },
+                'eye_type':      { 'bounds': (1, 15), 'bits': (81, 92), },
                 'fringe_type':   { 'bounds': (1, 22), 'bits': (84, 97), },
                 'nose_type':     { 'bounds': (1, 6), 'bits': (89, 100), },
 
