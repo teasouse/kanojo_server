@@ -1231,7 +1231,7 @@ def barcode_scan_and_generate():
 
 	return json_response(rspns)
 
-@app.route('/2/account/update.json', methods=['POST'])
+@app.route('/2/api/account/update.json', methods=['POST'])
 @set_parsers(BKMultipartParser)
 def account_update():
 	if 'id' not in session:
@@ -1278,7 +1278,7 @@ def account_update():
 	rspns['user'] = user_manager.clear(self_user, CLEAR_SELF, self_user=self_user)
 	return json_response(rspns)
 
-@app.route('/2/activity/scanned_timeline.json', methods=['GET'])
+@app.route('/2/api/activity/scanned_timeline.json', methods=['GET'])
 def activity_scanned_timeline():
 	'''
 	'''
