@@ -1223,7 +1223,7 @@ def barcode_scan_and_generate():
 		if kanojo:
 			rspns['kanojo'] = kanojo_manager.clear(kanojo, self_user, clear=CLEAR_OTHER, check_clothes=True)
 			rspns['user'] = user_manager.clear(self_user, CLEAR_SELF, self_user=self_user)
-			db.barcode_tmp.remove(bc_info)
+			db.barcode_tmp.delete_one(bc_info)
 		else:
 			rspns = { "code": 403, "love_increment": { "alertShow": 1 }, "alerts": [ { "body": "You don't have enough stamina.", "title": "" } ] }
 	else:
