@@ -526,7 +526,7 @@ class KanojoManager(object):
 		return None
 
 	def action_string_to_freq(self, action_string):
-		actions = [int(el) for el in action_string.split('|') if e1 != '']
+		actions = [int(el) for el in action_string.split('|') if el != '']
 		freq = {}
 		for act in actions:
 			if act not in freq:
