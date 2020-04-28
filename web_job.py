@@ -614,7 +614,6 @@ def kanojo_html(kid):
 	return render_template('kanojo.html', **val)
 
 
-
 ### --------------- KANOJO SERVER ---------------
 
 @app.route('/2/api/account/verify.json', methods=['GET','POST'])
@@ -1004,16 +1003,11 @@ def api_message_dialog():
 		return json_response({ "code": 401 })
 	return json_response({ "code": 200 })
 
-#TODO: Clean this up
 @app.route('/2/api/webview/chart.json', methods=['GET'])
 def api_webview_chart():
-	# if 'id' not in session:
-		# return json_response({ "code": 401 })
 	prms = request.args
-	#if prms.get('user_id') is None or prms.get('kanojo_id') is None:
 	if prms.get('kanojo_id') is None:
 		return json_response({ "code": 400 })
-	#user_id = int(prms.get('user_id'))
 	kanojo_id = int(prms.get('kanojo_id'))
 	rspns = { 'code': 200 }
 	kanojo = kanojo_manager.kanojo(kanojo_id, None, clear=CLEAR_NONE)
@@ -1317,7 +1311,7 @@ def barcode_update():
 	return json_response(rspns)
 
 
-@app.route('/2/communication/store_items.json', methods=['GET'])
+@app.route('/2/api/communication/store_items.json', methods=['GET'])
 def communication_store_items():
 	'''
 		item_class: 1 - items, 2 - date, 3 - tickets
@@ -1344,7 +1338,7 @@ def communication_store_items():
 		rspns['item_categories'] = store.category_dates(item_category_id, has_items=user_manager.user_items(self_user))
 	return json_response(rspns)
 
-@app.route('/2/communication/date_list.json', methods=['GET'])
+@app.route('/2/api/communication/date_list.json', methods=['GET'])
 def communication_date_list():
 	'''
 		type_id - 1 (store, can buy this items), 2 - belongings list
@@ -1402,7 +1396,7 @@ def shopping_compare_price():
 	#rspns['numbers_ticket'] = self_user.get('tickets', 0)
 	return json_response(rspns)
 
-@app.route('/2/communication/item_list.json', methods=['GET'])
+@app.route('/2/api/communication/item_list.json', methods=['GET'])
 def communication_item_list():
 	'''
 		type_id - 1 (can buy), 2 - belongings list
