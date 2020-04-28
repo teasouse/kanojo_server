@@ -75,7 +75,7 @@ class ImageManager(object):
 
 		full_url = None
 		if cdn and upload_full_image:
-			dt = io.StringIO()
+			dt = io.BytesIO()
 			im.save(dt, format="png")
 			full_url = cdn.upload(dt.getvalue(), content_type='image/png', filename='%s.png'%filename)
 			dt.close()
