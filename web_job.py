@@ -815,7 +815,6 @@ def communication_play_on_live2d():
 		#url = request.url_root+'apibanner/kanojoroom/reactionword.html'
 		url = server_url() + 'web/reactionword.html'
 		if actions and len(actions):
-			print(actions)
 			dt = user_manager.user_action(self_user, kanojo, action_string=actions, current_owner=owner_user)
 			if 'love_increment' in dt and 'info' in dt:
 				tmp = dt.get('info', {})
@@ -1005,14 +1004,16 @@ def api_message_dialog():
 		return json_response({ "code": 401 })
 	return json_response({ "code": 200 })
 
+#TODO: Clean this up
 @app.route('/2/api/webview/chart.json', methods=['GET'])
 def api_webview_chart():
-	if 'id' not in session:
-		return json_response({ "code": 401 })
+	# if 'id' not in session:
+		# return json_response({ "code": 401 })
 	prms = request.args
-	if prms.get('user_id') is None or prms.get('kanojo_id') is None:
+	#if prms.get('user_id') is None or prms.get('kanojo_id') is None:
+	if prms.get('kanojo_id') is None:
 		return json_response({ "code": 400 })
-	user_id = int(prms.get('user_id'))
+	#user_id = int(prms.get('user_id'))
 	kanojo_id = int(prms.get('kanojo_id'))
 	rspns = { 'code': 200 }
 	kanojo = kanojo_manager.kanojo(kanojo_id, None, clear=CLEAR_NONE)
