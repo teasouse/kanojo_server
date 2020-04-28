@@ -786,7 +786,7 @@ def user_enemy_users():
 	rspns['enemy_users'] = enemy_users
 	return json_response(rspns)
 
-@app.route('/2/communication/play_on_live2d.json', methods=['GET', 'POST'])
+@app.route('/2/api/communication/play_on_live2d.json', methods=['GET', 'POST'])
 def communication_play_on_live2d():
 	'''
 		actions codes (reverse direction):
