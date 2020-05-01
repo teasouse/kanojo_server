@@ -990,7 +990,7 @@ def profile_images_kanojo(kid):
 	#request.args.get('w,h,face')
 	abort(404)
 
-@app.route('/2/notification/register_token.json', methods=['POST'])
+@app.route('/2/api/notification/register_token.json', methods=['POST'])
 def notification_register_token():
 	if 'id' not in session:
 		return json_response({ "code": 401 })
@@ -1094,7 +1094,7 @@ def barcode_query():
 				rspns["barcode"] = bc_info
 				bc = copy.deepcopy(bc_info)
 				bc['timestamp'] = int(time.time())
-				db.barcode_tmp.insert(bc)
+				db.barcode_tmp.insert_one(bc)
 			else:
 				rspns = {
 					"code": 400,
