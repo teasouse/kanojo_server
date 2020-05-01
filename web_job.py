@@ -1132,7 +1132,7 @@ def barcode_query():
 	return json_response(rspns)
 
 # curl -v -k --trace-ascii curl.trace -x http://192.168.1.41:8888 -include --form barcode=8028670007619 --form asd=zxc http://192.168.1.19:5000/2/barcode/scan.json
-@app.route('/2/barcode/scan.json', methods=['POST'])
+@app.route('/2/api/barcode/scan.json', methods=['POST'])
 @set_parsers(BKMultipartParser)
 def barcode_scan():
 	if 'id' not in session:
