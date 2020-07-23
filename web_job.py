@@ -616,7 +616,7 @@ def kanojo_html(kid):
 
 ### --------------- KANOJO SERVER ---------------
 
-@app.route('/2/api/account/verify.json', methods=['GET','POST'])
+@app.route('/api/account/verify.json', methods=['GET','POST'])
 def acc_verify():
 	prms = request.form if request.method == 'POST' else request.args
 	uuid = prms.get('uuid')
@@ -635,8 +635,8 @@ def acc_verify():
 	else:
 		return json_response({ "code": 400 })
 
-@app.route('/2/api/account/show.json', methods=['GET','POST'])
-@app.route('/2/account/show.json', methods=['GET','POST'])
+@app.route('/api/account/show.json', methods=['GET','POST'])
+@app.route('/account/show.json', methods=['GET','POST'])
 def account_show():
 	if 'id' not in session:
 		return json_response({ "code": 401 })
@@ -646,7 +646,7 @@ def account_show():
 	else:
 		return json_response({ "code": 404 })
 
-@app.route('/2/user/current_kanojos.json', methods=['GET','POST'])
+@app.route('/user/current_kanojos.json', methods=['GET','POST'])
 def user_currentkanojos():
 	#kanojo_manager.server = request.url_root[:-1]
 	kanojo_manager.server = server_url()[:-1]
@@ -678,7 +678,7 @@ def user_currentkanojos():
 	rspns['user'] = user_manager.clear(user, CLEAR_OTHER, self_uid=session['id'])
 	return json_response(rspns)
 
-@app.route('/2/api/user/friend_kanojos.json', methods=['GET','POST'])
+@app.route('/api/user/friend_kanojos.json', methods=['GET','POST'])
 def user_friendkanojos():
 	if 'id' not in session:
 		return json_response({ "code": 401 })
@@ -711,7 +711,7 @@ def user_friendkanojos():
 	rspns['user'] = user_manager.clear(user, CLEAR_OTHER, self_uid=session['id'])
 	return json_response(rspns)
 
-@app.route('/2/api/kanojo/like_rankings.json', methods=['GET','POST'])
+@app.route('/api/kanojo/like_rankings.json', methods=['GET','POST'])
 def kanojo_likerankings():
 	if 'id' not in session:
 		return json_response({ "code": 401 })
@@ -739,7 +739,7 @@ def kanojo_likerankings():
 	rspns['like_ranking_kanojos'] = like_ranking_kanojos
 	return json_response(rspns)
 
-@app.route('/2/api/kanojo/show.json', methods=['GET','POST'])
+@app.route('/api/kanojo/show.json', methods=['GET','POST'])
 def kanojo_show():
 	if 'id' not in session:
 		return json_response({ "code": 401 })
@@ -767,7 +767,7 @@ def kanojo_show():
 		rspns['alerts'] = [{"body": "The Requested KANOJO was not found.", "title": ""}]
 	return json_response(rspns)
 
-@app.route('/2/user/enemy_users.json', methods=['GET','POST'])
+@app.route('/user/enemy_users.json', methods=['GET','POST'])
 def user_enemy_users():
 	if 'id' not in session:
 		return json_response({ "code": 401 })
@@ -785,7 +785,7 @@ def user_enemy_users():
 	rspns['enemy_users'] = enemy_users
 	return json_response(rspns)
 
-@app.route('/2/api/communication/play_on_live2d.json', methods=['GET', 'POST'])
+@app.route('/api/communication/play_on_live2d.json', methods=['GET', 'POST'])
 def communication_play_on_live2d():
 	'''
 		actions codes (reverse direction):
@@ -861,7 +861,7 @@ def apibanner_kanojoroom_reactionword():
 	}
 	return render_template('apibanner_kanojoroom_reactionword.html', **val)
 
-@app.route('/2/api/kanojo/vote_like.json', methods=['GET', 'POST'])
+@app.route('/api/kanojo/vote_like.json', methods=['GET', 'POST'])
 def kanojo_vote_like():
 	if 'id' not in session:
 		return json_response({ "code": 401 })
@@ -882,7 +882,7 @@ def kanojo_vote_like():
 	rspns['kanojo'] = kanojo_manager.clear(kanojo, self_user, clear=CLEAR_OTHER)
 	return json_response(rspns)
 
-@app.route('/2/api/resource/product_category_list.json', methods=['GET','POST'])
+@app.route('/api/resource/product_category_list.json', methods=['GET','POST'])
 def resource_product_category_list():
 	if 'id' not in session:
 		return json_response({ "code": 401 })
@@ -891,7 +891,7 @@ def resource_product_category_list():
 	return json_response(rspns)
 
 
-@app.route('/2/activity/user_timeline.json', methods=['GET','POST'])
+@app.route('/activity/user_timeline.json', methods=['GET','POST'])
 def activity_usertimeline():
 	'''
 		activity_type
@@ -990,20 +990,20 @@ def profile_images_kanojo(kid):
 	#request.args.get('w,h,face')
 	abort(404)
 
-@app.route('/2/api/notification/register_token.json', methods=['POST'])
+@app.route('/api/notification/register_token.json', methods=['POST'])
 def notification_register_token():
 	if 'id' not in session:
 		return json_response({ "code": 401 })
 	time.sleep(1)
 	return json_response({ "code": 200 })
 
-@app.route('/2/api/message/dialog.json', methods=['GET'])
+@app.route('/api/message/dialog.json', methods=['GET'])
 def api_message_dialog():
 	if 'id' not in session:
 		return json_response({ "code": 401 })
 	return json_response({ "code": 200 })
 
-@app.route('/2/api/webview/chart.json', methods=['GET'])
+@app.route('/api/webview/chart.json', methods=['GET'])
 def api_webview_chart():
 	prms = request.args
 	if prms.get('kanojo_id') is None:
@@ -1032,7 +1032,7 @@ def wv_chart():
 	}
 	return render_template('wv_chart.html', **val)
 
-@app.route('/2/api/webview/show.json', methods=['GET'])
+@app.route('/api/webview/show.json', methods=['GET'])
 def api_webview_show():
 	#print request.cookies
 	if 'id' not in session:
@@ -1058,7 +1058,7 @@ def web_i():
 	val = {}
 	return render_template('index_m.html', **val)
 
-@app.route('/2/api/barcode/query.json', methods=['GET', 'POST'])
+@app.route('/api/barcode/query.json', methods=['GET', 'POST'])
 def barcode_query():
 	if 'id' not in session:
 		return json_response({ "code": 401 })
@@ -1132,7 +1132,7 @@ def barcode_query():
 	return json_response(rspns)
 
 # curl -v -k --trace-ascii curl.trace -x http://192.168.1.41:8888 -include --form barcode=8028670007619 --form asd=zxc http://192.168.1.19:5000/2/barcode/scan.json
-@app.route('/2/api/barcode/scan.json', methods=['POST'])
+@app.route('/api/barcode/scan.json', methods=['POST'])
 @set_parsers(BKMultipartParser)
 def barcode_scan():
 	if 'id' not in session:
@@ -1165,7 +1165,7 @@ def barcode_scan():
 		rspns['user'] = user_manager.clear(self_user, CLEAR_SELF, self_user=self_user)
 	return json_response(rspns)
 
-@app.route('/2/api/barcode/decrease_generating.json', methods=['GET'])
+@app.route('/api/barcode/decrease_generating.json', methods=['GET'])
 def barcode_decrease_generating():
 	if 'id' not in session:
 		return json_response({ "code": 401 })
@@ -1179,7 +1179,7 @@ def barcode_decrease_generating():
 	rspns['product'] = { 'category': 'Industrial tool', 'company_name': 'wakaba', 'name': None, 'price': '$9.95', 'product': 'iichan', 'product_image_url': None }
 	return json_response(rspns)
 
-@app.route('/2/api/barcode/scan_and_generate.json', methods=['POST'])
+@app.route('/api/barcode/scan_and_generate.json', methods=['POST'])
 @set_parsers(BKMultipartParser)
 def barcode_scan_and_generate():
 	if 'id' not in session:
@@ -1226,7 +1226,7 @@ def barcode_scan_and_generate():
 
 	return json_response(rspns)
 
-@app.route('/2/api/account/update.json', methods=['POST'])
+@app.route('/api/account/update.json', methods=['POST'])
 @set_parsers(BKMultipartParser)
 def account_update():
 	if 'id' not in session:
@@ -1273,7 +1273,7 @@ def account_update():
 	rspns['user'] = user_manager.clear(self_user, CLEAR_SELF, self_user=self_user)
 	return json_response(rspns)
 
-@app.route('/2/api/activity/scanned_timeline.json', methods=['GET'])
+@app.route('/api/activity/scanned_timeline.json', methods=['GET'])
 def activity_scanned_timeline():
 	'''
 	'''
@@ -1293,7 +1293,7 @@ def activity_scanned_timeline():
 	rspns['activities'] = []
 	return json_response(rspns)
 
-@app.route('/2/barcode/update.json', methods=['POST'])
+@app.route('/barcode/update.json', methods=['POST'])
 @set_parsers(BKMultipartParser)
 def barcode_update():
 	'''
@@ -1311,7 +1311,7 @@ def barcode_update():
 	return json_response(rspns)
 
 
-@app.route('/2/api/communication/store_items.json', methods=['GET'])
+@app.route('/api/communication/store_items.json', methods=['GET'])
 def communication_store_items():
 	'''
 		item_class: 1 - items, 2 - date, 3 - tickets
@@ -1338,7 +1338,7 @@ def communication_store_items():
 		rspns['item_categories'] = store.category_dates(item_category_id, has_items=user_manager.user_items(self_user))
 	return json_response(rspns)
 
-@app.route('/2/api/communication/date_list.json', methods=['GET'])
+@app.route('/api/communication/date_list.json', methods=['GET'])
 def communication_date_list():
 	'''
 		type_id - 1 (store, can buy this items), 2 - belongings list
@@ -1375,7 +1375,7 @@ def communication_date_list():
 
 	return json_response(rspns)
 
-@app.route('/2/shopping/compare_price.json', methods=['GET', 'POST'])
+@app.route('/shopping/compare_price.json', methods=['GET', 'POST'])
 def shopping_compare_price():
 	if 'id' not in session:
 		return json_response({ "code": 401 })
@@ -1396,7 +1396,7 @@ def shopping_compare_price():
 	#rspns['numbers_ticket'] = self_user.get('tickets', 0)
 	return json_response(rspns)
 
-@app.route('/2/api/communication/item_list.json', methods=['GET'])
+@app.route('/api/communication/item_list.json', methods=['GET'])
 def communication_item_list():
 	'''
 		type_id - 1 (can buy), 2 - belongings list
@@ -1431,7 +1431,7 @@ def communication_item_list():
 			rspns['item_categories'] = []
 	return json_response(rspns)
 
-@app.route('/2/communication/has_items.json', methods=['GET'])
+@app.route('/communication/has_items.json', methods=['GET'])
 def communication_has_items():
 	'''
 		item_class: 1 - items, 2 - date
@@ -1464,7 +1464,7 @@ def communication_has_items():
 			rspns['item_categories'] = []
 	return json_response(rspns)
 
-@app.route('/2/communication/do_gift.json', methods=['GET', 'POST'])
+@app.route('/communication/do_gift.json', methods=['GET', 'POST'])
 def communication_do_gift():
 	if 'id' not in session:
 		return json_response({ "code": 401 })
@@ -1498,7 +1498,7 @@ def communication_do_gift():
 		rspns['owner_user'] = user_manager.clear(self_user, CLEAR_OTHER, self_user=self_user)
 	return json_response(rspns)
 
-@app.route('/2/shopping/verify_tickets.json', methods=['GET', 'POST'])
+@app.route('/shopping/verify_tickets.json', methods=['GET', 'POST'])
 def shopping_verify_tickets():
 	'''
 		buy extend gift/date
@@ -1526,7 +1526,7 @@ def shopping_verify_tickets():
 	rspns.update(buy_present)
 	return json_response(rspns)
 
-@app.route('/2/communication/do_extend_gift.json', methods=['GET', 'POST'])
+@app.route('/communication/do_extend_gift.json', methods=['GET', 'POST'])
 def communication_do_extend_gift():
 	if 'id' not in session:
 		return json_response({ "code": 401 })
@@ -1561,7 +1561,7 @@ def communication_do_extend_gift():
 		rspns['owner_user'] = user_manager.clear(self_user, CLEAR_OTHER, self_user=self_user)    
 	return json_response(rspns)
 
-@app.route('/2/communication/do_date.json', methods=['GET', 'POST'])
+@app.route('/communication/do_date.json', methods=['GET', 'POST'])
 def communication_do_date():
 	if 'id' not in session:
 		return json_response({ "code": 401 })
@@ -1595,7 +1595,7 @@ def communication_do_date():
 		rspns['owner_user'] = user_manager.clear(self_user, CLEAR_OTHER, self_user=self_user)
 	return json_response(rspns)
 
-@app.route('/2/communication/do_extend_date.json', methods=['GET', 'POST'])
+@app.route('/communication/do_extend_date.json', methods=['GET', 'POST'])
 def communication_do_extend_date():
 	if 'id' not in session:
 		return json_response({ "code": 401 })
