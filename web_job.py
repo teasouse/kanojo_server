@@ -4,6 +4,7 @@
 __author__ = 'Andrey Derevyagin'
 __copyright__ = 'Copyright © 2014-2015'
 
+import atexit
 import datetime
 import json
 import os, os.path
@@ -38,7 +39,7 @@ context = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)
 context.load_cert_chain(config.SSL_CERTIFICATE_FILE, keyfile=config.SSL_PRIVATEKEY_FILE)
 
 app = Flask(__name__)
-app.debug = False
+app.debug = True
 app.secret_key = config.SESSION_SECRET_KEY
 #app.config['SESSION_COOKIE_DOMAIN'] = '192.168.1.19'
 #session.permanent = True
@@ -1638,38 +1639,33 @@ def communication_do_extend_date():
 
 #@sched.scheduled_job('interval', minutes=10)
 def update_stamina_job():
-	t = (int(time.time())/60)%(60*24)
-	run_period = 10
-	idxs = []
-	tmp = t % 240
-	for i in range(6):
-		for j in range(run_period):
-			idxs.append((tmp+j)%(60*24))
-		tmp += 240
-	query = { 
-		'stamina_idx': { "$in": idxs}
-	}
+	print('Updating User Stamina values')
+	# t = (int(time.time())/60)%(60*24)
+	# run_period = 10
+	# idxs = []
+	# tmp = t % 240
+	# for i in range(6):
+		# for j in range(run_period):
+			# idxs.append((tmp+j)%(60*24))
+		# tmp += 240
+	# query = {
+		# 'stamina_idx': { "$in": idxs}
+	# }
 	#print int(time.time()), idxs
-	for user in db.users.find(query):
-		user_manager.user_change(user, up_stamina=True, update_db_record=True)
-		try:
-			print('Recover stamina \"%s\"(id:%d)'%(user.get('name').encode('utf-8'), user.get('id')))
-		except UnicodeEncodeError as e:
-			print('Recover stamina uid: %d'%user.get('id'))
+	for user in db.users.find():
+		if (user_manager.user_change(user, up_stamina=True, update_db_record=True)):
+			print('Recover stamina \"%s\"(id:%d) Stamina:%d'%(user.get('name'), user.get('id'), user.get('stamina')))
 
 def test_job():
 	print(int(time.time()))
 
-
-update_stamina_job()
-
-#if not app.debug or os.environ.get('WERKZEUG_RUN_MAIN') == 'true':
-#if True:
-sched = BackgroundScheduler()
-sched.add_job(update_stamina_job, 'interval', minutes=10, id='update_stamina_job', replace_existing=True)
-#sched.add_job(test_job, 'interval', seconds=30)
-sched.start()
-
+if not app.debug or os.environ.get('WERKZEUG_RUN_MAIN') == 'true':
+	#if True:
+	sched = BackgroundScheduler()
+	sched.add_job(update_stamina_job, 'interval', minutes=1, id='update_stamina_job', replace_existing=True)
+	#sched.add_job(test_job, 'interval', seconds=30)
+	sched.start()
+	atexit.register(lambda: sched.shutdown())
 
 if __name__ == "__main__":
 	app.debug = True

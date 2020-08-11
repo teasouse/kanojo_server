@@ -106,7 +106,6 @@ class UserManager(object):
 				# ----
 				#"stamina_recover_index": (tm % 86400) / 60
 			}
-		user['stamina_idx'] = (tm / 60) % (60 * 24)
 		if self.db:
 			try:
 				self.db.users.insert(user)
@@ -176,7 +175,7 @@ class UserManager(object):
 					"uuid": {
 						"$exists": True,
 						"$elemMatch": { "$in": [ uuid  ] }
-					}        
+					}
 				}
 		else:
 			return None
@@ -434,9 +433,10 @@ class UserManager(object):
 			user['tickets'] = user.get('tickets', 0) - tickets_change
 		if up_stamina:
 			stamina_max = (user.get('level', 0) + 9) * 10
-			if user.get('stamina', 0) == stamina_max:
+			if user.get('stamina', 0) >= stamina_max:
 				return False
-			user['stamina'] = stamina_max
+			else:
+				user['stamina'] += 1
 		if update_db_record:
 			self.save(user)
 		return user
