@@ -345,7 +345,7 @@ class ActivityManager(object):
                 tmp += '<div class="r_activities_box"><a href="%s"><img class="icon" height="50" width="50" src="%s"></a></div>'%(url, img)
 
             # CENTER
-            tmp += '<div class="c_activities_box"><span html="true">%s</span><br><span id="activity%d_time" value="%d">%s</span></div>'%(a.get('activity').decode('utf-8'), a.get('id'), a.get('created_timestamp'), self.time_diff(tm - a.get('created_timestamp')))
+            tmp += '<div class="c_activities_box"><span html="true">%s</span><br><span id="activity%d_time" value="%d">%s</span></div>'%(a.get('activity'), a.get('id'), a.get('created_timestamp'), self.time_diff(tm - a.get('created_timestamp')))
             rv += '<div class="activities_box" id="activity%d">%s</div>'%(a.get('id'), tmp)
         return rv
 
