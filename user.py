@@ -6,6 +6,7 @@ __copyright__ = 'Copyright © 2014-2015'
 
 import copy
 import math
+import pymongo.errors
 import random
 import time
 
@@ -30,8 +31,7 @@ def user_order_dict_cmp(x, y):
 		return -1
 	elif y in order:
 		return 1
-	return cmp(x, y)
-
+	return (x > y) - (x < y)
 
 class UserManager(object):
 	"""docstring for UserManager"""
@@ -244,10 +244,10 @@ class UserManager(object):
 						})
 		return rv
 
-	def create_kanojo_from_barcode(self, user, barcode_info, kanojo_name, crop_url, full_url=None):
+	def create_kanojo_from_barcode(self, user, barcode_info, kanojo_name):
 		if user.get('stamina') < 20:
 			return False
-		kanojo = self.kanojo_manager.create(barcode_info, kanojo_name, crop_url, user, profile_full_image_url=full_url)
+		kanojo = self.kanojo_manager.create(barcode_info, kanojo_name, user)
 		if kanojo:
 			try:
 				user['generate_count'] = int(user.get('generate_count', 0)) + 1

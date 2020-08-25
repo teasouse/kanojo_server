@@ -60,27 +60,35 @@ class ImageManager(object):
 		dt.close()
 		return url
 
-	def crop_and_upload_profile_image(self, img_data, filename='kanojo', upload_full_image=True):
-		try:
-			cdn = UploadToCDN()
-		except NameError as e:
-			cdn = saveLocal()
-		im = Image.open(img_data)
-		cr = im.crop((94, 40, 170+94, 170+40))
-		cr.thumbnail((88, 88), Image.ANTIALIAS)
-		dt = io.BytesIO()
-		cr.save(dt, format="png")
-		crop_url = cdn.upload(dt.getvalue(), content_type='image/png', filename='%ss.png'%filename)
-		dt.close()
+def save_image(content, filename='image.png'):
+	with open(filename, 'bw') as f:
+		f.write(content)
+	return filename
 
-		full_url = None
-		if cdn and upload_full_image:
-			dt = io.BytesIO()
-			im.save(dt, format="png")
-			full_url = cdn.upload(dt.getvalue(), content_type='image/png', filename='%s.png'%filename)
-			dt.close()
-		return (crop_url, full_url)
+def crop_and_save_profile_image(img_data, filename):
+	im = Image.open(img_data)
+	#cr = im.crop((94, 40, 170 + 94, 170 + 40))	#Original face from 368
+	#cr = im.crop((im.width*0.25, im.width*0.09, im.width*0.75, im.width*0.59))	#Good for bust image
+	cr = im.crop((im.width * 0.255, im.width * 0.108, im.width * 0.717, im.width * 0.570))	#Face
+	#cr.thumbnail((88, 88), Image.ANTIALIAS)
+	dt = io.BytesIO()
+	cr.save(dt, format="png")
+	save_image(dt.getvalue(), filename='%s_face.png'%filename)
+	dt.close()
 
+	dt = io.BytesIO()
+	im.save(dt, format="png")
+	save_image(dt.getvalue(), filename='%s.png'%filename)
+	dt.close()
+
+def save_resized_image(filename, size):
+	im.open(filename+'.png')
+
+	im.thumbnail((size, size), Image.ANTIALIAS)
+	dt = io.BytesIO()
+	im.save(dt, format="png")
+	save_image(dt.getvalue(), filename='{filename}_{size}.png')
+	dt.close()
 
 if __name__=='__main__':
 	im = Image.open('1.png')

@@ -9,6 +9,7 @@ import hashlib
 import json
 import time
 import pytz
+import pymongo.errors
 
 from collections import OrderedDict
 from datetime import datetime
@@ -24,7 +25,7 @@ CLEAR_SELF = 1
 CLEAR_BARCODE = 3
 
 def kanojo_order_dict_cmp(x, y):
-	order = ('status', 'avatar_background_image_url', 'in_room', 'mascot_enabled', 'mouth_type', 'skin_color', 'body_type', 'race_type', 'spot_type', 'birth_day', 'sexual', 'id', 'recognition', 'on_advertising', 'clothes_type', 'brow_type', 'consumption', 'like_rate', 'eye_position', 'source', 'location', 'birth_month', 'follower_count', 'goods_button_visible', 'accessory_type', 'birth_year', 'possession', 'hair_type', 'clothes_color', 'relation_status', 'ear_type', 'brow_position', 'barcode', 'love_gauge', 'profile_image_url', 'voted_like', 'eye_color', 'glasses_type', 'hair_color', 'face_type', 'nationality', 'advertising_product_url', 'geo', 'emotion_status', 'eye_type', 'mouth_position', 'name', 'fringe_type', 'nose_type', 'advertising_banner_url', 'advertising_product_title', )
+	order = ('status', 'avatar_background_image_url', 'in_room', 'mascot_enabled', 'mouth_type', 'skin_color', 'body_type', 'race_type', 'spot_type', 'birth_day', 'sexual', 'id', 'recognition', 'on_advertising', 'clothes_type', 'brow_type', 'consumption', 'like_rate', 'eye_position', 'source', 'location', 'birth_month', 'follower_count', 'goods_button_visible', 'accessory_type', 'birth_year', 'possession', 'hair_type', 'clothes_color', 'relation_status', 'ear_type', 'brow_position', 'barcode', 'love_gauge', 'voted_like', 'eye_color', 'glasses_type', 'hair_color', 'face_type', 'nationality', 'advertising_product_url', 'geo', 'emotion_status', 'eye_type', 'mouth_position', 'name', 'fringe_type', 'nose_type', 'advertising_banner_url', 'advertising_product_title', )
 	x,y = x[0], y[0]
 	if x in order and y in order:
 		return order.index(x)-order.index(y)
@@ -32,14 +33,13 @@ def kanojo_order_dict_cmp(x, y):
 		return -1
 	elif y in order:
 		return 1
-	return cmp(x, y)
+	return (x > y) - (x < y)
 
 class KanojoManager(object):
 	"""docstring for KanojoManager"""
-	def __init__(self, db=None, server=None, clothes_magic=51212494783, generate_secret=''):
+	def __init__(self, db=None, clothes_magic=51212494783, generate_secret=''):
 		super(KanojoManager, self).__init__()
 		self.db = db
-		self.server = server
 		self.clothes_magic = clothes_magic
 		self.generate_secret = generate_secret
 		tmp = json.loads(open('dress_up_clothes_time.json').read())
@@ -51,14 +51,14 @@ class KanojoManager(object):
 					'id': 0
 				})
 
-	def create(self, barcode_info, kanojo_name, profile_image_url, owner_user=None, profile_full_image_url=None):
+	def create(self, barcode_info, kanojo_name, owner_user=None):
 		'''
 
 		'''
 		barcode_fields = ['barcode',
 				'mouth_type', 'body_type', 'race_type', 'spot_type', 'clothes_type', 'brow_type', 'accessory_type', 'hair_type', 'ear_type', 'glasses_type', 'face_type', 'eye_type', 'fringe_type', 'nose_type',
-				'skin_color', 'clothes_color', 'eye_color', 'hair_color', 
-				'eye_position', 'brow_position', 'mouth_position', 
+				'skin_color', 'clothes_color', 'eye_color', 'hair_color',
+				'eye_position', 'brow_position', 'mouth_position',
 				'consumption', 'possession', 'recognition', 'sexual', 'flirtable']
 		for key in barcode_fields:
 			if key not in barcode_info:
@@ -69,14 +69,13 @@ class KanojoManager(object):
 				query = {'colection': 'kanojos'},
 				update = {'$inc': {'id': 1}},
 				fields = {'id': 1, '_id': 0},
-				new = True 
+				new = True
 			)
 		kid = kid.get('id', -1) if kid else -2
 
 		kanojo = { key: barcode_info[key] for key in barcode_fields }
 		kanojo.update({
 				'id': kid,
-				'profile_image_url': profile_image_url,
 				"name": kanojo_name,
 				"mascot_enabled": "0",
 				"like_rate": 0,
@@ -114,12 +113,10 @@ class KanojoManager(object):
 		else:
 			kanojo['owner_user_id'] = 0
 			kanojo['followers'] = []
-		if profile_full_image_url:
-			kanojo['profile_image_full_url'] = profile_full_image_url
 		try:
 			self.db.kanojos.insert(kanojo)
 		except pymongo.errors.DuplicateKeyError as e:
-			return self.create(barcode_info, kanojo_name, profile_image_url, owner_user)
+			return self.create(barcode_info, kanojo_name, owner_user)
 		return kanojo
 
 	def bits2int(self, data, bit_start, bit_end):
@@ -149,7 +146,7 @@ class KanojoManager(object):
 		order =    [
 				'hair_color', 'eye_color', 'skin_color', 'clothes_color',
 				'mouth_type', 'race_type', 'spot_type', 'clothes_type', 'brow_type', 'accessory_type', 'hair_type', 'ear_type', 'glasses_type', 'face_type', 'eye_type', 'fringe_type', 'nose_type',
-				'eye_position', 'brow_position', 'mouth_position', 
+				'eye_position', 'brow_position', 'mouth_position',
 				'consumption', 'possession', 'recognition', 'sexual', 'flirtable'
 			]
 		defaults =  {
@@ -262,12 +259,12 @@ class KanojoManager(object):
 		'''
 		return 2 if kanojo.get('id') in user.get('kanojos') else 3 if kanojo.get('id') in user.get('friends') else 1
 
-	def fill_fields(self, kanojo, self_user=None, owner_user=None):
+	def fill_fields(self, kanojo, host_url, self_user=None, owner_user=None):
 		kanojo['status'] = 'Born in  %s.\n%d users are following.\n'%(time.strftime('%d %b %Y', time.gmtime(kanojo.get('birthday', 0))), len(kanojo.get('followers', [])))
 		if owner_user:
 			kanojo['status'] += 'She has relationship with %s.'%owner_user.get('name')
 		elif self_user and self_user.get('id') == kanojo.get('owner_user_id'):
-		   kanojo['status'] += 'She has relationship with %s.'%self_user.get('name')
+			kanojo['status'] += 'She has relationship with %s.'%self_user.get('name')
 		else:
 			kanojo['status'] += 'She has not in relationship.'
 
@@ -294,14 +291,9 @@ class KanojoManager(object):
 			kanojo['relation_status'] = 1
 			#kanojo['status'] += 'Nobody'
 		kanojo['in_room'] = True
-		if not kanojo.get('profile_image_url'):
-			kanojo['profile_image_url'] = 'http://bk-dump.herokuapp.com/images/common/no_kanojo_picture.png'
-		if not kanojo.get('profile_image_url').startswith('http') and self.server:
-			kanojo['profile_image_url'] = self.server + kanojo.get('profile_image_url')
-		if not kanojo.get('profile_image_full_url'):
-			kanojo['profile_image_full_url'] = 'http://bk-dump.herokuapp.com/images/common/no_kanojo_picture_f.png'
-		if not kanojo.get('profile_image_full_url').startswith('http') and self.server:
-			kanojo['profile_image_full_url'] = self.server + kanojo.get('profile_image_full_url')
+		if host_url:
+			kanojo['profile_image_url'] = host_url + 'profile_images/kanojo/%s/%s.png' % (kanojo['id'], kanojo['name'])
+			kanojo['profile_image_full_url'] = host_url + 'profile_images/kanojo/%s/%s.png' % (kanojo['id'], kanojo['name'])
 
 		kanojo['like_rate'] = int(round(kanojo.get('like_rate', 0)))
 		if kanojo.get('like_rate') > 5:
@@ -330,9 +322,9 @@ class KanojoManager(object):
 				d_string = self.duration_to_str(duration)
 				return { "body": "She on the trip, comming back %s."%d_string, "title": "" }
 		return None
-	
 
-	def clear(self, kanojo, self_user=None, clear=CLEAR_SELF, check_clothes=False, owner_user=None):
+
+	def clear(self, kanojo, host_url, self_user=None, clear=CLEAR_SELF, check_clothes=False, owner_user=None):
 		if kanojo is None:
 			# TODO: maybe should return somthing else?
 			return kanojo
@@ -351,7 +343,7 @@ class KanojoManager(object):
 				self.save(kanojo)
 
 		tmp_kanojo = copy.copy(kanojo)
-		self.fill_fields(tmp_kanojo, self_user=self_user, owner_user=owner_user)
+		self.fill_fields(tmp_kanojo, host_url, self_user=self_user, owner_user=owner_user)
 		if tmp_kanojo.get('relation_status') != 2:
 			tmp_kanojo['barcode'] = '************'
 
@@ -370,14 +362,14 @@ class KanojoManager(object):
 		rv['clothes_type'] = clothes_type
 		return OrderedDict(sorted(list(rv.items()), key=cmp_to_key(kanojo_order_dict_cmp)))
 
-	def kanojo(self, kanojo_id, self_user=None, clear=CLEAR_SELF, check_clothes=False):
+	def kanojo(self, kanojo_id, host_url, self_user=None, clear=CLEAR_SELF, check_clothes=False):
 		query = { 'id': kanojo_id }
 		k = self.db.kanojos.find_one(query)
 		if k:
-			return self.clear(k, self_user=self_user, clear=clear, check_clothes=check_clothes)
+			return self.clear(k, host_url, self_user=self_user, clear=clear, check_clothes=check_clothes)
 		return k
 
-	def kanojos(self, kanojo_ids, self_user=None, clear=CLEAR_SELF):
+	def kanojos(self, kanojo_ids, host_url, self_user=None, clear=CLEAR_SELF):
 		query = {
 			'id': {
 				'$in': kanojo_ids
@@ -385,17 +377,17 @@ class KanojoManager(object):
 		}
 		arr = []
 		for k in self.db.kanojos.find(query):
-			arr.append(self.clear(k, self_user=self_user, clear=clear))
+			arr.append(self.clear(k, host_url, self_user=self_user, clear=clear))
 
 		# sort result
 		rv = sorted(arr, key=lambda k: kanojo_ids.index(k['id']))
 		return rv
 
-	def fill_owners_info(self, kanojos, owner_users, self_user=None):
+	def fill_owners_info(self, kanojos, host_url, owner_users, self_user=None):
 		rv = []
 		for k in kanojos:
 			owner_user = next((u for u in owner_users if u.get('id') == k.get('owner_user_id')), None)
-			rv.append(self.clear(k, self_user=self_user, owner_user=owner_user, clear=CLEAR_SELF))
+			rv.append(self.clear(k, host_url, self_user=self_user, owner_user=owner_user, clear=CLEAR_SELF))
 		return rv
 
 	def kanojos_owner_users(self, kanojos):
@@ -547,7 +539,7 @@ class KanojoManager(object):
 		return { 'price_s': 10 }
 
 	def _kanojo_love_increment(self, kanojo, user, love_change, relation_status=None):
-		rv = { 
+		rv = {
 			'code': 200,
 			'info': {},
 			'love_increment': {
@@ -702,7 +694,7 @@ class KanojoManager(object):
 			}
 		}
 		return rv
-	
+
 
 
 if __name__ == "__main__":
@@ -713,7 +705,7 @@ if __name__ == "__main__":
 
 	exit()
 
-	mdb_connection_string = config.MDB_CONNECTION_STRING    
+	mdb_connection_string = config.MDB_CONNECTION_STRING
 	db_name = mdb_connection_string.split('/')[-1]
 	db = MongoClient(mdb_connection_string)[db_name]
 

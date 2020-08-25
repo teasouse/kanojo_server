@@ -5,6 +5,7 @@ __author__ = 'Andrey Derevyagin'
 __copyright__ = 'Copyright © 2015'
 
 import copy
+import pymongo.errors
 import time
 
 from html import escape
@@ -137,7 +138,7 @@ class ActivityManager(object):
         if 'activity' not in rv:
             at = rv.get('activity_type')
             if ACTIVITY_SCAN == at:
-                human_time = time.strftime("%d %b %Y %H:%M:%S", time.localtime(rv.get(created_timestamp)))
+                human_time = time.strftime("%d %b %Y %H:%M:%S", time.localtime(rv.get('created_timestamp')))
                 rv['activity'] = '{user_name} has scanned on ' + human_time+ '.'
             elif ACTIVITY_GENERATED == at:
                 rv['activity'] = '{kanojo_name} was generated.'
