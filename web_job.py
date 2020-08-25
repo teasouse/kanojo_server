@@ -28,11 +28,12 @@ from store import KANOJO_FRIEND, KANOJO_OTHER, KANOJO_OWNER, StoreManager
 from thread_post import Post
 from user import *
 
-context = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)
-context.load_cert_chain(config.SSL_CERTIFICATE_FILE, keyfile=config.SSL_PRIVATEKEY_FILE)
+if config.USE_HTTPS:
+	context = ssl.SSLContext(ssl.PROTOCOL_TLSv1_2)
+	context.load_cert_chain(config.SSL_CERTIFICATE_FILE, keyfile=config.SSL_PRIVATEKEY_FILE)
 
 app = Flask(__name__)
-app.debug = True
+app.debug = config.DEBUG
 app.secret_key = config.SESSION_SECRET_KEY
 #app.config['SESSION_COOKIE_DOMAIN'] = '192.168.1.19'
 #session.permanent = True
@@ -1650,8 +1651,9 @@ if not app.debug or os.environ.get('WERKZEUG_RUN_MAIN') == 'true':
 	atexit.register(lambda: sched.shutdown())
 
 if __name__ == "__main__":
-	app.debug = True
 	#app.run(host='0.0.0.0', port=443, ssl_context=context)
-	#app.run(host='192.168.1.19', port=443, ssl_context=context)
-	app.run(host='0.0.0.0', port=5000)
+	if config.USE_HTTPS:
+		app.run(host=config.HOST, port=config.PORT, ssl_context=context)
+	else:
+		app.run(host=config.HOST, port=config.PORT)
 	#app.run(host='localhost')

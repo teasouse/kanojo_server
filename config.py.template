@@ -10,9 +10,16 @@ MDB_CONNECTION_STRING_REAL = 'mongodb://<user>:<pass>@dsXXXXXX.mongolab.com:<por
 
 # secret key for session
 SESSION_SECRET_KEY = 'secret'
+
 # ssl certificate/key files path
 SSL_PRIVATEKEY_FILE = 'cert/ssl.key'
 SSL_CERTIFICATE_FILE = 'cert/ssl.cert'
+
+#Flags
+USE_HTTPS = True
+DEBUG = False
+HOST = '0.0.0.0'
+port = 443
 
 # prime number for generate kanojo from barcode
 BARCODE_SECRET = 236887699
@@ -20,7 +27,6 @@ BARCODE_SECRET = 236887699
 # kanojo secrets
 CLOTHES_MAGIC = 373587883
 KANOJO_SECRET = 'secret'
-
 
 # geo ip secrets
 GEOIP_SECRET1 = 'secret'
