@@ -1,0 +1,5 @@
+#!/bin/bash
+
+KanojoConfigSetup
+
+python3 web_job.py

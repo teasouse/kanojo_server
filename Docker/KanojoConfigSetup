@@ -1,0 +1,34 @@
+#!/bin/bash
+
+declare -A envvars
+envvars[USE_HTTPS]=$(printenv HTTPS)
+envvars[PORT]=$(printenv PORT_VAL)
+envvars[SESSION_SECRET_KEY]=$(printenv SESSION_SECRET)
+envvars[SSL_PRIVATEKEY_FILE]=$(printenv SSL_KEY_PATH)
+envvars[SSL_CERTIFICATE_FILE]=$(printenv SSL_CERT_PATH)
+envvars[DEBUG]=$(printenv DEBUG)
+envvars[HOST]=$(printenv HOST)
+envvars[BARCODE_SECRET]=$(printenv BARCODE_SECRET)
+envvars[CLOTHES_MAGIC]=$(printenv CLOTHES_MAGIC)
+envvars[KANOJO_SECRET]=$(printenv KANOJO_SECRET)
+envvars[GEOIP_SECRET1]=$(printenv GEO1)
+envvars[GEOIP_SECRET2]=$(printenv GEO2)
+envvars[GEOIP_SECRET3]=$(printenv GEO3)
+
+musername=$(printenv MONGO_USERNAME)
+mpassword=$(printenv MONGO_PASSWORD)
+mhost=$(printenv MONGO_HOST)
+mport=$(printenv MONGO_PORT)
+
+for envvar in "${!envvars[@]}"; do
+	if [[ -n "${envvars[$envvar]}" ]]; then
+		var=${envvars[$envvar]}
+		echo "Setting ${envvar} to ${var}"
+		sed -r -i "s/(${envvar} = ).*/\1${var}/g" /usr/src/kanojo_server/config.py
+	fi
+done
+if [[ -n musername && -n mpassword && -n mhost && -n mport ]]; then
+	echo "Setting Mongo info to mongodb://${musername}:[PASSWORD HIDDEN]@${mhost}:${mport}"
+	sed -r -i "s/(MDB_CONNECTION_STRING = ).*/\1\'mongodb:\/\/${musername}:${mpassword}@${mhost}:${mport}\'/g" /usr/src/kanojo_server/config.py
+	sed -r -i "s/(MDB_CONNECTION_STRING_REAL = ).*/\1\'mongodb:\/\/${musername}:${mpassword}@${mhost}:${mport}\'/g" /usr/src/kanojo_server/config.py
+fi
