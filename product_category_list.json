@@ -1,0 +1,92 @@
+{
+	"categories": [
+		{
+			"id": "1",
+			"name": "Drink"
+		},
+		{
+			"id": "2",
+			"name": "Food"
+		},
+		{
+			"id": "3",
+			"name": "Snack"
+		},
+		{
+			"id": "4",
+			"name": "Alcohol"
+		},
+		{
+			"id": "5",
+			"name": "Beer"
+		},
+		{
+			"id": "6",
+			"name": "Tabacco"
+		},
+		{
+			"id": "7",
+			"name": "Magazines"
+		},
+		{
+			"id": "8",
+			"name": "Stationary"
+		},
+		{
+			"id": "9",
+			"name": "Industrial Tool"
+		},
+		{
+			"id": "10",
+			"name": "Electronics"
+		},
+		{
+			"id": "11",
+			"name": "Kitchenware"
+		},
+		{
+			"id": "12",
+			"name": "Clothes"
+		},
+		{
+			"id": "13",
+			"name": "Accessory"
+		},
+		{
+			"id": "14",
+			"name": "Music"
+		},
+		{
+			"id": "15",
+			"name": "DVD"
+		},
+		{
+			"id": "16",
+			"name": "Video Game"
+		},
+		{
+			"id": "17",
+			"name": "Sports Gear"
+		},
+		{
+			"id": "18",
+			"name": "Health & Beauty"
+		},
+		{
+			"id": "19",
+			"name": "Medicine"
+		},
+		{
+			"id": "20",
+			"name": "Medical Supplies"
+		},
+		{
+			"id": "22",
+			"name": "Book"
+		},
+		{
+			"id": "21",
+			"name": "Other"
+		}
+	]
+}

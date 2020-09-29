@@ -100,6 +100,14 @@ def get_remote_ip():
 		remote_ip = request.headers.getlist("X-Forwarded-For")[0]
 	return remote_ip
 
+def getCategoryText(category_id):
+	with open('product_category_list.json') as json_file:
+		categories = json.load(json_file)['categories']
+		for category in categories:
+			if category['id'] == category_id:
+				return category['name']
+		return 'Others'
+
 @app.route('/')
 def index():
 	remote_ip = get_remote_ip()
@@ -740,9 +748,6 @@ def kanojo_show():
 		return json_response({ "code": 400 })
 	kanojo_id = int(prms.get('kanojo_id'))
 	rspns = { "code": 200 }
-	barcode = '************'
-	rspns['product'] = {"category": "others", "comment": "", "name": "product_name", "product_image_url": None, "barcode": barcode, "country": "Japan", "location": "Somewhere", "scan_count": 1366, "category_id": 21, "geo": None, "company_name": "company_name"}
-	rspns['scanned'] = {"category": "others", "comment": "", "user_id": 0, "name": "RT454K", "product_image_url": None, "barcode": barcode, "location": "Somewhere", "nationality": "Japan", "geo": None, "id": 0}
 	rspns['messages'] = {"notify_amendment_information": "This information is already used by other users.\nIf your amendment would be incorrect, you will be restricted user."}
 	self_user = user_manager.user(uid=session['id'], clear=CLEAR_NONE)
 	kanojo = kanojo_manager.kanojo(kanojo_id, request.host_url, self_user=self_user, clear=CLEAR_NONE)
@@ -750,6 +755,31 @@ def kanojo_show():
 		owner_user = user_manager.user(uid=kanojo.get('owner_user_id'), clear=CLEAR_NONE)
 		rspns['kanojo'] = kanojo_manager.clear(kanojo, request.host_url, self_user, owner_user=owner_user, clear=CLEAR_OTHER, check_clothes=True)
 		rspns['owner_user'] = user_manager.clear(owner_user, CLEAR_OTHER, self_user=self_user)
+
+		rspns['product'] = {
+			"category": getCategoryText(kanojo.get('product_category_id', '21')),
+			"comment": kanojo.get('product_comment', ''),
+			"name": kanojo.get('product_name', ''),
+			"product_image_url": None,
+			"barcode": kanojo.get('barcode'),
+			"country": "A Country",
+			"location": kanojo.get('location'),
+			"scan_count": kanojo.get('scan_count'),
+			"category_id": kanojo.get('product_category_id', '21'),
+			"geo": kanojo.get('geo'),
+			"company_name": kanojo.get('company_name', '')}
+
+		rspns['scanned'] = {
+			"category": getCategoryText(kanojo.get('product_category_id', '21')),
+			"comment": kanojo.get('product_comment', ''),
+			"user_id": kanojo.get('owner_user_id'),
+			"name": kanojo.get('product_name', ''),
+			"product_image_url": None,
+			"barcode": kanojo.get('barcode'),
+			"location": kanojo.get('location'),
+			"nationality": kanojo.get('nationality'),
+			"geo": kanojo.get('geo'),
+			"id": kanojo.get('id')}
 
 		kanojo_date_alert = kanojo_manager.kanojo_date_alert(kanojo)
 		if kanojo_date_alert:
@@ -877,12 +907,13 @@ def kanojo_vote_like():
 @app.route('/api/resource/product_category_list.json', methods=['GET','POST'])
 def resource_product_category_list():
 	if 'id' not in session:
-		return jsonify({ "code": 401 })
+		return jsonify({"code": 401})
 
-	rspns = { "code": 200 }
-	rspns['categories'] = [{"id": "1", "name": "Drink"}, {"id": "2", "name": "Food"}, {"id": "3", "name": "Snack"}, {"id": "4", "name": "Alcohol"}, {"id": "5", "name": "Beer"}, {"id": "6", "name": "Tabacco"}, {"id": "7", "name": "Magazines"}, {"id": "8", "name": "Stationary"}, {"id": "9", "name": "Industrial tool"}, {"id": "10", "name": "Electronics"}, {"id": "11", "name": "Kitchenware"}, {"id": "12", "name": "Clothes"}, {"id": "13", "name": "Accessory"}, {"id": "14", "name": "Music"}, {"id": "15", "name": "DVD"}, {"id": "16", "name": "TVgame"}, {"id": "17", "name": "Sports gear"}, {"id": "18", "name": "Health & beauty"}, {"id": "19", "name": "Medicine"}, {"id": "20", "name": "Medical supplies"}, {"id": "22", "name": "Book"}, {"id": "21", "name": "others"}]
+	rspns = {"code": 200}
+	with open('product_category_list.json') as json_file:
+		rspns.update(json.load(json_file))
+	#rspns['categories'] = [{"id": "1", "name": "Drink"}, {"id": "2", "name": "Food"}, {"id": "3", "name": "Snack"}, {"id": "4", "name": "Alcohol"}, {"id": "5", "name": "Beer"}, {"id": "6", "name": "Tabacco"}, {"id": "7", "name": "Magazines"}, {"id": "8", "name": "Stationary"}, {"id": "9", "name": "Industrial tool"}, {"id": "10", "name": "Electronics"}, {"id": "11", "name": "Kitchenware"}, {"id": "12", "name": "Clothes"}, {"id": "13", "name": "Accessory"}, {"id": "14", "name": "Music"}, {"id": "15", "name": "DVD"}, {"id": "16", "name": "TVgame"}, {"id": "17", "name": "Sports gear"}, {"id": "18", "name": "Health & beauty"}, {"id": "19", "name": "Medicine"}, {"id": "20", "name": "Medical supplies"}, {"id": "22", "name": "Book"}, {"id": "21", "name": "others"}]
 	return jsonify(rspns)
-
 
 @app.route('/activity/user_timeline.json', methods=['GET','POST'])
 def activity_usertimeline():
@@ -980,6 +1011,7 @@ def profile_images_kanojo(kid, kname):
 	prms = request.args
 	face = prms.get('face', False)
 	size = prms.get('size', False)
+	kname = urllib.parse.unquote(kname)
 	filename = f'profile_images/kanojo/{kid}/{kname}'
 	if face:
 		filename += '_face'
@@ -1211,12 +1243,12 @@ def barcode_scan_and_generate():
 		# 	rspns = { "code": 503, "love_increment": { "alertShow": 1 }, "alerts": [ { "body": "Something going wrong, please, scan again.", "title": "" } ] }
 		# 	return json_response(rspns)
 
-		kanojo = user_manager.create_kanojo_from_barcode(self_user, bc_info, prms.get('kanojo_name'))
+		kanojo = user_manager.create_kanojo_from_barcode(self_user, bc_info, prms)
 		if kanojo:
 			f = files['kanojo_profile_image_data']
 			os.makedirs('./profile_images/kanojo/' + str(kanojo['id']))
-			fname = 'profile_images/kanojo/%d/%s'%(kanojo['id'], prms.get('kanojo_name'))
-			crop_and_save_profile_image(f.stream, filename=urllib.parse.quote(fname))
+			fname = 'profile_images/kanojo/%d/%s'%(kanojo['id'], kanojo['name'])
+			crop_and_save_profile_image(f.stream, filename=fname)
 
 			rspns['kanojo'] = kanojo_manager.clear(kanojo, request.host_url, self_user, clear=CLEAR_OTHER, check_clothes=True)
 			rspns['user'] = user_manager.clear(self_user, CLEAR_SELF, self_user=self_user)
@@ -1226,7 +1258,7 @@ def barcode_scan_and_generate():
 	else:
 		rspns = { 'code': 404 }
 
-	return json_response(rspns)
+	return jsonify(rspns)
 
 @app.route('/api/account/update.json', methods=['POST'])
 @set_parsers(BKMultipartParser)
@@ -1295,7 +1327,7 @@ def activity_scanned_timeline():
 	rspns['activities'] = []
 	return json_response(rspns)
 
-@app.route('/barcode/update.json', methods=['POST'])
+@app.route('/api/barcode/update.json', methods=['POST'])
 @set_parsers(BKMultipartParser)
 def barcode_update():
 	'''
@@ -1308,8 +1340,27 @@ def barcode_update():
 		'content_length': request.headers.get('content_length')
 	}
 	(prms, files) = parser.parse(request.stream.read(), request.headers.get('Content-Type'), **options)
-	# TODO: logic
-	rspns = { 'code': 200 }
+	if prms.get('barcode') is None:
+		return json_response({"code": 400})
+	barcode = prms.get('barcode')
+	kanojo = kanojo_manager.kanojo_by_barcode(barcode)
+
+	if kanojo is None or len(kanojo) == 0:
+		rspns = {"code": 404}
+		rspns['alerts'] = [{"body": "The Requested KANOJO was not found.", "title": ""}]
+	else:
+		kanojo = kanojo[0]
+		kanojo['company_name'] = prms.get('company_name')
+		kanojo['product_name'] = prms.get('product_name')
+		kanojo['product_category_id'] = prms.get('product_category_id')
+		kanojo['product_comment'] = prms.get('product_comment')
+		#TODO: Deal with geo and image
+		if kanojo_manager.save(kanojo):
+			rspns = {'code': 200}
+		else:
+			rspns = {"code": 500}
+			rspns['alerts'] = [{"body": "KANOJO data could not be saved.", "title": "Internal Server Error"}]
+
 	return json_response(rspns)
 
 

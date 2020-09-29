@@ -10,6 +10,7 @@ import json
 import time
 import pytz
 import pymongo.errors
+import urllib.parse
 
 from collections import OrderedDict
 from datetime import datetime
@@ -51,7 +52,7 @@ class KanojoManager(object):
 					'id': 0
 				})
 
-	def create(self, barcode_info, kanojo_name, owner_user=None):
+	def create(self, barcode_info, params, owner_user=None):
 		'''
 
 		'''
@@ -76,13 +77,13 @@ class KanojoManager(object):
 		kanojo = { key: barcode_info[key] for key in barcode_fields }
 		kanojo.update({
 				'id': kid,
-				"name": kanojo_name,
+				"name": params.get('kanojo_name'),
 				"mascot_enabled": "0",
 				"like_rate": 0,
 				"love_gauge": 50,
 				#"emotion_status": 50,
 				"location": "Somewhere",
-				"nationality": "Japan",
+				"nationality": "Earth",
 				"avatar_background_image_url": None,
 				"advertising_product_url": None,
 				"birthday": int(time.time()),
@@ -96,11 +97,17 @@ class KanojoManager(object):
 				#"follower_count": 0,
 				#"goods_button_visible": True,
 				#"relation_status": 2,
-				#"geo": "35.517161,139.466934",
+				"geo": params.get('product_geo', '0,0'),
 				#"advertising_banner_url": None,
-				#"advertising_product_title": None
+				#"advertising_product_title": None,
 				#"voted_like": True,
 				"likes": [],
+
+				#Product Info
+				"company_name": params.get('company_name'),
+				"product_name": params.get('product_name'),
+				"product_category_id": params.get('product_category_id', 0),
+				"product_comment": params.get('product_comment'),
 
 				# defined by me
 				"scan_count": 1,
@@ -115,8 +122,8 @@ class KanojoManager(object):
 			kanojo['followers'] = []
 		try:
 			self.db.kanojos.insert(kanojo)
-		except pymongo.errors.DuplicateKeyError as e:
-			return self.create(barcode_info, kanojo_name, owner_user)
+		except pymongo.errors.DuplicateKeyError:
+			return self.create(barcode_info, params, owner_user)
 		return kanojo
 
 	def bits2int(self, data, bit_start, bit_end):
@@ -253,9 +260,9 @@ class KanojoManager(object):
 
 	def relation_status(self, kanojo, user):
 		'''
-			1 - don't know this kanojo_name
-			2 - my kanojo
-			3 - kanojo in my friends 
+			1 - RELATION_OTHER
+			2 - RELATION_KANOJO
+			3 - RELATION_FRIEND
 		'''
 		return 2 if kanojo.get('id') in user.get('kanojos') else 3 if kanojo.get('id') in user.get('friends') else 1
 
@@ -273,7 +280,7 @@ class KanojoManager(object):
 		kanojo['birth_month'] = dt.tm_mon
 		kanojo['birth_year'] = dt.tm_year
 		kanojo['emotion_status'] = kanojo.get('love_gauge')
-		kanojo['on_advertising'] = None
+		kanojo['on_advertising'] = False
 		kanojo['source'] = ''
 		kanojo['follower_count'] = len(kanojo.get('followers'))
 		kanojo['geo'] = '0.0000,0.0000'
@@ -292,8 +299,8 @@ class KanojoManager(object):
 			#kanojo['status'] += 'Nobody'
 		kanojo['in_room'] = True
 		if host_url:
-			kanojo['profile_image_url'] = host_url + 'profile_images/kanojo/%s/%s.png' % (kanojo['id'], kanojo['name'])
-			kanojo['profile_image_full_url'] = host_url + 'profile_images/kanojo/%s/%s.png' % (kanojo['id'], kanojo['name'])
+			kanojo['profile_image_url'] = host_url + 'profile_images/kanojo/%s/%s.png' % (kanojo['id'], urllib.parse.quote(kanojo['name']))
+			kanojo['profile_image_full_url'] = host_url + 'profile_images/kanojo/%s/%s.png' % (kanojo['id'], urllib.parse.quote(kanojo['name']))
 
 		kanojo['like_rate'] = int(round(kanojo.get('like_rate', 0)))
 		if kanojo.get('like_rate') > 5:
@@ -397,7 +404,6 @@ class KanojoManager(object):
 		return list(s)
 
 	def kanojo_by_barcode(self, barcode):
-		query = None
 		if 'kanojo' == barcode[:6]:
 			kid = int(barcode[6:])
 			query = { 'id': kid }

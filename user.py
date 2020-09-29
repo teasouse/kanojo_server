@@ -244,10 +244,10 @@ class UserManager(object):
 						})
 		return rv
 
-	def create_kanojo_from_barcode(self, user, barcode_info, kanojo_name):
+	def create_kanojo_from_barcode(self, user, barcode_info, params):
 		if user.get('stamina') < 20:
 			return False
-		kanojo = self.kanojo_manager.create(barcode_info, kanojo_name, user)
+		kanojo = self.kanojo_manager.create(barcode_info, params, user)
 		if kanojo:
 			try:
 				user['generate_count'] = int(user.get('generate_count', 0)) + 1
