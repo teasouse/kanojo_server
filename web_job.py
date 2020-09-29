@@ -91,7 +91,8 @@ def json_response(data):
 
 def server_url():
 	url = request.url_root
-	return url.replace('http:/', 'https:/')
+	#return url.replace('http:/', 'https:/')
+	return url
 
 def get_remote_ip():
 	if not request.headers.getlist("X-Forwarded-For"):
@@ -867,7 +868,7 @@ def apibanner_kanojoroom_reactionword():
 	except ValueError as e:
 		return json_response({ "code": 400 })
 	val = {
-		'text': reactionword.reactionword_json(a, pod),
+		'text': reactionword.reactionword_json(a, pod)
 	}
 	return render_template('apibanner_kanojoroom_reactionword.html', **val)
 
