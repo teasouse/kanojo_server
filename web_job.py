@@ -881,14 +881,15 @@ def kanojo_vote_like():
 		return json_response({ "code": 400 })
 	try:
 		kanojo_id = int(prms.get('kanojo_id'))
-		like = int(prms.get('like'))
+		like = prms.get('like').lower() == 'true'
 	except ValueError:
 		return json_response({ "code": 400 })
 	rspns = { "code": 200 }
 	self_user = user_manager.user(uid=session['id'], clear=CLEAR_NONE)
 	kanojo = kanojo_manager.kanojo(kanojo_id, request.host_url, self_user=self_user, clear=CLEAR_NONE)
 
-	changed = user_manager.set_like(self_user, kanojo, like, update_db_record=True)
+	if not user_manager.set_like(self_user, kanojo, like, update_db_record=True):
+		return json_response({"code": 500})
 
 	rspns['kanojo'] = kanojo_manager.clear(kanojo, request.host_url, self_user, clear=CLEAR_OTHER)
 	return json_response(rspns)

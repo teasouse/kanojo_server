@@ -312,9 +312,8 @@ class UserManager(object):
 				like_kanojos.remove(kid)
 				user['likes'] = like_kanojos
 				changed = True
-		if changed:
-			if update_db_record:
-				self.save(user)
+		if changed and update_db_record:
+			return self.save(user)
 		return changed
 
 	def user_items(self, user):
