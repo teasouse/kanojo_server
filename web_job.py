@@ -90,9 +90,9 @@ def json_response(data):
 	return Response(rtext, status=200, mimetype='application/json')
 
 def server_url():
-	url = request.url_root
-	#return url.replace('http:/', 'https:/')
-	return url
+	if config.USE_HTTPS:
+		return request.url_root.replace('http:/', 'https:/')
+	return request.url_root
 
 def get_remote_ip():
 	if not request.headers.getlist("X-Forwarded-For"):
