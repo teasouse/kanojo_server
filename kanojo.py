@@ -327,7 +327,7 @@ class KanojoManager(object):
 			if relation_status != 2:
 				duration = kanojo_date.get('back_time', 0) - int(time.time())
 				d_string = self.duration_to_str(duration)
-				return { "body": "She on the trip, comming back %s."%d_string, "title": "" }
+				return { "body": "She on the trip, coming back %s."%d_string, "title": "" }
 		return None
 
 
@@ -595,7 +595,6 @@ class KanojoManager(object):
 
 		return rv
 
-
 	def user_action(self, kanojo, user, action_string):
 		rv = { 'code': 400 }
 		if action_string:
@@ -700,8 +699,6 @@ class KanojoManager(object):
 			}
 		}
 		return rv
-
-
 
 if __name__ == "__main__":
 	import config
