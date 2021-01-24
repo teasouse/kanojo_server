@@ -23,7 +23,7 @@ CLEAR_SELF = 1
 CLEAR_OTHER = 2
 
 def user_order_dict_cmp(x, y):
-	order = ('facebook_connect', 'money', 'sex', 'birth_day', 'enemy_count', 'id', 'relation_status', 'twitter_connect', 'kanojo_count', 'stamina', 'birth_month', 'email', 'birth_year', 'friend_count', 'stamina_max', 'description', 'generate_count', 'profile_image_url', 'password', 'tickets', 'name', 'language', 'level', 'scan_count', )
+	order = ('money', 'sex', 'birth_day', 'enemy_count', 'id', 'relation_status','kanojo_count', 'stamina', 'birth_month', 'email', 'birth_year', 'friend_count', 'stamina_max', 'generate_count', 'profile_image_url', 'password', 'tickets', 'name', 'language', 'level', 'scan_count', )
 	x,y = x[0], y[0]
 	if x in order and y in order:
 		return order.index(x)-order.index(y)
@@ -49,48 +49,39 @@ class UserManager(object):
 					'id': 0
 				})
 
-	def generate_name(self):
-		colors = ('Aqua', 'Aquamarine', 'Azure', 'Beige', 'Bisque', 'Black', 'Blue', 'Brown', 'Burlywood', 'Chartreuse', 'Chocolate', 'Coral', 'Cornflower', 'Cornsilk', 'Crimson', 'Cyan', 'Firebrick', 'Fuchsia', 'Gainsboro', 'Gold', 'Goldenrod', 'Gray', 'Green', 'Honeydew', 'Indigo', 'Ivory', 'Khaki', 'Lavender', 'Lime', 'Linen', 'Magenta', 'Maroon', 'Moccasin', 'Olive', 'Orange', 'Orchid', 'Peru', 'Pink', 'Plum', 'Purple', 'Red', 'Salmon', 'Seashell', 'Sienna', 'Silver', 'Snow', 'Tan', 'Teal', 'Thistle', 'Tomato', 'Turquoise', 'Violet', 'Wheat', 'White', 'Yellow')
-		fruits = ('Apple', 'Apricot', 'Avocado', 'Banana', 'Bilberry', 'Blackberry', 'Blackcurrant', 'Blueberry', 'Boysenberry', 'Cantaloupe', 'Currant', 'Cherry', 'Cherimoya', 'Cloudberry', 'Coconut', 'Cranberry', 'Damson', 'Date', 'Dragonfruit', 'Durian', 'Elderberry', 'Feijoa', 'Fig', 'Goji berry', 'Gooseberry', 'Grape', 'Grapefruit', 'Guava', 'Huckleberry', 'Jabouticaba', 'Jackfruit', 'Jambul', 'Jujube', 'Kiwi', 'Kumquat', 'Lemon', 'Lime', 'Loquat', 'Lychee', 'Mango', 'Melon', 'Miracle fruit', 'Mulberry', 'Nectarine', 'Olive', 'Papaya', 'Passionfruit', 'Peach', 'Pear', 'Persimmon', 'Physalis', 'Plum', 'Pineapple', 'Pomegranate', 'Pomelo', 'Quince', 'Raspberry', 'Rambutan', 'Redcurrant', 'Satsuma', 'Strawberry')
-		return '%s %s'%(random.choice(colors), random.choice(fruits))
-
-	def create(self, uuid):
+	def create(self, uuid, name, password, email, birthday, sex, profile_image_data):
+		#TODO: user Profile image data
 		if self.db:
 			uid = self.db.seqs.find_and_modify(
 					query = {'colection': 'users'},
 					update = {'$inc': {'id': 1}},
 					fields = {'id': 1, '_id': 0},
-					new = True 
+					new = True
 				)
 			uid = uid.get('id', -1) if uid else -2
 		else:
 			uid = self.last_uid
 			self.last_uid += 1
 		tm = int(time.time())
+		if name == "":
+			name = generate_name()
 		user = {
 				"create_time": tm,
-				"birthday": tm,
+				"birthday": birthday,
 				"id": uid,
-				"uuid": [uuid],
-				#"name": 'id:%d'%uid,
-				"name": self.generate_name(),
+				"uuid": uuid,
+				"name": name,
 				"level": 1,
-				"money": 1000, 
-				"sex": "not sure",
+				"money": 1000,
+				"sex": sex,
 				"stamina": 100,
-				"email": None,
-				"description": None,
-				"generate_count": 0,
+				"email": email,
 				"profile_image_url": None,
-				"password": None,
 				"tickets": 20,
 				"language": "en",
 				"scan_count": 0,
-				"twitter_connect": False,
-				"facebook_connect": False,
 				"generate_count": 0,
-				"description": None,
-				"password": None,
+				"password": password,
 				#"stamina_max": 1080,
 				#"relation_status": 2,
 				#"birth_day": 27,
@@ -111,7 +102,7 @@ class UserManager(object):
 				self.db.users.insert(user)
 				self.last_uid = uid
 			except pymongo.errors.DuplicateKeyError as e:
-				return self.create(uuid)
+				return self.create(name, password, email, birthday, sex, profile_image_data)
 
 			if self.activity_manager:
 				self.activity_manager.create({
@@ -127,7 +118,23 @@ class UserManager(object):
 
 	@property
 	def default_user(self):
-		return {"generate_count": 0, "description": "", "language": "ja", "level": 1, "kanojo_count": 0, "money": 100, "birth_month": 10, "stamina_max": 100, "facebook_connect": False, "profile_image_url": None, "sex": "no sure", "stamina": 100, "money_max": 100, "twitter_connect": False, "scan_count": 0, "birth_day": 25, "enemy_count": 0, "wish_count": 0, "id": 0, "name": 'unknown'}
+		return {"generate_count": 0,
+				"language": "ja",
+				"level": 1,
+				"kanojo_count": 0,
+				"money": 100,
+				"birth_month": 10,
+				"stamina_max": 100,
+				"profile_image_url": None,
+				"sex": "no sure",
+				"stamina": 100,
+				"money_max": 100,
+				"scan_count": 0,
+				"birth_day": 25,
+				"enemy_count": 0,
+				"wish_count": 0,
+				"id": 0,
+				"name": 'unknown'}
 
 	def fill_fields(self, usr):
 		usr['stamina_max'] = (usr.get('level', 0) + 9) * 10
@@ -153,7 +160,7 @@ class UserManager(object):
 			self.fill_fields(tmp_user)
 			allow_keys = ['id', 'name', 'level', 'money', 'sex', 'stamina', 'profile_image_url', 'scan_count', 'stamina_max', 'relation_status', 'kanojo_count', 'friend_count', 'enemy_count', 'generate_count']
 			if clear == CLEAR_SELF:
-				allow_keys.extend(['email', 'tickets', 'language', 'twitter_connect', 'facebook_connect', 'birth_day', 'birth_month', 'birth_year', 'description'])
+				allow_keys.extend(['email', 'tickets', 'language', 'birth_day', 'birth_month', 'birth_year', 'description'])
 				if self_uid is None:
 					self_uid = tmp_user.get('id')
 			rv = { key: tmp_user[key] for key in allow_keys if key in tmp_user }
@@ -166,23 +173,42 @@ class UserManager(object):
 				rv['relation_status'] = 2 if self_user.get('id')==tmp_user.get('id') else 3 if tmp_user.get('id') in self_user.get('enemies') else 1
 			return OrderedDict(sorted(list(rv.items()), key=cmp_to_key(user_order_dict_cmp)))
 
-	def user(self, uuid=None, uid=None, self_uid=None, self_user=None, clear=CLEAR_SELF):
-		query = None
-		if uid:
-			query = { "id": uid }
-		elif uuid:
-			query = {
-					"uuid": {
-						"$exists": True,
-						"$elemMatch": { "$in": [ uuid  ] }
-					}
-				}
-		else:
-			return None
+	def user(self, uuid=None, uid=None, self_uid=None, self_user=None, clear=CLEAR_SELF, email=None, password=None):
 		if not self.db:
 			return None
-		usr = self.db.users.find_one(query)
-		return self.clear(usr, clear=clear, self_uid=self_uid, self_user=self_user)
+		if uid:
+			query = { "id": uid }
+			user = self.db.users.find_one(query)
+		elif uuid:
+			query = {
+				"uuid": {
+					"$exists": True,
+					"$eq": uuid
+				}
+			}
+			user = self.db.users.find_one(query)
+			if (not user) and email and password:
+				query = {
+						"$and": [
+							{"email": {
+								"$exists": True,
+								"$eq": email
+							}},
+							{"password": {
+								"$exists": True,
+								"$eq": password
+							}}
+						]
+					}
+				user = self.db.users.find_one(query)
+				if user:
+					user['uuid'] = uuid
+					self.save(user)
+				else:
+					return None
+		else:
+			return None
+		return self.clear(user, clear=clear, self_uid=self_uid, self_user=self_user)
 
 	def users(self, ids, self_uid=None, self_user=None):
 		tmp_ids = list(ids)
@@ -196,7 +222,6 @@ class UserManager(object):
 				self_user = copy.copy(u)
 		rv = [self.clear(u, clear=CLEAR_OTHER, self_user=self_user) for u in rv]
 		return rv
-
 
 	def add_kanojo_as_friend(self, user, kanojo, increment_scan_couner=True, update_db_record=True):
 		uid = user.get('id')
@@ -589,11 +614,50 @@ class UserManager(object):
 			if len(kanojo.get('followers')):
 				self.kanojo_manager.save(kanojo)
 			else:
+
 				self.kanojo_manager.save(kanojo)
 				#self.kanojo_manager.delete(kanojo)
 			self.save(user)
 
+	def delete_user(self, uid):
+		user = self.user(uid=uid, clear=CLEAR_NONE)
+		if user:
+			#Clear Likes
+			for kid in user.get('likes', []):
+				kanojo = self.kanojo_manager.kanojo(kid, '', clear=CLEAR_NONE)
+				if uid in kanojo.get('likes', []):
+					kanojo['likes'].remove(uid)
+					self.kanojo_manager.save(kanojo)
+			#Clear Kanojos
+			for kid in user.get('kanojos', []):
+				kanojo = self.kanojo_manager.kanojo(kid, '', clear=CLEAR_NONE)
+				self.breakup_with_kanojo(user, kanojo)
+			#Remove enemies
+			for other_user in self.db.users.find():
+				if uid in other_user.get('enemies', []):
+					other_user['enemies'].remove(uid)
+					self.save(other_user)
+			result = self.db.users.delete_one({"id": uid})
+			if result.acknowledged and result.deleted_count > 0:
+				return self.clear(user, clear=CLEAR_SELF)
+		return False
 
+def generate_name():
+	colors = ('Aqua', 'Aquamarine', 'Azure', 'Beige', 'Bisque', 'Black', 'Blue', 'Brown', 'Burlywood', 'Chartreuse',
+			  'Chocolate', 'Coral', 'Cornflower', 'Cornsilk', 'Crimson', 'Cyan', 'Firebrick', 'Fuchsia', 'Gainsboro',
+			  'Gold', 'Goldenrod', 'Gray', 'Green', 'Honeydew', 'Indigo', 'Ivory', 'Khaki', 'Lavender', 'Lime', 'Linen',
+			  'Magenta', 'Maroon', 'Moccasin', 'Olive', 'Orange', 'Orchid', 'Peru', 'Pink', 'Plum', 'Purple', 'Red',
+			  'Salmon', 'Seashell', 'Sienna', 'Silver', 'Snow', 'Tan', 'Teal', 'Thistle', 'Tomato', 'Turquoise',
+			  'Violet', 'Wheat', 'White', 'Yellow')
+	fruits = ('Apple', 'Apricot', 'Avocado', 'Banana', 'Bilberry', 'Blackberry', 'Blackcurrant', 'Blueberry',
+			  'Boysenberry', 'Cantaloupe', 'Currant', 'Cherry', 'Cherimoya', 'Cloudberry', 'Coconut', 'Cranberry',
+			  'Damson', 'Date', 'Dragonfruit', 'Durian', 'Elderberry', 'Feijoa', 'Fig', 'Goji berry', 'Gooseberry',
+			  'Grape', 'Grapefruit', 'Guava', 'Huckleberry', 'Jabouticaba', 'Jackfruit', 'Jambul', 'Jujube', 'Kiwi',
+			  'Kumquat', 'Lemon', 'Lime', 'Loquat', 'Lychee', 'Mango', 'Melon', 'Miracle fruit', 'Mulberry',
+			  'Nectarine', 'Olive', 'Papaya', 'Passionfruit', 'Peach', 'Pear', 'Persimmon', 'Physalis', 'Plum',
+			  'Pineapple', 'Pomegranate', 'Pomelo', 'Quince', 'Raspberry', 'Rambutan', 'Redcurrant', 'Satsuma',
+			  'Strawberry')
+	return f'{random.choice(colors)} {random.choice(fruits)}'
 
 if __name__ == "__main__":
 	mdb_connection_string = config.MDB_CONNECTION_STRING    
@@ -601,7 +665,7 @@ if __name__ == "__main__":
 	db = MongoClient(mdb_connection_string)[db_name]
 
 	u = UserManager(db)
-	print(u.generate_name())
+	print(generate_name())
 	#u.create('~')
 
 	import json
@@ -611,6 +675,3 @@ if __name__ == "__main__":
 	print json.dumps(user)
 	'''
 	print(json.dumps(u.users([1,2], self_uid=1)))
-
-
-

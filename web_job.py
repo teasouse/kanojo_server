@@ -59,7 +59,6 @@ image_manager = ImageManager()
 geoIP = GeoIP(db, secret1=config.GEOIP_SECRET1, secret2=config.GEOIP_SECRET2, secret3=config.GEOIP_SECRET3)
 reactionword = ReactionwordManager()
 
-
 @app.template_filter('date_format')
 def timectime(s):
 	dt = time.gmtime(s)
@@ -621,20 +620,66 @@ def kanojo_html(kid):
 def acc_verify():
 	prms = request.form if request.method == 'POST' else request.args
 	uuid = prms.get('uuid')
+	email = prms.get('email')
+	password = prms.get('password')
 	if uuid:
-		user = user_manager.user(uuid=uuid)
+		user = user_manager.user(uuid=uuid, email=email, password=password)
 		if not user:
-			#return jsonify({ "code": 404 })
-			user = user_manager.create(uuid=uuid)
-			if user:
-				user = user_manager.clear(user, CLEAR_SELF)
-			else:
-				return jsonify({ "code": 507 })
+			return jsonify({ "code": 404 })
+			# user = user_manager.create(uuid=uuid)
+			# if user:
+			# 	user = user_manager.clear(user, CLEAR_SELF)
+			# else:
+			# 	return jsonify({ "code": 507 })
 		session['id'] = user.get('id')
 		rv = jsonify({ "code": 200, "user": user })
 		return rv
 	else:
 		return jsonify({ "code": 400 })
+
+@app.route('/api/account/signup.json', methods=['POST'])
+def acc_signup():
+	prms = request.form
+	uuid = prms.get('uuid')
+	name = prms.get('name', generate_name())
+	password = prms.get('password')
+	email = prms.get('email')
+	birthday = int(time.mktime(time.strptime('%s-%s-%s 12:00:00' % (prms.get('birth_year', 1990), prms.get('birth_month', 1), prms.get('birth_day', 1)), '%Y-%m-%d %H:%M:%S'))) - time.timezone
+	sex = prms.get('sex', 'Not Sure')
+	profile_image_data = prms.get('profile_image_data')
+	if uuid and email and password:
+		query = {
+			"email": {
+				"$exists": True,
+				"$eq": email
+			}
+		}
+		existing_user = db.users.find_one(query)
+		if existing_user:
+			return jsonify({"code": 400, "alerts": [{"body": "Email already in use.", "title": ""}]})
+		else:
+			user = user_manager.create(uuid, name, password, email, birthday, sex, profile_image_data)
+			if not user:
+				return jsonify({"code": 507})
+			else:
+				return jsonify({"code": 200, "user": user_manager.clear(user, clear=CLEAR_SELF)})
+	else:
+		return jsonify({"code": 400})
+
+@app.route('/api/account/delete.json', methods=['POST'])
+def acc_delete():
+	if 'id' not in session:
+		return jsonify({ "code": 401 })
+	else:
+		user_id = int(request.form.get('user_id'))
+		if user_id == session['id']:
+			user = user_manager.delete_user(uid=user_id)
+			if user:
+				return jsonify({"code": 200, "user": user})
+			else:
+				return jsonify({"code": 500})
+		else:
+			return jsonify({"code": 400})
 
 @app.route('/api/account/show.json', methods=['GET'])
 def account_show():
@@ -1248,6 +1293,7 @@ def barcode_scan_and_generate():
 
 	return jsonify(rspns)
 
+#TODO Need password verification in here
 @app.route('/api/account/update.json', methods=['POST'])
 @set_parsers(BKMultipartParser)
 def account_update():
@@ -1266,14 +1312,16 @@ def account_update():
 	if 'name' in prms:
 		self_user['name'] = prms['name']
 		updated = True
-	if 'sex' in prms:
-		self_user['sex'] = prms['sex']
-		updated = True
+	if 'new_password' in prms and (('current_password' in prms and self_user['password'] == prms['current_password']) or self_user['password'] == ''):
+		self_user['password'] = prms['new_password']
 	if 'email' in prms:
-		#self_user['email'] = prms['email']
+		self_user['email'] = prms['email']
 		updated = True
 	if 'birth_year' in prms and 'birth_month' in prms and 'birth_day' in prms:
 		self_user['birthday'] = int(time.mktime(time.strptime('%s-%s-%s 12:00:00'%(prms['birth_year'], prms['birth_month'], prms['birth_day'] ), '%Y-%m-%d %H:%M:%S'))) - time.timezone
+		updated = True
+	if 'sex' in prms:
+		self_user['sex'] = prms['sex']
 		updated = True
 	if 'profile_image_data' in files:
 		f = files['profile_image_data']
@@ -1288,12 +1336,10 @@ def account_update():
 	if updated:
 		user_manager.save(self_user)
 
-	rspns = {
-		'code': 200,
-		"alerts": [{"body": "Your account have been saved.", "title": ""}]
-	}
-	rspns['user'] = user_manager.clear(self_user, CLEAR_SELF, self_user=self_user)
-	return json_response(rspns)
+	rspns = {'code': 200,
+				"alerts": [{"body": "Your account have been saved.", "title": ""}],
+				'user': user_manager.clear(self_user, CLEAR_SELF, self_user=self_user)}
+	return jsonify(rspns)
 
 @app.route('/api/activity/scanned_timeline.json', methods=['GET'])
 def activity_scanned_timeline():
