@@ -662,6 +662,7 @@ def acc_signup():
 			if not user:
 				return jsonify({"code": 507})
 			else:
+				session['id'] = user.get('id')
 				return jsonify({"code": 200, "user": user_manager.clear(user, clear=CLEAR_SELF)})
 	else:
 		return jsonify({"code": 400})
