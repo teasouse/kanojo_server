@@ -1315,6 +1315,7 @@ def account_update():
 		updated = True
 	if 'new_password' in prms and (('current_password' in prms and self_user['password'] == prms['current_password']) or self_user['password'] == ''):
 		self_user['password'] = prms['new_password']
+		updated = True
 	if 'email' in prms:
 		self_user['email'] = prms['email']
 		updated = True

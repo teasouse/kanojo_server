@@ -160,7 +160,7 @@ class UserManager(object):
 			self.fill_fields(tmp_user)
 			allow_keys = ['id', 'name', 'level', 'money', 'sex', 'stamina', 'profile_image_url', 'scan_count', 'stamina_max', 'relation_status', 'kanojo_count', 'friend_count', 'enemy_count', 'generate_count']
 			if clear == CLEAR_SELF:
-				allow_keys.extend(['email', 'tickets', 'language', 'birth_day', 'birth_month', 'birth_year', 'description'])
+				allow_keys.extend(['email', 'password', 'tickets', 'language', 'birth_day', 'birth_month', 'birth_year', 'description'])
 				if self_uid is None:
 					self_uid = tmp_user.get('id')
 			rv = { key: tmp_user[key] for key in allow_keys if key in tmp_user }
