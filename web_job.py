@@ -806,7 +806,7 @@ def kanojo_show():
 		rspns['product'] = {
 			"category": getCategoryText(kanojo.get('product_category_id', '21')),
 			"comment": kanojo.get('product_comment', ''),
-			"name": kanojo.get('product_name', ''),
+			"name": kanojo.get('name', ''),
 			"product_image_url": None,
 			"barcode": kanojo.get('barcode'),
 			"country": "A Country",
@@ -814,7 +814,8 @@ def kanojo_show():
 			"scan_count": kanojo.get('scan_count'),
 			"category_id": kanojo.get('product_category_id', '21'),
 			"geo": kanojo.get('geo'),
-			"company_name": kanojo.get('company_name', '')}
+			"company_name": kanojo.get('company_name', ''),
+			"product": kanojo.get('product_name', '')}
 
 		kanojo_date_alert = kanojo_manager.kanojo_date_alert(kanojo)
 		if kanojo_date_alert:
@@ -1045,20 +1046,24 @@ def activity_usertimeline():
 def profile_images_kanojo(kid, kname):
 	# TODO: web
 	prms = request.args
-	face = prms.get('face', False)
+	full = prms.get('full', False)
 	size = prms.get('size', False)
 	kname = urllib.parse.unquote(kname)
 	filename = f'profile_images/kanojo/{kid}/{kname}'
-	if face:
-		filename += '_face'
-	if size:
-		if not os.path.isfile(f'{filename}_{size}.png'):
-			save_resized_image(filename, size)
-		filename += '_{size}'
-	filename += '.png'
-	if os.path.isfile(filename):
-		return send_file(filename, mimetype='image/png')
-	abort(404)
+	if full:
+		filename += '_full'
+	if not os.path.isfile(filename+'.png'):
+		abort(404)
+	else:
+		if size:
+			size = int(size)
+			if not os.path.isfile(f'{filename}_{size}.png'):
+				save_resized_image(filename, size)
+			filename += f'_{size}'
+		filename += '.png'
+		if os.path.isfile(filename):
+			return send_file(filename, mimetype='image/png')
+		abort(500)
 
 @app.route('/api/notification/register_token.json', methods=['POST'])
 def notification_register_token():

@@ -53,7 +53,7 @@ class ImageManager(object):
 		im = Image.open(img_data)
 		(width, height) = im.size
 		if width > 200 or height > 200:
-			im.thumbnail((200, 200), Image.ANTIALIAS)
+			im = im.resize((200, 200), resample=Image.LANCZOS)
 		dt = io.StringIO()
 		im.save(dt, format="JPEG", quality=95)
 		url = cdn.upload(dt.getvalue(), content_type='image/jpeg', filename=filename)
@@ -68,26 +68,31 @@ def save_image(content, filename='image.png'):
 def crop_and_save_profile_image(img_data, filename):
 	im = Image.open(img_data)
 	#cr = im.crop((94, 40, 170 + 94, 170 + 40))	#Original face from 368
-	#cr = im.crop((im.width*0.25, im.width*0.09, im.width*0.75, im.width*0.59))	#Good for bust image
-	cr = im.crop((im.width * 0.255, im.width * 0.108, im.width * 0.717, im.width * 0.570))	#Face
+	#cr = im.crop((im.width * 0.25543, im.width * 0.108, im.width * 0.71739, im.width * 0.570))	#Old Face
+	cr = im.crop((im.width * 0.27173, im.width * 0.10869, im.width * 0.72826, im.width * 0.56521))
 	#cr.thumbnail((88, 88), Image.ANTIALIAS)
 	dt = io.BytesIO()
 	cr.save(dt, format="png")
-	save_image(dt.getvalue(), filename='%s_face.png'%filename)
+	save_image(dt.getvalue(), filename=f'{filename}.png')
+	dt.close()
+
+	cr = im.crop((im.width*0.25, im.width*0.09, im.width*0.75, im.width*0.59))	#Good for bust image (v1 style)
+	dt = io.BytesIO()
+	cr.save(dt, format="png")
+	save_image(dt.getvalue(), filename=f'{filename}_bust.png')
 	dt.close()
 
 	dt = io.BytesIO()
 	im.save(dt, format="png")
-	save_image(dt.getvalue(), filename='%s.png'%filename)
+	save_image(dt.getvalue(), filename=f'{filename}_full.png')
 	dt.close()
 
 def save_resized_image(filename, size):
-	im.open(filename+'.png')
-
-	im.thumbnail((size, size), Image.ANTIALIAS)
+	im = Image.open(filename+'.png')
+	rs = im.resize((size, size), resample=Image.LANCZOS)
 	dt = io.BytesIO()
-	im.save(dt, format="png")
-	save_image(dt.getvalue(), filename='{filename}_{size}.png')
+	rs.save(dt, format="png")
+	save_image(dt.getvalue(), filename=f'{filename}_{size}.png')
 	dt.close()
 
 if __name__=='__main__':
