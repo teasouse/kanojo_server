@@ -151,10 +151,12 @@ class UserManager(object):
 
 	def clear(self, usr, clear, self_uid=None, self_user=None):
 		if usr is None:
-			# TODO: maybe should return somthing else?
+			# TODO: maybe should return something else?
 			return usr
 		if clear == CLEAR_NONE:
-			return usr
+			tmp_user = copy.copy(usr)
+			self.fill_fields(tmp_user)
+			return tmp_user
 		else:
 			tmp_user = copy.copy(usr)
 			self.fill_fields(tmp_user)
