@@ -10,6 +10,8 @@ import time
 
 from html import escape
 
+from web_job import getCategoryText
+
 CLEAR_NONE = 0
 CLEAR_SELF = 1
 
@@ -51,7 +53,7 @@ class ActivityManager(object):
         '''
                 {
                     'kanojo': null,
-                    'scanned': null,
+                    'product': null,
                     'user': null,
                     'other_user': null,
                     'activity': 'human readeble string',
@@ -99,8 +101,8 @@ class ActivityManager(object):
             else:
                 activity['kanojo'] = activity_info.get('kanojo')
 
-        if 'scanned' in activity_info:
-            activity['scanned'] = activity_info.get('scanned')
+        if 'product' in activity_info:
+            activity['product'] = activity_info.get('product')
 
         if 'activity' in activity_info:
             activity['activity'] = activity_info.get('activity')
@@ -115,12 +117,12 @@ class ActivityManager(object):
 
     def clear(self, activity, clear=CLEAR_SELF, user_id=None):
         if activity is None:
-            # TODO: maybe should return somthing else?
+            # TODO: maybe should return something else?
             return activity
         if activity == CLEAR_NONE:
             return activity
 
-        allow_keys = ('kanojo', 'scanned', 'user', 'other_user', 'activity', 'created_timestamp', 'id', 'activity_type', 'activity_type2', )
+        allow_keys = ('kanojo', 'product', 'user', 'other_user', 'activity', 'created_timestamp', 'id', 'activity_type', 'activity_type2', )
         rv = { key: activity[key] for key in allow_keys if key in activity }
 
         if user_id and rv.get('activity_type') == ACTIVITY_ME_STOLE_KANOJO and rv.get('other_user') == user_id:
@@ -130,18 +132,17 @@ class ActivityManager(object):
             rv['activity_type'] = ACTIVITY_MY_KANOJO_ADDED_TO_FRIENDS
             #(rv['user'], rv['other_user']) = (rv.get('other_user'), rv.get('user'))
 
-        # exchenge user and other_user
+        # exchange user and other_user
         if rv.get('activity_type') in [ACTIVITY_APPROACH_KANOJO, ACTIVITY_MY_KANOJO_STOLEN, ACTIVITY_MY_KANOJO_ADDED_TO_FRIENDS]:
             (rv['user'], rv['other_user']) = (rv.get('other_user'), rv.get('user'))
-
 
         if 'activity' not in rv:
             at = rv.get('activity_type')
             if ACTIVITY_SCAN == at:
                 human_time = time.strftime("%d %b %Y %H:%M:%S", time.localtime(rv.get('created_timestamp')))
-                rv['activity'] = '{user_name} has scanned on ' + human_time+ '.'
+                rv['activity'] = '{user_name} has scanned on ' + human_time + '.'
             elif ACTIVITY_GENERATED == at:
-                rv['activity'] = '{kanojo_name} was generated.'
+                rv['activity'] = '{kanojo_name} was generated from {product_name} in {nationality}.'
             elif ACTIVITY_ME_ADD_FRIEND == at:
                 rv['activity'] = '{user_name} added {kanojo_name} to friend list.'
             elif ACTIVITY_APPROACH_KANOJO == at:
@@ -265,6 +266,8 @@ class ActivityManager(object):
             if a.get('kanojo'):
                 if FILL_TYPE_PLAIN == fill_type:
                     f['kanojo_name'] = a['kanojo'].get('name').encode('utf-8')
+                    f['product_name'] = a['kanojo'].get('product_name')
+                    f['nationality'] = a['kanojo'].get('nationality')
                 elif FILL_TYPE_HTML == fill_type:
                     a['kanojo_url'] = '/kanojo/%d.html'%a['kanojo'].get('id')
                     if a['kanojo'].get('id'):
@@ -304,6 +307,7 @@ class ActivityManager(object):
             if 'kanojo' in a:
                 kanojo = next((k for k in kanojos if k.get('id') == a.get('kanojo')), None)
                 a['kanojo'] = kanojo if kanojo else def_kanojo
+                a['product'] = {"category": getCategoryText(a['kanojo']['product_category_id']), "comment": a['kanojo']['product_comment'], "name": a['kanojo']['product_name'], "barcode": a['kanojo']['barcode'], "country": a['kanojo']["nationality"], "location": a['kanojo']["location"], "scan_count": a['kanojo']['scan_count'], "category_id": a['kanojo']['product_category_id'], "company_name": a['kanojo']["company_name"]}
             if 'user' in a:
                 user = next((u for u in users if u.get('id') == a.get('user')), None)
                 a['user'] = user if user else def_user
