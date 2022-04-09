@@ -21,7 +21,7 @@ from flask_api.decorators import set_parsers
 from activity import FILL_TYPE_HTML
 from bkmultipartparser import BKMultipartParser
 from geo_ip import GEOIP_WEB_SERVICE, GeoIP
-from images import ImageManager, crop_and_save_profile_image, save_resized_image
+from images import save_profile_image, crop_and_save_profile_image, save_resized_image
 from kanojo import *
 from reactionword import ReactionwordManager
 from store import KANOJO_FRIEND, KANOJO_OTHER, KANOJO_OWNER, StoreManager
@@ -40,6 +40,10 @@ app.secret_key = config.SESSION_SECRET_KEY
 #app.permanent_session_lifetime = datetime.timedelta(minutes=5)
 #app.config['DEFAULT_PARSERS'] = []
 
+#Set Up Debug From WSGI
+from werkzeug.debug import DebuggedApplication
+application = DebuggedApplication(app, config.DEBUG)
+
 mdb_connection_string = config.MDB_CONNECTION_STRING_REAL
 db_name = mdb_connection_string.split('/')[-1]
 db2 = MongoClient(mdb_connection_string)[db_name]
@@ -55,7 +59,6 @@ kanojo_manager = KanojoManager(db,
 store = StoreManager()
 activity_manager = ActivityManager(db=db)
 user_manager = UserManager(db, server=app.config['SERVER_NAME'], kanojo_manager=kanojo_manager, store=store, activity_manager=activity_manager)
-image_manager = ImageManager()
 geoIP = GeoIP(db, secret1=config.GEOIP_SECRET1, secret2=config.GEOIP_SECRET2, secret3=config.GEOIP_SECRET3)
 reactionword = ReactionwordManager()
 
@@ -63,7 +66,6 @@ reactionword = ReactionwordManager()
 def timectime(s):
 	dt = time.gmtime(s)
 	return '%d-%02d-%02d'%(dt.tm_year, dt.tm_mon, dt.tm_mday)
-
 
 def order_dict_cmp(x, y):
 	order = ('code', )
@@ -613,7 +615,6 @@ def kanojo_html(kid):
 	#print json.dumps(kanojo)
 	return render_template('kanojo.html', **val)
 
-
 ### --------------- KANOJO SERVER ---------------
 
 @app.route('/api/account/verify.json', methods=['GET', 'POST'])
@@ -959,7 +960,7 @@ def activity_usertimeline():
 			01 - ("Nightmare has scanned on 2014/10/04 05:31:50.\n")
 			02 - ("Violet was generated from 星光産業 .")
 			05 - Me add new friend ("Filter added 葵 to friend list.")
-			07 - approche my kanojo  ("KH approached めりい.")
+			07 - approached my kanojo  ("KH approached めりい.")
 			08 - me stole kanojo ("Devourer stole うる from Nobody.")
 			09 - my kanojo was stollen ("ふみえ was stolen by Nobody.")
 			10 - other user added my kanojo ("呪いのBlu-ray added ぽいと to friend list.")
@@ -1014,7 +1015,7 @@ def activity_usertimeline():
 	rspns = { "code": 200 }
 	rspns['activities'] = activities
 	#print json.dumps(rspns)
-	return json_response(rspns)
+	return jsonify(rspns)
 
 
 	#return json_response({"code": 200, "activities": []})
@@ -1042,17 +1043,14 @@ def activity_usertimeline():
 	return response
 
 #http://www.barcodekanojo.com/profile_images/kanojo/625028/1289899377/non.png?w=50&h=50&face=true
-@app.route('/profile_images/kanojo/<kid>/<kname>.png', methods=['GET'])
-def profile_images_kanojo(kid, kname):
+@app.route('/profile_images/kanojo/<kid>/<crop>.png', methods=['GET'])
+def profile_images_kanojo(kid, crop):
 	# TODO: web
 	prms = request.args
-	full = prms.get('full', False)
 	size = prms.get('size', False)
-	kname = urllib.parse.unquote(kname)
-	filename = f'profile_images/kanojo/{kid}/{kname}'
-	if full:
-		filename += '_full'
+	filename = f'profile_images/kanojo/{kid}/{crop}'
 	if not os.path.isfile(filename+'.png'):
+		print("Image not found at: ", filename)
 		abort(404)
 	else:
 		if size:
@@ -1064,6 +1062,22 @@ def profile_images_kanojo(kid, kname):
 		if os.path.isfile(filename):
 			return send_file(filename, mimetype='image/png')
 		abort(500)
+
+@app.route('/profile_images/user/<uid>.jpg', methods=['GET'])
+def profile_images_user(uid):
+	# TODO: web
+	filename = f'profile_images/user/{uid}.jpg'
+	if os.path.isfile(filename):
+		return send_file(filename, mimetype='image/jpeg')
+	abort(404)
+
+#TODO Find way to moderate user submitted images
+@app.route('/product_images/barcode/<barcode>.jpg', methods=['GET'])
+def product_images_barcode(barcode):
+	filename = f'product_images/barcode/{barcode}.jpg'
+	if os.path.isfile(filename):
+		return send_file(filename, mimetype='image/jpeg')
+	abort(404)
 
 @app.route('/api/notification/register_token.json', methods=['POST'])
 def notification_register_token():
@@ -1230,6 +1244,10 @@ def barcode_scan():
 		}
 	else:
 		uid = session['id']
+		f = files['product_image_data']
+		os.makedirs('./product_images/barcode/')
+		fname = f'product_images/barcode/{barcode}'
+		save_profile_image(f.stream, filename=fname)
 		self_user = user_manager.user(uid=uid, clear=CLEAR_NONE)
 		for k in kanojos:
 			user_manager.add_kanojo_as_friend(self_user, k)
@@ -1285,9 +1303,14 @@ def barcode_scan_and_generate():
 		kanojo = user_manager.create_kanojo_from_barcode(self_user, bc_info, prms)
 		if kanojo:
 			f = files['kanojo_profile_image_data']
-			os.makedirs('./profile_images/kanojo/' + str(kanojo['id']))
-			fname = 'profile_images/kanojo/%d/%s'%(kanojo['id'], kanojo['name'])
-			crop_and_save_profile_image(f.stream, filename=fname)
+			fdir = 'profile_images/kanojo/' + str(kanojo['id'])
+			os.makedirs(fdir)
+			crop_and_save_profile_image(f.stream, fdir)
+
+			f = files['product_image_data']
+			os.makedirs('./product_images/barcode/')
+			fname = f'product_images/barcode/{barcode}'
+			save_profile_image(f.stream, filename=fname)
 
 			rspns['kanojo'] = kanojo_manager.clear(kanojo, request.host_url, self_user, clear=CLEAR_OTHER, check_clothes=True)
 			rspns['user'] = user_manager.clear(self_user, CLEAR_SELF, self_user=self_user)
@@ -1332,13 +1355,12 @@ def account_update():
 		updated = True
 	if 'profile_image_data' in files:
 		f = files['profile_image_data']
-		#img_url = image_manager.upload(f.stream.read(), f.content_type, filename=f.filename)
-		img_url = image_manager.upload_user_profile_image(f.stream, filename='%s.jpg'%uid)
-		print('url: ', img_url)
-		#f.save(open(f.filename, 'wb'))
-		if img_url:
-			self_user['profile_image_url'] = img_url
-			updated = True
+		path = f'./profile_images/user'
+		if not os.path.isdir(path):
+			os.makedirs(path)
+		fname = f'profile_images/user/{uid}'
+		save_profile_image(f.stream, filename=fname)
+		updated = True
 
 	if updated:
 		user_manager.save(self_user)
@@ -1390,6 +1412,11 @@ def barcode_update():
 		rspns = {"code": 404}
 		rspns['alerts'] = [{"body": "The Requested KANOJO was not found.", "title": ""}]
 	else:
+		f = files['product_image_data']
+		os.makedirs('./product_images/barcode/')
+		fname = f'product_images/barcode/{barcode}'
+		save_profile_image(f.stream, filename=fname)
+
 		kanojo = kanojo[0]
 		kanojo['company_name'] = prms.get('company_name')
 		kanojo['product_name'] = prms.get('product_name')
@@ -1735,12 +1762,12 @@ def update_stamina_job():
 def test_job():
 	print(int(time.time()))
 
-if not app.debug or os.environ.get('WERKZEUG_RUN_MAIN') == 'true':
-	sched = BackgroundScheduler()
-	sched.add_job(update_stamina_job, 'interval', minutes=2, id='update_stamina_job', replace_existing=True)
-	#sched.add_job(test_job, 'interval', seconds=30)
-	sched.start()
-	atexit.register(lambda: sched.shutdown())
+# Update Stamina ever 2 minutes
+sched = BackgroundScheduler()
+sched.add_job(update_stamina_job, 'interval', minutes=2, id='update_stamina_job', replace_existing=True)
+#sched.add_job(test_job, 'interval', seconds=30)
+sched.start()
+atexit.register(lambda: sched.shutdown())
 
 if __name__ == "__main__":
 	#app.run(host='0.0.0.0', port=443, ssl_context=context)
