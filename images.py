@@ -28,16 +28,16 @@ def save_profile_image(img_data, filename):
 #For Kanojo
 def crop_and_save_profile_image(img_data, destination):
 	im = Image.open(img_data)
-	#cr = im.crop((94, 40, 170 + 94, 170 + 40))	#Original face from 368
-	#cr = im.crop((im.width * 0.25543, im.width * 0.108, im.width * 0.71739, im.width * 0.570))	#Old Face
-	cr = im.crop((im.width * 0.27173, im.width * 0.10869, im.width * 0.72826, im.width * 0.56521))
+	#cr = im.crop((104, 40, 170 + 94, 170 + 40))	#Original face from 368 (fixed to be centered)
+	#cr = im.crop((im.width * 0.25543, im.width * 0.108, im.width * 0.71739, im.width * 0.570))	#Old Face (Not fixed for being centered)
+	cr = im.crop((im.width * 0.269, im.width * 0.108, im.width * 0.731, im.width * 0.570))
 	#cr.thumbnail((88, 88), Image.ANTIALIAS)
 	dt = io.BytesIO()
 	cr.save(dt, format="png")
 	save_image(dt.getvalue(), filename=f'{destination}/icon.png')
 	dt.close()
 
-	cr = im.crop((im.width*0.25, im.width*0.09, im.width*0.75, im.width*0.59))	#Good for bust image (v1 style)
+	cr = im.crop((im.width*0.1875, 0.00, im.width*0.8125, im.width*0.625))	#Good for bust image (v1 style icon). This has been verified by Kanojo Wars site.
 	dt = io.BytesIO()
 	cr.save(dt, format="png")
 	save_image(dt.getvalue(), filename=f'{destination}/iconv1.png')
