@@ -1307,10 +1307,11 @@ def barcode_scan_and_generate():
 			os.makedirs(fdir)
 			crop_and_save_profile_image(f.stream, fdir)
 
-			f = files['product_image_data']
-			os.makedirs('./product_images/barcode/')
-			fname = f'product_images/barcode/{barcode}'
-			save_profile_image(f.stream, filename=fname)
+			if 'product_image_data' in files:
+				f = files['product_image_data']
+				os.makedirs('./product_images/barcode/')
+				fname = f'product_images/barcode/{barcode}'
+				save_profile_image(f.stream, filename=fname)
 
 			rspns['kanojo'] = kanojo_manager.clear(kanojo, request.host_url, self_user, clear=CLEAR_OTHER, check_clothes=True)
 			rspns['user'] = user_manager.clear(self_user, CLEAR_SELF, self_user=self_user)
@@ -1392,6 +1393,7 @@ def activity_scanned_timeline():
 
 @app.route('/api/barcode/update.json', methods=['POST'])
 @set_parsers(BKMultipartParser)
+#TODO: Update Kanojo image here?
 def barcode_update():
 	'''
 		update product info
@@ -1412,10 +1414,11 @@ def barcode_update():
 		rspns = {"code": 404}
 		rspns['alerts'] = [{"body": "The Requested KANOJO was not found.", "title": ""}]
 	else:
-		f = files['product_image_data']
-		os.makedirs('./product_images/barcode/')
-		fname = f'product_images/barcode/{barcode}'
-		save_profile_image(f.stream, filename=fname)
+		if 'product_image_data' in files:
+			f = files['product_image_data']
+			os.makedirs('./product_images/barcode/')
+			fname = f'product_images/barcode/{barcode}'
+			save_profile_image(f.stream, filename=fname)
 
 		kanojo = kanojo[0]
 		kanojo['company_name'] = prms.get('company_name')
