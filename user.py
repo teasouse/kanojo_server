@@ -6,6 +6,8 @@ __copyright__ = 'Copyright © 2014-2015'
 
 import copy
 import math
+import os
+
 import pymongo.errors
 import random
 import time
@@ -17,6 +19,7 @@ from pymongo import MongoClient
 import config
 
 from activity import ActivityManager, ACTIVITY_SCAN, ACTIVITY_GENERATED, ACTIVITY_ME_ADD_FRIEND, ACTIVITY_APPROACH_KANOJO, ACTIVITY_ME_STOLE_KANOJO, ACTIVITY_MY_KANOJO_STOLEN, ACTIVITY_MY_KANOJO_ADDED_TO_FRIENDS, ACTIVITY_BECOME_NEW_LEVEL, ACTIVITY_MARRIED, ACTIVITY_JOINED, ACTIVITY_BREAKUP, ACTIVITY_ADD_AS_ENEMY
+from images import save_user_profile_image
 
 CLEAR_NONE = 0
 CLEAR_SELF = 1
@@ -50,7 +53,6 @@ class UserManager(object):
 				})
 
 	def create(self, uuid, name, password, email, birthday, sex, profile_image_data):
-		#TODO: user Profile image data
 		if self.db:
 			uid = self.db.seqs.find_and_modify(
 					query = {'colection': 'users'},
@@ -101,7 +103,7 @@ class UserManager(object):
 			try:
 				self.db.users.insert(user)
 				self.last_uid = uid
-			except pymongo.errors.DuplicateKeyError as e:
+			except pymongo.errors.DuplicateKeyError:
 				return self.create(name, password, email, birthday, sex, profile_image_data)
 
 			if self.activity_manager:
@@ -109,6 +111,8 @@ class UserManager(object):
 						'activity_type': ACTIVITY_JOINED,
 						'user': user,
 					})
+			if profile_image_data:
+				save_user_profile_image(profile_image_data.stream, uid)
 		return user
 
 	def save(self, user):

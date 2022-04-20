@@ -1,11 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-__author__ = 'Andrey Derevyagin'
+__author__ = 'Andrey Derevyagin,  Goujer'
 __copyright__ = 'Copyright © 2014-2015'
 
 import atexit
-import os
 import os.path
 import re
 import ssl
@@ -21,7 +20,7 @@ from flask_api.decorators import set_parsers
 from activity import FILL_TYPE_HTML
 from bkmultipartparser import BKMultipartParser
 from geo_ip import GEOIP_WEB_SERVICE, GeoIP
-from images import save_profile_image, crop_and_save_profile_image, save_resized_image
+from images import save_user_profile_image, save_product_image, save_kanojo_profile_image, save_resized_image
 from kanojo import *
 from reactionword import ReactionwordManager
 from store import KANOJO_FRIEND, KANOJO_OTHER, KANOJO_OWNER, StoreManager
@@ -627,14 +626,8 @@ def acc_verify():
 		user = user_manager.user(uuid=uuid, email=email, password=password)
 		if not user:
 			return jsonify({ "code": 404 })
-			# user = user_manager.create(uuid=uuid)
-			# if user:
-			# 	user = user_manager.clear(user, CLEAR_SELF)
-			# else:
-			# 	return jsonify({ "code": 507 })
 		session['id'] = user.get('id')
-		rv = jsonify({ "code": 200, "user": user })
-		return rv
+		return jsonify({ "code": 200, "user": user })
 	else:
 		return jsonify({ "code": 400 })
 
@@ -1244,10 +1237,10 @@ def barcode_scan():
 		}
 	else:
 		uid = session['id']
-		f = files['product_image_data']
-		os.makedirs('./product_images/barcode/')
-		fname = f'product_images/barcode/{barcode}'
-		save_profile_image(f.stream, filename=fname)
+		if 'product_image_data' in files:
+			f = files['product_image_data']
+			save_product_image(f.stream, barcode)
+
 		self_user = user_manager.user(uid=uid, clear=CLEAR_NONE)
 		for k in kanojos:
 			user_manager.add_kanojo_as_friend(self_user, k)
@@ -1280,7 +1273,7 @@ def barcode_scan_and_generate():
 		'content_length': request.headers.get('content_length')
 	}
 	(prms, files) = parser.parse(request.stream.read(), request.headers.get('Content-Type'), **options)
-	if 'barcode' not in prms or 'kanojo_profile_image_data' not in files and 'kanojo_name' not in prms:
+	if 'barcode' not in prms or 'kanojo_name' not in prms or 'kanojo_profile_image_data' not in files:
 		return json_response({ "code": 400 })
 
 	rspns = { 'code': 200 }
@@ -1303,15 +1296,11 @@ def barcode_scan_and_generate():
 		kanojo = user_manager.create_kanojo_from_barcode(self_user, bc_info, prms)
 		if kanojo:
 			f = files['kanojo_profile_image_data']
-			fdir = 'profile_images/kanojo/' + str(kanojo['id'])
-			os.makedirs(fdir)
-			crop_and_save_profile_image(f.stream, fdir)
+			save_kanojo_profile_image(f.stream, kanojo['id'])
 
 			if 'product_image_data' in files:
 				f = files['product_image_data']
-				os.makedirs('./product_images/barcode/')
-				fname = f'product_images/barcode/{barcode}'
-				save_profile_image(f.stream, filename=fname)
+				save_product_image(f.stream, barcode)
 
 			rspns['kanojo'] = kanojo_manager.clear(kanojo, request.host_url, self_user, clear=CLEAR_OTHER, check_clothes=True)
 			rspns['user'] = user_manager.clear(self_user, CLEAR_SELF, self_user=self_user)
@@ -1356,11 +1345,7 @@ def account_update():
 		updated = True
 	if 'profile_image_data' in files:
 		f = files['profile_image_data']
-		path = f'./profile_images/user'
-		if not os.path.isdir(path):
-			os.makedirs(path)
-		fname = f'profile_images/user/{uid}'
-		save_profile_image(f.stream, filename=fname)
+		save_user_profile_image(f.stream, uid)
 		updated = True
 
 	if updated:
@@ -1416,16 +1401,14 @@ def barcode_update():
 	else:
 		if 'product_image_data' in files:
 			f = files['product_image_data']
-			os.makedirs('./product_images/barcode/')
-			fname = f'product_images/barcode/{barcode}'
-			save_profile_image(f.stream, filename=fname)
+			save_product_image(f.stream, barcode)
 
 		kanojo = kanojo[0]
 		kanojo['company_name'] = prms.get('company_name')
 		kanojo['product_name'] = prms.get('product_name')
 		kanojo['product_category_id'] = prms.get('product_category_id')
 		kanojo['product_comment'] = prms.get('product_comment')
-		#TODO: Deal with geo and image
+		#TODO: Deal with geo
 		if kanojo_manager.save(kanojo):
 			rspns = {'code': 200}
 		else:
