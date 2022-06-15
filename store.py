@@ -1,13 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-__author__ = 'Andrey Derevyagin'
-__copyright__ = 'Copyright © 2014-2015'
+__author__ = 'Andrey Derevyagin, Goujer'
+__copyright__ = 'Copyright © 2014-2015, 2020-2022'
 
 import copy
 import json
-
-from user import UserManager, CLEAR_NONE
 
 KANOJO_OWNER = 1
 KANOJO_FRIEND = 2

@@ -17,7 +17,6 @@ from apscheduler.schedulers.background import BackgroundScheduler
 from flask import Flask, Response, abort, json, jsonify, redirect, render_template, request, send_file, send_from_directory, session
 from flask_api.decorators import set_parsers
 
-from activity import FILL_TYPE_HTML
 from bkmultipartparser import BKMultipartParser
 from geo_ip import GEOIP_WEB_SERVICE, GeoIP
 from images import save_user_profile_image, save_product_image, save_kanojo_profile_image, save_resized_image
@@ -522,7 +521,7 @@ def last_activity():
 	users = user_manager.users(uids)
 	kanojos = kanojo_manager.kanojos(kids, request.host_url)
 
-	activities = activity_manager.fill_activities(activities, users, kanojos, user_manager.default_user, kanojo_manager.default_kanojo, fill_type=FILL_TYPE_HTML)
+	activities = activity_manager.fill_activities(activities, users, kanojos, user_manager.default_user, kanojo_manager.default_kanojo, fill_type=1)
 
 	rspns = { "code": 200 }
 	rspns['last_id'] = activities[0].get('id') if len(activities) else since_id
@@ -563,7 +562,7 @@ def user_html(uid):
 	for i in range(min(18, len(user.get('enemies')))):
 		user['enemies'][i] = next((u for u in users if u.get('id') == user['enemies'][i]), user_manager.default_user)
 
-	activities = activity_manager.fill_activities(activities, users, kanojos, user_manager.default_user, kanojo_manager.default_kanojo, fill_type=FILL_TYPE_HTML)
+	activities = activity_manager.fill_activities(activities, users, kanojos, user_manager.default_user, kanojo_manager.default_kanojo, fill_type=1)
 
 	val = {
 		'stamina_percentage': user.get('stamina') * 10 / (user.get('level') + 9),
@@ -601,7 +600,7 @@ def kanojo_html(kid):
 	for i in range(min(18, len(kanojo.get('followers')))):
 		kanojo['followers'][i] = next((u for u in users if u.get('id') == kanojo['followers'][i]), user_manager.default_user)
 
-	activities = activity_manager.fill_activities(activities, users, [kanojo, ], user_manager.default_user, kanojo_manager.default_kanojo, fill_type=FILL_TYPE_HTML)
+	activities = activity_manager.fill_activities(activities, users, [kanojo, ], user_manager.default_user, kanojo_manager.default_kanojo, fill_type=1)
 
 	val = {
 		'red_level': lambda x: x < 30,
@@ -857,22 +856,27 @@ def communication_play_on_live2d():
 	except ValueError:
 		return json_response({ "code": 400 })
 	actions = prms.get('actions')
+
 	rspns = { "code": 200 }
 	self_user = user_manager.user(uid=session['id'], clear=CLEAR_NONE)
 	kanojo = kanojo_manager.kanojo(kanojo_id, request.host_url, self_user=self_user, clear=CLEAR_NONE)
+
 	if kanojo:
 		owner_user = user_manager.user(uid=kanojo.get('owner_user_id'), clear=CLEAR_NONE)
 		rspns['owner_user'] = user_manager.clear(owner_user, CLEAR_OTHER, self_user=self_user)
 		#url = request.url_root+'apibanner/kanojoroom/reactionword.html'
 		url = server_url() + 'web/reactionword.html'
+
 		if actions and len(actions):
 			dt = user_manager.user_action(self_user, kanojo, action_string=actions, current_owner=owner_user)
+
 			if 'love_increment' in dt and 'info' in dt:
 				tmp = dt.get('info', {})
 				prms = { key: tmp[key] for key in ['pod', 'a'] if key in tmp }
-				dt['love_increment']['reaction_word'] = '%s?%s'%(url, urllib.parse.urlencode(prms))
+				dt['love_increment']['reaction_word'] = f'{url}?{urllib.parse.urlencode(prms)}'
 				#print dt['love_increment']['reaction_word']
 				dt.pop('info', None)
+
 			rspns.update(dt)
 		rspns['self_user'] = user_manager.clear(self_user, CLEAR_SELF, self_user=self_user)
 		rspns['kanojo'] = kanojo_manager.clear(kanojo, request.host_url, self_user, clear=CLEAR_OTHER)
