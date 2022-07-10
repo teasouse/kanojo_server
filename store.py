@@ -7,10 +7,6 @@ __copyright__ = 'Copyright © 2014-2015, 2020-2022'
 import copy
 import json
 
-KANOJO_OWNER = 1
-KANOJO_FRIEND = 2
-KANOJO_OTHER = 4
-
 ITEM_DESRIPTION_DICT = {
 	'attention': '\n*Attention\nThis is consumable item.\nThis item is for the user who is at level 1 or higher.\nWhen she wears clothes, love level is cut down less likely. Effectiveness is depending upon clothes she wears.\nWhen you give her more than 1clothes at the same time, KANOJO by herself selects which clothes she wears daily. Outfits can be given by her [friends], but she often seems to put on clothes given from her [owner].\nDressing time is depending on her area(where she was born).',
 	'date1': ' Enemies won\'t be able to approach your KANOJO for 1day when using this item.\nCaution: You can use this item only for your KANOJO.',
@@ -219,6 +215,7 @@ class StoreManager(object):
 
 if __name__ == "__main__":
 	import pprint
+	KANOJO_OWNER = 1
 	k_type = KANOJO_OWNER
 	u_level = 1
 	sm = StoreManager()
