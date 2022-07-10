@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-__author__ = 'Andrey Derevyagin, Goujer'
+__author__ = 'Goujer'
 __copyright__ = 'Copyright © 2022'
 
 import io
