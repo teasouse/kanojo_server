@@ -82,10 +82,20 @@
 			"category_id": 1
 		},
 		{
+			"item_id": 2,
+			"description": "A bit fancy gift. This item may increase KANOJO's love level.",
+			"title": "Perfume",
+			"price": "Price: 40B Coins",
+			"image_url": "http://www.barcodekanojo.com/images/api/item/basic/gift_perfume.png",
+			"image_thumbnail_url": "http://www.barcodekanojo.com/images/api/item/basic/gift_perfume_thm.png",
+			"category_id": 1
+		},
+		{
 			"item_id": 51
 		},
 		{
 			"item_id": 101,
+			"clothes_item_id": 8,
 			"purchase_product_id": "jp.co.cybird.barcodekanojo.wardrobe_clothes_0001",
 			"confirm_purchase_message": null,
 			"description": "Dressing time: Daytime\nChic and elegant black jacket.{attention}",
@@ -95,8 +105,7 @@
 			"image_thumbnail_url": "https://www.barcodekanojo.com/images/store/wardrobe_clothes_0001_thm.png",
 			"category_id": 6,
 			"price_t": 1,
-			"group": "Business Wear",
-			"clothes_item_id": 8
+			"group": "Business Wear"
 		},
 		{
 			"item_id": 110,
@@ -107,6 +116,7 @@
 		},
 		{
 			"item_id": 140,
+			"clothes_item_id": 66,
 			"purchase_product_id": "jp.co.cybird.barcodekanojo.wardrobe_clothes_0009",
 			"confirm_purchase_message": null,
 			"description": "Dressing time: Daytime\nおかえり！ごはんすぐ出来るから待っててね。エプロン姿であなたを待っててくれます。{attention}",
@@ -116,8 +126,7 @@
 			"image_url": "https://www.barcodekanojo.com/images/store/wardrobe_clothes_0009.png",
 			"image_thumbnail_url": "https://www.barcodekanojo.com/images/store/wardrobe_clothes_0009_thm.png",
 			"price_t": 3,
-			"group": "Special",
-			"clothes_item_id": 66
+			"group": "Special"
 		},
 		{
 			"item_id": 198,
