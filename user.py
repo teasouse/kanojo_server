@@ -4,11 +4,10 @@
 __author__ = 'Andrey Derevyagin'
 __copyright__ = 'Copyright © 2014-2015'
 
+#Library imports
 import copy
-import math
-import os
-
 import pymongo.errors
+import math
 import random
 import time
 
@@ -16,9 +15,10 @@ from collections import OrderedDict
 from functools import cmp_to_key
 from pymongo import MongoClient
 
+#Imports from local
 import config
 
-from activity import ActivityManager, ACTIVITY_SCAN, ACTIVITY_GENERATED, ACTIVITY_ME_ADD_FRIEND, ACTIVITY_APPROACH_KANOJO, ACTIVITY_ME_STOLE_KANOJO, ACTIVITY_MY_KANOJO_STOLEN, ACTIVITY_MY_KANOJO_ADDED_TO_FRIENDS, ACTIVITY_BECOME_NEW_LEVEL, ACTIVITY_MARRIED, ACTIVITY_JOINED, ACTIVITY_BREAKUP, ACTIVITY_ADD_AS_ENEMY
+from constants import *
 from images import save_user_profile_image
 
 CLEAR_NONE = 0
@@ -234,7 +234,7 @@ class UserManager(object):
 		if uid not in kanojo.get('followers'):
 			kanojo['followers'].append(uid)
 			if increment_scan_couner and self.kanojo_manager:
-				self.kanojo_manager.increment_scan_couner(kanojo, update_db_record=update_db_record)
+				self.kanojo_manager.increment_scan_counter(kanojo, update_db_record=update_db_record)
 			elif update_db_record:
 				self.kanojo_manager.save(kanojo)
 		if kanojo.get('id') not in user.get('friends'):
@@ -245,6 +245,7 @@ class UserManager(object):
 				self.increment_scan_couner(user, update_db_record=False)
 			if update_db_record:
 				self.save(user)
+				self.kanojo_manager.save(kanojo)
 			if self.activity_manager:
 				self.activity_manager.create({
 						'activity_type': ACTIVITY_ME_ADD_FRIEND,
@@ -326,7 +327,7 @@ class UserManager(object):
 		if kid in user.get('friends'):
 			user['friends'].insert(0, user['friends'].pop(user['friends'].index(kid)))
 		self.increment_scan_couner(user, update_db_record=True)
-		self.kanojo_manager.increment_scan_couner(kanojo, update_db_record=True)
+		self.kanojo_manager.increment_scan_counter(kanojo, update_db_record=True)
 
 	def set_like(self, user, kanojo, like_value, update_db_record=False):
 		self.kanojo_manager.set_like(kanojo, like_value, user, update_db_record=update_db_record)
@@ -525,7 +526,7 @@ class UserManager(object):
 		# check if user can use this action
 		store_item = None
 		if action_string:
-			price = self.kanojo_manager.user_action_price(kanojo, action_string)
+			price = self.kanojo_manager.user_action_price(action_string)
 			#if not price:
 			#    return False
 		elif do_gift:
@@ -537,6 +538,7 @@ class UserManager(object):
 		else:
 			return { "code": 500, "love_increment": { "alertShow": 1 }, "alerts": [ { "body": "Server error.", "title": "" } ] }
 
+		#Have the stats to preform action?
 		if user.get('stamina') < price.get('price_s', 0):
 			return { "code": 403, "love_increment": { "alertShow": 1 }, "alerts": [ { "body": "You don't have enough stamina.", "title": "" } ] }
 		if user.get('money') < price.get('price_b', 0):

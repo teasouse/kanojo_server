@@ -10,30 +10,15 @@ import time
 
 from html import escape
 
-from web_job import getCategoryText
+from kanojo import as_product
+
+from constants import *
 
 CLEAR_NONE = 0
 CLEAR_SELF = 1
 
 FILL_TYPE_PLAIN = 0
 FILL_TYPE_HTML = 1
-
-# after add new activity type add them to ALL_ACTIVITIES list
-#    and fix "user_activity" and "all_activities" if need
-ACTIVITY_SCAN = 1                           #   "Nightmare has scanned on 2014/10/04 05:31:50.\n"
-ACTIVITY_GENERATED = 2                      # + "Violet was generated from 星光産業 ."
-ACTIVITY_ME_ADD_FRIEND = 5                  # + "Filter added 葵 to friend list."
-ACTIVITY_APPROACH_KANOJO = 7                # + "KH approached めりい."
-ACTIVITY_ME_STOLE_KANOJO = 8                # + "Devourer stole うる from Nobody."
-ACTIVITY_MY_KANOJO_STOLEN = 9               # + "ふみえ was stolen by Nobody."
-ACTIVITY_MY_KANOJO_ADDED_TO_FRIENDS = 10    # + "呪いのBlu-ray added ぽいと to friend list."
-ACTIVITY_BECOME_NEW_LEVEL = 11              # + "Everyone became Lev.\"99\"."
-ACTIVITY_MARRIED = 15                       #   "Devourer get married with うる."
-# user defined
-# can change "activity_type" in "clear" function to show in client
-ACTIVITY_JOINED = 101                       # +
-ACTIVITY_BREAKUP = 102                      # +
-ACTIVITY_ADD_AS_ENEMY = 103                 # +
 
 ALL_ACTIVITIES = (ACTIVITY_SCAN, ACTIVITY_GENERATED, ACTIVITY_ME_ADD_FRIEND, ACTIVITY_APPROACH_KANOJO, ACTIVITY_ME_STOLE_KANOJO, ACTIVITY_MY_KANOJO_STOLEN, ACTIVITY_MY_KANOJO_ADDED_TO_FRIENDS, ACTIVITY_BECOME_NEW_LEVEL, ACTIVITY_MARRIED, ACTIVITY_JOINED, ACTIVITY_BREAKUP)
 
@@ -307,7 +292,7 @@ class ActivityManager(object):
             if 'kanojo' in a:
                 kanojo = next((k for k in kanojos if k.get('id') == a.get('kanojo')), None)
                 a['kanojo'] = kanojo if kanojo else def_kanojo
-                a['product'] = {"category": getCategoryText(a['kanojo']['product_category_id']), "comment": a['kanojo']['product_comment'], "name": a['kanojo']['product_name'], "barcode": a['kanojo']['barcode'], "country": a['kanojo']["nationality"], "location": a['kanojo']["location"], "scan_count": a['kanojo']['scan_count'], "category_id": a['kanojo']['product_category_id'], "company_name": a['kanojo']["company_name"]}
+                a['product'] = as_product(kanojo)
             if 'user' in a:
                 user = next((u for u in users if u.get('id') == a.get('user')), None)
                 a['user'] = user if user else def_user

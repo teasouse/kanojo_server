@@ -135,10 +135,10 @@ class KanojoTest(unittest.TestCase):
     def test_user_action_price(self):
         kanojo = copy.deepcopy(self.kanojo)
 
-        price = self.km.user_action_price(kanojo, '10|12|21|21|20|12|12|20')
+        price = self.km.user_action_price('10|12|21|21|20|12|12|20')
         self.assertEqual(price.get('price_s'), 10)
 
-        price = self.km.user_action_price(kanojo, '10|11')
+        price = self.km.user_action_price('10|11')
         self.assertEqual(len(price), 0)
 
         self.assertSequenceEqual(kanojo, self.kanojo)

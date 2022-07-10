@@ -11,15 +11,16 @@ import ssl
 import urllib.parse
 from hashlib import sha224
 from html import escape
-import pymongo.errors
 
+import pymongo.errors
 from apscheduler.schedulers.background import BackgroundScheduler
-from flask import Flask, Response, abort, json, jsonify, redirect, render_template, request, send_file, send_from_directory, session
+from flask import Flask, Response, abort, json, jsonify, redirect, render_template, request, send_file, \
+	send_from_directory, session
 from flask_api.decorators import set_parsers
 
 from bkmultipartparser import BKMultipartParser
 from geo_ip import GEOIP_WEB_SERVICE, GeoIP
-from images import save_user_profile_image, save_product_image, save_kanojo_profile_image, save_resized_image
+from images import save_kanojo_profile_image, save_product_image, save_resized_image
 from kanojo import *
 from reactionword import ReactionwordManager
 from store import KANOJO_FRIEND, KANOJO_OTHER, KANOJO_OWNER, StoreManager
@@ -99,14 +100,6 @@ def get_remote_ip():
 	else:
 		remote_ip = request.headers.getlist("X-Forwarded-For")[0]
 	return remote_ip
-
-def getCategoryText(category_id):
-	with open('product_category_list.json') as json_file:
-		categories = json.load(json_file)['categories']
-		for category in categories:
-			if category['id'] == category_id:
-				return category['name']
-		return 'Others'
 
 @app.route('/')
 def index():
@@ -796,19 +789,7 @@ def kanojo_show():
 		rspns['kanojo'] = kanojo_manager.clear(kanojo, request.host_url, self_user, owner_user=owner_user, clear=CLEAR_OTHER, check_clothes=True)
 		rspns['owner_user'] = user_manager.clear(owner_user, CLEAR_OTHER, self_user=self_user)
 
-		rspns['product'] = {
-			"category": getCategoryText(kanojo.get('product_category_id', '21')),
-			"comment": kanojo.get('product_comment', ''),
-			"name": kanojo.get('name', ''),
-			"product_image_url": None,
-			"barcode": kanojo.get('barcode'),
-			"country": "A Country",
-			"location": kanojo.get('location'),
-			"scan_count": kanojo.get('scan_count'),
-			"category_id": kanojo.get('product_category_id', '21'),
-			"geo": kanojo.get('geo'),
-			"company_name": kanojo.get('company_name', ''),
-			"product": kanojo.get('product_name', '')}
+		rspns['product'] = as_product(kanojo)
 
 		kanojo_date_alert = kanojo_manager.kanojo_date_alert(kanojo)
 		if kanojo_date_alert:
@@ -1167,7 +1148,7 @@ def barcode_query():
 				"inform_girlfriend": "She is your KANOJO, and you have scanned this barcode 0times.",
 				"inform_friend": "She belongs to , and you have scanned this barcode 0times.",
 				"do_generate_kanojo": "Would you like to generate this KANOJO?\nIt requires 20 stamina.",
-				"do_add_friend": "She belongs to .\nDo you want to add her on your friend list ? It requires 5 stamina."
+				"do_add_friend": "She belongs to no one.\nDo you want to add her on your friend list ? It requires 5 stamina."
 			},
 		}
 		if bc:
@@ -1201,16 +1182,16 @@ def barcode_query():
 
 		rspns = { 'code': 200 }
 		#barcode = '************'
-		rspns['product'] = {"category": "others", "comment": "", "name": "product_name", "product_image_url": None, "barcode": barcode, "country": "Japan", "location": "Somewhere", "scan_count": 1, "category_id": 21, "geo": None, "company_name": "company_name"}
+		rspns['product'] = as_product(kanojo)
 		rspns['scan_history'] = {"kanojo_count": 0, "friend_count": 0, "barcode": barcode, "total_count": 0}
 		rspns['messages'] = {
 			"notify_amendment_information": "This information is already used by other users.\nIf your amendment would be incorrect, you will be restricted user.",
 			"inform_girlfriend": "She is your KANOJO.",
-			"inform_friend": "She belongs to %s, and your friend."%owner_user.get('name'),
+			"inform_friend": f"She belongs to {owner_user.get('name')}, and your friend.",
 			"do_generate_kanojo": "Would you like to generate this KANOJO?\nIt requires 20 stamina.",
-			"do_add_friend": "She belongs to %s.\nDo you want to add her on your friend list? It requires 0 stamina."%owner_user.get('name')
+			"do_add_friend": f"She belongs to {owner_user.get('name')}.\nDo you want to add her on your friend list? It requires 0 stamina."
 		}
-		rspns['barcode'] = kanojo_manager.clear(kanojo, request.host_url, self_user, clear=CLEAR_BARCODE)
+		rspns['barcode'] = as_barcode(kanojo)
 		rspns['kanojo'] = kanojo_manager.clear(kanojo,  request.host_url, self_user, clear=CLEAR_SELF)
 		rspns['owner_user'] = user_manager.clear(owner_user, CLEAR_OTHER, self_user=self_user)
 	return json_response(rspns)
@@ -1293,9 +1274,6 @@ def barcode_scan_and_generate():
 	bc_info = db.barcode_tmp.find_one({ 'barcode': barcode })
 
 	if bc_info:
-		# if not crop_url or not full_url:	#TODO put back in but before Kanojo gets tied to user.
-		# 	rspns = { "code": 503, "love_increment": { "alertShow": 1 }, "alerts": [ { "body": "Something going wrong, please, scan again.", "title": "" } ] }
-		# 	return json_response(rspns)
 
 		kanojo = user_manager.create_kanojo_from_barcode(self_user, bc_info, prms)
 		if kanojo:
