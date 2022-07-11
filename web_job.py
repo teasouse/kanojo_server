@@ -18,12 +18,14 @@ from flask import Flask, Response, abort, json, jsonify, redirect, render_templa
 	send_from_directory, session
 from flask_api.decorators import set_parsers
 
+from activity import ActivityManager
 from bkmultipartparser import BKMultipartParser
+from constants import *
 from geo_ip import GEOIP_WEB_SERVICE, GeoIP
 from images import save_kanojo_profile_image, save_product_image, save_resized_image
 from kanojo import *
 from reactionword import ReactionwordManager
-from store import KANOJO_FRIEND, KANOJO_OTHER, KANOJO_OWNER, StoreManager
+from store import StoreManager
 from thread_post import Post
 from user import *
 
@@ -1448,11 +1450,11 @@ def communication_date_list():
 
 	kanojo = kanojo_manager.kanojo(kanojo_id, None, clear=CLEAR_NONE)
 	self_user = user_manager.user(uid=session['id'], clear=CLEAR_NONE)
-	allow_kanojo = KANOJO_OTHER
+	allow_kanojo = RELATION_OTHER
 	if kanojo.get('owner_user_id') == session['id']:
-		allow_kanojo = KANOJO_OWNER
+		allow_kanojo = RELATION_KANOJO
 	elif session['id'] in kanojo.get('followers', []):
-		allow_kanojo = KANOJO_FRIEND
+		allow_kanojo = RELATION_FRIEND
 	if type_id == 1:
 		rspns['item_categories'] = store.dates_list(allow_kanojo, user_level=self_user.get('level'))
 	elif type_id == 2:
@@ -1505,11 +1507,11 @@ def communication_item_list():
 
 	kanojo = kanojo_manager.kanojo(kanojo_id, None, clear=CLEAR_NONE)
 	self_user = user_manager.user(uid=session['id'], clear=CLEAR_NONE)
-	allow_kanojo = KANOJO_OTHER
+	allow_kanojo = RELATION_OTHER
 	if kanojo.get('owner_user_id') == session['id']:
-		allow_kanojo = KANOJO_OWNER
+		allow_kanojo = RELATION_KANOJO
 	elif session['id'] in kanojo.get('followers', []):
-		allow_kanojo = KANOJO_FRIEND
+		allow_kanojo = RELATION_FRIEND
 	if type_id == 1:
 		rspns['item_categories'] = store.goods_list(allow_kanojo, user_level=self_user.get('level'))
 	elif type_id == 2:
