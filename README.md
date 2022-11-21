@@ -8,21 +8,33 @@ Barcode Kanojo server.
 
 ## Setup
 
-- **Recommended** Install [virtualenv](https://virtualenv.pypa.io/en/latest/)
-	- Recommended to be setup under `./venv/` directory.
-	- Can also be installed from pip.
+### Basic Install
+
 - Install python requirements from "requirements.txt"
 ```sh
 python(3) -m pip -r requirements.txt
 ```
-- Rename "config.py.template" to "config.py" and fill app parameters.
+- Copy "config.py.template" to "config.py" and fill app parameters.
 
-## Usage
+#### Usage
+
+- Now you can run server by: `python(3) web_job.py`
+- Note: It is possible to install under Apache2 as well.
+
+### VENV
+- Install [virtualenv](https://virtualenv.pypa.io/en/latest/)
+	- Recommended to be setup under `./venv/` directory.
+	- Can also be installed from pip.
+
+- Install python requirements from "requirements.txt"
+- Copy "config.py.template" to "config.py" and fill app parameters.
+
+#### Usage
 
  Now you can run server by:
-`python(3) web_job.py`
+`python web_job.py`
 
-## Docker
+### Docker
  If you prefer to run in docker, you can run it with:
 ```sh
 docker run -it -d \
