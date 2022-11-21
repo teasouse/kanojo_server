@@ -1,11 +1,11 @@
 {
 	"reactionword": [
 		{
-			"data": [ "…", "It still makes my heart skip a beat.", "Wehenever you do that…" ],
+			"data": [ "…", "It still makes my heart skip a beat.", "Whenever you do that…" ],
 			"a": [10,11,12,20,21]
 		},
 		{
-			"data": [ "Mm\u2026", "I\u2019m getting dizzy\u2026", "\u2026" ],
+			"data": [ "Mm…", "I’m getting dizzy…", "…" ],
 			"a": [10,11,12,20,21]
 		},
 		{
@@ -14,61 +14,61 @@
 			"pod": [1]
 		},
 		{
-			"data": [ "Thank you\u2026!", "The way you take care of me,", "You know you're starting to spoil me?" ],
+			"data": [ "Thank you…!", "The way you take care of me,", "You know you're starting to spoil me?" ],
 			"a": [1]
 		},
 		{
-			"data": [ "Thank you\u2026!", "I won't be lonely now.", "It'll feel like you're right by my side." ],
+			"data": [ "Thank you…!", "I won't be lonely now.", "It'll feel like you're right by my side." ],
 			"a": [1]
 		},
 		{
-			"data": [ "Thanks\u2026!", "I'm won't be lonely anymore, even if we're not together.", "I think about you all day\u2026" ],
+			"data": [ "Thanks…!", "I'm won't be lonely anymore, even if we're not together.", "I think about you all day…" ],
 			"a": [1],
 			"pod": [3]
 		},
 		{
-			"data": ["Thanks\u2026!", "I'll treat it as if it were you.", "I'm gonna sleep with it every night\u2026!"],
+			"data": ["Thanks…!", "I'll treat it as if it were you.", "I'm gonna sleep with it every night…!"],
 			"a": [1]
 		},
 		{
-			"data": ["Your presents,", "To me\u2026", "They\u2019re like my treasure."],
+			"data": ["Your presents,", "To me…", "They’re like my treasure."],
 			"a": [1]
 		},
 		{
-			"data": ["I don\u2019t want gifts.", "I\u2019d rather\u2026", "You be with me\u2026"],
+			"data": ["I don’t want gifts.", "I’d rather…", "You be with me…"],
 			"a": [1]
 		},
 		{
-			"data": ["Each and every one..", "You put a lot of thought into it.", "That\u2019s what makes me happy."],
+			"data": ["Each and every one..", "You put a lot of thought into it.", "That’s what makes me happy."],
 			"a": [1]
 		},
 		{
-			"data": ["This time\u2026", "I give you something.", "What do you want\u2026?"],
+			"data": ["This time…", "I give you something.", "What do you want…?"],
 			"a": [1],
 			"pod": [0]
 		},
 		{
-			"data": ["Thank you\u2026", "This is like a dream\u2026", "\u2026I'm really happy."],
+			"data": ["Thank you…", "This is like a dream…", "…I'm really happy."],
 			"a": [1]
 		},
 		{
-			"data": ["\u2026", "Why me?", "What did I do to deserve this?"],
+			"data": ["…", "Why me?", "What did I do to deserve this?"],
 			"a": [1]
 		},
 		{
-			"data": ["\u2026", "Why are you giving me a present?", "Were we close like that?"],
+			"data": ["…", "Why are you giving me a present?", "Were we close like that?"],
 			"a": [1]
 		},
 		{
-			"data": ["\u2026", "I don't know what to do.", "I didn't do anything to deserve this."],
+			"data": ["…", "I don't know what to do.", "I didn't do anything to deserve this."],
 			"a": [1]
 		},
 		{
-			"data": ["\u2026", "This is really nice,", "But I can't take this."],
+			"data": ["…", "This is really nice,", "But I can’t take this."],
 			"a": [1]
 		},
 		{
-			"data": ["This\u2026what does it mean?", "I'm sorry but\u2026", "There's no reason to give me this."],
+			"data": ["This…what does it mean?", "I'm sorry but…", "There's no reason to give me this."],
 			"a": [1],
 			"pod": [2]
 		},
@@ -77,19 +77,19 @@
 			"a": [1]
 		},
 		{
-			"data": ["For me\u2026?", "I'll take it.", "Thank you."],
+			"data": ["For me…?", "I'll take it.", "Thank you."],
 			"a": [1]
 		},
 		{
-			"data": ["A present\u2026", "This is really unexpected.", "I can really have this?"],
+			"data": ["A present…", "This is really unexpected.", "I can really have this?"],
 			"a": [1]
 		},
 		{
-			"data": ["For me?", "Why?", "\u2026Thanks."],
+			"data": ["For me?", "Why?", "…Thanks."],
 			"a": [1]
 		},
 		{
-			"data": ["Why for me?", "\u2026Alright.", "Thanks."],
+			"data": ["Why for me?", "…Alright.", "Thanks."],
 			"a": [1]
 		},
 		{
@@ -97,87 +97,87 @@
 			"a": [1]
 		},
 		{
-			"data": ["Hey, good morning.", "You\u2019re giving me a gift\u2026", "\u2026I can\u2019t give you anything."],
+			"data": ["Hey, good morning.", "You’re giving me a gift…", "…I can’t give you anything."],
 			"a": [1]
 		},
 		{
-			"data": ["Hey! Nice morning, isn\u2019t it?", "That\u2019s out of the blue\u2026 really?", "I feel bad."],
+			"data": ["Hey! Nice morning, isn’t it?", "That’s out of the blue… really?", "I feel bad."],
 			"a": [1],
 			"pod": [1]
 		},
 		{
-			"data": ["Good Morning.", "No way!", "I can\u2019t accept this!"],
+			"data": ["Good Morning.", "No way!", "I can’t accept this!"],
 			"a": [1],
 			"pod": [1]
 		},
 		{
-			"data": ["Oh\u2026good morning.", "No, no!", "I can\u2019t accept this!"],
+			"data": ["Oh…good morning.", "No, no!", "I can’t accept this!"],
 			"a": [1],
 			"pod": [1]
 		},
 		{
-			"data": ["Good Morning.", "I can\u2019t accept this!", "I feel bad."],
+			"data": ["Good Morning.", "I can’t accept this!", "I feel bad."],
 			"a": [1],
 			"pod": [1]
 		},
 		{
-			"data": ["Th, this\u2026", "A surprise?", "Thank you\u2026!"],
+			"data": ["Th, this…", "A surprise?", "Thank you…!"],
 			"a": [1]
 		},
 		{
-			"data": ["Th, this\u2026", "No, it's not a problem.", "I'm surprised and excited at the same time."],
+			"data": ["Th, this…", "No, it's not a problem.", "I'm surprised and excited at the same time."],
 			"a": [1]
 		},
 		{
-			"data": ["Th, this\u2026", "I like stuff like this.", "But is it really okay?"],
+			"data": ["Th, this…", "I like stuff like this.", "But is it really okay?"],
 			"a": [1],
 			"pod": [0]
 		},
 		{
-			"data": ["This\u2026?", "Is for me?", "Really!?"],
+			"data": ["This…?", "Is for me?", "Really!?"],
 			"a": [1],
 			"pod": [2]
 		},
 		{
-			"data": ["What's this\u2026?", "Wonder what it is.", "I want to open it."],
+			"data": ["What's this…?", "Wonder what it is.", "I want to open it."],
 			"a": [1]
 		},
 		{
-			"data": ["Th, this\u2026", "A surprise?", "Thank you\u2026!"],
+			"data": ["Th, this…", "A surprise?", "Thank you…!"],
 			"a": [1]
 		},
 		{
-			"data": ["What's this\u2026?", "Wonder what it is.", "I want to open it."],
+			"data": ["What's this…?", "Wonder what it is.", "I want to open it."],
 			"a": [1]
 		},
 		{
-			"data": ["Good Morning.", "\u2026I can\u2019t accept this.", "\u2026Alright, if you insist."],
+			"data": ["Good Morning.", "…I can’t accept this.", "…Alright, if you insist."],
 			"a": [1, 2],
 			"pod": [0]
 		},
 		{
-			"data": ["Hey.", "What? It\u2019s not a special occasion, is it?", "Thank you\u2026I\u2019m going to take care of it."],
+			"data": ["Hey.", "What? It’s not a special occasion, is it?", "Thank you…I’m going to take care of it."],
 			"a": [1, 2]
 		},
 
 		{
-			"data": [ "You didn\u2019t have to.",  "All I want is you\u2026",  "That\u2019s all I need to be happy." ],
+			"data": [ "You didn’t have to.",  "All I want is you…",  "That’s all I need to be happy." ],
 			"a": [1,2]
 		},
 		{
-			"data": [ "Thank you\u2026", "For thinking about me.", "I really appreciate it." ],
+			"data": [ "Thank you…", "For thinking about me.", "I really appreciate it." ],
 			"a": [2]
 		},
 		{
-			"data": ["You know exactly what I want.", "I can tell you put a lot of thought into it.", "It makes me really happy\u2026"],
+			"data": ["You know exactly what I want.", "I can tell you put a lot of thought into it.", "It makes me really happy…"],
 			"a": [2]
 		},
 		{
-			"data": ["Really?", "There's no reason for this\u2026", "I'll take it I guess."],
+			"data": ["Really?", "There's no reason for this…", "I'll take it I guess."],
 			"a": [2]
 		},
 		{
-			"data": ["I don\u2019t need gifts\u2026", "My heart is yours, okay?", "You can relax."],
+			"data": ["I don’t need gifts…", "My heart is yours, okay?", "You can relax."],
 			"a": [2]
 		},
 		{
@@ -185,51 +185,51 @@
 			"a": [2]
 		},
 		{
-			"data": ["Thanks.", "This is really nice\u2026", "But don\u2019t worry about it, okay?"],
+			"data": ["Thanks.", "This is really nice…", "But don’t worry about it, okay?"],
 			"a": [1,2]
 		},
 		{
-			"data": ["I love it\u2026", "But\u2026", "It\u2019s not just me, is it\u2026?"],
+			"data": ["I love it…", "But…", "It’s not just me, is it…?"],
 			"a": [2]
 		},
 		{
-			"data": ["Why do you always give me stuff?", "You have to tell me today.", "Does it mean\u2026you like me\u2026?"],
+			"data": ["Why do you always give me stuff?", "You have to tell me today.", "Does it mean…you like me…?"],
 			"a": [2]
 		},
 		{
-			"data": ["A present\u2026", "There's no reason for you to give me one.", "I mean, I'll take it anyways."],
+			"data": ["A present…", "There's no reason for you to give me one.", "I mean, I'll take it anyways."],
 			"a": [2]
 		},
 		{
-			"data": ["A present\u2026", "Hey,", "You don't need to do that."],
+			"data": ["A present…", "Hey,", "You don't need to do that."],
 			"a": [2]
 		},
 		{
-			"data": ["A present\u2026!?", "Just for me?", "\u2026Then I'll take it. Thanks."],
+			"data": ["A present…!?", "Just for me?", "…Then I'll take it. Thanks."],
 			"a": [2]
 		},
 		{
-			"data": ["A present\u2026", "It's\u2026", "A nice gesture."],
+			"data": ["A present…", "It's…", "A nice gesture."],
 			"a": [2]
 		},
 		{
-			"data": ["A present\u2026", "For me?", "Uh, I don\u2019t know what to do\u2026"],
+			"data": ["A present…", "For me?", "Uh, I don’t know what to do…"],
 			"a": [2]
 		},
 		{
-			"data": ["A present\u2026!?", "I've wanted this!", "Um, thank you. I\u2026like it."],
+			"data": ["A present…!?", "I've wanted this!", "Um, thank you. I…like it."],
 			"a": [2]
 		},
 		{
-			"data": ["A present\u2026", "Hmmm\u2026?", "Are you trying to get lucky!?"],
+			"data": ["A present…", "Hmmm…?", "Are you trying to get lucky!?"],
 			"a": [2]
 		},
 		{
-			"data": ["A present\u2026!?", "How did you know I would love this?", "This is really great\u2026"],
+			"data": ["A present…!?", "How did you know I would love this?", "This is really great…"],
 			"a": [2]
 		},
 		{
-			"data": ["You know exactly\u2026", "How to make me happy.", "Thank you."],
+			"data": ["You know exactly…", "How to make me happy.", "Thank you."],
 			"a": [1, 2]
 		},
 		{
@@ -253,32 +253,32 @@
 			"a": [2]
 		},
 		{
-			"data": ["This present,", "Is it just for me?", "\u2026\u2026I love it."],
+			"data": ["This present,", "Is it just for me?", "……I love it."],
 			"a": [2]
 		},
 		{
-			"data": ["\u2026Thank you\u2026!", "I should give you something, too.", "How about a kiss\u2026?"],
+			"data": ["…Thank you…!", "I should give you something, too.", "How about a kiss…?"],
 			"a": [2]
 		},
 		{
-			"data": ["\u2026Thank you\u2026!", "This is staying with me forever.", "It's like you're right next to me."],
+			"data": ["…Thank you…!", "This is staying with me forever.", "It's like you're right next to me."],
 			"a": [2]
 		},
 		{
-			"data": ["\u2026Thanks\u2026!", "This is so nice!", "You're gonna make me cry\u2026"],
+			"data": ["…Thanks…!", "This is so nice!", "You're gonna make me cry…"],
 			"a": [2]
 		},
 		{
-			"data": ["You don\u2019t have to do that.", "I love the thought you give it.", "You don\u2019t need to get me anything."],
+			"data": ["You don’t have to do that.", "I love the thought you give it.", "You don’t need to get me anything."],
 			"a": [1, 2]
 		},
 		{
-			"data": ["You don\u2019t have to give me anything anymore, okay?", "As long as you're by my side\u2026", "That\u2019s what makes me happy."],
+			"data": ["You don’t have to give me anything anymore, okay?", "As long as you're by my side…", "That’s what makes me happy."],
 			"a": [2],
 			"pod": [2]
 		},
 		{
-			"data": ["You didn\u2019t have to get me that.", "As long as you're with me\u2026", "I'm happy, you know that?"],
+			"data": ["You didn’t have to get me that.", "As long as you're with me…", "I'm happy, you know that?"],
 			"a": [2]
 		},
 		{
@@ -296,7 +296,7 @@
 			"a": [2]
 		},
 		{
-			"data": ["Yay!", "A present\u2026!", "But\u2026Why? (Stares)"],
+			"data": ["Yay!", "A present…!", "But…Why? (Stares)"],
 			"a": [2]
 		},
 		{
@@ -304,7 +304,7 @@
 			"a": [1, 2]
 		},
 		{
-			"data": ["Thank you!", "You picked this!?", "Hehe, this is really exiciting!"],
+			"data": ["Thank you!", "You picked this!?", "Hehe, this is really exciting!"],
 			"a": [1, 2]
 		},
 		{
@@ -333,37 +333,37 @@
 			"a": [1, 2]
 		},
 		{
-			"data": ["Thank you!", "But, I don\u2019t need anything.", "As long as you're with me."],
+			"data": ["Thank you!", "But, I don’t need anything.", "As long as you're with me."],
 			"a": [2]
 		},
 		{
-			"data": ["Hey.", "I bet you\u2019re looking for something else..", "Thank you, though."],
+			"data": ["Hey.", "I bet you’re looking for something else..", "Thank you, though."],
 			"a": [2]
 		},
 		{
-			"data": ["Good Morning!", "Is it a special day or something?", "Alright, I\u2019ll accept it."],
+			"data": ["Good Morning!", "Is it a special day or something?", "Alright, I’ll accept it."],
 			"a": [2],
 			"pod": [1]
 		},
 		{
-			"data": ["You\u2026", "You picked it out for me.", "Thank you."],
+			"data": ["You…", "You picked it out for me.", "Thank you."],
 			"a": [2],
 			"pod": [2,3]
 		},
 		{
-			"data": ["Hey.", "I\u2019ll accept your thoughts.", "Thank you."],
+			"data": ["Hey.", "I’ll accept your thoughts.", "Thank you."],
 			"a": [2]
 		},
 		{
-			"data": ["Wha\u2026", "You're giving this to me?", "I can really have this?"],
+			"data": ["Wha…", "You're giving this to me?", "I can really have this?"],
 			"a": [2]
 		},
 		{
-			"data": ["What\u2026(Blushes)", "I haven't looked at it yet,", "But I'm sure I'll love it! "],
+			"data": ["What…(Blushes)", "I haven't looked at it yet,", "But I'm sure I'll love it! "],
 			"a": [2]
 		},
 		{
-			"data": ["What\u2026(Blushes)", "I don't know if I should take it.", "No, I'm really happy!"],
+			"data": ["What…(Blushes)", "I don't know if I should take it.", "No, I'm really happy!"],
 			"a": [2]
 		},
 		{
@@ -371,40 +371,40 @@
 			"a": [2]
 		},
 		{
-			"data": ["Oh\u2026", "I feel bad,", "You giving me stuff!"],
+			"data": ["Oh…", "I feel bad,", "You giving me stuff!"],
 			"a": [2]
 		},
 		{
-			"data": ["What\u2026", "You got this for me?", "Is this really okay?"],
+			"data": ["What…", "You got this for me?", "Is this really okay?"],
 			"a": [2]
 		},
 		{
-			"data": ["Hello.", "Did you think about me?", "I love it\u2026!"],
+			"data": ["Hello.", "Did you think about me?", "I love it…!"],
 			"a": [1,2],
 			"pod": [1,2,3]
 		},
 		{
-			"data": ["\u2026Thank you\u2026!", "No one's given me a present like this before!", "I'm gonna start crying."],
+			"data": ["…Thank you…!", "No one's given me a present like this before!", "I'm gonna start crying."],
 			"a": [2]
 		},
 		{
-			"data": ["Did you\u2026", "Pick that out just for me?", "I can't decline this."],
+			"data": ["Did you…", "Pick that out just for me?", "I can't decline this."],
 			"a": [2]
 		},
 		{
-			"data": ["I'm not happy for the presents.", "I'm happy that you thought about me.", "Don\u2019t get me wrong, okay\u2026?"],
+			"data": ["I'm not happy for the presents.", "I'm happy that you thought about me.", "Don’t get me wrong, okay…?"],
 			"a": [2]
 		},
 		{
-			"data": ["You always give me stuff\u2026", "Why?", "I wanna know\u2026"],
+			"data": ["You always give me stuff…", "Why?", "I wanna know…"],
 			"a": [2]
 		},
 		{
-			"data": ["These gifts\u2026", "Do you only give them to me?", "Is it because you like me\u2026?"],
+			"data": ["These gifts…", "Do you only give them to me?", "Is it because you like me…?"],
 			"a": [2]
 		},
 		{
-			"data": ["A present\u2026!?", "Can I take this?", "(Whispers)\u2026This is gonna be my treasure."],
+			"data": ["A present…!?", "Can I take this?", "(Whispers)…This is gonna be my treasure."],
 			"a": [2]
 		},
 		{
@@ -412,7 +412,7 @@
 			"a": [2]
 		},
 		{
-			"data": ["A present?", "Huh.", "Oh this is cute\u2026maybe."],
+			"data": ["A present?", "Huh.", "Oh this is cute…maybe."],
 			"a": [2]
 		},
 		{
@@ -432,12 +432,12 @@
 			"a": [2]
 		},
 		{
-			"data": ["That's enough!", "I get your feeling now\u2026", "More than enough, okay?"],
+			"data": ["That's enough!", "I get your feeling now…", "More than enough, okay?"],
 			"a": [2],
 			"pod": [2,3,0]
 		},
 		{
-			"data": ["Really?", "\u2026", "Thank you!"],
+			"data": ["Really?", "…", "Thank you!"],
 			"a": [1, 2]
 		},
 		{
@@ -477,12 +477,12 @@
 			"a": [1, 2]
 		},
 		{
-			"data": ["Morning! I\u2019m feeling good today!", "Aww, really?", "Thanks so much!"],
+			"data": ["Morning! I’m feeling good today!", "Aww, really?", "Thanks so much!"],
 			"a": [2],
 			"pod": [1]
 		},
 		{
-			"data": ["Gooood Morning!", "Really?!", "But\u2026thanks\u2026"],
+			"data": ["Gooood Morning!", "Really?!", "But…thanks…"],
 			"a": [2],
 			"pod": [1]
 		},
@@ -491,30 +491,30 @@
 			"a": [2]
 		},
 		{
-			"data": ["Ah.", "You\u2019re giving me this?", "Thanks!"],
+			"data": ["Ah.", "You’re giving me this?", "Thanks!"],
 			"a": [2]
 		},
 		{
-			"data": ["Good Morning!", "Really? A present?", "\u2026I\u2019ll take it. Thanks."],
+			"data": ["Good Morning!", "Really? A present?", "…I’ll take it. Thanks."],
 			"a": [2],
 			"pod": [1]
 		},
 		{
-			"data": ["Morning!", "You\u2019re making me suspicious.", "I bet you have something planned\u2026!"],
+			"data": ["Morning!", "You’re making me suspicious.", "I bet you have something planned…!"],
 			"a": [2],
 			"pod": [1]
 		},
 		{
-			"data": ["Hold on.", "I\u2019m gonna get you something awesome.", "Hehe."],
+			"data": ["Hold on.", "I’m gonna get you something awesome.", "Hehe."],
 			"a": [1, 2],
 			"pod": [3, 4]
 		},
 		{
-			"data": ["You always give me stuff\u2026", "What\u2019s in it?", "You can\u2019t tell me, huh."],
+			"data": ["You always give me stuff…", "What’s in it?", "You can’t tell me, huh."],
 			"a": [2]
 		},
 		{
-			"data": ["\u2026Thank you\u2026!", "I have to give you something. Come here?", "(Smooch)"],
+			"data": ["…Thank you…!", "I have to give you something. Come here?", "(Smooch)"],
 			"a": [1, 2],
 			"pod": [1,2,3]
 		},
@@ -536,56 +536,56 @@
 		},
 
 		{
-			"data": [ "Finally got to see you\u2026", "I brought stuff to stay the night with.", "I can't be without you anymore." ],
+			"data": [ "Finally got to see you…", "I brought stuff to stay the night with.", "I can't be without you anymore." ],
 			"a": [3]
 		},
 		{
-			"data": [ "Finally got to see you\u2026", "I might start crying just by seeing you\u2026", "I think I can't live without you." ],
+			"data": [ "Finally got to see you…", "I might start crying just by seeing you…", "I think I can't live without you." ],
 			"a": [3],
 			"pod": [2,3]
 		},
 		{
-			"data": ["I finally got to see you\u2026", "I don\u2019t wanna go home tonight.", "\u2026Is that okay?"],
+			"data": ["I finally got to see you…", "I don’t wanna go home tonight.", "…Is that okay?"],
 			"a": [3]
 		},
 		{
-			"data": ["We finally get to see each other.", "I hate being away from you\u2026", "All I do is think about you."],
+			"data": ["We finally get to see each other.", "I hate being away from you…", "All I do is think about you."],
 			"a": [3]
 		},
 		{
-			"data": ["Finally get to see you\u2026", "I don\u2019t ever want to leave you.", "You're gonna be with me til the morning, right?"],
+			"data": ["Finally get to see you…", "I don’t ever want to leave you.", "You're gonna be with me til the morning, right?"],
 			"a": [3]
 		},
 		{
-			"data": ["Since yesterday\u2026", "I\u2019ve missed you.", "Be mine forever."],
+			"data": ["Since yesterday…", "I’ve missed you.", "Be mine forever."],
 			"a": [3],
 			"pod": [1,2,3]
 		},
 		{
-			"data": ["Please.", "Be with me forever.", "I don\u2019t want to leave you\u2026"],
+			"data": ["Please.", "Be with me forever.", "I don’t want to leave you…"],
 			"a": [3],
 			"pod": [0,3]
 		},
 		{
-			"data": ["Today\u2026", "We\u2019re gonna spend it all day together?", "I\u2019m okay with that."],
+			"data": ["Today…", "We’re gonna spend it all day together?", "I’m okay with that."],
 			"a": [3],
 			"pod": [2]
 		},
 		{
-			"data": ["Whenever I spend time with you\u2026", "It makes me like you more.", "It\u2019s a little scary\u2026"],
+			"data": ["Whenever I spend time with you…", "It makes me like you more.", "It’s a little scary…"],
 			"a": [3]
 		},
 		{
-			"data": ["Tell me you won\u2019t let go of me\u2026", "If you don\u2019t\u2026", "I won\u2019t be comforted."],
+			"data": ["Tell me you won’t let go of me…", "If you don’t…", "I won’t be comforted."],
 			"a": [3]
 		},
 		{
-			"data": ["We're gonna be together for the rest of the day.", "I cried yesterday\u2026", "I don't like it when you're not with me."],
+			"data": ["We're gonna be together for the rest of the day.", "I cried yesterday…", "I don't like it when you're not with me."],
 			"a": [3],
 			"pod": [2,3]
 		},
 		{
-			"data": ["Do I worry too much?", "When I think that other girls are after you,", "\u2026\u2026It keeps me up at night."],
+			"data": ["Do I worry too much?", "When I think that other girls are after you,", "……It keeps me up at night."],
 			"a": [3]
 		},
 		{
@@ -593,7 +593,7 @@
 			"a": [3]
 		},
 		{
-			"data": ["\u2026\u2026Hey,", "I can be with you all day, right?", "Don't leave me behind."],
+			"data": ["……Hey,", "I can be with you all day, right?", "Don't leave me behind."],
 			"a": [3],
 			"pod": [1,2]
 		},
@@ -602,24 +602,24 @@
 			"a": [3]
 		},
 		{
-			"data": ["Hello\u2026", "Hm, is there something you want to do?", "I don't have anything in mind."],
+			"data": ["Hello…", "Hm, is there something you want to do?", "I don't have anything in mind."],
 			"a": [3]
 		},
 		{
-			"data": ["Hello\u2026", "(Yawn)", "I'm really sleepy."],
+			"data": ["Hello…", "(Yawn)", "I'm really sleepy."],
 			"a": [3],
 			"pod": [3,0]
 		},
 		{
-			"data": ["Hello\u2026", "Can you plan around my schedule?", "Alright, let's go!"],
+			"data": ["Hello…", "Can you plan around my schedule?", "Alright, let's go!"],
 			"a": [3]
 		},
 		{
-			"data": ["Hello\u2026", "If you haven't thought of anything to do,", "There's somewhere I want to go."],
+			"data": ["Hello…", "If you haven't thought of anything to do,", "There's somewhere I want to go."],
 			"a": [3]
 		},
 		{
-			"data": ["Hey\u2026", "What do you want to do?", "Cafe? Or do you just wanna walk?"],
+			"data": ["Hey…", "What do you want to do?", "Cafe? Or do you just wanna walk?"],
 			"a": [3],
 			"pod": [1,2,3]
 		},
@@ -639,7 +639,7 @@
 			"pod": [3,0]
 		},
 		{
-			"data": ["You want me to go out to eat\u2026", "Hey,", "This is a hotel!"],
+			"data": ["You want me to go out to eat…", "Hey,", "This is a hotel!"],
 			"a": [3]
 		},
 		{
@@ -657,16 +657,16 @@
 			"pod": [3,0]
 		},
 		{
-			"data": ["It's already late.", "\u2026For a little bit?", "Alright then."],
+			"data": ["It's already late.", "…For a little bit?", "Alright then."],
 			"a": [3],
 			"pod": [2,3,0]
 		},
 		{
-			"data": ["This late?", "I don't understand you at all.", "You're suspicious\u2026"],
+			"data": ["This late?", "I don't understand you at all.", "You're suspicious…"],
 			"a": [3]
 		},
 		{
-			"data": ["Umm, right now?", "It's gonna be late\u2026", "Where do you want to go?"],
+			"data": ["Umm, right now?", "It's gonna be late…", "Where do you want to go?"],
 			"a": [3]
 		},
 		{
@@ -674,7 +674,7 @@
 			"a": [3]
 		},
 		{
-			"data": ["Where are you trying to take me?", "I'm sorry\u2026", "But only for two hours."],
+			"data": ["Where are you trying to take me?", "I'm sorry…", "But only for two hours."],
 			"a": [3]
 		},
 		{
@@ -683,29 +683,29 @@
 			"pod": [1]
 		},
 		{
-			"data": ["\u2026Hey.", "A date?", "I just felt bad for you."],
+			"data": ["…Hey.", "A date?", "I just felt bad for you."],
 			"a": [3]
 		},
 		{
-			"data": ["What? A date?", "Where do I want to go..?", "I don\u2019t know."],
+			"data": ["What? A date?", "Where do I want to go..?", "I don’t know."],
 			"a": [3]
 		},
 		{
-			"data": ["Good Morning.", "I\u2019m a little busy,", "so can we hurry?"],
+			"data": ["Good Morning.", "I’m a little busy,", "so can we hurry?"],
 			"a": [3],
 			"pod": [1]
 		},
 		{
-			"data": ["What\u2026? Hey.", "What are you doing..!", "Don\u2019t you think it\u2019s a little early for that?"],
+			"data": ["What…? Hey.", "What are you doing..!", "Don’t you think it’s a little early for that?"],
 			"a": [3]
 		},
 		{
-			"data": ["Good Morning.", "A date? That\u2019s very bold of you.", "Okay, I\u2019ll take you up for it."],
+			"data": ["Good Morning.", "A date? That’s very bold of you.", "Okay, I’ll take you up for it."],
 			"a": [3],
 			"pod": [1]
 		},
 		{
-			"data": ["\u2026Hey.", "You have a lot of guts.", "Not enough for me, though."],
+			"data": ["…Hey.", "You have a lot of guts.", "Not enough for me, though."],
 			"a": [3]
 		},
 		{
@@ -713,7 +713,7 @@
 			"a": [3]
 		},
 		{
-			"data": ["What do you think?", "I dressed up for you\u2026", "Say something!"],
+			"data": ["What do you think?", "I dressed up for you…", "Say something!"],
 			"a": [3]
 		},
 		{
@@ -725,19 +725,19 @@
 			"a": [3]
 		},
 		{
-			"data": ["Huh, a date?", "\u2026Why aren't you saying anything?", "Am I boring you?"],
+			"data": ["Huh, a date?", "…Why aren't you saying anything?", "Am I boring you?"],
 			"a": [3]
 		},
 		{
-			"data": ["Hey.", "You\u2019re full of energy, aren\u2019t you?", "Alright, let\u2019s go."],
+			"data": ["Hey.", "You’re full of energy, aren’t you?", "Alright, let’s go."],
 			"a": [3]
 		},
 		{
-			"data": ["Hey!", "Are you asking me out on a date?", "You\u2019re asking about 100 years too soon!"],
+			"data": ["Hey!", "Are you asking me out on a date?", "You’re asking about 100 years too soon!"],
 			"a": [3]
 		},
 		{
-			"data": ["Uhm\u2026", "If I say that I can't,", "Will you ask me out another time\u2026?"],
+			"data": ["Uhm…", "If I say that I can't,", "Will you ask me out another time…?"],
 			"a": [3]
 		},
 		{
@@ -746,22 +746,22 @@
 			"pod": [1,2]
 		},
 		{
-			"data": ["Hey! Nice morning, isn\u2019t it?", "You want ME to go with you?", "I might get hopeful!"],
+			"data": ["Hey! Nice morning, isn’t it?", "You want ME to go with you?", "I might get hopeful!"],
 			"a": [3],
 			"pod": [1]
 		},
 		{
-			"data": ["Hey, good morning.", "A date already?", "You\u2019re inpatient, huh."],
+			"data": ["Hey, good morning.", "A date already?", "You’re inpatient, huh."],
 			"a": [3],
 			"pod": [1]
 		},
 		{
-			"data": ["Good Morning!", "A date? This early in the morning?", "That\u2019s quite a surprise."],
+			"data": ["Good Morning!", "A date? This early in the morning?", "That’s quite a surprise."],
 			"a": [3],
 			"pod": [1]
 		},
 		{
-			"data": ["Oh\u2026good morning.", "Really? Already?", "I\u2019m excited."],
+			"data": ["Oh…good morning.", "Really? Already?", "I’m excited."],
 			"a": [3],
 			"pod": [1]
 		},
@@ -771,61 +771,61 @@
 			"pod": [1]
 		},
 		{
-			"data": ["\u2026Hello.", "\u2026(Nervous)", "I'm not nervous if I'm not holding hands."],
+			"data": ["…Hello.", "…(Nervous)", "I'm not nervous if I'm not holding hands."],
 			"a": [3]
 		},
 		{
-			"data": ["\u2026Hello.", "Do you think,", "We look like we're dating?"],
+			"data": ["…Hello.", "Do you think,", "We look like we're dating?"],
 			"a": [3]
 		},
 		{
-			"data": ["\u2026Hello.", "I've been looking forward to this.", "Alright, do you want to go?"],
+			"data": ["…Hello.", "I've been looking forward to this.", "Alright, do you want to go?"],
 			"a": [3]
 		},
 		{
-			"data": ["\u2026Hello.", "Do you have time today?", "We can be together all day?"],
+			"data": ["…Hello.", "Do you have time today?", "We can be together all day?"],
 			"a": [3]
 		},
 		{
-			"data": ["\u2026Hey.", "I'm really nervous.", "But I was still looking forward to it!"],
+			"data": ["…Hey.", "I'm really nervous.", "But I was still looking forward to it!"],
 			"a": [3]
 		},
 		{
-			"data": ["Um\u2026", "A date this late.", "That limits where we would go."],
+			"data": ["Um…", "A date this late.", "That limits where we would go."],
 			"a": [3]
 		},
 
 		{
-			"data": ["Good Morning.", "Hey\u2026", "Don\u2019t touch me like that, okay?"],
+			"data": ["Good Morning.", "Hey…", "Don’t touch me like that, okay?"],
 			"a": [10,11,12],
 			"pod": [1]
 		},
 		{
-			"data": ["Ah, that feels really good.", "But\u2026", "Your hands are moving kind of weird."],
+			"data": ["Ah, that feels really good.", "But…", "Your hands are moving kind of weird."],
 			"a": [20]
 		},
 		{
-			"data": ["You\u2019re petting me\u2026", "Like a kid again.", "I don\u2019t mind though."],
+			"data": ["You’re petting me…", "Like a kid again.", "I don’t mind though."],
 			"a": [20]
 		},
 		{
-			"data": ["\u2026More.", "Til I open my eyes\u2026", "\u2026"],
+			"data": ["…More.", "Til I open my eyes…", "…"],
 			"a": [20]
 		},
 		{
-			"data": ["I\u2026", "I feel like my body\u2019s melting\u2026", "It feels good\u2026"],
+			"data": ["I…", "I feel like my body’s melting…", "It feels good…"],
 			"a": [20, 21]
 		},
 		{
-			"data": ["I want you to\u2026", "Keep petting me like this\u2026", "But I have to go."],
+			"data": ["I want you to…", "Keep petting me like this…", "But I have to go."],
 			"a": [20, 21]
 		},
 		{
-			"data": ["You know,", "I actually like it\u2026", "Your hands, they\u2019re warm\u2026"],
+			"data": ["You know,", "I actually like it…", "Your hands, they’re warm…"],
 			"a": [20,21]
 		},
 		{
-			"data": ["When you do that\u2026", "It\u2019s really comforting\u2026", "I like it a lot\u2026"],
+			"data": ["When you do that…", "It’s really comforting…", "I like it a lot…"],
 			"a": [20]
 		},
 		{
@@ -837,15 +837,15 @@
 			"a": [20,12]
 		},
 		{
-			"data": ["\u2026", "That tickles.", "Is my heart beating really fast\u2026?"],
+			"data": ["…", "That tickles.", "Is my heart beating really fast…?"],
 			"a": [20,21,12]
 		},
 		{
-			"data": ["Hello\u2026", "Hehe, that feels nice.", "Can you do that more?"],
+			"data": ["Hello…", "Hehe, that feels nice.", "Can you do that more?"],
 			"a": [20,12]
 		},
 		{
-			"data": ["Hello\u2026", "Hehe, that tickles\u2026", "Do that more?"],
+			"data": ["Hello…", "Hehe, that tickles…", "Do that more?"],
 			"a": [20,12]
 		},
 		{
@@ -853,7 +853,7 @@
 			"a": [20,12,10]
 		},
 		{
-			"data": ["Hello\u2026", "Your hands are really comforting.", "Keep doing that."],
+			"data": ["Hello…", "Your hands are really comforting.", "Keep doing that."],
 			"a": [20,12,10]
 		},
 		{
@@ -861,11 +861,11 @@
 			"a": [20,10]
 		},
 		{
-			"data": ["\u2026", "I love it.", "I want to do that to you, too."],
+			"data": ["…", "I love it.", "I want to do that to you, too."],
 			"a": [20,21,12,10]
 		},
 		{
-			"data": ["\u2026Hi.", "Those hands of yours\u2026", "I love it\u2026"],
+			"data": ["…Hi.", "Those hands of yours…", "I love it…"],
 			"a": [20,12,10,21]
 		},
 		{
@@ -873,7 +873,7 @@
 			"a": [20]
 		},
 		{
-			"data": ["\u2026Oh, no.", "I'm so happy, my heart's going crazy.", "That's never happened before."],
+			"data": ["…Oh, no.", "I'm so happy, my heart's going crazy.", "That's never happened before."],
 			"a": [20]
 		},
 		{
@@ -881,15 +881,15 @@
 			"a": [20]
 		},
 		{
-			"data": ["Hello\u2026", "That makes me warm up.", "My heart, too."],
+			"data": ["Hello…", "That makes me warm up.", "My heart, too."],
 			"a": [20]
 		},
 		{
-			"data": ["\u2026", "Don't play around with me.", "Do you like watching me get excited?"],
+			"data": ["…", "Don't play around with me.", "Do you like watching me get excited?"],
 			"a": [20]
 		},
 		{
-			"data": ["Hello\u2026", "Finally I get to see you\u2026!", "I hate not being with you."],
+			"data": ["Hello…", "Finally I get to see you…!", "I hate not being with you."],
 			"a": [20]
 		},
 		{
@@ -905,27 +905,27 @@
 			"a": [20,12,10]
 		},
 		{
-			"data": ["Alright\u2026", "Did you want to touch me?", "I'm not feeling like it right now."],
+			"data": ["Alright…", "Did you want to touch me?", "I'm not feeling like it right now."],
 			"a": [10,11,12]
 		},
 		{
-			"data": ["You know\u2026", "Can you stop that?", "I'm not that kind of girl."],
+			"data": ["You know…", "Can you stop that?", "I'm not that kind of girl."],
 			"a": [10,11,12,21]
 		},
 		{
-			"data": ["Hey\u2026", "When did you start petting me?", "I never know what to expect from you."],
+			"data": ["Hey…", "When did you start petting me?", "I never know what to expect from you."],
 			"a": [10,11,12]
 		},
 		{
-			"data": ["Hey\u2026", "Seems like you're used to doing this.", "Hmmm."],
+			"data": ["Hey…", "Seems like you're used to doing this.", "Hmmm."],
 			"a": [10,11,12]
 		},
 		{
-			"data": ["\u2026!", "You're pretty bold, aren't you?", "Our hearts are beating really fast."],
+			"data": ["…!", "You're pretty bold, aren't you?", "Our hearts are beating really fast."],
 			"a": [21]
 		},
 		{
-			"data": ["\u2026!", "That was a surprise, but I don't mind.", "Your hands, they feel really good."],
+			"data": ["…!", "That was a surprise, but I don't mind.", "Your hands, they feel really good."],
 			"a": [20,21]
 		},
 		{
@@ -933,11 +933,11 @@
 			"a": [20]
 		},
 		{
-			"data": ["Keep doing that for a bit\u2026", "When you pet me,", "It comforts me a lot."],
+			"data": ["Keep doing that for a bit…", "When you pet me,", "It comforts me a lot."],
 			"a": [20,12]
 		},
 		{
-			"data": ["Your warmth\u2026", "It spreads through my body.", "And then I get really comfortable."],
+			"data": ["Your warmth…", "It spreads through my body.", "And then I get really comfortable."],
 			"a": [20]
 		},
 		{
@@ -945,7 +945,7 @@
 			"a": [20]
 		},
 		{
-			"data": ["When you gently pet me like that\u2026", "I feel like my heart's floating around.", "I don't feel like myself."],
+			"data": ["When you gently pet me like that…", "I feel like my heart's floating around.", "I don't feel like myself."],
 			"a": [20,10]
 		},
 		{
@@ -953,7 +953,7 @@
 			"a": [20]
 		},
 		{
-			"data": ["I still get jolted\u2026", "Because it's you.", "I want to stay like this for a while."],
+			"data": ["I still get jolted…", "Because it's you.", "I want to stay like this for a while."],
 			"a": [20]
 		},
 		{
@@ -981,7 +981,7 @@
 			"a": [20]
 		},
 		{
-			"data": ["Where you're touching,", "I can feel how hot your hands are.", "I'm getting hot too\u2026"],
+			"data": ["Where you're touching,", "I can feel how hot your hands are.", "I'm getting hot too…"],
 			"a": [20]
 		},
 		{
@@ -989,11 +989,11 @@
 			"a": [20]
 		},
 		{
-			"data": ["When you do that\u2026", "I can be honest with myself.", "It's a healing hand, huh?"],
+			"data": ["When you do that…", "I can be honest with myself.", "It's a healing hand, huh?"],
 			"a": [20]
 		},
 		{
-			"data": ["Keep doing that\u2026", "Until I tell you to stop.", "It's really comforting."],
+			"data": ["Keep doing that…", "Until I tell you to stop.", "It's really comforting."],
 			"a": [20,11]
 		},
 		{
@@ -1001,15 +1001,15 @@
 			"a": [20]
 		},
 		{
-			"data": ["When you pet me\u2026", "It calms me down a lot.", "It feels weird."],
+			"data": ["When you pet me…", "It calms me down a lot.", "It feels weird."],
 			"a": [20]
 		},
 		{
-			"data": ["Are you this nice\u2026", "Because you like me?", "You have to answer me!"],
+			"data": ["Are you this nice…", "Because you like me?", "You have to answer me!"],
 			"a": [20]
 		},
 		{
-			"data": ["When you do that\u2026", "I get really excited.", "And my heart starts beating really fast\u2026"],
+			"data": ["When you do that…", "I get really excited.", "And my heart starts beating really fast…"],
 			"a": [20]
 		},
 		{
@@ -1017,23 +1017,23 @@
 			"a": [20]
 		},
 		{
-			"data": ["The way you pet me\u2026", "It\u2019s really comforting.", "Pet me more\u2026"],
+			"data": ["The way you pet me…", "It’s really comforting.", "Pet me more…"],
 			"a": [20]
 		},
 		{
-			"data": ["When you pet me like this\u2026", "I feel like I\u2019m gonna fall asleep\u2026", "Just kidding!"],
+			"data": ["When you pet me like this…", "I feel like I’m gonna fall asleep…", "Just kidding!"],
 			"a": [20]
 		},
 		{
-			"data": ["When you do that,", "It\u2019s really comforting\u2026", "I don\u2019t know why\u2026"],
+			"data": ["When you do that,", "It’s really comforting…", "I don’t know why…"],
 			"a": [20]
 		},
 		{
-			"data": ["This feels good\u2026", "I was petted a lot when I was a kid.", "Keep doing that\u2026"],
+			"data": ["This feels good…", "I was petted a lot when I was a kid.", "Keep doing that…"],
 			"a": [20]
 		},
 		{
-			"data": ["You\u2019re petting me\u2026", "Does that mean you like me?", "\u2026"],
+			"data": ["You’re petting me…", "Does that mean you like me?", "…"],
 			"a": [20]
 		},
 		{
@@ -1041,15 +1041,15 @@
 			"a": [20,12]
 		},
 		{
-			"data": ["Stop that.", "I\u2019m not a little kid.", "You should try somewhere else."],
+			"data": ["Stop that.", "I’m not a little kid.", "You should try somewhere else."],
 			"a": [20]
 		},
 		{
-			"data": ["They way you\u2019re petting me\u2026", "Are you thinking about something else?", "Something naughty?"],
+			"data": ["They way you’re petting me…", "Are you thinking about something else?", "Something naughty?"],
 			"a": [20]
 		},
 		{
-			"data": ["I did my hair today\u2026", "It\u2019s all messed up now!", "I\u2019m gonna get you back!"],
+			"data": ["I did my hair today…", "It’s all messed up now!", "I’m gonna get you back!"],
 			"a": [20]
 		},
 		{
@@ -1058,24 +1058,24 @@
 			"pod": [1]
 		},
 		{
-			"data": ["Only cheeks in the morning.", "Otherwise\u2026", "You get out of hand."],
+			"data": ["Only cheeks in the morning.", "Otherwise…", "You get out of hand."],
 			"a": [20,11,21],
 			"pod": [1]
 		},
 		{
-			"data": ["You\u2019re petting me again.", "Does that mean something?", "I want to know\u2026"],
+			"data": ["You’re petting me again.", "Does that mean something?", "I want to know…"],
 			"a": [20]
 		},
 		{
-			"data": ["Hey.", "Was there something in my hair?", "\u2026Oh, you were petting me."],
+			"data": ["Hey.", "Was there something in my hair?", "…Oh, you were petting me."],
 			"a": [10,11,12]
 		},
 		{
-			"data": ["Hey.", "You just petted me, didn\u2019t you?", "You\u2019re gonna mess up my hair."],
+			"data": ["Hey.", "You just petted me, didn’t you?", "You’re gonna mess up my hair."],
 			"a": [10,11,12]
 		},
 		{
-			"data": ["Good Morning.", "What\u2026", "What are you trying to do?"],
+			"data": ["Good Morning.", "What…", "What are you trying to do?"],
 			"a": [10,11,12],
 			"pod": [1]
 		},
@@ -1088,11 +1088,11 @@
 			"a": [20]
 		},
 		{
-			"data": ["When you pet me\u2026", "It makes my heart jump.", "I wonder why\u2026?"],
+			"data": ["When you pet me…", "It makes my heart jump.", "I wonder why…?"],
 			"a": [20]
 		},
 		{
-			"data": ["Petting me again?", "Try something else!", "That\u2019s not supposed to mean anything!"],
+			"data": ["Petting me again?", "Try something else!", "That’s not supposed to mean anything!"],
 			"a": [20]
 		},
 		{
@@ -1100,11 +1100,11 @@
 			"a": [20]
 		},
 		{
-			"data": ["\u2026", "Is that it?", "Hmm."],
+			"data": ["…", "Is that it?", "Hmm."],
 			"a": [20]
 		},
 		{
-			"data": ["Whoa!", "I don't like being pet\u2026", "Just kidding, I like being pet."],
+			"data": ["Whoa!", "I don't like being pet…", "Just kidding, I like being pet."],
 			"a": [20]
 		},
 		{
@@ -1112,11 +1112,11 @@
 			"a": [20,11]
 		},
 		{
-			"data": ["Nope! Stop it!", "Petting me like that\u2026", "\u2026Actually, keep doing that."],
+			"data": ["Nope! Stop it!", "Petting me like that…", "…Actually, keep doing that."],
 			"a": [20]
 		},
 		{
-			"data": ["Stop it!", "It's like petting a kid.", "\u2026But I like it."],
+			"data": ["Stop it!", "It's like petting a kid.", "…But I like it."],
 			"a": [20]
 		},
 		{
@@ -1124,11 +1124,11 @@
 			"a": [20,21]
 		},
 		{
-			"data": ["I've always been nervous\u2026", "But I'm not anymore,", "Because you're by my side."],
+			"data": ["I've always been nervous…", "But I'm not anymore,", "Because you're by my side."],
 			"a": [20,21]
 		},
 		{
-			"data": ["This has been satisfying for now\u2026", "But soon,", "This won't be enough."],
+			"data": ["This has been satisfying for now…", "But soon,", "This won't be enough."],
 			"a": [20,21]
 		},
 		{
@@ -1148,7 +1148,7 @@
 			"a": [20,21]
 		},
 		{
-			"data": ["You have to put more feeling into it.", "I don\u2019t want us\u2026", "To get used to this."],
+			"data": ["You have to put more feeling into it.", "I don’t want us…", "To get used to this."],
 			"a": [20,21]
 		},
 		{
@@ -1156,7 +1156,7 @@
 			"a": [21]
 		},
 		{
-			"data": ["\u2026\u2026Hey,", "Kiss me more.", "No\u2026?"],
+			"data": ["……Hey,", "Kiss me more.", "No…?"],
 			"a": [20,21]
 		},
 		{
@@ -1164,95 +1164,95 @@
 			"a": [21]
 		},
 		{
-			"data": ["When I think about your kiss,", "It makes me want to cry.", "I miss it too much\u2026"],
+			"data": ["When I think about your kiss,", "It makes me want to cry.", "I miss it too much…"],
 			"a": [20,21]
 		},
 		{
-			"data": ["Umm\u2026", "It's not that I don\u2019t like it.", "It's true!"],
+			"data": ["Umm…", "It's not that I don’t like it.", "It's true!"],
 			"a": [21]
 		},
 		{
-			"data": ["Ah\u2026(Stares)", "This\u2026", "This is kind of nice."],
+			"data": ["Ah…(Stares)", "This…", "This is kind of nice."],
 			"a": [20,21]
 		},
 		{
-			"data": ["Ahh! You surprised me?", "But, um, isn't it a bit small?", "I'm embarrassed\u2026"],
+			"data": ["Ahh! You surprised me?", "But, um, isn't it a bit small?", "I'm embarrassed…"],
 			"a": [21]
 		},
 		{
-			"data": ["Whoa.", "I wasn\u2019t ready for that!", "Can you do that again\u2026?"],
+			"data": ["Whoa.", "I wasn’t ready for that!", "Can you do that again…?"],
 			"a": [20,21]
 		},
 		{
-			"data": ["Ah\u2026(Stares)", "Man, what am I thinking about.", "No, I didn't say anything!"],
+			"data": ["Ah…(Stares)", "Man, what am I thinking about.", "No, I didn't say anything!"],
 			"a": [21]
 		},
 		{
-			"data": ["Ah\u2026(Stares)", "Oh man\u2026", "My cheeks are really hot."],
+			"data": ["Ah…(Stares)", "Oh man…", "My cheeks are really hot."],
 			"a": [21]
 		},
 		{
-			"data": ["Ah\u2026", "No, it's nothing.", "I'm telling you it's nothing!"],
+			"data": ["Ah…", "No, it's nothing.", "I'm telling you it's nothing!"],
 			"a": [21]
 		},
 		{
-			"data": ["Umm\u2026", "When you do that I get really relaxed.", "I wonder why!"],
+			"data": ["Umm…", "When you do that I get really relaxed.", "I wonder why!"],
 			"a": [10,11,12,21]
 		},
 		{
-			"data": ["Ummmm\u2026", "You're really sweet.", "Yeah\u2026"],
+			"data": ["Ummmm…", "You're really sweet.", "Yeah…"],
 			"a": [10,11,12]
 		},
 		{
-			"data": ["Ahhh!", "Sorry I screamed\u2026", "But, it was a surprise\u2026!"],
+			"data": ["Ahhh!", "Sorry I screamed…", "But, it was a surprise…!"],
 			"a": [20,21]
 		},
 		{
-			"data": ["Ahhh.", "That feels good\u2026", "If it cute if I say stuff like that\u2026?"],
+			"data": ["Ahhh.", "That feels good…", "If it cute if I say stuff like that…?"],
 			"a": [20,21]
 		},
 		{
-			"data": ["Ahhh!!", "Your hands are touching me\u2026!?", "\u2026No, I like it\u2026!"],
+			"data": ["Ahhh!!", "Your hands are touching me…!?", "…No, I like it…!"],
 			"a": [21]
 		},
 		{
-			"data": ["Ahhh!", "Sorry I screamed.", "I just got really embarrased."],
+			"data": ["Ahhh!", "Sorry I screamed.", "I just got really embarrassed."],
 			"a": [21]
 		},
 		{
-			"data": ["Whoaaa.", "I wanna do that again\u2026", "Is that okay with you?"],
+			"data": ["Whoaaa.", "I wanna do that again…", "Is that okay with you?"],
 			"a": [20,21]
 		},
 		{
-			"data": ["Whoa whoa.", "You caught me off guard.", "Kiss me\u2026again?"],
+			"data": ["Whoa whoa.", "You caught me off guard.", "Kiss me…again?"],
 			"a": [20,21]
 		},
 		{
-			"data": ["\u2026Hm! Hold on\u2026", "You're gonna break my heart!", "\u2026But I don\u2019t mind if it's you."],
+			"data": ["…Hm! Hold on…", "You're gonna break my heart!", "…But I don’t mind if it's you."],
 			"a": [21]
 		},
 		{
-			"data": ["\u2026!", "My heart's beating fast, isn't it?", "\u2026It's because of you."],
+			"data": ["…!", "My heart's beating fast, isn't it?", "…It's because of you."],
 			"a": [21]
 		},
 		{
-			"data": ["\u2026", "What if I say that I love it\u2026?", "Look at how fast my heart is beating."],
+			"data": ["…", "What if I say that I love it…?", "Look at how fast my heart is beating."],
 			"a": [20,21]
 		},
 		{
-			"data": ["\u2026", "Don't surprise me like that\u2026", "My heart's skipping beats."],
+			"data": ["…", "Don't surprise me like that…", "My heart's skipping beats."],
 			"a": [20,21]
 		},
 		{
-			"data": ["Hey!!", "I was keeping that\u2026", "And you stole it from me."],
+			"data": ["Hey!!", "I was keeping that…", "And you stole it from me."],
 			"a": [20,21]
 		},
 		{
-			"data": ["Whoa.", "You surprised me!", "My hands are shaking\u2026!"],
+			"data": ["Whoa.", "You surprised me!", "My hands are shaking…!"],
 			"a": [20]
 		},
 		{
-			"data": ["Umm\u2026", "Those hands, they're really big.", "They look like a man's hand."],
+			"data": ["Umm…", "Those hands, they're really big.", "They look like a man's hand."],
 			"a": [10,11,12]
 		},
 		{
@@ -1268,7 +1268,7 @@
 			"a": [20]
 		},
 		{
-			"data": ["Why\u2026", "This is against the rules!", "I was keeping that for someone\u2026"],
+			"data": ["Why…", "This is against the rules!", "I was keeping that for someone…"],
 			"a": [20,21]
 		},
 		{
@@ -1280,23 +1280,23 @@
 			"a": [20,21]
 		},
 		{
-			"data": ["Hm\u2026", "What? What is it?", "Are you that interested in me?"],
+			"data": ["Hm…", "What? What is it?", "Are you that interested in me?"],
 			"a": [21]
 		},
 		{
-			"data": ["Hm\u2026", "You should do that to someone you like.", "Oh, do you\u2026?"],
+			"data": ["Hm…", "You should do that to someone you like.", "Oh, do you…?"],
 			"a": [20,21]
 		},
 		{
-			"data": ["Hm..", "What? Don't look at me like that.", "\u2026"],
+			"data": ["Hm..", "What? Don't look at me like that.", "…"],
 			"a": [20]
 		},
 		{
-			"data": ["Hey\u2026", "You surprised me.", "Are you up to something?"],
+			"data": ["Hey…", "You surprised me.", "Are you up to something?"],
 			"a": [10,11,12]
 		},
 		{
-			"data": ["\u2026", "Did we just kiss\u2026?", "I'm blushing all over my body\u2026"],
+			"data": ["…", "Did we just kiss…?", "I'm blushing all over my body…"],
 			"a": [20,21]
 		},
 		{
@@ -1304,19 +1304,19 @@
 			"a": [20,21]
 		},
 		{
-			"data": ["Ahh!", "Wh, what that a kiss\u2026?", "You stole a kiss from me\u2026."],
+			"data": ["Ahh!", "Wh, what that a kiss…?", "You stole a kiss from me…."],
 			"a": [20]
 		},
 		{
-			"data": ["That\u2026", "Why did you do that?", "I don't know what to believe."],
+			"data": ["That…", "Why did you do that?", "I don't know what to believe."],
 			"a": [20,21]
 		},
 		{
-			"data": ["You know\u2026", "Why do you always do that?", "How much do you think you know about me?"],
+			"data": ["You know…", "Why do you always do that?", "How much do you think you know about me?"],
 			"a": [20,21]
 		},
 		{
-			"data": ["\u2026Ah\u2026!", "You scared me\u2026", "What's going on? Do you need a hug?"],
+			"data": ["…Ah…!", "You scared me…", "What's going on? Do you need a hug?"],
 			"a": [20,21]
 		},
 		{
@@ -1324,11 +1324,11 @@
 			"a": [20,21]
 		},
 		{
-			"data": ["Whoa.", "A kiss that suddenly\u2026", "I don't like it. No, I lied."],
+			"data": ["Whoa.", "A kiss that suddenly…", "I don't like it. No, I lied."],
 			"a": [20]
 		},
 		{
-			"data": ["\u2026", "You surprised me!", "That stays a secret between us, okay?"],
+			"data": ["…", "You surprised me!", "That stays a secret between us, okay?"],
 			"a": [20]
 		},
 		{
@@ -1336,11 +1336,11 @@
 			"a": [20,21]
 		},
 		{
-			"data": ["That\u2026", "It's not that it's okay if it's dark,", "But it's still noon!"],
+			"data": ["That…", "It's not that it's okay if it's dark,", "But it's still noon!"],
 			"a": [20,21]
 		},
 		{
-			"data": ["\u2026", "It's only noon\u2026!", "What if people see us\u2026!"],
+			"data": ["…", "It's only noon…!", "What if people see us…!"],
 			"a": [20,21]
 		},
 		{
@@ -1348,11 +1348,11 @@
 			"a": [20,21]
 		},
 		{
-			"data": ["You kiss\u2026", "I can never have enough of it.", "The more we do it, the more I want\u2026"],
+			"data": ["You kiss…", "I can never have enough of it.", "The more we do it, the more I want…"],
 			"a": [20,21]
 		},
 		{
-			"data": ["Kiss me more\u2026", "Until I tell you to stop.", "I haven't had enough yet."],
+			"data": ["Kiss me more…", "Until I tell you to stop.", "I haven't had enough yet."],
 			"a": [20,21]
 		},
 		{
@@ -1360,7 +1360,7 @@
 			"a": [20,21]
 		},
 		{
-			"data": ["Mm\u2026", "Your kiss.", "I love it."],
+			"data": ["Mm…", "Your kiss.", "I love it."],
 			"a": [20,21]
 		},
 		{
@@ -1368,31 +1368,31 @@
 			"a": [21]
 		},
 		{
-			"data": ["Kiss me more\u2026", "Until I start melting\u2026", "Mm\u2026"],
+			"data": ["Kiss me more…", "Until I start melting…", "Mm…"],
 			"a": [20,21]
 		},
 		{
-			"data": ["Where you're touching\u2026", "It's really\u2026hot.", "Ah\u2026I'm going crazy."],
+			"data": ["Where you're touching…", "It's really…hot.", "Ah…I'm going crazy."],
 			"a": [20,21]
 		},
 		{
-			"data": ["That was like saying hello, right?", "Give me a real kiss now.", "Mm\u2026"],
+			"data": ["That was like saying hello, right?", "Give me a real kiss now.", "Mm…"],
 			"a": [20,21]
 		},
 		{
-			"data": ["My body\u2026it's hot, isn't it?", "It's because you're touching me.", "I feel like I'm gonna pass out\u2026"],
+			"data": ["My body…it's hot, isn't it?", "It's because you're touching me.", "I feel like I'm gonna pass out…"],
 			"a": [20,21]
 		},
 		{
-			"data": ["What does\u2026this mean?", "\u2026?", "It's a bit suspicious!"],
+			"data": ["What does…this mean?", "…?", "It's a bit suspicious!"],
 			"a": [10,11,12]
 		},
 		{
-			"data": ["Hey,", "You wanna keep petting me, don\u2019t you.", "Go ahead!"],
+			"data": ["Hey,", "You wanna keep petting me, don’t you.", "Go ahead!"],
 			"a": [20]
 		},
 		{
-			"data": ["Can you tell?", "My heart's reacing.", "Here\u2026see for yourself."],
+			"data": ["Can you tell?", "My heart's racing.", "Here… See for yourself."],
 			"a": [20,21]
 		},
 		{
@@ -1400,7 +1400,7 @@
 			"a": [20,21]
 		},
 		{
-			"data": ["Where you're touching.", "It's really hot.", "It feels like it's burning up\u2026"],
+			"data": ["Where you're touching.", "It's really hot.", "It feels like it's burning up…"],
 			"a": [20,21]
 		},
 		{
@@ -1408,125 +1408,125 @@
 			"a": [20,21]
 		},
 		{
-			"data": ["Oh, is that it?", "You don\u2019t have to hold back once it's dark.", "One more time\u2026"],
+			"data": ["Oh, is that it?", "You don’t have to hold back once it's dark.", "One more time…"],
 			"a": [20,21]
 		},
 		{
-			"data": ["\u2026?", "What are you doing?", "Goodnight."],
+			"data": ["…?", "What are you doing?", "Goodnight."],
 			"a": [10,11,12]
 		},
 		{
-			"data": ["Since it's night\u2026", "You can be rougher with me.", "Okay?"],
+			"data": ["Since it's night…", "You can be rougher with me.", "Okay?"],
 			"a": [20,21]
 		},
 		{
-			"data": ["Mmm.", "That was more than usual\u2026", "Was I just imagining\u2026?"],
+			"data": ["Mmm.", "That was more than usual…", "Was I just imagining…?"],
 			"a": [20,21]
 		},
 		{
-			"data": ["\u2026?", "Everything okay?", "Alright\u2026(Backs away)"],
+			"data": ["…?", "Everything okay?", "Alright…(Backs away)"],
 			"a": [20]
 		},
 		{
-			"data": ["I like this.", "Because\u2026", "It\u2019s comforting."],
+			"data": ["I like this.", "Because…", "It’s comforting."],
 			"a": [20]
 		},
 		{
-			"data": ["I\u2019m not scared anymore.", "Why?", "I got used to it."],
+			"data": ["I’m not scared anymore.", "Why?", "I got used to it."],
 			"a": [21]
 		},
 		{
-			"data": ["This kiss\u2026", "Does it mean good morning?", "Or does it mean you like me?"],
+			"data": ["This kiss…", "Does it mean good morning?", "Or does it mean you like me?"],
 			"a": [20,21],
 			"pod": [1]
 		},
 		{
-			"data": ["Hey.", "Don\u2019t do that so early in the morning.", "Be careful, okay?"],
+			"data": ["Hey.", "Don’t do that so early in the morning.", "Be careful, okay?"],
 			"a": [10,11,12],
 			"pod": [1]
 		},
 		{
-			"data": ["Is this a form of greeting?", "Or\u2026", "Is it because you like me?"],
+			"data": ["Is this a form of greeting?", "Or…", "Is it because you like me?"],
 			"a": [20]
 		},
 		{
-			"data": ["Oh.", "Hey\u2026", "That\u2019s too deep\u2026"],
+			"data": ["Oh.", "Hey…", "That’s too deep…"],
 			"a": [20,21]
 		},
 		{
-			"data": ["Hey.", "That hurts\u2026", "Be gentle."],
+			"data": ["Hey.", "That hurts…", "Be gentle."],
 			"a": [20,21]
 		},
 		{
-			"data": ["\u2026", "I don\u2019t wanna open my eyes\u2026", "Just a little more\u2026"],
+			"data": ["…", "I don’t wanna open my eyes…", "Just a little more…"],
 			"a": [20]
 		},
 		{
-			"data": ["Close your eyes.", "Because\u2026", "I don\u2019t want you looking at me when you do that."],
+			"data": ["Close your eyes.", "Because…", "I don’t want you looking at me when you do that."],
 			"a": [20,21]
 		},
 		{
-			"data": ["Bit by bit\u2026", "You\u2019re getting better at this.", "A bit of room for improvement."],
+			"data": ["Bit by bit…", "You’re getting better at this.", "A bit of room for improvement."],
 			"a": [20,21]
 		},
 		{
-			"data": ["Hey\u2026", "\u2026", "You have to be nicer\u2026"],
+			"data": ["Hey…", "…", "You have to be nicer…"],
 			"a": [21]
 		},
 		{
-			"data": ["You can touch me all you want.", "I like it\u2026", "Only when you do it\u2026"],
+			"data": ["You can touch me all you want.", "I like it…", "Only when you do it…"],
 			"a": [20,21]
 		},
 		{
-			"data": ["\u2026", "Pretty rough early on.", "You\u2019re making me dizzy."],
+			"data": ["…", "Pretty rough early on.", "You’re making me dizzy."],
 			"a": [20,21]
 		},
 		{
-			"data": ["It\u2019s too early for that.", "But\u2026", "I don\u2019t mind."],
+			"data": ["It’s too early for that.", "But…", "I don’t mind."],
 			"a": [20,21]
 		},
 		{
-			"data": ["Whoa!", "I froze up, haha.", "But I don\u2019t mind."],
+			"data": ["Whoa!", "I froze up, haha.", "But I don’t mind."],
 			"a": [20,21]
 		},
 		{
-			"data": ["Is my face red?", "I can\u2019t help it.", "You surprised me."],
+			"data": ["Is my face red?", "I can’t help it.", "You surprised me."],
 			"a": [20]
 		},
 		{
-			"data": ["\u2026!", "I don\u2019t mind\u2026", "But do it softer."],
+			"data": ["…!", "I don’t mind…", "But do it softer."],
 			"a": [20,21]
 		},
 		{
-			"data": ["Don\u2019t be so rough with me\u2026", "You\u2019re driving me crazy\u2026", "That\u2019s not good\u2026"],
+			"data": ["Don’t be so rough with me…", "You’re driving me crazy…", "That’s not good…"],
 			"a": [20,21]
 		},
 		{
-			"data": ["I\u2019m used to it now.", "Either way\u2026", "I like it."],
+			"data": ["I’m used to it now.", "Either way…", "I like it."],
 			"a": [20,21]
 		},
 		{
-			"data": ["This kiss\u2026", "Is it as your girlfriend?", "Tell me!"],
+			"data": ["This kiss…", "Is it as your girlfriend?", "Tell me!"],
 			"a": [20,21]
 		},
 		{
-			"data": ["\u2026", "My heart\u2019s racing\u2026", "\u2026"],
+			"data": ["…", "My heart’s racing…", "…"],
 			"a": [21]
 		},
 		{
-			"data": ["You\u2019re good at kissing.", "Are you practicing somewhere?", "Tell me."],
+			"data": ["You’re good at kissing.", "Are you practicing somewhere?", "Tell me."],
 			"a": [20]
 		},
 		{
-			"data": ["\u2026", "That\u2019s it\u2026?", "One more time\u2026"],
+			"data": ["…", "That’s it…?", "One more time…"],
 			"a": [20,21]
 		},
 		{
-			"data": ["Hey\u2026", "No!", "Don\u2019t do more than that for now."],
+			"data": ["Hey…", "No!", "Don’t do more than that for now."],
 			"a": [21]
 		},
 		{
-			"data": ["The way you touch me seems like you\u2019ve had practice.", "Am I just imagining things?", "i wonder what it is."],
+			"data": ["The way you touch me seems like you’ve had practice.", "Am I just imagining things?", "i wonder what it is."],
 			"a": [20,21]
 		},
 		{
@@ -1534,7 +1534,7 @@
 			"a": [20,21]
 		},
 		{
-			"data": ["\u2026!!", "Sssssstop it!", "(I can't say that I like it\u2026!)"],
+			"data": ["…!!", "Sssssstop it!", "(I can't say that I like it…!)"],
 			"a": [20,21]
 		},
 		{
@@ -1546,11 +1546,11 @@
 			"a": [20]
 		},
 		{
-			"data": ["That kiss wasn\u2019t enough.", "Put more feeling into it.", "One more time?"],
+			"data": ["That kiss wasn’t enough.", "Put more feeling into it.", "One more time?"],
 			"a": [20]
 		},
 		{
-			"data": ["My body's getting hot\u2026", "It's spreading from where you're touching me\u2026", "I'm burning up\u2026"],
+			"data": ["My body's getting hot…", "It's spreading from where you're touching me…", "I'm burning up…"],
 			"a": [20,21]
 		},
 		{
@@ -1558,31 +1558,31 @@
 			"a": [10,11,12]
 		},
 		{
-			"data": ["\u2026", "What does this mean?", "I'm going to go to bed."],
+			"data": ["…", "What does this mean?", "I'm going to go to bed."],
 			"a": [10,11,12]
 		},
 		{
-			"data": ["Hm\u2026?", "What are you doing?", "I'm having a hard time understanding you."],
+			"data": ["Hm…?", "What are you doing?", "I'm having a hard time understanding you."],
 			"a": [10,11,12]
 		},
 		{
-			"data": ["Your kiss, it's always really gentle.", "It's already late,", "You don\u2019t have to hold back!"],
+			"data": ["Your kiss, it's always really gentle.", "It's already late,", "You don’t have to hold back!"],
 			"a": [20,21]
 		},
 		{
-			"data": ["Do you want to touch me from under my shirt?", "You\u2026you can.", "\u2026"],
+			"data": ["Do you want to touch me from under my shirt?", "You…you can.", "…"],
 			"a": [21]
 		},
 		{
-			"data": ["Mm\u2026", "Since it's nighttime,", "You can do more than that."],
+			"data": ["Mm…", "Since it's nighttime,", "You can do more than that."],
 			"a": [20,21]
 		},
 		{
-			"data": ["I can never get used to that.", "It makes my heart race.", "When your hands touch me\u2026"],
+			"data": ["I can never get used to that.", "It makes my heart race.", "When your hands touch me…"],
 			"a": [20,21]
 		},
 		{
-			"data": ["I only let you.", "Touch me there.", "Because\u2026I love you\u2026"],
+			"data": ["I only let you.", "Touch me there.", "Because…I love you…"],
 			"a": [21]
 		},
 		{
@@ -1590,7 +1590,7 @@
 			"a": [10,11,12]
 		},
 		{
-			"data": ["That\u2019s a gente kiss\u2026", "I can tell\u2026", "You want to take care of me."],
+			"data": ["That’s a gentle kiss…", "I can tell…", "You want to take care of me."],
 			"a": [20]
 		},
 		{
@@ -1598,87 +1598,87 @@
 			"a": [20,21]
 		},
 		{
-			"data": ["Deep in this chest\u2026", "There's something really important.", "It's\u2026my feelings for you."],
+			"data": ["Deep in this chest…", "There's something really important.", "It's…my feelings for you."],
 			"a": [20,21]
 		},
 		{
-			"data": ["I wonder\u2026", "Are you having fun watching me react?", "I'm already used to it."],
+			"data": ["I wonder…", "Are you having fun watching me react?", "I'm already used to it."],
 			"a": [20,21]
 		},
 		{
-			"data": ["What is it?", "You okay?", "\u2026It's warm, huh."],
+			"data": ["What is it?", "You okay?", "…It's warm, huh."],
 			"a": [10,11,12]
 		},
 		{
-			"data": ["Do you want to\u2026touch me?", "Yo don\u2019t have to hold back.", "Okay?"],
+			"data": ["Do you want to…touch me?", "Yo don’t have to hold back.", "Okay?"],
 			"a": [21]
 		},
 		{
-			"data": ["That kiss\u2026", "Was the best I've ever had.", "Do it again\u2026?"],
+			"data": ["That kiss…", "Was the best I've ever had.", "Do it again…?"],
 			"a": [20,21]
 		},
 		{
-			"data": ["You kiss\u2026", "Is like magic.", "I feel like I'm melting\u2026"],
+			"data": ["You kiss…", "Is like magic.", "I feel like I'm melting…"],
 			"a": [20]
 		},
 		{
-			"data": ["Hm\u2026?", "Hey, what are you trying to do?", "Go to sleep."],
+			"data": ["Hm…?", "Hey, what are you trying to do?", "Go to sleep."],
 			"a": [10,11,12]
 		},
 		{
-			"data": ["Mm\u2026", "One more time.", "Be rougher this time\u2026"],
+			"data": ["Mm…", "One more time.", "Be rougher this time…"],
 			"a": [20,21]
 		},
 		{
-			"data": ["Don\u2019t be too tough.", "Those kinds of kisses,", "Are for when we're alone."],
+			"data": ["Don’t be too tough.", "Those kinds of kisses,", "Are for when we're alone."],
 			"a": [20]
 		},
 		{
-			"data": ["Right now,", "I don't mind you doing that.", "I'm expecting it a little bit\u2026"],
+			"data": ["Right now,", "I don't mind you doing that.", "I'm expecting it a little bit…"],
 			"a": [20,21]
 		},
 		{
-			"data": ["This\u2026", "Is this for me?", "Thank you."],
+			"data": ["This…", "Is this for me?", "Thank you."],
 			"a": [20]
 		},
 		{
-			"data": ["Good Morning.", "\u2026", "I still have some\u2026resistance towards you."],
+			"data": ["Good Morning.", "…", "I still have some…resistance towards you."],
 			"a": [10,11,12],
 			"pod": [1]
 		},
 		{
-			"data": ["When you do this,", "Are you supposed to close your eyes?", "I don\u2019t know\u2026"],
+			"data": ["When you do this,", "Are you supposed to close your eyes?", "I don’t know…"],
 			"a": [20,21]
 		},
 		{
-			"data": ["Good Morning.", "\u2026Did you just pet me?", "You\u2019re making me,,,"],
+			"data": ["Good Morning.", "…Did you just pet me?", "You’re making me,,,"],
 			"a": [10,11,12],
 			"pod": [1]
 		},
 		{
-			"data": ["Good Morning.", "Haha, you gave me energy.", "I think I\u2019m going to have a good day."],
+			"data": ["Good Morning.", "Haha, you gave me energy.", "I think I’m going to have a good day."],
 			"a": [10,11,12,20],
 			"pod": [1]
 		},
 		{
-			"data": ["Hey, good morning.", "\u2026did you just pet me?", "Seems like you\u2019re used to doing that\u2026"],
+			"data": ["Hey, good morning.", "…did you just pet me?", "Seems like you’re used to doing that…"],
 			"a": [10,11,12],
 			"pod": [1]
 		},
 		{
-			"data": ["I like this a lot\u2026", "\u2026", "Keep doing that\u2026"],
+			"data": ["I like this a lot…", "…", "Keep doing that…"],
 			"a": [20]
 		},
 		{
-			"data": ["You hands, they\u2019re so warm.", "\u2026", "It\u2019s like your heart\u2026"],
+			"data": ["You hands, they’re so warm.", "…", "It’s like your heart…"],
 			"a": [21]
 		},
 		{
-			"data": ["Ah.", "It feels good.", "I\u2019m getting sleepy\u2026"],
+			"data": ["Ah.", "It feels good.", "I’m getting sleepy…"],
 			"a": [20]
 		},
 		{
-			"data": ["Ah\u2026(Stares)", "It feels like time stopped\u2026", "Oh, it's nothing."],
+			"data": ["Ah…(Stares)", "It feels like time stopped…", "Oh, it's nothing."],
 			"a": [20]
 		},
 		{
@@ -1686,7 +1686,7 @@
 			"a": [21]
 		},
 		{
-			"data": ["Waaaah!", "I finally get to see you\u2026!", "I thought I was gonna die of loneliness."],
+			"data": ["Waaaah!", "I finally get to see you…!", "I thought I was gonna die of loneliness."],
 			"a": [21]
 		},
 		{
@@ -1694,11 +1694,11 @@
 			"a": [20]
 		},
 		{
-			"data": ["Hehe.", "Your kiss, I don\u2019t know what to do with them.", "Once we start, it doesn\u2019t stop."],
+			"data": ["Hehe.", "Your kiss, I don’t know what to do with them.", "Once we start, it doesn’t stop."],
 			"a": [20,21]
 		},
 		{
-			"data": ["Waaaah!", "I missed you so much\u2026!", "Pet me more!"],
+			"data": ["Waaaah!", "I missed you so much…!", "Pet me more!"],
 			"a": [21]
 		},
 		{
@@ -1706,11 +1706,11 @@
 			"a": [20,21]
 		},
 		{
-			"data": ["Hehe!", "Your kiss, it's full of affection.", "I can tell\u2026I love you!"],
+			"data": ["Hehe!", "Your kiss, it's full of affection.", "I can tell…I love you!"],
 			"a": [20]
 		},
 		{
-			"data": ["Hee!", "Your kisses tastes like happiness.", "I wonder if it's because I love you\u2026"],
+			"data": ["Hee!", "Your kisses tastes like happiness.", "I wonder if it's because I love you…"],
 			"a": [20]
 		},
 		{
@@ -1718,7 +1718,7 @@
 			"a": [20]
 		},
 		{
-			"data": ["Ah!", "You surprised me\u2026it's okay.", "I'm special to you, right?"],
+			"data": ["Ah!", "You surprised me…it's okay.", "I'm special to you, right?"],
 			"a": [20,21]
 		},
 		{
@@ -1726,72 +1726,72 @@
 			"a": [21]
 		},
 		{
-			"data": ["Ah! Mm\u2026", "Could you tell that my heart's racing?", "Hehe, I'm embarrassed\u2026"],
+			"data": ["Ah! Mm…", "Could you tell that my heart's racing?", "Hehe, I'm embarrassed…"],
 			"a": [21]
 		},
 		{
-			"data": ["I\u2019ve wanted this\u2026", "Since yesterday.", "Keep doing that."],
+			"data": ["I’ve wanted this…", "Since yesterday.", "Keep doing that."],
 			"a": [20,21]
 		},
 		{
-			"data": ["Pet me more.", "Until I tell you to stop\u2026", "Your hands\u2026they\u2019re really warm."],
+			"data": ["Pet me more.", "Until I tell you to stop…", "Your hands…they’re really warm."],
 			"a": [20,21]
 		},
 		{
-			"data": ["Your hands\u2026", "They\u2019re nice and warm.", "I love it."],
+			"data": ["Your hands…", "They’re nice and warm.", "I love it."],
 			"a": [21]
 		},
 		{
-			"data": ["You can kiss me like always\u2026", "But i wanna try something different.", "Please\u2026?"],
+			"data": ["You can kiss me like always…", "But i wanna try something different.", "Please…?"],
 			"a": [20]
 		},
 		{
-			"data": ["Your hands\u2026", "They\u2019re hot.", "My entire body\u2019s hot too."],
+			"data": ["Your hands…", "They’re hot.", "My entire body’s hot too."],
 			"a": [21]
 		},
 		{
-			"data": ["Ah!", "\u2026It makes me happier than it embarrases me.", "You can do anything to me, okay?"],
+			"data": ["Ah!", "…It makes me happier than it embarrasses me.", "You can do anything to me, okay?"],
 			"a": [21]
 		},
 		{
-			"data": ["Hey.", "I can't take this anymore.", "\u2026Can I stay with you tonight?"],
+			"data": ["Hey.", "I can't take this anymore.", "…Can I stay with you tonight?"],
 			"a": [20,21]
 		},
 		{
-			"data": ["Ah!", "Do we do that because we're lovers?", "Um\u2026I like it."],
+			"data": ["Ah!", "Do we do that because we're lovers?", "Um…I like it."],
 			"a": [20,21]
 		},
 		{
-			"data": ["Whenever I get lonely\u2026", "I think about your hands.", "It comforts me\u2026"],
+			"data": ["Whenever I get lonely…", "I think about your hands.", "It comforts me…"],
 			"a": [20]
 		},
 		{
-			"data": ["When someone I like does that\u2026", "It makes me really happy.", "My heart\u2019s beating really fast\u2026"],
+			"data": ["When someone I like does that…", "It makes me really happy.", "My heart’s beating really fast…"],
 			"a": [20,21]
 		},
 		{
-			"data": ["Oh no\u2026", "My body\u2019s heating up like crazy.", "My feelings for you, it won\u2019t stop\u2026"],
+			"data": ["Oh no…", "My body’s heating up like crazy.", "My feelings for you, it won’t stop…"],
 			"a": [20,21]
 		},
 		{
-			"data": ["Morning kiss, huh.", "Can I expect more\u2026", "For later\u2026?"],
+			"data": ["Morning kiss, huh.", "Can I expect more…", "For later…?"],
 			"a": [20,21],
 			"pod": [1]
 		},
 		{
-			"data": ["That was longer than usual.", "Next time\u2026", "I want it to be longer."],
+			"data": ["That was longer than usual.", "Next time…", "I want it to be longer."],
 			"a": [20]
 		},
 		{
-			"data": ["Is that it?", "This\u2026", "Isn\u2019t enough\u2026"],
+			"data": ["Is that it?", "This…", "Isn’t enough…"],
 			"a": [20,21]
 		},
 		{
-			"data": ["Don\u2019t do this to anyone else\u2026", "Stuff like this\u2026", "Please\u2026"],
+			"data": ["Don’t do this to anyone else…", "Stuff like this…", "Please…"],
 			"a": [21]
 		},
 		{
-			"data": ["\u2026\u2026Next time,", "You have to squeeze me tight.", "And never let me go."],
+			"data": ["……Next time,", "You have to squeeze me tight.", "And never let me go."],
 			"a": [20,21]
 		},
 		{
@@ -1799,39 +1799,39 @@
 			"a": [20,21]
 		},
 		{
-			"data": ["Is that all you're gonna do?", "\u2026I can't wait\u2026", "Until nighttime\u2026"],
+			"data": ["Is that all you're gonna do?", "…I can't wait…", "Until nighttime…"],
 			"a": [20,21]
 		},
 		{
-			"data": ["Right here\u2026", "I haven\u2019t let anyone else touch it.", "Besides you\u2026"],
+			"data": ["Right here…", "I haven’t let anyone else touch it.", "Besides you…"],
 			"a": [21]
 		},
 		{
-			"data": ["Hey\u2026", "I'm sorry!", "I'm not feeling you like that yet."],
+			"data": ["Hey…", "I'm sorry!", "I'm not feeling you like that yet."],
 			"a": [20,21]
 		},
 		{
-			"data": ["Hey\u2026", "It's not that I don\u2019t like it\u2026", "But not now\u2026"],
+			"data": ["Hey…", "It's not that I don’t like it…", "But not now…"],
 			"a": [21]
 		},
 		{
-			"data": ["That\u2026", "Was a bit sudden.", "Makes me think about what's to come."],
+			"data": ["That…", "Was a bit sudden.", "Makes me think about what's to come."],
 			"a": [20,21]
 		},
 		{
-			"data": ["Hey\u2026", "Did you just feel like doing that?", "Or are you serious about us?"],
+			"data": ["Hey…", "Did you just feel like doing that?", "Or are you serious about us?"],
 			"a": [20,21]
 		},
 		{
-			"data": ["Hey\u2026", "Did you want to", "Kiss me that much?"],
+			"data": ["Hey…", "Did you want to", "Kiss me that much?"],
 			"a": [20]
 		},
 		{
-			"data": ["Ah\u2026", "Your hands are shaking.", "Are you nervous?"],
+			"data": ["Ah…", "Your hands are shaking.", "Are you nervous?"],
 			"a": [21]
 		},
 		{
-			"data": ["That\u2026", "I guess that's what you're looking for.", "Huh."],
+			"data": ["That…", "I guess that's what you're looking for.", "Huh."],
 			"a": [20,21]
 		},
 		{
@@ -1839,15 +1839,15 @@
 			"a": [20]
 		},
 		{
-			"data": ["Hm\u2026", "You like stuff like that, huh.", "I don't mind."],
+			"data": ["Hm…", "You like stuff like that, huh.", "I don't mind."],
 			"a": [20,21]
 		},
 		{
-			"data": ["Wha\u2026", "Tell me what that was all about.", "You have to say something."],
+			"data": ["Wha…", "Tell me what that was all about.", "You have to say something."],
 			"a": [20,21]
 		},
 		{
-			"data": ["Ah!", "I didn\u2019t expect,", "For you to do that."],
+			"data": ["Ah!", "I didn’t expect,", "For you to do that."],
 			"a": [20]
 		},
 		{
@@ -1871,7 +1871,7 @@
 			"a": [20]
 		},
 		{
-			"data": ["No kisses right now.", "It's dark\u2026", "And you might do more than that."],
+			"data": ["No kisses right now.", "It's dark…", "And you might do more than that."],
 			"a": [20]
 		},
 		{
@@ -1879,15 +1879,15 @@
 			"a": [20,21]
 		},
 		{
-			"data": ["That\u2026", "Was that as friends?", "Or was it more\u2026?"],
+			"data": ["That…", "Was that as friends?", "Or was it more…?"],
 			"a": [20,21]
 		},
 		{
-			"data": ["Really\u2026", "You want to touch more than my head, right?", "Be honest!"],
+			"data": ["Really…", "You want to touch more than my head, right?", "Be honest!"],
 			"a": [21]
 		},
 		{
-			"data": ["Ah!", "N, no\u2026", "You're scaring me\u2026!"],
+			"data": ["Ah!", "N, no…", "You're scaring me…!"],
 			"a": [21]
 		},
 		{
@@ -1895,11 +1895,11 @@
 			"a": [20,21]
 		},
 		{
-			"data": ["Hey hey.", "Don\u2019t get too crazy.", "Control yourself!"],
+			"data": ["Hey hey.", "Don’t get too crazy.", "Control yourself!"],
 			"a": [20,21]
 		},
 		{
-			"data": ["What!?", "That\u2019s out of the blue!", "Don't scare me like that."],
+			"data": ["What!?", "That’s out of the blue!", "Don't scare me like that."],
 			"a": [20,21]
 		},
 		{
@@ -1907,7 +1907,7 @@
 			"a": [21]
 		},
 		{
-			"data": ["\u2026", "You're petting me really gently.", "It feels really familiar."],
+			"data": ["…", "You're petting me really gently.", "It feels really familiar."],
 			"a": [21]
 		},
 		{
@@ -1915,11 +1915,11 @@
 			"a": [20]
 		},
 		{
-			"data": ["I've been wondering,", "If those hands are gonna get lower and lower.", "Don\u2019t touch me anywhere else, okay?"],
+			"data": ["I've been wondering,", "If those hands are gonna get lower and lower.", "Don’t touch me anywhere else, okay?"],
 			"a": [10,11,12]
 		},
 		{
-			"data": ["Ahh! (Pushes away)", "Oh\u2026", "I'm sorry I pushed you away."],
+			"data": ["Ahh! (Pushes away)", "Oh…", "I'm sorry I pushed you away."],
 			"a": [20,21]
 		},
 		{
@@ -1931,7 +1931,7 @@
 			"a": [20]
 		},
 		{
-			"data": ["Your hands\u2026", "They're warm\u2026", "It feels good."],
+			"data": ["Your hands…", "They're warm…", "It feels good."],
 			"a": [20]
 		},
 		{
@@ -1939,11 +1939,11 @@
 			"a": [21]
 		},
 		{
-			"data": ["Um.", "That kiss came out of nowhere\u2026", "Don't play around with me."],
+			"data": ["Um.", "That kiss came out of nowhere…", "Don't play around with me."],
 			"a": [20,21]
 		},
 		{
-			"data": ["Stop!", "Just on the cheeks\u2026", "I won't let you do more than that."],
+			"data": ["Stop!", "Just on the cheeks…", "I won't let you do more than that."],
 			"a": [20]
 		},
 		{
@@ -1951,11 +1951,11 @@
 			"a": [20,21]
 		},
 		{
-			"data": ["Mmm.", "I don\u2019t think that was just as friends\u2026", "What are you thinkinging about\u2026??"],
+			"data": ["Mmm.", "I don’t think that was just as friends…", "What are you thinking about…??"],
 			"a": [20]
 		},
 		{
-			"data": ["\u2026!", "Hold on.", "What is that? You need to explain to me."],
+			"data": ["…!", "Hold on.", "What is that? You need to explain to me."],
 			"a": [20]
 		},
 		{
@@ -1963,15 +1963,15 @@
 			"a": [21]
 		},
 		{
-			"data": ["Petting me like that\u2026", "Do I look childish to you or something?", "I don\u2019t get you."],
+			"data": ["Petting me like that…", "Do I look childish to you or something?", "I don’t get you."],
 			"a": [10,11,12]
 		},
 		{
-			"data": ["Hm?", "What are you doing\u2026", "(Sits)"],
+			"data": ["Hm?", "What are you doing…", "(Sits)"],
 			"a": [20]
 		},
 		{
-			"data": ["Not on the lips!", "That\u2019s for people that like me.", "What? You do?"],
+			"data": ["Not on the lips!", "That’s for people that like me.", "What? You do?"],
 			"a": [20,21]
 		},
 		{
@@ -1979,15 +1979,15 @@
 			"a": [20]
 		},
 		{
-			"data": ["When you do that\u2026", "I feel like a kid again.", "It warms my heart up."],
+			"data": ["When you do that…", "I feel like a kid again.", "It warms my heart up."],
 			"a": [20]
 		},
 		{
-			"data": ["I don\u2019t mind getting pet,", "But I honestly don\u2019t know why you do.", "Why do you do that?"],
+			"data": ["I don’t mind getting pet,", "But I honestly don’t know why you do.", "Why do you do that?"],
 			"a": [20,21]
 		},
 		{
-			"data": ["What is it\u2026?", "(Stares)", "\u2026Do you want me to pet you?"],
+			"data": ["What is it…?", "(Stares)", "…Do you want me to pet you?"],
 			"a": [20]
 		},
 		{
@@ -1995,23 +1995,23 @@
 			"a": [20,21]
 		},
 		{
-			"data": ["We're friends, right?", "Friends\u2026don\u2019t\u2026", "\u2026(Runs)"],
+			"data": ["We're friends, right?", "Friends…don’t…", "…(Runs)"],
 			"a": [20,21]
 		},
 		{
-			"data": ["Your hands.", "They're really warm and nice.", "It's comforting\u2026"],
+			"data": ["Your hands.", "They're really warm and nice.", "It's comforting…"],
 			"a": [20]
 		},
 		{
-			"data": ["Hmm?", "Your hands right now\u2026", "What are they really trying to do?"],
+			"data": ["Hmm?", "Your hands right now…", "What are they really trying to do?"],
 			"a": [20,21]
 		},
 		{
-			"data": ["Ah\u2026", "No more than that.", "Because\u2026I'm sorry."],
+			"data": ["Ah…", "No more than that.", "Because…I'm sorry."],
 			"a": [21]
 		},
 		{
-			"data": ["What\u2026", "Hold on!", "I have to go."],
+			"data": ["What…", "Hold on!", "I have to go."],
 			"a": [20,21]
 		},
 		{
@@ -2027,7 +2027,7 @@
 			"a": [21]
 		},
 		{
-			"data": ["So you think,", "That if you touch me suddenly I'll be okay with it?", "Don\u2019t even think about it."],
+			"data": ["So you think,", "That if you touch me suddenly I'll be okay with it?", "Don’t even think about it."],
 			"a": [20,21]
 		},
 		{
@@ -2039,7 +2039,7 @@
 			"a": [10,11,12]
 		},
 		{
-			"data": ["Hey.", "Don\u2019t push your luck!", "\u2026Jeez."],
+			"data": ["Hey.", "Don’t push your luck!", "…Jeez."],
 			"a": [21]
 		},
 		{
@@ -2051,11 +2051,11 @@
 			"a": [20]
 		},
 		{
-			"data": ["Ah!", "That's out of the blue\u2026", "You scared me\u2026"],
+			"data": ["Ah!", "That's out of the blue…", "You scared me…"],
 			"a": [20,21]
 		},
 		{
-			"data": ["Hey.", "That\u2019s enough.", "I can't believe you."],
+			"data": ["Hey.", "That’s enough.", "I can't believe you."],
 			"a": [20,21]
 		},
 		{
@@ -2067,15 +2067,15 @@
 			"a": [20,21]
 		},
 		{
-			"data": ["What is it?", "\u2026", "(What do I do now\u2026)"],
+			"data": ["What is it?", "…", "(What do I do now…)"],
 			"a": [20,21]
 		},
 		{
-			"data": ["What are you doing!", "I'm not a kid. Don\u2019t do that.", "You can, but still!"],
+			"data": ["What are you doing!", "I'm not a kid. Don’t do that.", "You can, but still!"],
 			"a": [10,11,12]
 		},
 		{
-			"data": ["Um\u2026", "What are you doing\u2026?", "\u2026"],
+			"data": ["Um…", "What are you doing…?", "…"],
 			"a": [20,21]
 		},
 		{
@@ -2083,23 +2083,23 @@
 			"a": [20]
 		},
 		{
-			"data": ["Ah!", "S, stop it\u2026", "You're making me cry\u2026"],
+			"data": ["Ah!", "S, stop it…", "You're making me cry…"],
 			"a": [20,21]
 		},
 		{
-			"data": ["This doesn\u2019t count as a kiss.", "Give me a real kiss!", "One more time!"],
+			"data": ["This doesn’t count as a kiss.", "Give me a real kiss!", "One more time!"],
 			"a": [20,21]
 		},
 		{
-			"data": ["Hey!", "Just because it's late\u2026", "That's too much!"],
+			"data": ["Hey!", "Just because it's late…", "That's too much!"],
 			"a": [21]
 		},
 		{
-			"data": ["You can kiss me on the cheeks\u2026", "But not on the lips.", "That\u2019s for later on."],
+			"data": ["You can kiss me on the cheeks…", "But not on the lips.", "That’s for later on."],
 			"a": [20]
 		},
 		{
-			"data": ["Is this some kind of message?", "I\u2019m not getting it.", "You should find another way."],
+			"data": ["Is this some kind of message?", "I’m not getting it.", "You should find another way."],
 			"a": [10,11,12]
 		},
 		{
@@ -2112,24 +2112,24 @@
 			"pod": [1]
 		},
 		{
-			"data": ["This kiss\u2026", "It\u2019s just as friends, right?", "Hm, never mind."],
+			"data": ["This kiss…", "It’s just as friends, right?", "Hm, never mind."],
 			"a": [20]
 		},
 		{
-			"data": ["Maybe\u2026", "You want to touch me\u2026", "Somewhere else\u2026?"],
+			"data": ["Maybe…", "You want to touch me…", "Somewhere else…?"],
 			"a": [10,11,12]
 		},
 		{
-			"data": ["Hey! Nice morning, isn\u2019t it?", "\u2026That\u2019s very nice of you.", "I feel like today\u2019s going to be a good day."],
+			"data": ["Hey! Nice morning, isn’t it?", "…That’s very nice of you.", "I feel like today’s going to be a good day."],
 			"a": [21],
 			"pod": [1]
 		},
 		{
-			"data": ["You have to\u2026", "Mess my hair up more.", "It feels good."],
+			"data": ["You have to…", "Mess my hair up more.", "It feels good."],
 			"a": [20]
 		},
 		{
-			"data": ["Again?", "I\u2019m not a kid!", "Alright, alright."],
+			"data": ["Again?", "I’m not a kid!", "Alright, alright."],
 			"a": [10,11,12]
 		},
 		{
@@ -2138,7 +2138,7 @@
 			"pod": [1]
 		},
 		{
-			"data": ["Honestly\u2026", "I bet you want to really touch me.", "Not yet, though!"],
+			"data": ["Honestly…", "I bet you want to really touch me.", "Not yet, though!"],
 			"a": [21]
 		},
 		{
@@ -2146,11 +2146,11 @@
 			"a": [20]
 		},
 		{
-			"data": ["\u2026", "Do you do that to everyone?", "\u2026"],
+			"data": ["…", "Do you do that to everyone?", "…"],
 			"a": [20,21]
 		},
 		{
-			"data": ["Huh?", "You really like petting me\u2026", "I don\u2019t mind\u2026"],
+			"data": ["Huh?", "You really like petting me…", "I don’t mind…"],
 			"a": [21]
 		},
 		{
@@ -2158,32 +2158,32 @@
 			"a": [20]
 		},
 		{
-			"data": ["Good Morning.", "Whoa! Wh\u2026What!", "What did you do that for!"],
+			"data": ["Good Morning.", "Whoa! Wh…What!", "What did you do that for!"],
 			"a": [20,21],
 			"pod": [1]
 		},
 		{
-			"data": ["Hey!", "You scared me.", "There\u2019s order of things!"],
+			"data": ["Hey!", "You scared me.", "There’s order of things!"],
 			"a": [21]
 		},
 		{
-			"data": ["You\u2019re gonna pet me again?", "\u2026", "I mean, you can all you want."],
+			"data": ["You’re gonna pet me again?", "…", "I mean, you can all you want."],
 			"a": [10,11,12]
 		},
 		{
-			"data": ["You only pet my head, huh.", "That doesn\u2019t mean you can touch me anywhere else!", "Don\u2019t misunderstand me."],
+			"data": ["You only pet my head, huh.", "That doesn’t mean you can touch me anywhere else!", "Don’t misunderstand me."],
 			"a": [10,11,12]
 		},
 		{
-			"data": ["\u2026Hey.", "\u2026Whoa!", "What are you doing!"],
+			"data": ["…Hey.", "…Whoa!", "What are you doing!"],
 			"a": [20,21]
 		},
 		{
-			"data": ["I\u2019m getting used to you doing that.", "I should tell you,", "I\u2019m only letting you do this."],
+			"data": ["I’m getting used to you doing that.", "I should tell you,", "I’m only letting you do this."],
 			"a": [20,21]
 		},
 		{
-			"data": ["What\u2026? Hey.", "Did you just touch me?", "Oh\u2026you meant to pet me\u2026"],
+			"data": ["What…? Hey.", "Did you just touch me?", "Oh…you meant to pet me…"],
 			"a": [10,11,12]
 		},
 		{
@@ -2191,45 +2191,45 @@
 			"a": [20]
 		},
 		{
-			"data": ["Do I look like a kid to you?", "But\u2026", "I\u2019m more like an adult than you think!"],
+			"data": ["Do I look like a kid to you?", "But…", "I’m more like an adult than you think!"],
 			"a": [20]
 		},
 		{
-			"data": ["Hey, good morning.", "Ahh!", "\u2026I can\u2019t believe you\u2026"],
+			"data": ["Hey, good morning.", "Ahh!", "…I can’t believe you…"],
 			"a": [20,21],
 			"pod": [1]
 		},
 		{
-			"data": ["Oh\u2026good morning.", "What\u2026", "What would you\u2026do that\u2026"],
+			"data": ["Oh…good morning.", "What…", "What would you…do that…"],
 			"a": [20,21],
 			"pod": [1]
 		},
 		{
-			"data": ["Aren\u2019t kisses for when,", "When we\u2019re closer to each other?", "Or maybe we already are?"],
+			"data": ["Aren’t kisses for when,", "When we’re closer to each other?", "Or maybe we already are?"],
 			"a": [20,21]
 		},
 		{
-			"data": ["I like being pet.", "Why?", "Because it\u2019s you."],
+			"data": ["I like being pet.", "Why?", "Because it’s you."],
 			"a": [10,11,12]
 		},
 		{
-			"data": ["Hey.", "\u2026Stop it.", "You horny man!"],
+			"data": ["Hey.", "…Stop it.", "You horny man!"],
 			"a": [20,21]
 		},
 		{
-			"data": ["Hey hey hey!", "I bet you\u2019re gonna use tongue.", "Alright, if you\u2019re not going to."],
+			"data": ["Hey hey hey!", "I bet you’re gonna use tongue.", "Alright, if you’re not going to."],
 			"a": [20]
 		},
 		{
-			"data": ["\u2026Hey.", "Is that supposed to be friendly?", "A little too touchy."],
+			"data": ["…Hey.", "Is that supposed to be friendly?", "A little too touchy."],
 			"a": [10,11,12]
 		},
 		{
-			"data": ["Ahh!", "It\u2019s so early still\u2026", "I'm not used to this\u2026"],
+			"data": ["Ahh!", "It’s so early still…", "I'm not used to this…"],
 			"a": [20,21]
 		},
 		{
-			"data": ["I mean, I don\u2019t not like it\u2026", "It pisses me off though!", "Treat me like an adult."],
+			"data": ["I mean, I don’t not like it…", "It pisses me off though!", "Treat me like an adult."],
 			"a": [21]
 		},
 		{
@@ -2249,11 +2249,11 @@
 			"a": [20,21]
 		},
 		{
-			"data": ["Stop!", "No more.", "I mean\u2026It\u2019s still really early\u2026"],
+			"data": ["Stop!", "No more.", "I mean…It’s still really early…"],
 			"a": [20,21]
 		},
 		{
-			"data": ["You have big, warm hands\u2026", "Really different from mine.", "\u2026"],
+			"data": ["You have big, warm hands…", "Really different from mine.", "…"],
 			"a": [20,21]
 		},
 		{
@@ -2261,12 +2261,12 @@
 			"a": [20,21]
 		},
 		{
-			"data": ["Good Morning.", "\u2026Uh\u2026.hey\u2026did you just\u2026?", "Do I look like that kind of girl?"],
+			"data": ["Good Morning.", "…Uh….hey…did you just…?", "Do I look like that kind of girl?"],
 			"a": [20,21],
 			"pod": [1]
 		},
 		{
-			"data": ["Mm\u2026", "What was that kiss supposed to mean?", "I wanna know\u2026"],
+			"data": ["Mm…", "What was that kiss supposed to mean?", "I wanna know…"],
 			"a": [20]
 		},
 		{
@@ -2274,22 +2274,22 @@
 			"a": [20]
 		},
 		{
-			"data": ["Oh\u2026good morning.", "W\u2026wait.", "Did\u2026you just\u2026?"],
+			"data": ["Oh…good morning.", "W…wait.", "Did…you just…?"],
 			"a": [20,21],
 			"pod": [1]
 		},
 		{
-			"data": ["Good Morning.", "Wh\u2026wait\u2026what\u2026?", "Do you do that to everyone?"],
+			"data": ["Good Morning.", "Wh…wait…what…?", "Do you do that to everyone?"],
 			"a": [20,21],
 			"pod": [1]
 		},
 		{
-			"data": ["Good Morning.", "\u2026Wha\u2026.", "Ahhhhhhhhhhh!!!"],
+			"data": ["Good Morning.", "…Wha….", "Ahhhhhhhhhhh!!!"],
 			"a": [21],
 			"pod": [1]
 		},
 		{
-			"data": ["It\u2019s still morning.", "I bet\u2026", "You\u2019re just continuing your dream?"],
+			"data": ["It’s still morning.", "I bet…", "You’re just continuing your dream?"],
 			"a": [20,21],
 			"pod": [1]
 		},
@@ -2299,11 +2299,11 @@
 			"pod": [1]
 		},
 		{
-			"data": ["Hey,", "I didn\u2019t say you could touch me!", "You have to ask for permission!"],
+			"data": ["Hey,", "I didn’t say you could touch me!", "You have to ask for permission!"],
 			"a": [21]
 		},
 		{
-			"data": ["Ah.", "That was really sudden\u2026", "You scared me\u2026"],
+			"data": ["Ah.", "That was really sudden…", "You scared me…"],
 			"a": [20,21]
 		},
 		{
@@ -2311,7 +2311,7 @@
 			"a": [21]
 		},
 		{
-			"data": ["Hey\u2026", "What are you doing?", "You're not even serious with me\u2026"],
+			"data": ["Hey…", "What are you doing?", "You're not even serious with me…"],
 			"a": [20]
 		},
 		{
@@ -2319,7 +2319,7 @@
 			"a": [20,21]
 		},
 		{
-			"data": ["Phew\u2026", "So\u2026", "Do you do this to other girls?"],
+			"data": ["Phew…", "So…", "Do you do this to other girls?"],
 			"a": [20,21]
 		},
 		{
@@ -2327,11 +2327,11 @@
 			"a": [21]
 		},
 		{
-			"data": ["Ah!!", "We touched lips.", "\u2026(Unease)"],
+			"data": ["Ah!!", "We touched lips.", "…(Unease)"],
 			"a": [20,21]
 		},
 		{
-			"data": ["Hey\u2026", "Don't get ahead of yourself.", "That was just a light kiss."],
+			"data": ["Hey…", "Don't get ahead of yourself.", "That was just a light kiss."],
 			"a": [20,21]
 		},
 		{
@@ -2343,7 +2343,7 @@
 			"a": [20]
 		},
 		{
-			"data": ["That\u2026", "Did you want to see what I would do?", "You need to watch yourself."],
+			"data": ["That…", "Did you want to see what I would do?", "You need to watch yourself."],
 			"a": [21]
 		},
 		{
@@ -2351,7 +2351,7 @@
 			"a": [20,21]
 		},
 		{
-			"data": ["Wha\u2026", "Unless you're serious,", "Don't so stuff like that."],
+			"data": ["Wha…", "Unless you're serious,", "Don't so stuff like that."],
 			"a": [20,21]
 		},
 		{
@@ -2359,7 +2359,7 @@
 			"a": [21]
 		},
 		{
-			"data": ["\u2026", "If you keep doing that,", "I might\u2026"],
+			"data": ["…", "If you keep doing that,", "I might…"],
 			"a": [20,21]
 		},
 		{
@@ -2371,23 +2371,23 @@
 			"a": [20,21]
 		},
 		{
-			"data": ["Hey!", "You scared me!", "You\u2026(Blushes)"],
+			"data": ["Hey!", "You scared me!", "You…(Blushes)"],
 			"a": [10,11,12]
 		},
 		{
-			"data": ["Hey\u2026", "What was that about!", "It's not like I wanted that!"],
+			"data": ["Hey…", "What was that about!", "It's not like I wanted that!"],
 			"a": [20]
 		},
 		{
-			"data": ["Phew\u2026", "Sorry, um\u2026", "My heart won't stop beating fast."],
+			"data": ["Phew…", "Sorry, um…", "My heart won't stop beating fast."],
 			"a": [21]
 		},
 		{
-			"data": ["I'll be straightfoward,", "Do you like me?", "If you do, tell me so."],
+			"data": ["I'll be straightforward,", "Do you like me?", "If you do, tell me so."],
 			"a": [20,21]
 		},
 		{
-			"data": ["\u2026", "I wonder if this is where it begins\u2026", "Our love\u2026"],
+			"data": ["…", "I wonder if this is where it begins…", "Our love…"],
 			"a": [20]
 		},
 		{
@@ -2395,7 +2395,7 @@
 			"a": [20,21]
 		},
 		{
-			"data": ["Phew\u2026", "No\u2026How do I say this.", "I can't look at you without getting exited!"],
+			"data": ["Phew…", "No…How do I say this.", "I can't look at you without getting exited!"],
 			"a": [21]
 		},
 		{
@@ -2403,15 +2403,15 @@
 			"a": [21]
 		},
 		{
-			"data": ["Hey!!", "Wh, what are you doing\u2026", "What if people see us!?"],
+			"data": ["Hey!!", "Wh, what are you doing…", "What if people see us!?"],
 			"a": [20]
 		},
 		{
-			"data": ["Hey\u2026", "I didn't tell you that you could do that.", "I did not!!"],
+			"data": ["Hey…", "I didn't tell you that you could do that.", "I did not!!"],
 			"a": [20]
 		},
 		{
-			"data": ["Phew\u2026", "Your face is too close,", "I can't look at you right."],
+			"data": ["Phew…", "Your face is too close,", "I can't look at you right."],
 			"a": [10,11,12]
 		},
 		{
@@ -2419,7 +2419,7 @@
 			"a": [20,21]
 		},
 		{
-			"data": ["What!?", "What was that\u2026", "No more than that!"],
+			"data": ["What!?", "What was that…", "No more than that!"],
 			"a": [20]
 		},
 		{
@@ -2427,23 +2427,23 @@
 			"a": [20,21]
 		},
 		{
-			"data": ["Hey\u2026", "(Heart racing)", "Ne, never mind."],
+			"data": ["Hey…", "(Heart racing)", "Ne, never mind."],
 			"a": [20,21]
 		},
 		{
-			"data": ["Um\u2026", "Wh, why did you!?", "Is it because you like me\u2026?"],
+			"data": ["Um…", "Wh, why did you!?", "Is it because you like me…?"],
 			"a": [20,21]
 		},
 		{
-			"data": ["What was that about!?", "I was being nice to you\u2026", "I don\u2019t like you!"],
+			"data": ["What was that about!?", "I was being nice to you…", "I don’t like you!"],
 			"a": [20,21]
 		},
 		{
-			"data": ["Umm,", "\u2026", "No, never mind."],
+			"data": ["Umm,", "…", "No, never mind."],
 			"a": [21]
 		},
 		{
-			"data": ["\u2026", "If you're not serious you have to stop.", "I'm taking this seriously, you know."],
+			"data": ["…", "If you're not serious you have to stop.", "I'm taking this seriously, you know."],
 			"a": [20]
 		},
 		{
@@ -2451,27 +2451,27 @@
 			"a": [20]
 		},
 		{
-			"data": ["Um\u2026", "Are you serious about me?", "If you're not, then I'm gonna cry."],
+			"data": ["Um…", "Are you serious about me?", "If you're not, then I'm gonna cry."],
 			"a": [20,21]
 		},
 		{
-			"data": ["\u2026", "You have to stop if this is a game.", "I'm really serious about us."],
+			"data": ["…", "You have to stop if this is a game.", "I'm really serious about us."],
 			"a": [20]
 		},
 		{
-			"data": ["What are you doing!?", "I can't believe you\u2026", "I don't care anymore!"],
+			"data": ["What are you doing!?", "I can't believe you…", "I don't care anymore!"],
 			"a": [21]
 		},
 		{
-			"data": ["\u2026", "Does this mean,", "You're serious about me?"],
+			"data": ["…", "Does this mean,", "You're serious about me?"],
 			"a": [20]
 		},
 		{
-			"data": ["\u2026", "I'm not crying!", "I was just surprised."],
+			"data": ["…", "I'm not crying!", "I was just surprised."],
 			"a": [20]
 		},
 		{
-			"data": ["Ah.", "I didn't expect that\u2026", "I don\u2019t know what to do."],
+			"data": ["Ah.", "I didn't expect that…", "I don’t know what to do."],
 			"a": [20]
 		},
 		{
@@ -2479,7 +2479,7 @@
 			"a": [20,21]
 		},
 		{
-			"data": ["Mm\u2026?", "This isn't what I wanted\u2026", "\u2026(Runs away)"],
+			"data": ["Mm…?", "This isn't what I wanted…", "…(Runs away)"],
 			"a": [20,21]
 		},
 		{
@@ -2503,7 +2503,7 @@
 			"a": [20,21]
 		},
 		{
-			"data": ["You can\u2026on the cheeks.", "But\u2026", "Not on the lips yet."],
+			"data": ["You can…on the cheeks.", "But…", "Not on the lips yet."],
 			"a": [20,21]
 		},
 		{
@@ -2511,7 +2511,7 @@
 			"a": [20]
 		},
 		{
-			"data": ["\u2026?", "Maybe,", "Do you just want to touch me?"],
+			"data": ["…?", "Maybe,", "Do you just want to touch me?"],
 			"a": [20]
 		},
 		{
@@ -2519,7 +2519,7 @@
 			"a": [20,21]
 		},
 		{
-			"data": ["Just because it's dark out\u2026", "This is a foul!", "I'm gonna block you!"],
+			"data": ["Just because it's dark out…", "This is a foul!", "I'm gonna block you!"],
 			"a": [21]
 		},
 		{
@@ -2531,11 +2531,11 @@
 			"a": [21]
 		},
 		{
-			"data": ["Ahh!", "S, stop it\u2026", "That wasn\u2019t nice\u2026(Runs)"],
+			"data": ["Ahh!", "S, stop it…", "That wasn’t nice…(Runs)"],
 			"a": [21]
 		},
 		{
-			"data": ["W, what!", "\u2026It's not like I'm used to it.", "It's rude!"],
+			"data": ["W, what!", "…It's not like I'm used to it.", "It's rude!"],
 			"a": [20,21]
 		},
 		{
@@ -2547,7 +2547,7 @@
 			"a": [21]
 		},
 		{
-			"data": ["What are you doing?", "Petting me like that for no reason\u2026", "Is a bit\u2026"],
+			"data": ["What are you doing?", "Petting me like that for no reason…", "Is a bit…"],
 			"a": [20]
 		},
 		{
@@ -2559,11 +2559,11 @@
 			"a": [20]
 		},
 		{
-			"data": ["Mm\u2026", "H, hold on.", "Not on the lips\u2026"],
+			"data": ["Mm…", "H, hold on.", "Not on the lips…"],
 			"a": [20]
 		},
 		{
-			"data": ["Huh? What?", "What was that about?", "Don\u2019t do that!"],
+			"data": ["Huh? What?", "What was that about?", "Don’t do that!"],
 			"a": [20,21]
 		},
 		{
@@ -2575,33 +2575,33 @@
 			"a": [20,21]
 		},
 		{
-			"data": ["Things like that,", "You\u2019re not supposed to do that lightheartedly!", "Do you understand?"],
+			"data": ["Things like that,", "You’re not supposed to do that lightheartedly!", "Do you understand?"],
 			"a": [21]
 		},
 		{
-			"data": ["Hey!", "Stop\u2026", "I\u2019m gonna cry\u2026"],
+			"data": ["Hey!", "Stop…", "I’m gonna cry…"],
 			"a": [21]
 		},
 		{
-			"data": ["Hey! Nice morning, isn\u2019t it?", "What are you doing\u2026", "Ughhhhh!"],
+			"data": ["Hey! Nice morning, isn’t it?", "What are you doing…", "Ughhhhh!"],
 			"a": [20,21],
 			"pod": [1]
 		},
 		{
-			"data": ["Good Morning.", "You just\u2026", "You really need to stop with that."],
+			"data": ["Good Morning.", "You just…", "You really need to stop with that."],
 			"a": [20],
 			"pod": [1]
 		},
 		{
-			"data": ["Really, what are you doing!?", "I bet\u2026", "You were having a weird dream, weren\u2019t you?"],
+			"data": ["Really, what are you doing!?", "I bet…", "You were having a weird dream, weren’t you?"],
 			"a": [20,21]
 		},
 		{
-			"data": ["Hey.", "Don\u2019t you think it\u2019s too soon for that?", "Ugh.."],
+			"data": ["Hey.", "Don’t you think it’s too soon for that?", "Ugh.."],
 			"a": [20]
 		},
 		{
-			"data": ["If it wasn\u2019t so early in the morning\u2026", "I wonder if your kisses would be rougher\u2026?", "\u2026"],
+			"data": ["If it wasn’t so early in the morning…", "I wonder if your kisses would be rougher…?", "…"],
 			"a": [20,21]
 		},
 		{
@@ -2609,39 +2609,39 @@
 			"a": [20,21]
 		},
 		{
-			"data": ["What are you doing so early on!", "It\u2019s embarrassing.", "Ugh."],
+			"data": ["What are you doing so early on!", "It’s embarrassing.", "Ugh."],
 			"a": [20,21]
 		},
 		{
-			"data": ["\u2026", "Are you happy now?", "Oh boy."],
+			"data": ["…", "Are you happy now?", "Oh boy."],
 			"a": [20,21]
 		},
 		{
-			"data": ["What?", "\u2026", "This calms me down for some reason."],
+			"data": ["What?", "…", "This calms me down for some reason."],
 			"a": [20,21]
 		},
 		{
-			"data": ["Stop\u2026", "You\u2019re just playing around.", "You know I\u2019m not."],
+			"data": ["Stop…", "You’re just playing around.", "You know I’m not."],
 			"a": [21]
 		},
 		{
-			"data": ["\u2026Hey.", "What are you doing!", "Stop it!"],
+			"data": ["…Hey.", "What are you doing!", "Stop it!"],
 			"a": [20]
 		},
 		{
-			"data": ["\u2026Hey.", "Whoa, what are you doing.", "You're being too touchy."],
+			"data": ["…Hey.", "Whoa, what are you doing.", "You're being too touchy."],
 			"a": [10,11,12]
 		},
 		{
-			"data": ["Sorry.", "Not on the lips.", "I\u2019m keeping this for my boyfriend."],
+			"data": ["Sorry.", "Not on the lips.", "I’m keeping this for my boyfriend."],
 			"a": [20]
 		},
 		{
-			"data": ["What\u2026? Hey.", "Whoa!! Did you just\u2026", "You just touched me! You\u2019re unbelievable!"],
+			"data": ["What…? Hey.", "Whoa!! Did you just…", "You just touched me! You’re unbelievable!"],
 			"a": [20,21]
 		},
 		{
-			"data": ["I have butterflies in my stomach\u2026", "It\u2019s not even the first time someone has petted me.", "I wonder if it\u2019s because it\u2019s you\u2026"],
+			"data": ["I have butterflies in my stomach…", "It’s not even the first time someone has petted me.", "I wonder if it’s because it’s you…"],
 			"a": [21]
 		},
 		{
@@ -2653,19 +2653,19 @@
 			"a": [20]
 		},
 		{
-			"data": ["Wh, what are you doing!", "From now on,", "You can't be more than 1 meter from me\u2026for today."],
+			"data": ["Wh, what are you doing!", "From now on,", "You can't be more than 1 meter from me…for today."],
 			"a": [20,21]
 		},
 		{
-			"data": ["Um\u2026", "We just met the other day.", "We can't be doing stuff like this."],
+			"data": ["Um…", "We just met the other day.", "We can't be doing stuff like this."],
 			"a": [20,21]
 		},
 		{
-			"data": ["I'm a little bit\u2026", "Excited,", "I can't look at you\u2026"],
+			"data": ["I'm a little bit…", "Excited,", "I can't look at you…"],
 			"a": [21]
 		},
 		{
-			"data": ["What!?", "What are you doing\u2026", "I guess you're impatient."],
+			"data": ["What!?", "What are you doing…", "I guess you're impatient."],
 			"a": [20,21]
 		},
 		{
@@ -2673,7 +2673,7 @@
 			"a": [20,21]
 		},
 		{
-			"data": ["Um\u2026", "This,", "Don't you think it's too soon for that?"],
+			"data": ["Um…", "This,", "Don't you think it's too soon for that?"],
 			"a": [21]
 		},
 		{
@@ -2681,15 +2681,15 @@
 			"a": [20]
 		},
 		{
-			"data": ["Um\u2026", "Hold on.", "We can't be doing this!"],
+			"data": ["Um…", "Hold on.", "We can't be doing this!"],
 			"a": [20,21]
 		},
 		{
-			"data": ["What!?", "Did you think\u2026", "Doing that would make me like you or something?"],
+			"data": ["What!?", "Did you think…", "Doing that would make me like you or something?"],
 			"a": [20]
 		},
 		{
-			"data": ["Oh\u2026", "No, I don't mean that I don't like it\u2026", "I just want to take care of our relationship."],
+			"data": ["Oh…", "No, I don't mean that I don't like it…", "I just want to take care of our relationship."],
 			"a": [21]
 		},
 		{
@@ -2701,7 +2701,7 @@
 			"a": [20,21]
 		},
 		{
-			"data": ["I bet\u2026", "You're imagining what's under my clothes!", "I knew it!"],
+			"data": ["I bet…", "You're imagining what's under my clothes!", "I knew it!"],
 			"a": [21]
 		},
 		{
@@ -2714,37 +2714,37 @@
 			"pod": [1]
 		},
 		{
-			"data": ["\u2026", "Don\u2019t be so rough!", "It\u2019s not nighttime yet!"],
+			"data": ["…", "Don’t be so rough!", "It’s not nighttime yet!"],
 			"a": [20,21]
 		},
 		{
-			"data": ["Oh\u2026good morning.", "Are you being serious?", "I don\u2019t like people like that\u2026"],
+			"data": ["Oh…good morning.", "Are you being serious?", "I don’t like people like that…"],
 			"a": [20,21],
 			"pod": [1]
 		},
 		{
-			"data": ["Hey!", "You\u2026!", "It\u2019s still early\u2026"],
+			"data": ["Hey!", "You…!", "It’s still early…"],
 			"a": [21]
 		},
 		{
-			"data": ["Ah!", "You scared me.", "You can\u2019t kiss me like that, not this early in the morning."],
+			"data": ["Ah!", "You scared me.", "You can’t kiss me like that, not this early in the morning."],
 			"a": [20]
 		},
 		{
-			"data": ["\u2026Hey.", "Did you just\u2026", "You perv!"],
+			"data": ["…Hey.", "Did you just…", "You perv!"],
 			"a": [21]
 		},
 		{
-			"data": ["Good Morning!", "Oh..um\u2026did you just pet me?", "I\u2019m going to blush."],
+			"data": ["Good Morning!", "Oh..um…did you just pet me?", "I’m going to blush."],
 			"a": [20,21],
 			"pod": [1]
 		},
 		{
-			"data": ["Ahh!!", "So are you taking me seriously?", "\u2026(Stares)"],
+			"data": ["Ahh!!", "So are you taking me seriously?", "…(Stares)"],
 			"a": [20,21]
 		},
 		{
-			"data": ["Hello.", "Hey, do you only do that to me?", "\u2026I was hoping so."],
+			"data": ["Hello.", "Hey, do you only do that to me?", "…I was hoping so."],
 			"a": [20,21]
 		},
 		{
@@ -2752,7 +2752,7 @@
 			"a": [20,21]
 		},
 		{
-			"data": ["What!?", "You're asking if you can?", "If you have to ask, don\u2019t do it!"],
+			"data": ["What!?", "You're asking if you can?", "If you have to ask, don’t do it!"],
 			"a": [20,21]
 		},
 		{
@@ -2760,7 +2760,7 @@
 			"a": [21]
 		},
 		{
-			"data": ["\u2026", "You can't be doing that.", "A kiss out of the blue."],
+			"data": ["…", "You can't be doing that.", "A kiss out of the blue."],
 			"a": [20,21]
 		},
 		{
@@ -2772,15 +2772,15 @@
 			"a": [21]
 		},
 		{
-			"data": ["Okay, that\u2019s enough!", "You're gonna get rougher and rougher, aren't you?", "Am I wrong?"],
+			"data": ["Okay, that’s enough!", "You're gonna get rougher and rougher, aren't you?", "Am I wrong?"],
 			"a": [20,21]
 		},
 		{
-			"data": ["You want to actually touch me, don\u2019t you?", "It says on your face!", "You're pretty honest, aren't you."],
+			"data": ["You want to actually touch me, don’t you?", "It says on your face!", "You're pretty honest, aren't you."],
 			"a": [20,21]
 		},
 		{
-			"data": ["\u2026!", "Why\u2026?", "\u2026"],
+			"data": ["…!", "Why…?", "…"],
 			"a": [20]
 		},
 		{
@@ -2788,30 +2788,30 @@
 			"a": [20,21]
 		},
 		{
-			"data": ["Oh (Pushes away)", "Oh\u2026Sorry.", "You caught me off guard\u2026"],
+			"data": ["Oh (Pushes away)", "Oh…Sorry.", "You caught me off guard…"],
 			"a": [20,21]
 		},
 		{
-			"data": ["\u2026?", "Oh, sorry.", "Stuff like that at night is exciting."],
+			"data": ["…?", "Oh, sorry.", "Stuff like that at night is exciting."],
 			"a": [20]
 		},
 		{
-			"data": ["Good Morning.", "Whoa! What!", "I don\u2019t want to talk to you right now."],
+			"data": ["Good Morning.", "Whoa! What!", "I don’t want to talk to you right now."],
 			"a": [20,21],
 			"pod": [1]
 		},
 		{
-			"data": ["Good Morning!", "Wh\u2026what\u2026", "You\u2019re seriously awful."],
+			"data": ["Good Morning!", "Wh…what…", "You’re seriously awful."],
 			"a": [21],
 			"pod": [1]
 		},
 		{
-			"data": ["Good Morning.", "Ahh! What are you doing!?", "Don\u2019t ever do that again!"],
+			"data": ["Good Morning.", "Ahh! What are you doing!?", "Don’t ever do that again!"],
 			"a": [20,21],
 			"pod": [1]
 		},
 		{
-			"data": ["Hey, good morning.", "Hey!", "You\u2026you just\u2026"],
+			"data": ["Hey, good morning.", "Hey!", "You…you just…"],
 			"a": [20,21],
 			"pod": [1]
 		},
@@ -2826,15 +2826,15 @@
 			"pod": [1]
 		},
 		{
-			"data": ["Really!?", "What are you thinking!", "We\u2019re not in that sort of relationship yet!"],
+			"data": ["Really!?", "What are you thinking!", "We’re not in that sort of relationship yet!"],
 			"a": [20,21]
 		},
 		{
-			"data": ["Whoa!", "In front of all these people?", "I\u2019m only letting you do this!"],
+			"data": ["Whoa!", "In front of all these people?", "I’m only letting you do this!"],
 			"a": [20]
 		},
 		{
-			"data": ["Hey!", "Don\u2019t touch me like that.", "Treat other the way you want to be treated, right?"],
+			"data": ["Hey!", "Don’t touch me like that.", "Treat other the way you want to be treated, right?"],
 			"a": [20,21]
 		},
 		{
@@ -2842,11 +2842,11 @@
 			"a": [20,21]
 		},
 		{
-			"data": ["\u2026", "Do I look easy?", "I did!?"],
+			"data": ["…", "Do I look easy?", "I did!?"],
 			"a": [20,21]
 		},
 		{
-			"data": ["Umm\u2026", "I get lonely easily,", "So I don't mind that\u2026"],
+			"data": ["Umm…", "I get lonely easily,", "So I don't mind that…"],
 			"a": [20]
 		},
 		{
@@ -2854,7 +2854,7 @@
 			"a": [20,21]
 		},
 		{
-			"data": ["Hey!", "It feels like you're treating me like a kid.", "\u2026You're not?"],
+			"data": ["Hey!", "It feels like you're treating me like a kid.", "…You're not?"],
 			"a": [20]
 		},
 		{
@@ -2862,7 +2862,7 @@
 			"a": [20]
 		},
 		{
-			"data": ["You know\u2026", "I don't think we're in that kind of relationship yet.", "I'm deducting points!"],
+			"data": ["You know…", "I don't think we're in that kind of relationship yet.", "I'm deducting points!"],
 			"a": [20,21]
 		},
 		{
@@ -2878,7 +2878,7 @@
 			"a": [21]
 		},
 		{
-			"data": ["Um\u2026", "Ho, hold on.", "Um\u2026I have to go."],
+			"data": ["Um…", "Ho, hold on.", "Um…I have to go."],
 			"a": [20]
 		},
 		{
@@ -2887,24 +2887,24 @@
 			"pod": [1]
 		},
 		{
-			"data": ["Hey, hey.", "It\u2019s still early.", "Do that when it\u2019s dark out."],
+			"data": ["Hey, hey.", "It’s still early.", "Do that when it’s dark out."],
 			"a": [21]
 		},
 		{
-			"data": ["What\u2026? Hey.", "I\u2019m not a morning person.", "Why would you do that!"],
+			"data": ["What…? Hey.", "I’m not a morning person.", "Why would you do that!"],
 			"a": [20,21]
 		},
 		{
-			"data": ["\u2026Hey.", "\u2026", "What are you doing!"],
+			"data": ["…Hey.", "…", "What are you doing!"],
 			"a": [20,21]
 		},
 		{
-			"data": ["Good Morning.", "If you\u2019re going to be like that\u2026", "I feel like I should take advantage."],
+			"data": ["Good Morning.", "If you’re going to be like that…", "I feel like I should take advantage."],
 			"a": [10,11,12],
 			"pod": [1]
 		},
 		{
-			"data": ["Don\u2019t get too crazy..", "Bit by bit\u2026", "I\u2019m getting crazy too\u2026"],
+			"data": ["Don’t get too crazy..", "Bit by bit…", "I’m getting crazy too…"],
 			"a": [21]
 		},
 		{
@@ -2913,7 +2913,7 @@
 			"pod": [1]
 		},
 		{
-			"data": ["Only on the cheeks\u2026", "Sorry.", "Are you upset now?"],
+			"data": ["Only on the cheeks…", "Sorry.", "Are you upset now?"],
 			"a": [20]
 		},
 		{
@@ -2925,7 +2925,7 @@
 			"a": [20,21]
 		},
 		{
-			"data": ["H, hey!", "It's not that I don\u2019t like it.", "I'm sorry!"],
+			"data": ["H, hey!", "It's not that I don’t like it.", "I'm sorry!"],
 			"a": [20,21]
 		},
 		{
@@ -2933,19 +2933,19 @@
 			"a": [20,21]
 		},
 		{
-			"data": ["Ah!!", "I've been interested in you,", "But a sudden kiss like that\u2026"],
+			"data": ["Ah!!", "I've been interested in you,", "But a sudden kiss like that…"],
 			"a": [20]
 		},
 		{
-			"data": ["W, wait!", "Um.", "This isn't good\u2026"],
+			"data": ["W, wait!", "Um.", "This isn't good…"],
 			"a": [20,21]
 		},
 		{
-			"data": ["Wha\u2026", "Just because it's dark out,", "What are you thinking?"],
+			"data": ["Wha…", "Just because it's dark out,", "What are you thinking?"],
 			"a": [20,21]
 		},
 		{
-			"data": ["Hey!", "What was that for!", "You should tell me before you do that\u2026"],
+			"data": ["Hey!", "What was that for!", "You should tell me before you do that…"],
 			"a": [21]
 		},
 		{
@@ -2953,11 +2953,11 @@
 			"a": [20,21]
 		},
 		{
-			"data": ["Hey!", "You were looking for the opportunity\u2026", "Too soon!"],
+			"data": ["Hey!", "You were looking for the opportunity…", "Too soon!"],
 			"a": [20,21]
 		},
 		{
-			"data": ["\u2026!!", "Wh, what are you doing!", "(What do I do\u2026!?)"],
+			"data": ["…!!", "Wh, what are you doing!", "(What do I do…!?)"],
 			"a": [20,21]
 		},
 		{
@@ -2977,11 +2977,11 @@
 			"a": [20,21]
 		},
 		{
-			"data": ["\u2026!!", "S, stop it!", "(I think I liked that\u2026!?)"],
+			"data": ["…!!", "S, stop it!", "(I think I liked that…!?)"],
 			"a": [20,21]
 		},
 		{
-			"data": ["\u2026!!", "Stop it!!!", "(He's gonna know my heart's going crazy!)"],
+			"data": ["…!!", "Stop it!!!", "(He's gonna know my heart's going crazy!)"],
 			"a": [20,21]
 		},
 		{
@@ -2989,31 +2989,31 @@
 			"a": [20,21]
 		},
 		{
-			"data": ["\u2026", "I didn't think,", "You would do that."],
+			"data": ["…", "I didn't think,", "You would do that."],
 			"a": [20,21]
 		},
 		{
-			"data": ["Um\u2026", "What is this?", "You're making me think\u2026"],
+			"data": ["Um…", "What is this?", "You're making me think…"],
 			"a": [20]
 		},
 		{
-			"data": ["Jeez.", "Just because it's nighttime\u2026", "Doesn\u2019t mean you can do that."],
+			"data": ["Jeez.", "Just because it's nighttime…", "Doesn’t mean you can do that."],
 			"a": [20,21]
 		},
 		{
-			"data": ["Stop\u2026", "Your face, it\u2019s scary\u2026", "\u2026But I like it."],
+			"data": ["Stop…", "Your face, it’s scary…", "…But I like it."],
 			"a": [20,21]
 		},
 		{
-			"data": ["It\u2019s still early\u2026", "No tongue, okay?", "\u2026"],
+			"data": ["It’s still early…", "No tongue, okay?", "…"],
 			"a": [20]
 		},
 		{
-			"data": ["\u2026", "You\u2019re getting better at this.", "The way you touch me."],
+			"data": ["…", "You’re getting better at this.", "The way you touch me."],
 			"a": [20,21]
 		},
 		{
-			"data": ["Heywhoa!", "I\u2019m not used to\u2026", "\u2026stuff like that."],
+			"data": ["Hey Whoa!", "I’m not used to…", "…stuff like that."],
 			"a": [21]
 		},
 		{
@@ -3021,7 +3021,7 @@
 			"a": [20,21]
 		},
 		{
-			"data": ["Hey.", "What are you doing!", "We\u2019re not in that kind of relationship!"],
+			"data": ["Hey.", "What are you doing!", "We’re not in that kind of relationship!"],
 			"a": [20,21]
 		},
 		{
@@ -3034,7 +3034,7 @@
 			"pod": [1]
 		},
 		{
-			"data": ["Hey!", "Do that when no one\u2019s watching!", "Phew."],
+			"data": ["Hey!", "Do that when no one’s watching!", "Phew."],
 			"a": [20]
 		},
 		{
@@ -3046,11 +3046,11 @@
 			"a": [20,21]
 		},
 		{
-			"data": ["What!?", "Did you just kiss me?", "It was so nonchalant, I didn\u2019t notice."],
+			"data": ["What!?", "Did you just kiss me?", "It was so nonchalant, I didn’t notice."],
 			"a": [20]
 		},
 		{
-			"data": ["Whoa!", "What a surprise!", "But I do feel like I\u2019m gonna have a good day!"],
+			"data": ["Whoa!", "What a surprise!", "But I do feel like I’m gonna have a good day!"],
 			"a": [20]
 		},
 		{
@@ -3059,24 +3059,24 @@
 			"pod": [1]
 		},
 		{
-			"data": ["Hey! How are ya?", "Whoa, that was unexpected.", "Haha, um\u2026"],
+			"data": ["Hey! How are ya?", "Whoa, that was unexpected.", "Haha, um…"],
 			"a": [20]
 		},
 		{
-			"data": ["Hey! It feels nice today, doesn\u2019t it?", "Whoa! What! Why\u2026", "That\u2019s really upsetting\u2026"],
+			"data": ["Hey! It feels nice today, doesn’t it?", "Whoa! What! Why…", "That’s really upsetting…"],
 			"a": [20]
 		},
 		{
-			"data": ["Hey.", "Stop, what are you doing!", "You\u2019re crazy."],
+			"data": ["Hey.", "Stop, what are you doing!", "You’re crazy."],
 			"a": [20,21]
 		},
 		{
-			"data": ["Good Morning.", "Who do you think I am?", "I expected more from you\u2026"],
+			"data": ["Good Morning.", "Who do you think I am?", "I expected more from you…"],
 			"a": [20,21],
 			"pod": [1]
 		},
 		{
-			"data": ["Hey.", "What are you doing! I\u2019m not your girlfriend!", "I don\u2019t care anymore!"],
+			"data": ["Hey.", "What are you doing! I’m not your girlfriend!", "I don’t care anymore!"],
 			"a": [20]
 		},
 		{
@@ -3085,28 +3085,28 @@
 			"pod": [1]
 		},
 		{
-			"data": ["Ahhh!", "Your hands, um, are touching\u2026!?", "Yeah, it was an accident, right?"],
+			"data": ["Ahhh!", "Your hands, um, are touching…!?", "Yeah, it was an accident, right?"],
 			"a": [20,21]
 		},
 		{
-			"data": ["Hey! Nice morning, isn\u2019t it?", "\u2026What? What was that for\u2026", "I don\u2019t know what you\u2019re looking for\u2026"],
+			"data": ["Hey! Nice morning, isn’t it?", "…What? What was that for…", "I don’t know what you’re looking for…"],
 			"a": [20],
 			"pod": [1]
 		},
 		{
-			"data": ["Hey.", "\u2026", "It hurts a little bit\u2026"],
+			"data": ["Hey.", "…", "It hurts a little bit…"],
 			"a": [21]
 		},
 		{
-			"data": ["Hey.", "Wh\u2026what are you doing!", "Dream on!"],
+			"data": ["Hey.", "Wh…what are you doing!", "Dream on!"],
 			"a": [20]
 		},
 		{
-			"data": ["Hey.", "Did you just\u2026", "You touched me, didn\u2019t you\u2026"],
+			"data": ["Hey.", "Did you just…", "You touched me, didn’t you…"],
 			"a": [21]
 		},
 		{
-			"data": ["Wh, what are you doing!", "Did you think I would let you?", "I haven't said you can\u2026yet!"],
+			"data": ["Wh, what are you doing!", "Did you think I would let you?", "I haven't said you can…yet!"],
 			"a": [20,21]
 		},
 		{
@@ -3114,15 +3114,15 @@
 			"a": [20]
 		},
 		{
-			"data": ["Hey\u2026", "What if people see us?", "I mean, I like it but\u2026"],
+			"data": ["Hey…", "What if people see us?", "I mean, I like it but…"],
 			"a": [20,21]
 		},
 		{
-			"data": ["Whoa.", "Kissing feels good\u2026", "Um, I was just kidding! It's a joke!"],
+			"data": ["Whoa.", "Kissing feels good…", "Um, I was just kidding! It's a joke!"],
 			"a": [20]
 		},
 		{
-			"data": ["\u2026!!", "What are you doing!?", "(I can't say that I liked it!)"],
+			"data": ["…!!", "What are you doing!?", "(I can't say that I liked it!)"],
 			"a": [20,21]
 		},
 		{
@@ -3130,19 +3130,19 @@
 			"a": [20,21]
 		},
 		{
-			"data": ["Mmm.", "Hey!", "That\u2019s too much\u2026"],
+			"data": ["Mmm.", "Hey!", "That’s too much…"],
 			"a": [20,21]
 		},
 		{
-			"data": ["Hey!", "That\u2019s too much.", "It\u2019s still early!"],
+			"data": ["Hey!", "That’s too much.", "It’s still early!"],
 			"a": [20,21]
 		},
 		{
-			"data": ["Mm\u2026", "Your kiss\u2026", "Is really sweet\u2026"],
+			"data": ["Mm…", "Your kiss…", "Is really sweet…"],
 			"a": [20,21]
 		},
 		{
-			"data":  [ "Mm\u2026", "Your kiss\u2026",  "Is really sweet\u2026" ],
+			"data":  [ "Mm…", "Your kiss…",  "Is really sweet…" ],
 			"a": [20]
 		}
 	]

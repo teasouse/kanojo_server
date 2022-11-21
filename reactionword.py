@@ -11,7 +11,7 @@ import random
 class ReactionwordManager(object):
     """docstring for ReactionwordManager"""
     def __init__(self, reactionword_file='reactionword.json'):
-        tmp = json.load(open(reactionword_file))
+        tmp = json.load(open(reactionword_file, encoding='utf-8'))
         self._items = tmp.get('reactionword')
 
     def reactionword_json(self, a, pod):
