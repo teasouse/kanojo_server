@@ -75,9 +75,9 @@ class KanojoManager(object):
 		tmp = json.loads(open('dress_up_clothes_time.json').read())
 		self.dress_up_time1 = [el for el in tmp.get('info') if el.get('dress_up_from')<el.get('dress_up_to')]
 		self.dress_up_time2 = [el for el in tmp.get('info') if el.get('dress_up_from')>el.get('dress_up_to')]
-		if self.db and self.db.seqs.find_one({ 'colection': 'kanojos' }) is None:
+		if self.db and self.db.seqs.find_one({ 'collection': 'kanojos' }) is None:
 			self.db.seqs.insert({
-					'colection': 'kanojos',
+					'collection': 'kanojos',
 					'id': 0
 				})
 
@@ -96,12 +96,15 @@ class KanojoManager(object):
 				return None
 
 		kid = self.db.seqs.find_and_modify(
-				query = {'colection': 'kanojos'},
+				query = {'collection': 'kanojos'},
 				update = {'$inc': {'id': 1}},
 				fields = {'id': 1, '_id': 0},
 				new = True
 			)
 		kid = kid.get('id', -1) if kid else -2
+
+		while self.db.kanojos.find_one({'id': kid}):
+			kid += 1
 
 		kanojo = { key: barcode_info[key] for key in barcode_fields }
 		kanojo.update({
@@ -125,7 +128,7 @@ class KanojoManager(object):
 				#"source": "\u82a5\u5ddd\u9f8d\u4e4b\u4ecb\u5168\u96c6\u30085\u3009 (\u3061\u304f\u307e\u6587\u5eab)",
 				#"follower_count": 0,
 				#"goods_button_visible": True,
-				#"relation_status": 2,
+				#"relation_status": RELATION_KANOJO,
 				"geo": params.get('product_geo', '0,0'),
 				#"advertising_banner_url": None,
 				#"advertising_product_title": None,
@@ -248,7 +251,7 @@ class KanojoManager(object):
 
 	@property
 	def default_kanojo(self):
-		rv = {"mascot_enabled": "0", "avatar_background_image_url": None, "in_room": True, "mouth_type": 1, "nose_type": 1, "body_type": 1, "race_type": 10, "spot_type": 1, "birth_day": 12, "sexual": 61, "id": 0, "recognition": 11, "on_advertising": None, "clothes_type": 701, "brow_type": 10, "consumption": 17, "like_rate": 1, "eye_position": 0, "source": "", "location": "Somewhere", "birth_month": 10, "follower_count": 1, "goods_button_visible": True, "accessory_type": 1, "birth_year": 2014, "possession": 11, "hair_type": 3, "clothes_color": 3, "relation_status": 2, "ear_type": 1, "brow_position": 0, "barcode": "************", "love_gauge": 50, "voted_like": False, "eye_color": 5, "glasses_type": 1, "hair_color": 23, "face_type": 3, "nationality": "Italy", "advertising_product_url": None, "geo": "0.0000,0.0000", "emotion_status": 50, "eye_type": 101, "mouth_position": 0, "name": 'Unknown', "fringe_type": 22, "skin_color": 2, "advertising_banner_url": None, "status": "Born in  12 Oct 2014 @ Somewhere. Area: Online. 0 users are following.\nShe has no relationship.", "advertising_product_title": None, "profile_image_url": "http://bk-dump.herokuapp.com/images/common/no_kanojo_picture.png", 'profile_image_full_url': "http://bk-dump.herokuapp.com/images/common/no_kanojo_picture_f.png"}
+		rv = {"mascot_enabled": "0", "avatar_background_image_url": None, "in_room": True, "mouth_type": 1, "nose_type": 1, "body_type": 1, "race_type": 10, "spot_type": 1, "birth_day": 12, "sexual": 61, "id": 0, "recognition": 11, "on_advertising": None, "clothes_type": 701, "brow_type": 10, "consumption": 17, "like_rate": 1, "eye_position": 0, "source": "", "location": "Somewhere", "birth_month": 10, "follower_count": 1, "goods_button_visible": True, "accessory_type": 1, "birth_year": 2014, "possession": 11, "hair_type": 3, "clothes_color": 3, "relation_status": RELATION_KANOJO, "ear_type": 1, "brow_position": 0, "barcode": "************", "love_gauge": 50, "voted_like": False, "eye_color": 5, "glasses_type": 1, "hair_color": 23, "face_type": 3, "nationality": "Italy", "advertising_product_url": None, "geo": "0.0000,0.0000", "emotion_status": 50, "eye_type": 101, "mouth_position": 0, "name": 'Unknown', "fringe_type": 22, "skin_color": 2, "advertising_banner_url": None, "status": "Born in  12 Oct 2014 @ Somewhere. Area: Online. 0 users are following.\nShe has no relationship.", "advertising_product_title": None, "profile_image_url": "http://bk-dump.herokuapp.com/images/common/no_kanojo_picture.png", 'profile_image_full_url': "http://bk-dump.herokuapp.com/images/common/no_kanojo_picture_f.png"}
 		return rv
 
 	def increment_scan_counter(self, kanojo, update_db_record=True):
@@ -296,7 +299,7 @@ class KanojoManager(object):
 			2 - RELATION_KANOJO
 			3 - RELATION_FRIEND
 		'''
-		return 2 if kanojo.get('id') in user.get('kanojos') else 3 if kanojo.get('id') in user.get('friends') else 1
+		return RELATION_KANOJO if kanojo.get('id') in user.get('kanojos') else RELATION_FRIEND if kanojo.get('id') in user.get('friends') else RELATION_OTHER
 
 	def fill_fields(self, kanojo, host_url, self_user=None, owner_user=None):
 		kanojo['status'] = 'Born in  %s.\n%d users are following.\n'%(time.strftime('%d %b %Y', time.gmtime(kanojo.get('birthday', 0))), len(kanojo.get('followers', [])))

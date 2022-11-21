@@ -7,13 +7,19 @@ __copyright__ = 'Copyright © 2014-2015, 2020-2022'
 import copy
 import json
 
+from constants import *
+
 ITEM_DESRIPTION_DICT = {
+	# TODO make behaviour match this description better
 	'attention': '\n*Attention\nThis is consumable item.\nThis item is for the user who is at level 1 or higher.\nWhen she wears clothes, love level is cut down less likely. Effectiveness is depending upon clothes she wears.\nWhen you give her more than 1clothes at the same time, KANOJO by herself selects which clothes she wears daily. Outfits can be given by her [friends], but she often seems to put on clothes given from her [owner].\nDressing time is depending on her area(where she was born).',
 	'date1': ' Enemies won\'t be able to approach your KANOJO for 1day when using this item.\nCaution: You can use this item only for your KANOJO.',
 	'date7': ' Enemies won\'t be able to approach your KANOJO for 7days when using this item.\nCaution: You can use this item only for your KANOJO.',
 	'date12h': ' Enemies won\'t be able to approach your KANOJO for 12hours when using this item.\nCaution: You can use this item only for your KANOJO.',
 }
 DESCRIPTION_FORMAT = "Dressing time: {dressing_time}\nIt throbs very much somehow when she puts this on..."
+
+# TODO Set 'flag' on item_categories to "true" if it is owned items
+# Currency Exchange 115Yen = $1 = 1 Ticket = ? B-coin
 
 class StoreManager(object):
 	"""docstring for StoreManager"""
@@ -26,17 +32,17 @@ class StoreManager(object):
 		#store_dates = json.load(open(dates_file))
 		#self._dates_categories = store_dates.get('categories')
 
-	def items(self, allow_kanojo, item_class):
-		_items = self._items if item_class==1 else self._dates
-		ctgrs = self.categories(allow_kanojo, item_class)
+	def items(self, kanojo_relation, item_class):
+		_items = self._items if item_class == 1 else self._dates
+		ctgrs = self.categories(kanojo_relation, item_class)
 		ctgrs = [x.get('item_category_id') for x in ctgrs]
-		itms = [x for x in _items if x.get('allow_kanojo', 0xFF) & allow_kanojo and x.get('category_id', 0) in ctgrs]
-		#itms = filter(lambda x: x.get('allow_kanojo', 0) & allow_kanojo, _items)
+		itms = [x for x in _items if x.get('relation_level', 0xFF) & kanojo_relation and x.get('category_id', 0) in ctgrs]
+		#itms = filter(lambda x: x.get('allow_kanojo', 0) & kanojo_relation, _items)
 		return itms
 
-	def categories(self, allow_kanojo, item_class):
+	def categories(self, kanojo_relation, item_class):
 		#_categories = self._items_categories if item_class==1 else self._dates_categories
-		ctgrs = [x for x in self._categories if x.get('allow_kanojo', 0) & allow_kanojo]
+		ctgrs = [x for x in self._categories if x.get('kanojo_relation', 0) & kanojo_relation]
 		return ctgrs
 
 	def clear_category(self, ctgr):
@@ -70,21 +76,21 @@ class StoreManager(object):
 		return rv
 
 	def category_by_id(self, item_category_id, item_class):
-		#_categories = self._items_categories if item_class==1 else self._dates_categories
-		_ctgrs = [c for c in self._categories if c.get('item_category_id')==item_category_id]
+		#_categories = self._items_categories if item_class==ITEM_CLASS_GOODS else self._dates_categories
+		_ctgrs = [c for c in self._categories if c.get('item_category_id') == item_category_id]
 		if len(_ctgrs):
 			return _ctgrs[0]
 		return None
 
 	def _items2categories(self, itms, item_class, user_level=None, has_items=None, set_user_has_flag=False):
-		#_categories = self._items_categories if item_class==1 else self._dates_categories
+		#_categories = self._items_categories if item_class == ITEM_CLASS_GOODS else self._dates_categories
 		item_categories = []
 		_itms = copy.deepcopy(itms)
 		while len(_itms):
 			i = _itms[0]
 			c = self.category_by_id(i.get('category_id'), item_class=item_class)
 			if c:
-				_ctgrs = [el for el in self._categories if el.get('group_title', -1)==c.get('group_title', -2) or el.get('item_category_id')==c.get('item_category_id')]
+				_ctgrs = [el for el in self._categories if el.get('group_title', -1) == c.get('group_title', -2) or el.get('item_category_id') == c.get('item_category_id')]
 				val = {
 					'items': []
 				}
@@ -121,18 +127,18 @@ class StoreManager(object):
 				_itms.remove(i)
 		return item_categories
 
-	def _item_list(self, allow_kanojo, item_class, user_level=None, filter_has_items=False, has_items=None):
-		itms = self.items(allow_kanojo, item_class=item_class)
+	def _item_list(self, kanojo_relation, item_class, user_level=None, filter_has_items=False, has_items=None):
+		items = self.items(kanojo_relation, item_class=item_class)
 		if filter_has_items:
 			store_item_ids = [x.get('store_item_id') for x in has_items]
-			itms = [x for x in itms if x.get('item_id') in store_item_ids]
-		return self._items2categories(itms, item_class=item_class, user_level=user_level, has_items=has_items, set_user_has_flag=filter_has_items)
+			items = [x for x in items if x.get('item_id') in store_item_ids]
+		return self._items2categories(items, item_class=item_class, user_level=user_level, has_items=has_items, set_user_has_flag=filter_has_items)
 
-	def goods_list(self, allow_kanojo, user_level=None, filter_has_items=False, has_items=None):
-		return self._item_list(allow_kanojo=allow_kanojo, item_class=1, user_level=user_level, filter_has_items=filter_has_items, has_items=has_items)
+	def goods_list(self, kanojo_relation, user_level=None, filter_has_items=False, has_items=None):
+		return self._item_list(kanojo_relation=kanojo_relation, item_class=GIFT_ITEM_CLASS, user_level=user_level, filter_has_items=filter_has_items, has_items=has_items)
 
-	def dates_list(self, allow_kanojo, user_level=None, filter_has_items=False, has_items=None):
-		return self._item_list(allow_kanojo=allow_kanojo, item_class=2, user_level=user_level, filter_has_items=filter_has_items, has_items=has_items)
+	def dates_list(self, kanojo_relation, user_level=None, filter_has_items=False, has_items=None):
+		return self._item_list(kanojo_relation=kanojo_relation, item_class=DATE_ITEM_CLASS, user_level=user_level, filter_has_items=filter_has_items, has_items=has_items)
 
 	def _category_items2categories(self, itms, set_user_has_flag=False, has_items=None):
 		item_categories = []
@@ -177,10 +183,10 @@ class StoreManager(object):
 		return self._category_items2categories(itms, set_user_has_flag=filter_has_items, has_items=has_items)
 
 	def category_goods(self, item_category_id, filter_has_items=False, has_items=None):
-		return self._category_items(item_category_id=item_category_id, item_class=1, filter_has_items=filter_has_items, has_items=has_items)
+		return self._category_items(item_category_id=item_category_id, item_class=GIFT_ITEM_CLASS, filter_has_items=filter_has_items, has_items=has_items)
 
 	def category_dates(self, item_category_id, filter_has_items=False, has_items=None):
-		return self._category_items(item_category_id=item_category_id, item_class=2, filter_has_items=filter_has_items, has_items=has_items)
+		return self._category_items(item_category_id=item_category_id, item_class=DATE_ITEM_CLASS, filter_has_items=filter_has_items, has_items=has_items)
 
 	def get_item(self, item_id):
 		'''
@@ -206,9 +212,9 @@ class StoreManager(object):
 		item_ids = [el.get('item_id') for el in self._items]
 		date_ids = [el.get('item_id') for el in self._dates]
 		if item_id in item_ids and item_id not in date_ids:
-			return 1
+			return GIFT_ITEM_CLASS
 		elif item_id in date_ids and item_id not in item_ids:
-			return 2
+			return DATE_ITEM_CLASS
 		else:
 			return 0
 
@@ -240,7 +246,77 @@ if __name__ == "__main__":
 		else:
 			return obj
 	dt_old = sm.item_list_from_categories(k_type, user_level=u_level)
-	#dt = {"code": 200, "item_categories": [{"items": [{"description": "Any KANOJOs love flowers. This item may increase KANOJO's love level.", "title": "A bunch of flowers", "price": "Price: 25B Coins", "image_url": "http://www.barcodekanojo.com/images/api/item/basic/gift_flower.png", "item_id": 1, "image_thumbnail_url": "http://www.barcodekanojo.com/images/api/item/basic/gift_flower_thm.png"}, {"description": "A bit fancy gift. This item may increase KANOJO's love level.", "title": "Perfume", "price": "Price: 40B Coins", "image_url": "http://www.barcodekanojo.com/images/api/item/basic/gift_perfume.png", "item_id": 2, "image_thumbnail_url": "http://www.barcodekanojo.com/images/api/item/basic/gift_perfume_thm.png"}], "level": 1, "title": "B coin"}, {"items": [{"category_id": 6, "image_thumbnail_url": "http://www.barcodekanojo.com/images/api/item/category/thm/wardrobe_thm.png", "description": "Buy clothes to your Kanojo or friends for present!", "expand_flag": 0, "title": "Clothes"}, {"category_id": 24, "image_thumbnail_url": "http://www.barcodekanojo.com/images/api/item/category/thm/category_glasses.png", "description": "Be more fashionable with glasses! Give it to her now!", "expand_flag": 0, "title": "EyeWear"}, {"category_id": 46, "image_thumbnail_url": "http://www.barcodekanojo.com/images/api/item/consumption/thm/item_bcoin_thm.png", "description": "B coin", "expand_flag": 0, "title": "B COIN"}, {"category_id": 44, "image_thumbnail_url": "http://www.barcodekanojo.com/images/api/item/consumption/thm/item_permanant_kanojo_thm.png", "description": "Wedding Ware For Permanent Kanojo", "expand_flag": 1, "title": "Wedding Ware"}], "title": "Wardrobe"}, {"items": [{"category_id": 7, "image_thumbnail_url": "http://www.barcodekanojo.com/images/api/item/category/thm/drink_energy_thm.png", "description": "Gain your Stamina.", "expand_flag": 0, "title": "Energy Drinks"}], "title": "Portion"}, {"items": [{"category_id": 8, "image_thumbnail_url": "http://www.barcodekanojo.com/images/api/item/category/thm/letter_goodbye_thm.png", "description": "To dump your Kanojo...", "expand_flag": 0, "title": "Goodbye Letter"}], "title": "Other"}]}
+	dt = {
+		"code": 200,
+		"item_categories": [
+			{
+				"items": [
+					{
+						"description": "Any KANOJOs love flowers. This item may increase KANOJO's love level.",
+						"title": "A bunch of flowers",
+						"price": "Price: 25B Coins",
+						"image_url": "http://www.barcodekanojo.com/images/api/item/basic/gift_flower.png",
+						"item_id": 1,
+						"image_thumbnail_url": "http://www.barcodekanojo.com/images/api/item/basic/gift_flower_thm.png"},
+					{
+						"description": "A bit fancy gift. This item may increase KANOJO's love level.",
+						"title": "Perfume",
+						"price": "Price: 40B Coins",
+						"image_url": "http://www.barcodekanojo.com/images/api/item/basic/gift_perfume.png",
+						"item_id": 2,
+						"image_thumbnail_url": "http://www.barcodekanojo.com/images/api/item/basic/gift_perfume_thm.png"}],
+				"level": 1,
+				"title": "B coin"},
+			{
+				"items": [
+					{
+						"category_id": 6,
+						"image_thumbnail_url": "http://www.barcodekanojo.com/images/api/item/category/thm/wardrobe_thm.png",
+						"description": "Buy clothes to your Kanojo or friends for present!",
+						"expand_flag": 0,
+						"title": "Clothes"},
+					{
+						"category_id": 24,
+						"image_thumbnail_url": "http://www.barcodekanojo.com/images/api/item/category/thm/category_glasses.png",
+						"description": "Be more fashionable with glasses! Give it to her now!",
+						"expand_flag": 0,
+						"title": "EyeWear"},
+					{
+						"category_id": 46,
+						"image_thumbnail_url": "http://www.barcodekanojo.com/images/api/item/consumption/thm/item_bcoin_thm.png",
+						"description": "B coin",
+						"expand_flag": 0,
+						"title": "B COIN"},
+					{
+						"category_id": 44,
+						"image_thumbnail_url": "http://www.barcodekanojo.com/images/api/item/consumption/thm/item_permanant_kanojo_thm.png",
+						"description": "Wedding Ware For Permanent Kanojo",
+						"expand_flag": 1,
+						"title": "Wedding Ware"}],
+				"title": "Wardrobe"},
+			{
+				"items": [
+					{
+						"category_id": 7,
+						"image_thumbnail_url": "http://www.barcodekanojo.com/images/api/item/category/thm/drink_energy_thm.png",
+						"description": "Gain your Stamina.",
+						"expand_flag": 0,
+						"title": "Energy Drinks"
+					}
+				],
+				"title": "Portion"
+			},
+			{
+				"items": [
+					{
+						"category_id": 8,
+						"image_thumbnail_url": "http://www.barcodekanojo.com/images/api/item/category/thm/letter_goodbye_thm.png",
+						"description": "To dump your Kanojo...",
+						"expand_flag": 0,
+						"title": "Goodbye Letter"
+					}
+				],
+				"title": "Other"}]}
 	print('Сomparison:', ordered(dt) == ordered(dt_old))
 	#print json.dumps(dt_old)
 

@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 __author__ = 'Andrey Derevyagin,  Goujer'
-__copyright__ = 'Copyright © 2014-2015'
+__copyright__ = 'Copyright © 2014-2015, 2020-2022'
 
 import atexit
 import os.path
@@ -178,14 +178,16 @@ def post():
 		else:
 			seqs_collection = 'posts_rejected'
 		pid = db.seqs.find_and_modify(
-				query = {'colection': seqs_collection},
+				query = {'collection': seqs_collection},
 				update = {'$inc': {'id': 1}},
 				fields = {'id': 1, '_id': 0},
 				new = True
 			)
+		while db.posts.find_one({'id': pid if pid else 1}):
+			pid += 1
 		if pid is None:
 			pid = {
-					'colection': seqs_collection,
+					'collection': seqs_collection,
 					'id': 1
 				}
 			try:
@@ -455,14 +457,16 @@ def generate_barcode():
 	bc = None
 	while True:
 		bid = db.seqs.find_and_modify(
-					query = {'colection': 'barcode_counter'},
+					query = {'collection': 'barcode_counter'},
 					update = {'$inc': {'id': 1}},
 					fields = {'id': 1, '_id': 0},
 					new = True
 				)
+		while db.barcode_tmp.find_one({'id': bid if bid else 1}):
+			bid += 1
 		if not bid:
 			bid = {
-					'colection': 'barcode_counter',
+					'collection': 'barcode_counter',
 					'id': 1
 				}
 			try:
@@ -893,7 +897,7 @@ def apibanner_kanojoroom_reactionword():
 	try:
 		a = int(prms.get('a'))
 		pod = int(prms.get('pod'))
-	except ValueError as e:
+	except ValueError:
 		return json_response({ "code": 400 })
 	val = {
 		'text': reactionword.reactionword_json(a, pod)
@@ -1415,7 +1419,7 @@ def communication_store_items():
 	try:
 		item_class = int(prms.get('item_class'))
 		item_category_id = int(prms.get('item_category_id'))
-	except ValueError as e:
+	except ValueError:
 		return json_response({ "code": 400 })
 	rspns = { 'code': 200 }
 
@@ -1450,17 +1454,19 @@ def communication_date_list():
 
 	kanojo = kanojo_manager.kanojo(kanojo_id, None, clear=CLEAR_NONE)
 	self_user = user_manager.user(uid=session['id'], clear=CLEAR_NONE)
-	allow_kanojo = RELATION_OTHER
-	if kanojo.get('owner_user_id') == session['id']:
-		allow_kanojo = RELATION_KANOJO
+	# Find Relationship level
+	kanojo_relation = RELATION_OTHER
+	if session['id'] == kanojo.get('owner_user_id'):
+		kanojo_relation = RELATION_KANOJO
 	elif session['id'] in kanojo.get('followers', []):
-		allow_kanojo = RELATION_FRIEND
-	if type_id == 1:
-		rspns['item_categories'] = store.dates_list(allow_kanojo, user_level=self_user.get('level'))
-	elif type_id == 2:
+		kanojo_relation = RELATION_FRIEND
+
+	if type_id == TYPE_STORE:
+		rspns['item_categories'] = store.dates_list(kanojo_relation, user_level=self_user.get('level'))
+	elif type_id == TYPE_ITEM_LIST:
 		has_items = user_manager.user_items(self_user)
 		if has_items:
-			rspns['item_categories'] = store.dates_list(allow_kanojo, user_level=self_user.get('level'), filter_has_items=True, has_items=has_items)
+			rspns['item_categories'] = store.dates_list(kanojo_relation, user_level=self_user.get('level'), filter_has_items=True, has_items=has_items)
 		else:
 			rspns['item_categories'] = []
 
@@ -1501,23 +1507,23 @@ def communication_item_list():
 	try:
 		type_id = int(prms.get('type_id'))
 		kanojo_id = int(prms.get('kanojo_id'))
-	except ValueError as e:
+	except ValueError:
 		return json_response({ "code": 400 })
 	rspns = { 'code': 200 }
 
 	kanojo = kanojo_manager.kanojo(kanojo_id, None, clear=CLEAR_NONE)
 	self_user = user_manager.user(uid=session['id'], clear=CLEAR_NONE)
-	allow_kanojo = RELATION_OTHER
+	kanojo_relation = RELATION_OTHER
 	if kanojo.get('owner_user_id') == session['id']:
-		allow_kanojo = RELATION_KANOJO
+		kanojo_relation = RELATION_KANOJO
 	elif session['id'] in kanojo.get('followers', []):
-		allow_kanojo = RELATION_FRIEND
-	if type_id == 1:
-		rspns['item_categories'] = store.goods_list(allow_kanojo, user_level=self_user.get('level'))
-	elif type_id == 2:
+		kanojo_relation = RELATION_FRIEND
+	if type_id == GIFT_ITEM_CLASS:
+		rspns['item_categories'] = store.goods_list(kanojo_relation, user_level=self_user.get('level'))
+	elif type_id == DATE_ITEM_CLASS:
 		has_items = user_manager.user_items(self_user)
 		if has_items:
-			rspns['item_categories'] = store.goods_list(allow_kanojo, user_level=self_user.get('level'), filter_has_items=True, has_items=has_items)
+			rspns['item_categories'] = store.goods_list(kanojo_relation, user_level=self_user.get('level'), filter_has_items=True, has_items=has_items)
 		else:
 			rspns['item_categories'] = []
 	return json_response(rspns)

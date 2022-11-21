@@ -4,11 +4,20 @@ RELATION_KANOJO = 2
 RELATION_OTHER = 1
 
 #Live2D User Actions
-USER_ACTION_SWIPE = 10	#Unverified
+USER_ACTION_SWIPE = 10
 USER_ACTION_SHAKE = 11
 USER_ACTION_HEADPAT = 12
 USER_ACTION_KISS = 20
 USER_ACTION_BREASTS = 21
+
+#Store Item Classes
+GIFT_ITEM_CLASS = 1
+DATE_ITEM_CLASS = 2
+TICKET_ITEM_CLASS = 3
+
+# Which List to get from store, available for purchase or owned by user
+TYPE_STORE = 1
+TYPE_ITEM_LIST = 2
 
 # after add new activity type add them to ALL_ACTIVITIES list
 #    and fix "user_activity" and "all_activities" if need

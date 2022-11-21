@@ -4,7 +4,7 @@
 		{
 			"item_category_id": 1,
 			"title": "B coin",
-			"allow_kanojo": 3
+			"relation_level": 3
 		},
 		{
 			"item_category_id": 6,
@@ -12,7 +12,7 @@
 			"description": "Buy clothes to your Kanojo or friends for present!",
 			"expand_flag": 0,
 			"title": "Clothes",
-			"allow_kanojo": 3,
+			"relation_level": 3,
 			"group_title": "Wardrobe"
 		},
 		{
@@ -21,7 +21,7 @@
 			"description": "Be more fashionable with glasses! Give it to her now!",
 			"expand_flag": 0,
 			"title": "EyeWear",
-			"allow_kanojo": 3,
+			"relation_level": 3,
 			"group_title": "Wardrobe"
 		},
 		{
@@ -30,7 +30,7 @@
 			"description": "B coin",
 			"expand_flag": 0,
 			"title": "B COIN",
-			"allow_kanojo": 7,
+			"relation_level": 7,
 			"group_title": "Wardrobe"
 		},
 		{
@@ -39,7 +39,7 @@
 			"description": "Wedding Ware For Permanent Kanojo",
 			"expand_flag": 1,
 			"title": "Wedding Ware",
-			"allow_kanojo": 1,
+			"relation_level": 1,
 			"group_title": "Wardrobe"
 		},
 		{
@@ -48,7 +48,7 @@
 			"description": "Gain your Stamina.",
 			"expand_flag": 0,
 			"title": "Energy Drinks",
-			"allow_kanojo": 7,
+			"relation_level": 7,
 			"group_title": "Portion"
 		},
 		{
@@ -57,7 +57,7 @@
 			"description" :"To dump your Kanojo...",
 			"expand_flag": 0,
 			"title": "Goodbye Letter",
-			"allow_kanojo": 3,
+			"relation_level": 3,
 			"group_title": "Other"
 		},
 		{
@@ -66,7 +66,7 @@
 			"description": "Take her to a wonderful place!",
 			"expand_flag": 0,
 			"title": "CATEGORY_SECTION_DATE",
-			"allow_kanojo": 1,
+			"relation_level": 1,
 			"group_title": "Other"
 		}
 	],
@@ -108,13 +108,14 @@
 			"group": "Business Wear"
 		},
 		{
+			"category_id": 6,
 			"item_id": 110,
 			"_price_t": "<20",
 			"_price_s": "<100",
-			"category_id": 6,
 			"_comment": "The above line is just a place holder for tests."
 		},
 		{
+			"category_id": 6,
 			"item_id": 140,
 			"clothes_item_id": 66,
 			"purchase_product_id": "jp.co.cybird.barcodekanojo.wardrobe_clothes_0009",
@@ -122,7 +123,6 @@
 			"description": "Dressing time: Daytime\nおかえり！ごはんすぐ出来るから待っててね。エプロン姿であなたを待っててくれます。{attention}",
 			"title": "エプロン",
 			"purchasable_level": 1,
-			"category_id": 6,
 			"image_url": "https://www.barcodekanojo.com/images/store/wardrobe_clothes_0009.png",
 			"image_thumbnail_url": "https://www.barcodekanojo.com/images/store/wardrobe_clothes_0009_thm.png",
 			"price_t": 3,

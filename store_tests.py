@@ -8,7 +8,8 @@ __copyright__ = 'Copyright © 2014'
 import copy
 import unittest
 
-from store import StoreManager, KANOJO_OWNER, KANOJO_FRIEND, KANOJO_OTHER
+from constants import *
+from store import StoreManager
 
 class StoreTest(unittest.TestCase):
     def __init__(self, *args, **kwargs):
@@ -70,23 +71,23 @@ class StoreTest(unittest.TestCase):
         return self.prepare_categories(ctgrs, user_level=user_level)
 
     def test_item_list1(self):
-        item_list1 = self.sm.goods_list(KANOJO_OWNER, 5)
-        item_list2 = self.item_list_from_categories(KANOJO_OWNER, 5)
+        item_list1 = self.sm.goods_list(RELATION_KANOJO, 5)
+        item_list2 = self.item_list_from_categories(RELATION_KANOJO, 5)
         self.assertSequenceEqual(item_list1, item_list2)
 
     def test_item_list2(self):
-        item_list1 = self.sm.goods_list(KANOJO_FRIEND, 1)
-        item_list2 = self.item_list_from_categories(KANOJO_FRIEND, 1)
+        item_list1 = self.sm.goods_list(RELATION_FRIEND, 1)
+        item_list2 = self.item_list_from_categories(RELATION_FRIEND, 1)
         self.assertSequenceEqual(item_list1, item_list2)
 
     def test_item_list3(self):
-        item_list1 = self.sm.goods_list(KANOJO_OTHER, 99)
-        item_list2 = self.item_list_from_categories(KANOJO_OTHER, 99)
+        item_list1 = self.sm.goods_list(RELATION_OTHER, 99)
+        item_list2 = self.item_list_from_categories(RELATION_OTHER, 99)
         self.assertSequenceEqual(item_list1, item_list2)
 
     def test_item_list_and_categories(self):
         has_items = copy.deepcopy(self.user.get('has_items'))
-        item_list = self.sm.goods_list(KANOJO_OWNER, filter_has_items=True, has_items=has_items)
+        item_list = self.sm.goods_list(RELATION_KANOJO, filter_has_items=True, has_items=has_items)
         self.assertGreater(len(item_list), 0)
         self.assertTrue('items' in item_list[0])
         self.assertGreater(len(item_list[0].get('items')), 0)
@@ -109,7 +110,7 @@ class StoreTest(unittest.TestCase):
         while len(ids):
             item_id = ids.pop(0)
             if item_id != None:
-                self.assertFalse(item_id in ids, 'Dublicate item_id: \"%s\"'%item_id)
+                self.assertFalse(item_id in ids, 'Duplicate item_id: \"%s\"'%item_id)
 
     def test_not_unique_categories(self):
         categories = copy.deepcopy(self.sm._categories)
@@ -117,7 +118,7 @@ class StoreTest(unittest.TestCase):
         while len(ids):
             c_id = ids.pop(0)
             if c_id != None:
-                self.assertFalse(c_id in ids, 'Dublicate category \"%s\"'%c_id)
+                self.assertFalse(c_id in ids, 'Duplicate category \"%s\"'%c_id)
 
 
 

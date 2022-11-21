@@ -46,21 +46,23 @@ class UserManager(object):
 		self.store = store
 		self.activity_manager = activity_manager
 		self.last_uid = 1
-		if self.db and self.db.seqs.find_one({ 'colection': 'users' }) is None:
+		if self.db and self.db.seqs.find_one({ 'collection': 'users' }) is None:
 			self.db.seqs.insert({
-					'colection': 'users',
+					'collection': 'users',
 					'id': 0
 				})
 
 	def create(self, uuid, name, password, email, birthday, sex, profile_image_data):
 		if self.db:
 			uid = self.db.seqs.find_and_modify(
-					query = {'colection': 'users'},
+					query = {'collection': 'users'},
 					update = {'$inc': {'id': 1}},
 					fields = {'id': 1, '_id': 0},
 					new = True
 				)
 			uid = uid.get('id', -1) if uid else -2
+			while self.db.users.find_one({'id': uid}):
+				uid += 1
 		else:
 			uid = self.last_uid
 			self.last_uid += 1
@@ -202,7 +204,7 @@ class UserManager(object):
 							}},
 							{"password": {
 								"$exists": True,
-								"$eq": password
+								"$eq": password.capitalize()
 							}}
 						]
 					}
